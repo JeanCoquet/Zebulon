@@ -9,6 +9,7 @@
 #define	SUBJECT_H
 #include <list>
 #include <string>
+#include "ClassPeriod.h"
 
 using namespace std;
 
