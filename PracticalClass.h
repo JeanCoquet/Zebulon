@@ -7,14 +7,14 @@
 
 #ifndef PRACTICALCLASS_H
 #define	PRACTICALCLASS_H
+#include "ClassPeriod.h"
 
-class PracticalClass {
+class PracticalClass : public ClassPeriod {
 public:
     PracticalClass();
     PracticalClass(const PracticalClass& orig);
     virtual ~PracticalClass();
 private:
-
 };
 
 #endif	/* PRACTICALCLASS_H */
