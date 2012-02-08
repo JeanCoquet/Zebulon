@@ -19,6 +19,7 @@ public:
     Module(const Module& orig);
     virtual ~Module();
 private:
+    string id;
     list<ClassPeriod> classPeriodList;
     string theHead;
 };
