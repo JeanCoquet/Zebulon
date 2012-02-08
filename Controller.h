@@ -13,7 +13,7 @@
 using namespace std;
 class Controller {
 public:
-    Controller();
+    Controller(Schedule *schedule);
     Controller(const Controller& orig);
     // Pour ajouter on demande l'objet. pour supprimer on demande l'id
     void addStudient(Studient *stud);
@@ -25,7 +25,7 @@ public:
     void joinTimeSlotWithClassPeriod(TimeSlot *timeslot, ClassPeriod *classPeriod);
     virtual ~Controller();
 private:
-    Schedule schedule;
+    Schedule *schedule;
 };
 
 #endif	/* CONTROLLER_H */
