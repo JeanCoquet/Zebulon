@@ -13,9 +13,10 @@
 using namespace std;
 class Controller {
 public:
-    Controller(Schedule *schedule);
+    Controller();
     Controller(const Controller& orig);
     // Pour ajouter on demande l'objet. pour supprimer on demande l'id
+    Schedule* loadSchedule();
     void addStudient(Studient *stud);
     void delStudient(string id);
     void addModule(Module *mod);
