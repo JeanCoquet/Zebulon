@@ -7,14 +7,18 @@
 
 #ifndef TIMESLOT_H
 #define	TIMESLOT_H
-
+#include "Date.h"
+#include "Classroom.h"
+#include "ClassPeriod.h"
 class TimeSlot {
 public:
     TimeSlot();
     TimeSlot(const TimeSlot& orig);
     virtual ~TimeSlot();
 private:
-
+    Date startDate;
+    Classroom classroom;
+    ClassPeriod classPeriod;
 };
 
 #endif	/* TIMESLOT_H */

@@ -8,6 +8,7 @@
 #ifndef CLASSPERIOD_H
 #define	CLASSPERIOD_H
 #include <string>
+#include "Group.h"
 #include <list>
 
 using namespace std;
@@ -19,6 +20,7 @@ public:
     virtual ~ClassPeriod();
 private:
     string theHead;
+    list<Group> groupList;
 };
 
 #endif	/* CLASSPERIOD_H */

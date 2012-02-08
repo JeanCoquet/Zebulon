@@ -35,12 +35,21 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/ClassPeriod.o \
+	${OBJECTDIR}/Group.o \
+	${OBJECTDIR}/TutorialClassroom.o \
 	${OBJECTDIR}/main.o \
+	${OBJECTDIR}/Module.o \
 	${OBJECTDIR}/MagistralClass.o \
 	${OBJECTDIR}/PracticalClass.o \
+	${OBJECTDIR}/Classroom.o \
+	${OBJECTDIR}/LectureHall.o \
 	${OBJECTDIR}/TimeSlot.o \
+	${OBJECTDIR}/Schedule.o \
 	${OBJECTDIR}/TutorialClass.o \
-	${OBJECTDIR}/Subject.o
+	${OBJECTDIR}/Date.o \
+	${OBJECTDIR}/Subject.o \
+	${OBJECTDIR}/Studient.o \
+	${OBJECTDIR}/PracticalClassroom.o
 
 
 # C Compiler Flags
@@ -72,10 +81,25 @@ ${OBJECTDIR}/ClassPeriod.o: ClassPeriod.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/ClassPeriod.o ClassPeriod.cpp
 
+${OBJECTDIR}/Group.o: Group.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Group.o Group.cpp
+
+${OBJECTDIR}/TutorialClassroom.o: TutorialClassroom.C 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/TutorialClassroom.o TutorialClassroom.C
+
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.cpp
+
+${OBJECTDIR}/Module.o: Module.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Module.o Module.cpp
 
 ${OBJECTDIR}/MagistralClass.o: MagistralClass.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -87,20 +111,50 @@ ${OBJECTDIR}/PracticalClass.o: PracticalClass.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/PracticalClass.o PracticalClass.cpp
 
+${OBJECTDIR}/Classroom.o: Classroom.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Classroom.o Classroom.cpp
+
+${OBJECTDIR}/LectureHall.o: LectureHall.C 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/LectureHall.o LectureHall.C
+
 ${OBJECTDIR}/TimeSlot.o: TimeSlot.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/TimeSlot.o TimeSlot.cpp
+
+${OBJECTDIR}/Schedule.o: Schedule.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Schedule.o Schedule.cpp
 
 ${OBJECTDIR}/TutorialClass.o: TutorialClass.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/TutorialClass.o TutorialClass.cpp
 
+${OBJECTDIR}/Date.o: Date.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Date.o Date.cpp
+
 ${OBJECTDIR}/Subject.o: Subject.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Subject.o Subject.cpp
+
+${OBJECTDIR}/Studient.o: Studient.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Studient.o Studient.cpp
+
+${OBJECTDIR}/PracticalClassroom.o: PracticalClassroom.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/PracticalClassroom.o PracticalClassroom.cpp
 
 # Subprojects
 .build-subprojects:

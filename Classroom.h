@@ -7,14 +7,16 @@
 
 #ifndef CLASSROOM_H
 #define	CLASSROOM_H
-
+#include <string>
+using namespace std;
 class Classroom {
 public:
     Classroom();
     Classroom(const Classroom& orig);
     virtual ~Classroom();
 private:
-
+    string id;
+    int capacity;
 };
 
 #endif	/* CLASSROOM_H */

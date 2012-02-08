@@ -7,8 +7,8 @@
 
 #ifndef TUTORIALCLASS_H
 #define	TUTORIALCLASS_H
-
-class TutorialClass {
+#include "ClassPeriod.h"
+class TutorialClass  : public ClassPeriod{
 public:
     TutorialClass();
     TutorialClass(const TutorialClass& orig);

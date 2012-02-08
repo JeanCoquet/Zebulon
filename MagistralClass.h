@@ -7,8 +7,8 @@
 
 #ifndef MAGISTRALCLASS_H
 #define	MAGISTRALCLASS_H
-
-class MagistralClass {
+#include "ClassPeriod.h"
+class MagistralClass  : public ClassPeriod{
 public:
     MagistralClass();
     MagistralClass(const MagistralClass& orig);
