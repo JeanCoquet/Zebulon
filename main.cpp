@@ -6,11 +6,9 @@
  */
 
 #include <cstdlib>
+#include "Controller.h"
 
 using namespace std;
-
-
-//tets
 
 int main(int argc, char** argv) {
     

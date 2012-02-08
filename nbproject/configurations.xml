@@ -42,6 +42,8 @@
         <itemPath>Studient.cpp</itemPath>
         <itemPath>Studient.h</itemPath>
       </logicalFolder>
+      <itemPath>Controller.cpp</itemPath>
+      <itemPath>Controller.h</itemPath>
       <itemPath>Date.cpp</itemPath>
       <itemPath>Date.h</itemPath>
       <itemPath>Schedule.cpp</itemPath>

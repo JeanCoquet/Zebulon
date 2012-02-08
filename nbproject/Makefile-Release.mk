@@ -35,8 +35,9 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/ClassPeriod.o \
-	${OBJECTDIR}/Group.o \
 	${OBJECTDIR}/TutorialClassroom.o \
+	${OBJECTDIR}/Controller.o \
+	${OBJECTDIR}/Group.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/Module.o \
 	${OBJECTDIR}/MagistralClass.o \
@@ -81,15 +82,20 @@ ${OBJECTDIR}/ClassPeriod.o: ClassPeriod.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/ClassPeriod.o ClassPeriod.cpp
 
-${OBJECTDIR}/Group.o: Group.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Group.o Group.cpp
-
 ${OBJECTDIR}/TutorialClassroom.o: TutorialClassroom.C 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/TutorialClassroom.o TutorialClassroom.C
+
+${OBJECTDIR}/Controller.o: Controller.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Controller.o Controller.cpp
+
+${OBJECTDIR}/Group.o: Group.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Group.o Group.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
