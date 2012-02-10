@@ -43,6 +43,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/MagistralClass.o \
 	${OBJECTDIR}/PracticalClass.o \
 	${OBJECTDIR}/Classroom.o \
+	${OBJECTDIR}/sqlite/lib/sqlite3.o \
 	${OBJECTDIR}/LectureHall.o \
 	${OBJECTDIR}/TimeSlot.o \
 	${OBJECTDIR}/Schedule.o \
@@ -120,6 +121,11 @@ ${OBJECTDIR}/Classroom.o: Classroom.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Classroom.o Classroom.cpp
+
+${OBJECTDIR}/sqlite/lib/sqlite3.o: sqlite/lib/sqlite3.c 
+	${MKDIR} -p ${OBJECTDIR}/sqlite/lib
+	${RM} $@.d
+	$(COMPILE.c) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/sqlite/lib/sqlite3.o sqlite/lib/sqlite3.c
 
 ${OBJECTDIR}/LectureHall.o: LectureHall.C 
 	${MKDIR} -p ${OBJECTDIR}

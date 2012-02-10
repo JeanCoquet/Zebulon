@@ -19,7 +19,7 @@ public:
     ClassPeriod(const ClassPeriod& orig);
     virtual ~ClassPeriod();
 private:
-    string theHead;
+    string teacher;
     list<Group> groupList;
 };
 

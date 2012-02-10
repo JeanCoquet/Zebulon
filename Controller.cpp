@@ -8,7 +8,7 @@
 #include "Controller.h"
 
 Controller::Controller() {
-    this->(*schedule) = Schedule(); //constructeur statique au lieu de dynamique
+//    this->(*schedule) = Schedule(); //constructeur statique au lieu de dynamique
     
 }
 
