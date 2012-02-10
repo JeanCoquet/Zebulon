@@ -9,6 +9,8 @@
 #include "Controller.h"
 #include "sqlite/lib/sqlite3.h"
 
+// test pour le pull de ludo
+
 using namespace std;
 
 static int callback(void *NotUsed, int argc, char **argv, char **azColName);
