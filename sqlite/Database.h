@@ -18,7 +18,8 @@ public:
     Database(const Database& orig);
     virtual ~Database();
     list< list<string> >* request(string request);
-    
+    bool add(string request);
+    bool del(string request);
 private:
     sqlite3 *database;
     static int callback(void*, int, char**, char**);
