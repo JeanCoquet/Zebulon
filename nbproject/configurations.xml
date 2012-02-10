@@ -80,6 +80,12 @@
         <compilerSet>GNU|GNU</compilerSet>
       </toolsSet>
       <compileType>
+        <cTool>
+          <commandLine>-pthread</commandLine>
+        </cTool>
+        <ccTool>
+          <commandLine>-pthread -ldl</commandLine>
+        </ccTool>
       </compileType>
     </conf>
     <conf name="Release" type="1">
