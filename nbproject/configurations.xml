@@ -46,6 +46,10 @@
           <itemPath>sqlite/lib/sqlite3.h</itemPath>
           <itemPath>sqlite/lib/sqlite3ext.h</itemPath>
         </logicalFolder>
+        <itemPath>sqlite/Database.cpp</itemPath>
+        <itemPath>sqlite/Database.h</itemPath>
+        <itemPath>sqlite/Zebulon_database.sqlite</itemPath>
+        <itemPath>sqlite/script.sql</itemPath>
       </logicalFolder>
       <itemPath>Controller.cpp</itemPath>
       <itemPath>Controller.h</itemPath>

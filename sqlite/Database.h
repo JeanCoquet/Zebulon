@@ -9,7 +9,7 @@
 #define	DATABASE_H
 #include <list>
 #include <string>
-#include "sqlite/lib/sqlite3.h"
+#include "lib/sqlite3.h"
 using namespace std;
 
 class Database {
@@ -18,12 +18,12 @@ public:
     Database(const Database& orig);
     virtual ~Database();
     list< list<string> >* request(string request);
-    bool add(string request);
-    bool del(string request);
+
 private:
     sqlite3 *database;
     static int callback(void*, int, char**, char**);
-    list< list<string> >* result;
+    static int coucou(void *nbOfColumns, int argc, char **argv, char **azColName);
+
 };
 
 #endif	/* DATABASE_H */

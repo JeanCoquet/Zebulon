@@ -50,7 +50,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/TutorialClass.o \
 	${OBJECTDIR}/Date.o \
 	${OBJECTDIR}/Studient.o \
-	${OBJECTDIR}/PracticalClassroom.o
+	${OBJECTDIR}/PracticalClassroom.o \
+	${OBJECTDIR}/sqlite/Database.o
 
 
 # C Compiler Flags
@@ -161,6 +162,11 @@ ${OBJECTDIR}/PracticalClassroom.o: PracticalClassroom.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/PracticalClassroom.o PracticalClassroom.cpp
+
+${OBJECTDIR}/sqlite/Database.o: sqlite/Database.cpp 
+	${MKDIR} -p ${OBJECTDIR}/sqlite
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/sqlite/Database.o sqlite/Database.cpp
 
 # Subprojects
 .build-subprojects:
