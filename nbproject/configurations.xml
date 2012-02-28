@@ -37,8 +37,8 @@
       <logicalFolder name="f1" displayName="People" projectFiles="true">
         <itemPath>Group.cpp</itemPath>
         <itemPath>Group.h</itemPath>
-        <itemPath>Studient.cpp</itemPath>
-        <itemPath>Studient.h</itemPath>
+        <itemPath>Student.cpp</itemPath>
+        <itemPath>Student.h</itemPath>
       </logicalFolder>
       <logicalFolder name="sqlite" displayName="sqlite" projectFiles="true">
         <logicalFolder name="lib" displayName="lib" projectFiles="true">

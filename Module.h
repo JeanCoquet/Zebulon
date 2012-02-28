@@ -18,8 +18,42 @@ public:
     Module();
     Module(const Module& orig);
     virtual ~Module();
+    list<ClassPeriod> GetClassPeriodList() const {
+        return classPeriodList;
+    }
+
+    void SetClassPeriodList(list<ClassPeriod> classPeriodList) {
+        this->classPeriodList = classPeriodList;
+    }
+
+    string GetId() const {
+        return id;
+    }
+
+    void SetId(string id) {
+        this->id = id;
+    }
+
+    string GetTheHead() const {
+        return theHead;
+    }
+
+    void SetTheHead(string theHead) {
+        this->theHead = theHead;
+    }
+    
+    string GetName() const {
+        return name;
+    }
+
+    void SetName(string name) {
+        this->name = name;
+    }
+
+
 private:
     string id;
+    string name;
     list<ClassPeriod> classPeriodList;
     string theHead;
 };

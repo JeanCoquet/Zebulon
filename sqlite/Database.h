@@ -10,6 +10,7 @@
 #include <list>
 #include <string>
 #include "lib/sqlite3.h"
+#include <exception>
 using namespace std;
 
 class Database {
@@ -17,7 +18,7 @@ public:
     Database();
     Database(const Database& orig);
     virtual ~Database();
-    list< list<string> >* request(string request);
+    list< list<string> >* request(string request) throw(int);
 
 private:
     sqlite3 *database;
