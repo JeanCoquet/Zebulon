@@ -10,8 +10,8 @@
 #include "Classroom.h"
 class TutorialClassroom : public Classroom {
 public:
-    TutorialClassroom();
-    TutorialClassroom(const TutorialClassroom& orig);
+    TutorialClassroom(string id, int capacity);
+    TutorialClassroom(const TutorialClassroom& orig, string id, int capacity);
     virtual ~TutorialClassroom();
 private:
     bool videoprojector;

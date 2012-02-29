@@ -7,10 +7,10 @@
 
 #include "TutorialClassroom.h"
 
-TutorialClassroom::TutorialClassroom() {
+TutorialClassroom::TutorialClassroom(string id, int capacity) : Classroom(id, capacity) {
 }
 
-TutorialClassroom::TutorialClassroom(const TutorialClassroom& orig) {
+TutorialClassroom::TutorialClassroom(const TutorialClassroom& orig, string id, int capacity)  : Classroom(id, capacity) {
 }
 
 TutorialClassroom::~TutorialClassroom() {

@@ -11,7 +11,7 @@
 using namespace std;
 class Classroom {
 public:
-    Classroom();
+    Classroom(string id, int capacity);
     Classroom(const Classroom& orig);
     virtual ~Classroom();
 private:

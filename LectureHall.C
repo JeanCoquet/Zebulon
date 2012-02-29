@@ -7,10 +7,10 @@
 
 #include "LectureHall.h"
 
-LectureHall::LectureHall() {
+LectureHall::LectureHall(string id, int capacity) : Classroom(id, capacity){
 }
 
-LectureHall::LectureHall(const LectureHall& orig) {
+LectureHall::LectureHall(const LectureHall& orig, string id, int capacity) : Classroom(id, capacity){
 }
 
 LectureHall::~LectureHall() {

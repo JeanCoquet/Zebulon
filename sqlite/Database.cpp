@@ -11,7 +11,9 @@ using namespace std;
 list< list<string> >* Database::request(string request) throw(int){
    list< list<string> >* result = new list< list<string> >();
    char *zErrMsg = NULL;
+   cout<<"execution de la requete : "<<request<<endl;
    int rc = sqlite3_exec(this->database, request.c_str(), callback, (void*)result, &zErrMsg);
+   cout<<"requete executee"<<endl;
    if(rc != SQLITE_OK) {
         cout<<"Error sql"<<endl;
         sqlite3_free(zErrMsg);
@@ -22,6 +24,7 @@ list< list<string> >* Database::request(string request) throw(int){
 }
 
 int Database::callback(void *result, int argc, char **argv, char **azColName) {
+    cout<<"traitement de la ligne"<<endl;
     list<string>* line = new list<string>();
     for(int i=0 ; i<argc ; i++){
          line->push_back(argv[i]);    

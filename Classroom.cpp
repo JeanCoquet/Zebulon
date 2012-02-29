@@ -7,7 +7,9 @@
 
 #include "Classroom.h"
 
-Classroom::Classroom() {
+Classroom::Classroom(string id, int capacity) {
+    this->id = id;
+    this->capacity = capacity;
 }
 
 Classroom::Classroom(const Classroom& orig) {

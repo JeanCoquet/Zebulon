@@ -9,9 +9,11 @@
 const char* historyFile = "history.sql";
 
 Controller::Controller() throw(int){
-    
-         this->schedule = loadSchedule();   
-         this->database = new Database();
+        this->database = new Database(); // doit etre avant load
+         this->schedule = NULL;
+         loadSchedule();  
+         cout<<"schedule loaded."<<endl;
+         
          this->history.open(historyFile, ios::out | ios::trunc);
          if(this->history.bad())
              throw 1;
@@ -65,28 +67,40 @@ void Controller::commit(){
     }
     this->history.open(historyFile, ios::out | ios::trunc);
 }
+int Controller::strToInt(string str){
+    int val = 0;
+    for(int i= 0 ; i < str.length() ; i++){
+        val *= 10;
+        val += str[i] - '0';
+    }
+   return val; 
+}
 
-Schedule* Controller::loadSchedule(){
+void Controller::loadSchedule(){
+    cout<<"loading schedule..."<<endl;
+    /*if(this->schedule != NULL)
+        delete this->schedule;*/
     this->schedule = new Schedule();
     list< list<string> >* result;
     try{
-         result = database->request("select * from student");
-         list< list<string> >::iterator it = result->begin();
-         list< list<string> >::const_iterator MaxList = result->end();
-         for(;it != MaxList; it++){
-            list<string>::const_iterator MaxListList = it->end();
-            list<string>::iterator itList = it->begin();
-            for(;itList!=MaxListList;itList++){    
-                cout<<*itList<<" ";
-            }
-            cout<<"#"<<endl;
-         } 
+         result = database->request("select * from classroom");
+         cout<<"   request done."<<endl;
+         if(result != NULL){
+             list< list<string> >::iterator it = result->begin();
+             list< list<string> >::const_iterator MaxList = result->end();
+             for(;it != MaxList; it++){
+                list<string>::const_iterator MaxListList = it->end();
+                list<string>::iterator itList = it->begin();
+                this->schedule->GetClassroomList()->push_back(new Classroom(*itList, strToInt(*(++itList)) ));
+                /*for(;itList!=MaxListList;itList++){    
+                    cout<<*itList<<" ";
+                }*/
+                cout<<"#"<<endl;
+             } 
+         }
     }catch(int){
-        cout<<"Error while loading students."<<endl;
+        cout<<"Error while loading classrooms."<<endl;
     }
-    
-    
-    return NULL;
 }
 
 Controller::Controller(const Controller& orig) {

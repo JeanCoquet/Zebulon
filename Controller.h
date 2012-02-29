@@ -21,7 +21,8 @@ public:
     Controller() throw(int);
     Controller(const Controller& orig);
     // Pour ajouter on demande l'objet. pour supprimer on demande l'id
-    Schedule* loadSchedule();
+    int strToInt(string);
+    void loadSchedule();
     void commit();
     void addStudent(Student *stud, Group *group);
     void delStudent(Student *stud, Group *group);

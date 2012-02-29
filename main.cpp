@@ -21,11 +21,8 @@ int main(int argc, char** argv) {
          ctrl = new Controller();
     }catch(int){
         cout<<"Error while Controller initialisation."<<endl;
-        exit(1);
+        return (1);
     }
-    ctrl->addGroup(new Group("602"));
-    ctrl->commit();
-    
 }
 
 

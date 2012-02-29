@@ -7,10 +7,10 @@
 
 #include "PracticalClassroom.h"
 
-PracticalClassroom::PracticalClassroom() {
+PracticalClassroom::PracticalClassroom(string id, int capacity) : Classroom(id, capacity){
 }
 
-PracticalClassroom::PracticalClassroom(const PracticalClassroom& orig) {
+PracticalClassroom::PracticalClassroom(const PracticalClassroom& orig, string id, int capacity) : Classroom(id, capacity){
 }
 
 PracticalClassroom::~PracticalClassroom() {

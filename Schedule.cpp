@@ -18,9 +18,9 @@ Schedule::Schedule(const Schedule& orig) {
 }
 
 Schedule::~Schedule() {
-    delete classroomList;
-    delete groupList;
-    delete moduleList;
-    delete timeSlotList;
+    delete[] classroomList;
+    delete[] groupList;
+    delete[] moduleList;
+    delete[] timeSlotList;
 }
 
