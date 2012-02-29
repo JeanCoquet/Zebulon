@@ -18,43 +18,45 @@ public:
     Schedule();
     Schedule(const Schedule& orig);
     virtual ~Schedule();
-    list<Classroom> GetClassroomList() const {
+
+    list<Classroom*>* GetClassroomList() const {
         return classroomList;
     }
 
-    void SetClassroomList(list<Classroom> classroomList) {
+    void SetClassroomList(list<Classroom*>* classroomList) {
         this->classroomList = classroomList;
     }
 
-    list<Group> GetGroupList() const {
+    list<Group*>* GetGroupList() const {
         return groupList;
     }
 
-    void SetGroupList(list<Group> groupList) {
+    void SetGroupList(list<Group*>* groupList) {
         this->groupList = groupList;
     }
 
-    list<Module> GetModuleList() const {
+    list<Module*>* GetModuleList() const {
         return moduleList;
     }
 
-    void SetModuleList(list<Module> moduleList) {
+    void SetModuleList(list<Module*>* moduleList) {
         this->moduleList = moduleList;
     }
 
-    list<TimeSlot> GetTimeSlotList() const {
+    list<TimeSlot*>* GetTimeSlotList() const {
         return timeSlotList;
     }
 
-    void SetTimeSlotList(list<TimeSlot> timeSlotList) {
+    void SetTimeSlotList(list<TimeSlot*>* timeSlotList) {
         this->timeSlotList = timeSlotList;
     }
 
+
 private:
-    list<Classroom> classroomList;
-    list<Group> groupList;
-    list<Module> moduleList;
-    list<TimeSlot> timeSlotList;    
+    list<Classroom*> *classroomList;
+    list<Group*> *groupList;
+    list<Module*> *moduleList;
+    list<TimeSlot*> *timeSlotList;    
 };
 
 #endif	/* SCHEDULE_H */

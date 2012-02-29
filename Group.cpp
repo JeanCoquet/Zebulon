@@ -7,7 +7,8 @@
 
 #include "Group.h"
 
-Group::Group() {
+Group::Group(string id) {
+    this->id = id;
 }
 
 Group::Group(const Group& orig) {

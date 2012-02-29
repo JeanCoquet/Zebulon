@@ -14,7 +14,7 @@
 using namespace std;
 class Group {
 public:
-    Group();
+    Group(string id);
     Group(const Group& orig);
     virtual ~Group();
     string GetId() const {
@@ -25,17 +25,17 @@ public:
         this->id = id;
     }
 
-    list<Student> GetStudentList() const {
+    list<Student*>* GetStudentList() const {
         return StudentList;
     }
 
-    void SetStudentList(list<Student> StudentList) {
+    void SetStudentList(list<Student*> *StudentList) {
         this->StudentList = StudentList;
     }
 
 private:
     string id;
-    list<Student> StudentList;
+    list<Student*> *StudentList;
 };
 
 #endif	/* GROUP_H */

@@ -15,25 +15,16 @@ using namespace std;
 
 static int callback(void *NotUsed, int argc, char **argv, char **azColName);
 
-int main(int argc, char** argv) {
-    Database *database = new Database();
-    list< list<string> >* result = database->request("select * from student");
-    if(result == NULL){
-        cout<<"requete invalide\n";
-        return 1;
+int main(int argc, char** argv) {    
+    Controller *ctrl;
+    try{
+         ctrl = new Controller();
+    }catch(int){
+        cout<<"Error while Controller initialisation."<<endl;
+        exit(1);
     }
-    list< list<string> >::iterator it = result->begin();
-    list< list<string> >::const_iterator MaxList = result->end();
-    cout<<"Affichage arc en ciel!!\n";
-    for(;it != MaxList; it++){
-        //cout<<"ligne magenta\n";
-       list<string>::const_iterator MaxListList = it->end();
-       list<string>::iterator itList = it->begin();
-       for(;itList!=MaxListList;itList++){    
-           cout<<*itList<<" ";
-       }
-       cout<<"#"<<endl;
-    }    
+    ctrl->addGroup(new Group("602"));
+    ctrl->commit();
     
 }
 
