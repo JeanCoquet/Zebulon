@@ -15,7 +15,7 @@ using namespace std;
         
 class Module {
 public:
-    Module();
+    Module(string id, string name, string theHead);
     Module(const Module& orig);
     virtual ~Module();
     list<ClassPeriod> GetClassPeriodList() const {

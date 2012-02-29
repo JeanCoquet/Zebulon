@@ -11,7 +11,7 @@
 using namespace std;
 class Student {
 public:
-    Student();
+    Student(int id, string lastname, string firstname, string addr, string email);
     Student(const Student& orig);
     virtual ~Student();
     string GetAddr() const {

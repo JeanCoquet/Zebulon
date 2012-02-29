@@ -9,11 +9,13 @@
 
 Group::Group(string id) {
     this->id = id;
+    this->StudentList = new list<Student*>();
 }
 
 Group::Group(const Group& orig) {
 }
 
 Group::~Group() {
+    delete[] this->StudentList;
 }
 

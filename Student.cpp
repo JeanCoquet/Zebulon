@@ -7,7 +7,12 @@
 
 #include "Student.h"
 
-Student::Student() {
+Student::Student(int id, string lastname, string firstname, string addr, string email) {
+    this->addr = addr;
+    this->id = id;
+    this->lastname = lastname;
+    this->email = email;
+    this->firstname = firstname;
 }
 
 Student::Student(const Student& orig) {

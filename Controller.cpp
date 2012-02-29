@@ -92,12 +92,69 @@ void Controller::loadSchedule(){
                 list<string>::const_iterator MaxListList = it->end();
                 list<string>::iterator itList = it->begin();
                 this->schedule->GetClassroomList()->push_back(new Classroom(*itList, strToInt(*(++itList)) ));
-                /*for(;itList!=MaxListList;itList++){    
-                    cout<<*itList<<" ";
-                }*/
-                cout<<"#"<<endl;
              } 
          }
+         result->clear();
+         result = database->request("select * from 'group'");
+         if(result != NULL){
+             list< list<string> >::iterator it = result->begin();
+             list< list<string> >::const_iterator MaxList = result->end();
+             for(;it != MaxList; it++){
+                list<string>::const_iterator MaxListList = it->end();
+                list<string>::iterator itList = it->begin();
+                this->schedule->GetGroupList()->push_back(new Group(*itList));
+             } 
+         }
+         result->clear();
+         
+         result = database->request("select * from student");
+         if(result != NULL){
+             list< list<string> >::iterator it = result->begin();
+             list< list<string> >::const_iterator MaxList = result->end();
+             for(;it != MaxList; it++){
+                list<string>::const_iterator MaxListList = it->end();
+                list<string>::iterator itList = it->begin();
+                string stuId = *itList;
+                string groupId = *(++itList);
+                Student *stud = new Student(stuId, *(++itList), *(++itList), *(++itList));
+                
+                list<Group*>::const_iterator MaxGroupList = this->schedule->GetGroupList()->end();                
+                list<Group*>::iterator elemGroupList = this->schedule->GetGroupList()->begin();                
+                for(;elemGroupList != MaxGroupList ; elemGroupList++){
+                    if((*elemGroupList)->GetId() == groupId){
+                        (*elemGroupList)->GetStudentList()->push_back(stud);
+                        break;
+                    }
+                }
+                
+             } 
+         }
+         
+         
+         
+         result->clear();
+         result = database->request("select m.id, m.name, m.theHead, c.id, c.teacher, c.duration from Module m, Classperiod c where m.id = c.id_module");
+         if(result != NULL){
+             string idModule = "";
+             Module *mod;
+             list< list<string> >::iterator it = result->begin();
+             list< list<string> >::const_iterator MaxList = result->end();
+             for(;it != MaxList; it++){
+                list<string>::const_iterator MaxListList = it->end();
+                list<string>::iterator itList = it->begin();
+                if(idModule != *itList) {
+                    idModule = *itList;
+                    mod = new Module(idModule, *(++itList), *(++itList));
+                    this->schedule->GetModuleList()->push_back(mod);
+                }
+                else {
+                    ++itList++;
+                }
+                ClassPeriod *classPeriod = new ClassPeriod(*(++itList), *(++itList), *(++itList));
+                mod->GetClassPeriodList()->push_back(classPeriod); 
+             } 
+         }
+         
     }catch(int){
         cout<<"Error while loading classrooms."<<endl;
     }

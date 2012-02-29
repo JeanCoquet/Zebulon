@@ -15,11 +15,46 @@ using namespace std;
 
 class ClassPeriod {
 public:
-    ClassPeriod();
+    ClassPeriod(int id, string teacher, int duration);
     ClassPeriod(const ClassPeriod& orig);
     virtual ~ClassPeriod();
+    list<Group> GetGroupList() const {
+        return groupList;
+    }
+
+    void SetGroupList(list<Group> groupList) {
+        this->groupList = groupList;
+    }
+
+    int GetId() const {
+        return id;
+    }
+
+    void SetId(int id) {
+        this->id = id;
+    }
+
+    string GetTeacher() const {
+        return teacher;
+    }
+
+    void SetTeacher(string teacher) {
+        this->teacher = teacher;
+    }
+    
+    int GetDuration() const {
+        return duration;
+    }
+
+    void SetDuration(int duration) {
+        this->duration = duration;
+    }
+
+
 private:
+    int id;
     string teacher;
+    int duration;
     list<Group> groupList;
 };
 

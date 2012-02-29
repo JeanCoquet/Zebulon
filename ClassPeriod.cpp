@@ -7,12 +7,17 @@
 
 #include "ClassPeriod.h"
 
-ClassPeriod::ClassPeriod() {
+ClassPeriod::ClassPeriod(int id, string teacher, int duration) {
+    this->duration = duration;
+    this->id = id;
+    this->teacher = teacher;
+    this->groupList = new list<Group*>();
 }
 
 ClassPeriod::ClassPeriod(const ClassPeriod& orig) {
 }
 
 ClassPeriod::~ClassPeriod() {
+    delete[] this->groupList;
 }
 
