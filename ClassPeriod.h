@@ -18,11 +18,20 @@ public:
     ClassPeriod(int id, string teacher, int duration);
     ClassPeriod(const ClassPeriod& orig);
     virtual ~ClassPeriod();
-    list<Group> GetGroupList() const {
+
+        int GetDuration() const {
+        return duration;
+    }
+
+    void SetDuration(int duration) {
+        this->duration = duration;
+    }
+
+    list<Group*>* GetGroupList() const {
         return groupList;
     }
 
-    void SetGroupList(list<Group> groupList) {
+    void SetGroupList(list<Group*>* groupList) {
         this->groupList = groupList;
     }
 
@@ -41,21 +50,14 @@ public:
     void SetTeacher(string teacher) {
         this->teacher = teacher;
     }
-    
-    int GetDuration() const {
-        return duration;
-    }
 
-    void SetDuration(int duration) {
-        this->duration = duration;
-    }
 
 
 private:
     int id;
     string teacher;
     int duration;
-    list<Group> groupList;
+    list<Group*> *groupList;
 };
 
 #endif	/* CLASSPERIOD_H */

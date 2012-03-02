@@ -11,7 +11,7 @@ Module::Module(string id, string name, string theHead) {
     this->id = id;
     this->name = name;
     this->theHead = theHead;
-    this->classPeriodList = new list<ClassPeriod>();
+    this->classPeriodList = new list<ClassPeriod*>();
 }
 
 Module::Module(const Module& orig) {

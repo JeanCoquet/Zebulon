@@ -12,13 +12,32 @@
 #include "ClassPeriod.h"
 class TimeSlot {
 public:
-    TimeSlot();
+    TimeSlot(int id, Date *startDate, Classroom *classroom, ClassPeriod* classPeriod);
     TimeSlot(const TimeSlot& orig);
     virtual ~TimeSlot();
+    
+    ClassPeriod* GetClassPeriod() const {
+        return classPeriod;
+    }
+
+    Classroom* GetClassroom() const {
+        return classroom;
+    }
+
+    int GetId() const {
+        return id;
+    }
+
+    Date* GetStartDate() const {
+        return startDate;
+    }
+
+
 private:
-    Date startDate;
-    Classroom classroom;
-    ClassPeriod classPeriod;
+    int id;
+    Date *startDate;
+    Classroom *classroom;
+    ClassPeriod *classPeriod;
 };
 
 #endif	/* TIMESLOT_H */

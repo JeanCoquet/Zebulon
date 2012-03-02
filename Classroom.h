@@ -14,6 +14,22 @@ public:
     Classroom(string id, int capacity);
     Classroom(const Classroom& orig);
     virtual ~Classroom();
+    int GetCapacity() const {
+        return capacity;
+    }
+
+    void SetCapacity(int capacity) {
+        this->capacity = capacity;
+    }
+
+    string GetId() const {
+        return id;
+    }
+
+    void SetId(string id) {
+        this->id = id;
+    }
+
 private:
     string id;
     int capacity;

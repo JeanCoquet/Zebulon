@@ -11,7 +11,7 @@
 using namespace std;
 class Student {
 public:
-    Student(int id, string lastname, string firstname, string addr, string email);
+    Student(string id, string lastname, string firstname, string addr, string email);
     Student(const Student& orig);
     virtual ~Student();
     string GetAddr() const {
@@ -38,13 +38,14 @@ public:
         this->firstname = firstname;
     }
 
-    int GetId() const {
+    string GetId() const {
         return id;
     }
 
-    void SetId(int id) {
+    void SetId(string id) {
         this->id = id;
     }
+
 
     string GetLastname() const {
         return lastname;
@@ -55,7 +56,7 @@ public:
     }
 
 private:
-    int id;
+    string id;
     string lastname;
     string firstname;
     string addr;

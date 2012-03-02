@@ -7,10 +7,10 @@
 
 #include "PracticalClass.h"
 
-PracticalClass::PracticalClass() {
+PracticalClass::PracticalClass(int id, string teacher, int duration) : ClassPeriod(id, teacher, duration) {
 }
 
-PracticalClass::PracticalClass(const PracticalClass& orig) {
+PracticalClass::PracticalClass(const PracticalClass& orig)  : ClassPeriod(orig.GetId(), orig.GetTeacher(), orig.GetDuration()){
 }
 
 PracticalClass::~PracticalClass() {

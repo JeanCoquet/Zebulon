@@ -76,6 +76,18 @@ int Controller::strToInt(string str){
    return val; 
 }
 
+Date* Controller::strToDate(string date){
+    int h = 0;
+    int m = 0;
+    
+    if(date.length() > 10){
+        h = strToInt(date.substr(12,14));
+        m = strToInt(date.substr(16,19));
+    }
+    Date *dateh = new Date(strToInt(date.substr(0,1)), strToInt(date.substr(3,4)), strToInt(date.substr(6,10)), h, m);
+    return dateh;
+}
+
 void Controller::loadSchedule(){
     cout<<"loading schedule..."<<endl;
     /*if(this->schedule != NULL)
@@ -116,7 +128,7 @@ void Controller::loadSchedule(){
                 list<string>::iterator itList = it->begin();
                 string stuId = *itList;
                 string groupId = *(++itList);
-                Student *stud = new Student(stuId, *(++itList), *(++itList), *(++itList));
+                Student *stud = new Student(stuId, *(++itList), *(++itList), *(++itList), *(++itList));
                 
                 list<Group*>::const_iterator MaxGroupList = this->schedule->GetGroupList()->end();                
                 list<Group*>::iterator elemGroupList = this->schedule->GetGroupList()->begin();                
@@ -133,7 +145,7 @@ void Controller::loadSchedule(){
          
          
          result->clear();
-         result = database->request("select m.id, m.name, m.theHead, c.id, c.teacher, c.duration from Module m, Classperiod c where m.id = c.id_module");
+         result = database->request("select m.id, m.name, m.theHead, c.id, c.teacher, c.duration from Module m left join Classperiod c on m.id = c.id_module order by m.id");
          if(result != NULL){
              string idModule = "";
              Module *mod;
@@ -150,8 +162,52 @@ void Controller::loadSchedule(){
                 else {
                     ++itList++;
                 }
-                ClassPeriod *classPeriod = new ClassPeriod(*(++itList), *(++itList), *(++itList));
-                mod->GetClassPeriodList()->push_back(classPeriod); 
+                if(*(itList) != "") { 
+                    ClassPeriod *classPeriod = new ClassPeriod(strToInt(*(++itList)), *(++itList), strToInt(*(++itList)));
+                    mod->GetClassPeriodList()->push_back(classPeriod); 
+                }
+             } 
+         }
+         
+         result->clear();
+         result = database->request("select id_classroom, id_classperiod, id, date from timeslot");
+         if(result != NULL){
+             string idModule = "";
+             Module *mod;
+             list< list<string> >::iterator it = result->begin();
+             list< list<string> >::const_iterator MaxList = result->end();
+             for(;it != MaxList; it++){
+                list<string>::const_iterator MaxListList = it->end();
+                list<string>::iterator itList = it->begin();
+                Classroom *classroom;
+                ClassPeriod *classperiod;
+                string classroomId = *itList;
+                string classPeriodId = *(++itList);
+                //recherche de la salle
+                list<Classroom*>::const_iterator MaxClassroomList = this->schedule->GetClassroomList()->end();                
+                list<Classroom*>::iterator elemClassroomList = this->schedule->GetClassroomList()->begin();                
+                for(;elemClassroomList != MaxClassroomList ; elemClassroomList++){
+                    if((*elemClassroomList)->GetId() == classroomId){
+                        classroom = (*elemClassroomList);
+                        break;
+                    }
+                }
+                
+                list<Module*>::const_iterator MaxModuleList = this->schedule->GetModuleList()->end();                
+                list<Module*>::iterator elemModuleList = this->schedule->GetModuleList()->begin();                
+                for(;elemModuleList != MaxModuleList ; elemModuleList++){
+                    list<ClassPeriod*>::const_iterator MaxClassPeriodList = (*elemModuleList)->GetClassPeriodList()->end();
+                    list<ClassPeriod*>::iterator elemClassPeriodList = (*elemModuleList)->GetClassPeriodList()->begin();
+                    for(;elemClassPeriodList != MaxClassPeriodList ; elemClassPeriodList++){
+                        if((*elemClassPeriodList)->GetId() == strToInt(classPeriodId)){
+                            classperiod = (*elemClassPeriodList);
+                            break;
+                        }
+                }
+            }
+                
+                TimeSlot *timeslot = new TimeSlot(strToInt(*(++itList)), strToDate(*(++itList)), classroom, classperiod);
+                schedule->GetTimeSlotList()->push_back(timeslot); 
              } 
          }
          

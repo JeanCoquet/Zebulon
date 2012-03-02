@@ -15,6 +15,8 @@ Date::Date(int day, int month, int year, int hour, int min) {
     this->min = min;
 }
 
+
+
 Date::Date(const Date& orig) {
 }
 

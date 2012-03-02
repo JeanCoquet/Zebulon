@@ -27,7 +27,10 @@ int Database::callback(void *result, int argc, char **argv, char **azColName) {
     cout<<"traitement de la ligne"<<endl;
     list<string>* line = new list<string>();
     for(int i=0 ; i<argc ; i++){
-         line->push_back(argv[i]);    
+        if(argv[i] == NULL)
+            line->push_back("");  
+        else
+            line->push_back(argv[i]);    
     }
     ((list< list<string> >*)result)->push_back(*line);
     return 0;

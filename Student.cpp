@@ -7,7 +7,7 @@
 
 #include "Student.h"
 
-Student::Student(int id, string lastname, string firstname, string addr, string email) {
+Student::Student(string id, string lastname, string firstname, string addr, string email) {
     this->addr = addr;
     this->id = id;
     this->lastname = lastname;

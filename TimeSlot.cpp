@@ -7,7 +7,11 @@
 
 #include "TimeSlot.h"
 
-TimeSlot::TimeSlot() {
+TimeSlot::TimeSlot(int id, Date *startDate, Classroom* classroom, ClassPeriod* classPeriod) {
+    this->id = id;
+    this->startDate = startDate;
+    this->classroom = classroom;
+    this->classPeriod = classPeriod;
 }
 
 TimeSlot::TimeSlot(const TimeSlot& orig) {

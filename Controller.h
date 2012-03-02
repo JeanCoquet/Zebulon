@@ -21,7 +21,14 @@ public:
     Controller() throw(int);
     Controller(const Controller& orig);
     // Pour ajouter on demande l'objet. pour supprimer on demande l'id
-    int strToInt(string);
+    Database* getDatabase() const {
+        return database;
+    }
+
+    Schedule* getSchedule() const {
+        return schedule;
+    }
+
     void loadSchedule();
     void commit();
     void addStudent(Student *stud, Group *group);
@@ -33,6 +40,8 @@ public:
     void joinTimeSlotWithClassPeriod(TimeSlot *timeslot, ClassPeriod *classPeriod);
     virtual ~Controller();
 private:
+    int strToInt(string);
+    Date* strToDate(string);
     Schedule *schedule;
     Database *database;
     fstream history;
