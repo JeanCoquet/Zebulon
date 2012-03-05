@@ -7,7 +7,8 @@
 
 #include "TutorialClassroom.h"
 
-TutorialClassroom::TutorialClassroom(string id, int capacity) : Classroom(id, capacity) {
+TutorialClassroom::TutorialClassroom(string id, int capacity, bool videoprojector) : Classroom(id, capacity) {
+    this->videoprojector = videoprojector;
 }
 
 TutorialClassroom::TutorialClassroom(const TutorialClassroom& orig, string id, int capacity)  : Classroom(id, capacity) {

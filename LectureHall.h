@@ -10,7 +10,7 @@
 #include "Classroom.h"
 class LectureHall : public Classroom {
 public:
-    LectureHall(string id, int capacity);
+    LectureHall(string id, int capacity, bool videoconferencing);
     LectureHall(const LectureHall& orig, string id, int capacity);
     virtual ~LectureHall();
 private:

@@ -10,7 +10,7 @@
 #include "Classroom.h"
 class PracticalClassroom : public Classroom {
 public:
-    PracticalClassroom(string id, int capacity);
+    PracticalClassroom(string id, int capacity, int elementsNumber);
     PracticalClassroom(const PracticalClassroom& orig, string id, int capacity);
     virtual ~PracticalClassroom();
 private:

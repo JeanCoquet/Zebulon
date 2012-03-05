@@ -6,7 +6,10 @@
  */
 
 #include "Date.h"
-
+ostream& operator <<(ostream& os, Date *d) {
+    os << d->GetDay() << "/" << d->GetMonth() << "/" << d->GetYear() << " " << d->GetHour() << ":" << d->GetMin();
+    return os;
+}
 Date::Date(int day, int month, int year, int hour, int min) {
     this->day = day;
     this->month = month;
@@ -16,10 +19,11 @@ Date::Date(int day, int month, int year, int hour, int min) {
 }
 
 
-
 Date::Date(const Date& orig) {
 }
 
 Date::~Date() {
 }
+
+
 

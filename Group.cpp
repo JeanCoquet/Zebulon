@@ -7,9 +7,10 @@
 
 #include "Group.h"
 
-Group::Group(string id) {
+Group::Group(string id, Group *daddy) {
     this->id = id;
     this->StudentList = new list<Student*>();
+    this->daddy = daddy; 
 }
 
 Group::Group(const Group& orig) {

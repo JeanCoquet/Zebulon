@@ -7,10 +7,7 @@
 
 #include "TutorialClass.h"
 
-TutorialClass::TutorialClass() {
-}
-
-TutorialClass::TutorialClass(const TutorialClass& orig) {
+TutorialClass::TutorialClass(int id, string teacher, int duration):ClassPeriod(id, teacher, duration) {
 }
 
 TutorialClass::~TutorialClass() {

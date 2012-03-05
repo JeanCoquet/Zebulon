@@ -11,6 +11,9 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include "PracticalClass.h"
+#include "TutorialClass.h"
+#include "MagistralClass.h"
 #include "Schedule.h"
 #include "Group.h"
 #include "sqlite/Database.h"
@@ -29,6 +32,8 @@ public:
         return schedule;
     }
 
+    void addTimeSlot(TimeSlot* timeSlot);
+    void delTimeSlot(TimeSlot* timeSlot);
     void loadSchedule();
     void commit();
     void addStudent(Student *stud, Group *group);
@@ -42,6 +47,7 @@ public:
 private:
     int strToInt(string);
     Date* strToDate(string);
+    bool strToBool(string);
     Schedule *schedule;
     Database *database;
     fstream history;

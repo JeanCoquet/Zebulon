@@ -7,10 +7,7 @@
 
 #include "MagistralClass.h"
 
-MagistralClass::MagistralClass() {
-}
-
-MagistralClass::MagistralClass(const MagistralClass& orig) {
+MagistralClass::MagistralClass(int id, string teacher, int duration):ClassPeriod(id,teacher,duration) {
 }
 
 MagistralClass::~MagistralClass() {

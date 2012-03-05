@@ -49,6 +49,14 @@ int main(int argc, char** argv) {
         }
     } 
     
+    list<TimeSlot*>::iterator it5 = ctrl->getSchedule()->GetTimeSlotList()->begin();
+    list<TimeSlot*>::const_iterator MaxList5 = ctrl->getSchedule()->GetTimeSlotList()->end();
+    for(;it5 != MaxList5; it5++){
+        Date *d = (*it5)->GetStartDate();
+        cout<<d->GetDay()<<"/"<<d->GetMonth()<<"/"<<d->GetYear()<<" "<<d->GetHour()<<":"<<d->GetMin()
+                <<" "<<(*it5)->GetClassroom()->GetId()<<" "<<(*it5)->GetClassPeriod()->GetTeacher()<<endl;
+    } 
+    
 }
 
 

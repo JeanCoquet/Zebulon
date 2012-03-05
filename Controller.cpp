@@ -6,6 +6,10 @@
  */
 
 #include "Controller.h"
+#include "LectureHall.h"
+#include "PracticalClassroom.h"
+#include "TutorialClassroom.h"
+#include "PracticalClass.h"
 const char* historyFile = "history.sql";
 
 Controller::Controller() throw(int){
@@ -26,7 +30,12 @@ void Controller::addStudent(Student *stud, Group *group){
 }
 
 void Controller::addGroup(Group* group){
-    this->history << "insert into 'Group' values('"<<group->GetId()<<"', '')"<<endl;
+    if(group->GetDaddy() != NULL){
+        this->history << "insert into 'Group' values('"<<group->GetId()<<"', ''"<<group->GetDaddy()->GetId()<<"');"<<endl;
+    }
+    else {
+        this->history << "insert into 'Group' values('"<<group->GetId()<<"', '')"<<endl;
+    }
     schedule->GetGroupList()->push_back(group);
 }
 
@@ -36,11 +45,13 @@ void Controller::addModule(Module* mod){
 }
 
 void Controller::delGroup(Group* group) {
+    this->history << "delete from Student where id_group='"<<group->GetId()<<"'";
     this->history << "delete from 'Group' where id = '"<<group->GetId()<<"'"<<endl;
     this->schedule->GetGroupList()->remove(group);
 }
 
 void Controller::delModule(Module* mod) {
+    this->history << "delete from ClassPeriod where id_module = '"<<mod->GetId()<<"'"<<endl;
     this->history << "delete from Module where id = '"<<mod->GetId()<<"'"<<endl;
     this->schedule->GetModuleList()->remove(mod);
 }
@@ -48,6 +59,11 @@ void Controller::delModule(Module* mod) {
 void Controller::delStudent(Student *stud, Group *group) {
     this->history << "delete from Student where id = '"<<stud->GetId()<<"'"<<endl;
     group->GetStudentList()->remove(stud);
+}
+
+void Controller::addTimeSlot(TimeSlot* timeSlot){
+    this->history << "insert into TimeSlot values('"<<timeSlot->GetId()<<"','"<<timeSlot->GetClassroom()<<"','"<<timeSlot->GetClassPeriod()<<"','"<<timeSlot->GetStartDate()<<"')";
+    this->schedule->GetTimeSlotList()->push_back(timeSlot);
 }
 
 void Controller::commit(){
@@ -81,11 +97,15 @@ Date* Controller::strToDate(string date){
     int m = 0;
     
     if(date.length() > 10){
-        h = strToInt(date.substr(12,14));
-        m = strToInt(date.substr(16,19));
+        h = strToInt(date.substr(12,2));
+        m = strToInt(date.substr(16,3));
     }
-    Date *dateh = new Date(strToInt(date.substr(0,1)), strToInt(date.substr(3,4)), strToInt(date.substr(6,10)), h, m);
+    Date *dateh = new Date(strToInt(date.substr(0,2)), strToInt(date.substr(3,2)), strToInt(date.substr(6,4)), h, m);
     return dateh;
+}
+
+bool Controller::strToBool(string str){
+    return (str == "true");
 }
 
 void Controller::loadSchedule(){
@@ -95,29 +115,101 @@ void Controller::loadSchedule(){
     this->schedule = new Schedule();
     list< list<string> >* result;
     try{
-         result = database->request("select * from classroom");
-         cout<<"   request done."<<endl;
+         result = database->request("select * from vlecturehall");
          if(result != NULL){
              list< list<string> >::iterator it = result->begin();
              list< list<string> >::const_iterator MaxList = result->end();
              for(;it != MaxList; it++){
                 list<string>::const_iterator MaxListList = it->end();
                 list<string>::iterator itList = it->begin();
-                this->schedule->GetClassroomList()->push_back(new Classroom(*itList, strToInt(*(++itList)) ));
+                this->schedule->GetClassroomList()->push_back(new LectureHall(*itList, strToInt(*(++itList)), strToBool(*(++itList)) ));
              } 
          }
          result->clear();
+         
+         result = database->request("select * from vpracticalclassroom");
+         if(result != NULL){
+             list< list<string> >::iterator it = result->begin();
+             list< list<string> >::const_iterator MaxList = result->end();
+             for(;it != MaxList; it++){
+                list<string>::const_iterator MaxListList = it->end();
+                list<string>::iterator itList = it->begin();
+                this->schedule->GetClassroomList()->push_back(new PracticalClassroom(*itList, strToInt(*(++itList)), strToInt(*(++itList)) ));
+             } 
+         }
+         result->clear();
+         
+         result = database->request("select * from vtutorialclassroom");
+         if(result != NULL){
+             list< list<string> >::iterator it = result->begin();
+             list< list<string> >::const_iterator MaxList = result->end();
+             for(;it != MaxList; it++){
+                list<string>::const_iterator MaxListList = it->end();
+                list<string>::iterator itList = it->begin();
+                this->schedule->GetClassroomList()->push_back(new TutorialClassroom(*itList, strToInt(*(++itList)), strToBool(*(++itList)) ));
+             } 
+         }
+         result->clear();
+         
          result = database->request("select * from 'group'");
          if(result != NULL){
+             list<string> listIdGroup = list<string>();
              list< list<string> >::iterator it = result->begin();
              list< list<string> >::const_iterator MaxList = result->end();
              for(;it != MaxList; it++){
                 list<string>::const_iterator MaxListList = it->end();
                 list<string>::iterator itList = it->begin();
-                this->schedule->GetGroupList()->push_back(new Group(*itList));
+                
+                string id = (*itList);
+                listIdGroup.push_back(id);
+                string idD = *(++itList);
+            
+                list<Group*>::iterator itGroup = schedule->GetGroupList()->begin();
+                list<Group*>::const_iterator MaxListGroup = schedule->GetGroupList()->end();
+                Group* groupExist = NULL;
+                Group* groupDaddyExist = NULL;
+                for(;itGroup != MaxListGroup; itGroup++){
+                   if((*itGroup)->GetId() == id ) {                       
+                       groupExist = (*itGroup);
+                   }
+                   else if((*itGroup)->GetId() == idD ){
+                       groupDaddyExist = (*itGroup);
+                   }
+                } 
+               if(groupExist != NULL) {
+                   groupExist->SetDaddy(groupDaddyExist);
+               }
+               else{
+                   this->schedule->GetGroupList()->push_back(new Group(id,groupDaddyExist));
+               }    
              } 
+             if(listIdGroup.size() != this->schedule->GetGroupList()->size()) {
+                   list<Group*>::iterator itGroup = schedule->GetGroupList()->begin();
+                   list<Group*>::const_iterator MaxListGroup = schedule->GetGroupList()->end();
+                   list<string>::iterator itString = listIdGroup.begin();
+                   list<string>::const_iterator MaxListString = listIdGroup.end();  
+                   list<Group*> lg = list<Group*>();
+                   bool test = false;
+                   for(;itGroup != MaxListGroup; itGroup++){
+                       itString = listIdGroup.begin();
+                       MaxListString = listIdGroup.end();
+                       for(;itString != MaxListString; itString++){
+                           if((*itString)==(*itGroup)->GetId())
+                               test = true;
+                       }
+                       if(!test){
+                           lg.push_back((*itGroup));
+                       }
+                   }
+                   itGroup = lg.begin();
+                   MaxListGroup = lg.end();
+                   for(;itGroup != MaxListGroup; itGroup++){
+                       schedule->GetGroupList()->remove((*itGroup));
+                   }
+               }
          }
-         result->clear();
+         
+         result->clear();      
          
          result = database->request("select * from student");
          if(result != NULL){
@@ -145,7 +237,7 @@ void Controller::loadSchedule(){
          
          
          result->clear();
-         result = database->request("select m.id, m.name, m.theHead, c.id, c.teacher, c.duration from Module m left join Classperiod c on m.id = c.id_module order by m.id");
+         result = database->request("select m.id, m.name, m.theHead, c.id, c.teacher, c.duration, c.id_type from Module m left join Classperiod c on m.id = c.id_module order by m.id");
          if(result != NULL){
              string idModule = "";
              Module *mod;
@@ -162,8 +254,24 @@ void Controller::loadSchedule(){
                 else {
                     ++itList++;
                 }
-                if(*(itList) != "") { 
-                    ClassPeriod *classPeriod = new ClassPeriod(strToInt(*(++itList)), *(++itList), strToInt(*(++itList)));
+                if(*(++itList) != "") { 
+                    int id = strToInt(*(itList));
+                    string teacher = *(++itList);
+                    int duration = strToInt(*(++itList));
+                    int type = strToInt(*(++itList));
+                    ClassPeriod *classPeriod;
+                    switch(type){
+                        case 1 :
+                            classPeriod = new PracticalClass(id, teacher, duration);
+                            break;
+                        case 2 :
+                            classPeriod = new MagistralClass(id, teacher, duration);
+                            break;
+                        case 3 :
+                            classPeriod = new TutorialClass(id, teacher, duration);
+                            break;
+                    }
+                    
                     mod->GetClassPeriodList()->push_back(classPeriod); 
                 }
              } 

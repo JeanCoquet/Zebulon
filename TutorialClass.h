@@ -10,8 +10,7 @@
 #include "ClassPeriod.h"
 class TutorialClass  : public ClassPeriod{
 public:
-    TutorialClass();
-    TutorialClass(const TutorialClass& orig);
+    TutorialClass(int id, string teacher, int duration);
     virtual ~TutorialClass();
 private:
 

@@ -7,7 +7,8 @@
 
 #include "LectureHall.h"
 
-LectureHall::LectureHall(string id, int capacity) : Classroom(id, capacity){
+LectureHall::LectureHall(string id, int capacity, bool videoconferencing) : Classroom(id, capacity){
+    this->videoconferencing = videoconferencing;
 }
 
 LectureHall::LectureHall(const LectureHall& orig, string id, int capacity) : Classroom(id, capacity){

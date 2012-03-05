@@ -8,7 +8,9 @@
 #ifndef DATE_H
 #define	DATE_H
 #include <string>
+#include <iostream>
 using namespace std;
+
 class Date {
 public:
     Date(int day, int month, int year, int hour, int min);
@@ -62,6 +64,9 @@ private:
     int hour;
     int min;
 };
+ostream& operator <<(ostream& os, Date *d);
+
+
 
 #endif	/* DATE_H */
 
