@@ -37,7 +37,7 @@ public:
     void setBorder (int b);
     void setBorderStyle (QString s);
     void setTitle(QString t);
-    void setTitleHeight(int h);
+    void setTitleHeight(int h);1
     void setFontSizeTitle(int s);
     void setDate(QDate date);
 
