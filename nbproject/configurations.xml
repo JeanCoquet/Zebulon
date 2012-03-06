@@ -34,6 +34,27 @@
         <itemPath>TutorialClassroom.C</itemPath>
         <itemPath>TutorialClassroom.h</itemPath>
       </logicalFolder>
+      <logicalFolder name="Gui" displayName="Gui" projectFiles="true">
+        <itemPath>Gui/Gui</itemPath>
+        <itemPath>Gui/Gui.pro</itemPath>
+        <itemPath>Gui/Makefile</itemPath>
+        <itemPath>Gui/QSchedule.cpp</itemPath>
+        <itemPath>Gui/QSchedule.h</itemPath>
+        <itemPath>Gui/QTimeSlot.cpp</itemPath>
+        <itemPath>Gui/QTimeSlot.h</itemPath>
+        <itemPath>Gui/commandesCompilationQt.txt</itemPath>
+        <itemPath>Gui/editTimeSlot.ui</itemPath>
+        <itemPath>Gui/main.cpp</itemPath>
+        <itemPath>Gui/mainwindow.cpp</itemPath>
+        <itemPath>Gui/mainwindow.h</itemPath>
+        <itemPath>Gui/mainwindow.ui</itemPath>
+        <itemPath>Gui/moc_QSchedule.cpp</itemPath>
+        <itemPath>Gui/moc_QTimeSlot.cpp</itemPath>
+        <itemPath>Gui/moc_mainwindow.cpp</itemPath>
+        <itemPath>Gui/ui_mainwindow.h</itemPath>
+        <itemPath>Gui/windowEditTimeSlot.cpp</itemPath>
+        <itemPath>Gui/windowEditTimeSlot.h</itemPath>
+      </logicalFolder>
       <logicalFolder name="f1" displayName="People" projectFiles="true">
         <itemPath>Group.cpp</itemPath>
         <itemPath>Group.h</itemPath>
@@ -75,6 +96,7 @@
   </logicalFolder>
   <sourceRootList>
     <Elem>sqlite</Elem>
+    <Elem>Gui</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>

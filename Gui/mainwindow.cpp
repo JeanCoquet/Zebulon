@@ -18,23 +18,26 @@ MainWindow::MainWindow(QWidget *parent) :
     QDate date = QDate::currentDate();
 
     ui->edt->setDate(date);
-
-    QObject::connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(addTimeSlot()));
-    QObject::connect(ui->pushButton_2, SIGNAL(clicked()), this, SLOT(removeTimeSlot()));
+    
     QObject::connect(ui->calendarWidget, SIGNAL(clicked(QDate)), this, SLOT(changeDate(QDate)));
+    QObject::connect(ui->addTimeSlotButton, SIGNAL(clicked()), this, SLOT(openEditTimeSlot())); 
 }
 
 void MainWindow::addTimeSlot() {
-    ui->edt->addTimeSlot(ui->calendarWidget->selectedDate(), ui->timeEdit->time().hour(), ui->timeEdit->time().minute(), ui->lineEdit_2->text().toInt(),
-                     "TD", "salle 008", "S32I010 Bases de donnees 2", "MEKAOUCHE, Abdelouahab", "602");
+    /*ui->edt->addTimeSlot(ui->calendarWidget->selectedDate(), ui->timeEdit->time().hour(), ui->timeEdit->time().minute(), ui->lineEdit_2->text().toInt(),
+                     "TD", "salle 008", "S32I010 Bases de donnees 2", "MEKAOUCHE, Abdelouahab", "602");*/
 }
 
 void MainWindow::removeTimeSlot() {
-    ui->edt->removeTimeSlot(ui->lineEdit->text().toInt());
+    //ui->edt->removeTimeSlot(ui->lineEdit->text().toInt());
 }
 
 void MainWindow::changeDate(QDate date) {
     ui->edt->setDate(date);
+}
+
+void MainWindow::openEditTimeSlot() {
+    
 }
 
 MainWindow::~MainWindow()

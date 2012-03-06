@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Mon Mar 5 21:33:09 2012
-**      by: Qt User Interface Compiler version 4.7.4
+** Created: Tue Mar 6 16:59:16 2012
+**      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -15,18 +15,17 @@
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
 #include <QtGui/QCalendarWidget>
+#include <QtGui/QComboBox>
+#include <QtGui/QCommandLinkButton>
 #include <QtGui/QDockWidget>
-#include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
-#include <QtGui/QLineEdit>
 #include <QtGui/QMainWindow>
 #include <QtGui/QMenu>
 #include <QtGui/QMenuBar>
-#include <QtGui/QPushButton>
 #include <QtGui/QScrollArea>
 #include <QtGui/QSpacerItem>
 #include <QtGui/QStatusBar>
-#include <QtGui/QTimeEdit>
+#include <QtGui/QTabWidget>
 #include <QtGui/QToolBar>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
@@ -52,21 +51,25 @@ public:
     QDockWidget *dockWidget;
     QWidget *dockWidgetContents;
     QVBoxLayout *verticalLayout;
+    QTabWidget *tabWidget;
+    QWidget *tab;
+    QVBoxLayout *verticalLayout_4;
+    QComboBox *comboBox;
+    QWidget *tab_2;
+    QVBoxLayout *verticalLayout_5;
+    QComboBox *comboBox_2;
+    QWidget *tab_3;
+    QVBoxLayout *verticalLayout_6;
+    QComboBox *comboBox_3;
     QCalendarWidget *calendarWidget;
-    QPushButton *pushButton;
-    QHBoxLayout *horizontalLayout;
-    QTimeEdit *timeEdit;
-    QLineEdit *lineEdit_2;
-    QHBoxLayout *horizontalLayout_2;
-    QPushButton *pushButton_2;
-    QLineEdit *lineEdit;
+    QCommandLinkButton *addTimeSlotButton;
     QSpacerItem *verticalSpacer;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(711, 452);
+        MainWindow->resize(739, 573);
         actionClose = new QAction(MainWindow);
         actionClose->setObjectName(QString::fromUtf8("actionClose"));
         centralWidget = new QWidget(MainWindow);
@@ -80,7 +83,7 @@ public:
         scrollArea_2->setWidgetResizable(true);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 482, 391));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 439, 491));
         verticalLayout_3 = new QVBoxLayout(scrollAreaWidgetContents_2);
         verticalLayout_3->setSpacing(6);
         verticalLayout_3->setContentsMargins(11, 11, 11, 11);
@@ -98,7 +101,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 711, 21));
+        menuBar->setGeometry(QRect(0, 0, 739, 26));
         menuFichier = new QMenu(menuBar);
         menuFichier->setObjectName(QString::fromUtf8("menuFichier"));
         menu_dition = new QMenu(menuBar);
@@ -112,59 +115,76 @@ public:
         MainWindow->setStatusBar(statusBar);
         dockWidget = new QDockWidget(MainWindow);
         dockWidget->setObjectName(QString::fromUtf8("dockWidget"));
+        dockWidget->setMinimumSize(QSize(274, 511));
+        dockWidget->setMaximumSize(QSize(524287, 524287));
         dockWidget->setContextMenuPolicy(Qt::DefaultContextMenu);
         dockWidget->setFeatures(QDockWidget::NoDockWidgetFeatures);
+        dockWidget->setAllowedAreas(Qt::AllDockWidgetAreas);
         dockWidgetContents = new QWidget();
         dockWidgetContents->setObjectName(QString::fromUtf8("dockWidgetContents"));
         verticalLayout = new QVBoxLayout(dockWidgetContents);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        tabWidget = new QTabWidget(dockWidgetContents);
+        tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
+        tabWidget->setMinimumSize(QSize(250, 75));
+        tabWidget->setMaximumSize(QSize(200, 75));
+        tab = new QWidget();
+        tab->setObjectName(QString::fromUtf8("tab"));
+        verticalLayout_4 = new QVBoxLayout(tab);
+        verticalLayout_4->setSpacing(6);
+        verticalLayout_4->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        comboBox = new QComboBox(tab);
+        comboBox->setObjectName(QString::fromUtf8("comboBox"));
+        comboBox->setMinimumSize(QSize(125, 0));
+
+        verticalLayout_4->addWidget(comboBox);
+
+        tabWidget->addTab(tab, QString());
+        tab_2 = new QWidget();
+        tab_2->setObjectName(QString::fromUtf8("tab_2"));
+        verticalLayout_5 = new QVBoxLayout(tab_2);
+        verticalLayout_5->setSpacing(6);
+        verticalLayout_5->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
+        comboBox_2 = new QComboBox(tab_2);
+        comboBox_2->setObjectName(QString::fromUtf8("comboBox_2"));
+        comboBox_2->setMinimumSize(QSize(125, 0));
+
+        verticalLayout_5->addWidget(comboBox_2);
+
+        tabWidget->addTab(tab_2, QString());
+        tab_3 = new QWidget();
+        tab_3->setObjectName(QString::fromUtf8("tab_3"));
+        verticalLayout_6 = new QVBoxLayout(tab_3);
+        verticalLayout_6->setSpacing(6);
+        verticalLayout_6->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
+        comboBox_3 = new QComboBox(tab_3);
+        comboBox_3->setObjectName(QString::fromUtf8("comboBox_3"));
+        comboBox_3->setMinimumSize(QSize(125, 0));
+
+        verticalLayout_6->addWidget(comboBox_3);
+
+        tabWidget->addTab(tab_3, QString());
+
+        verticalLayout->addWidget(tabWidget);
+
         calendarWidget = new QCalendarWidget(dockWidgetContents);
         calendarWidget->setObjectName(QString::fromUtf8("calendarWidget"));
-        calendarWidget->setMinimumSize(QSize(200, 200));
-        calendarWidget->setMaximumSize(QSize(200, 200));
+        calendarWidget->setMinimumSize(QSize(250, 200));
+        calendarWidget->setMaximumSize(QSize(250, 200));
         calendarWidget->setFirstDayOfWeek(Qt::Monday);
         calendarWidget->setHorizontalHeaderFormat(QCalendarWidget::NoHorizontalHeader);
 
         verticalLayout->addWidget(calendarWidget);
 
-        pushButton = new QPushButton(dockWidgetContents);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        addTimeSlotButton = new QCommandLinkButton(dockWidgetContents);
+        addTimeSlotButton->setObjectName(QString::fromUtf8("addTimeSlotButton"));
 
-        verticalLayout->addWidget(pushButton);
-
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setSpacing(6);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        timeEdit = new QTimeEdit(dockWidgetContents);
-        timeEdit->setObjectName(QString::fromUtf8("timeEdit"));
-
-        horizontalLayout->addWidget(timeEdit);
-
-        lineEdit_2 = new QLineEdit(dockWidgetContents);
-        lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
-
-        horizontalLayout->addWidget(lineEdit_2);
-
-
-        verticalLayout->addLayout(horizontalLayout);
-
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setSpacing(6);
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        pushButton_2 = new QPushButton(dockWidgetContents);
-        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
-
-        horizontalLayout_2->addWidget(pushButton_2);
-
-        lineEdit = new QLineEdit(dockWidgetContents);
-        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-
-        horizontalLayout_2->addWidget(lineEdit);
-
-
-        verticalLayout->addLayout(horizontalLayout_2);
+        verticalLayout->addWidget(addTimeSlotButton);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -172,15 +192,15 @@ public:
 
         dockWidget->setWidget(dockWidgetContents);
         MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(1), dockWidget);
-        QWidget::setTabOrder(calendarWidget, pushButton);
-        QWidget::setTabOrder(pushButton, timeEdit);
-        QWidget::setTabOrder(timeEdit, lineEdit_2);
 
         menuBar->addAction(menuFichier->menuAction());
         menuBar->addAction(menu_dition->menuAction());
         menuFichier->addAction(actionClose);
 
         retranslateUi(MainWindow);
+
+        tabWidget->setCurrentIndex(0);
+
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
@@ -191,9 +211,11 @@ public:
         actionClose->setText(QApplication::translate("MainWindow", "Close", 0, QApplication::UnicodeUTF8));
         menuFichier->setTitle(QApplication::translate("MainWindow", "Fichier", 0, QApplication::UnicodeUTF8));
         menu_dition->setTitle(QApplication::translate("MainWindow", "\303\211dition", 0, QApplication::UnicodeUTF8));
-        dockWidget->setWindowTitle(QApplication::translate("MainWindow", "Recherche", 0, QApplication::UnicodeUTF8));
-        pushButton->setText(QApplication::translate("MainWindow", "PushButton", 0, QApplication::UnicodeUTF8));
-        pushButton_2->setText(QApplication::translate("MainWindow", "PushButton", 0, QApplication::UnicodeUTF8));
+        dockWidget->setWindowTitle(QString());
+        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Classroom", 0, QApplication::UnicodeUTF8));
+        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Module", 0, QApplication::UnicodeUTF8));
+        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Group", 0, QApplication::UnicodeUTF8));
+        addTimeSlotButton->setText(QApplication::translate("MainWindow", "Add Time Slot", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

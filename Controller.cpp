@@ -113,8 +113,8 @@ Date* Controller::strToDate(string date){
     int m = 0;
     
     if(date.length() > 10){
-        h = strToInt(date.substr(12,2));
-        m = strToInt(date.substr(16,3));
+        h = strToInt(date.substr(11,2));
+        m = strToInt(date.substr(15,2));
     }
     Date *dateh = new Date(strToInt(date.substr(0,2)), strToInt(date.substr(3,2)), strToInt(date.substr(6,4)), h, m);
     return dateh;

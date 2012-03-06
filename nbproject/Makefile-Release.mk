@@ -35,23 +35,31 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/ClassPeriod.o \
+	${OBJECTDIR}/TutorialClassroom.o \
 	${OBJECTDIR}/Controller.o \
 	${OBJECTDIR}/Group.o \
-	${OBJECTDIR}/TutorialClassroom.o \
+	${OBJECTDIR}/Gui/moc_QSchedule.o \
 	${OBJECTDIR}/Student.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/Module.o \
+	${OBJECTDIR}/Gui/QTimeSlot.o \
 	${OBJECTDIR}/MagistralClass.o \
+	${OBJECTDIR}/Gui/moc_QTimeSlot.o \
+	${OBJECTDIR}/Gui/moc_mainwindow.o \
 	${OBJECTDIR}/PracticalClass.o \
+	${OBJECTDIR}/Gui/main.o \
 	${OBJECTDIR}/Classroom.o \
 	${OBJECTDIR}/sqlite/lib/sqlite3.o \
 	${OBJECTDIR}/LectureHall.o \
+	${OBJECTDIR}/Gui/QSchedule.o \
 	${OBJECTDIR}/TimeSlot.o \
 	${OBJECTDIR}/Schedule.o \
 	${OBJECTDIR}/TutorialClass.o \
 	${OBJECTDIR}/Date.o \
+	${OBJECTDIR}/Gui/windowEditTimeSlot.o \
 	${OBJECTDIR}/PracticalClassroom.o \
-	${OBJECTDIR}/sqlite/Database.o
+	${OBJECTDIR}/sqlite/Database.o \
+	${OBJECTDIR}/Gui/mainwindow.o
 
 
 # C Compiler Flags
@@ -83,6 +91,11 @@ ${OBJECTDIR}/ClassPeriod.o: ClassPeriod.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/ClassPeriod.o ClassPeriod.cpp
 
+${OBJECTDIR}/TutorialClassroom.o: TutorialClassroom.C 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/TutorialClassroom.o TutorialClassroom.C
+
 ${OBJECTDIR}/Controller.o: Controller.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
@@ -93,10 +106,10 @@ ${OBJECTDIR}/Group.o: Group.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Group.o Group.cpp
 
-${OBJECTDIR}/TutorialClassroom.o: TutorialClassroom.C 
-	${MKDIR} -p ${OBJECTDIR}
+${OBJECTDIR}/Gui/moc_QSchedule.o: Gui/moc_QSchedule.cpp 
+	${MKDIR} -p ${OBJECTDIR}/Gui
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/TutorialClassroom.o TutorialClassroom.C
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Gui/moc_QSchedule.o Gui/moc_QSchedule.cpp
 
 ${OBJECTDIR}/Student.o: Student.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -113,15 +126,35 @@ ${OBJECTDIR}/Module.o: Module.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Module.o Module.cpp
 
+${OBJECTDIR}/Gui/QTimeSlot.o: Gui/QTimeSlot.cpp 
+	${MKDIR} -p ${OBJECTDIR}/Gui
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Gui/QTimeSlot.o Gui/QTimeSlot.cpp
+
 ${OBJECTDIR}/MagistralClass.o: MagistralClass.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/MagistralClass.o MagistralClass.cpp
 
+${OBJECTDIR}/Gui/moc_QTimeSlot.o: Gui/moc_QTimeSlot.cpp 
+	${MKDIR} -p ${OBJECTDIR}/Gui
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Gui/moc_QTimeSlot.o Gui/moc_QTimeSlot.cpp
+
+${OBJECTDIR}/Gui/moc_mainwindow.o: Gui/moc_mainwindow.cpp 
+	${MKDIR} -p ${OBJECTDIR}/Gui
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Gui/moc_mainwindow.o Gui/moc_mainwindow.cpp
+
 ${OBJECTDIR}/PracticalClass.o: PracticalClass.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/PracticalClass.o PracticalClass.cpp
+
+${OBJECTDIR}/Gui/main.o: Gui/main.cpp 
+	${MKDIR} -p ${OBJECTDIR}/Gui
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Gui/main.o Gui/main.cpp
 
 ${OBJECTDIR}/Classroom.o: Classroom.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -137,6 +170,11 @@ ${OBJECTDIR}/LectureHall.o: LectureHall.C
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/LectureHall.o LectureHall.C
+
+${OBJECTDIR}/Gui/QSchedule.o: Gui/QSchedule.cpp 
+	${MKDIR} -p ${OBJECTDIR}/Gui
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Gui/QSchedule.o Gui/QSchedule.cpp
 
 ${OBJECTDIR}/TimeSlot.o: TimeSlot.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -158,6 +196,11 @@ ${OBJECTDIR}/Date.o: Date.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Date.o Date.cpp
 
+${OBJECTDIR}/Gui/windowEditTimeSlot.o: Gui/windowEditTimeSlot.cpp 
+	${MKDIR} -p ${OBJECTDIR}/Gui
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Gui/windowEditTimeSlot.o Gui/windowEditTimeSlot.cpp
+
 ${OBJECTDIR}/PracticalClassroom.o: PracticalClassroom.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
@@ -167,6 +210,11 @@ ${OBJECTDIR}/sqlite/Database.o: sqlite/Database.cpp
 	${MKDIR} -p ${OBJECTDIR}/sqlite
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/sqlite/Database.o sqlite/Database.cpp
+
+${OBJECTDIR}/Gui/mainwindow.o: Gui/mainwindow.cpp 
+	${MKDIR} -p ${OBJECTDIR}/Gui
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Gui/mainwindow.o Gui/mainwindow.cpp
 
 # Subprojects
 .build-subprojects:
