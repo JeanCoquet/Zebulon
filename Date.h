@@ -64,7 +64,7 @@ private:
     int hour;
     int min;
 };
-ostream& operator <<(ostream& os, Date *d);
+ostream& operator <<(ostream& os, const Date *d);
 
 
 

@@ -6,7 +6,7 @@
  */
 
 #include "Date.h"
-ostream& operator <<(ostream& os, Date *d) {
+ostream& operator <<(ostream& os, const Date *d) {
     os << d->GetDay() << "/" << d->GetMonth() << "/" << d->GetYear() << " " << d->GetHour() << ":" << d->GetMin();
     return os;
 }

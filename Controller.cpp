@@ -66,6 +66,22 @@ void Controller::addTimeSlot(TimeSlot* timeSlot){
     this->schedule->GetTimeSlotList()->push_back(timeSlot);
 }
 
+void Controller::delTimeSlot(TimeSlot* timeSlot) {
+    this->history << "delete from TimeSlot where id = '"<<timeSlot->GetId()<<"'"<<endl;
+    this->schedule->GetTimeSlotList()->remove(timeSlot);
+}
+    
+void Controller::addClassPeriod(ClassPeriod* classPeriod, Module *mod) {
+    
+    this->history << "insert into ClassPeriod values('"<<"')";
+    mod->GetClassPeriodList()->push_back(classPeriod);
+}
+
+void Controller::delClassPeriod(ClassPeriod* classPeriod, Module *mod) {
+    this->history << "delete from ClassPeriod where id = '"<<classPeriod->GetId()<<"'"<<endl;
+    mod->GetClassPeriodList()->remove(classPeriod);
+}
+
 void Controller::commit(){
     this->history.close();
     this->history.open(historyFile, ios::in);

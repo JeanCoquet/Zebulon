@@ -14,6 +14,7 @@
 #include "PracticalClass.h"
 #include "TutorialClass.h"
 #include "MagistralClass.h"
+#include "ClassPeriod.h"
 #include "Schedule.h"
 #include "Group.h"
 #include "sqlite/Database.h"
@@ -32,8 +33,6 @@ public:
         return schedule;
     }
 
-    void addTimeSlot(TimeSlot* timeSlot);
-    void delTimeSlot(TimeSlot* timeSlot);
     void loadSchedule();
     void commit();
     void addStudent(Student *stud, Group *group);
@@ -42,6 +41,10 @@ public:
     void delModule(Module *mod);
     void addGroup(Group *group);
     void delGroup(Group *group);
+    void addTimeSlot(TimeSlot* timeSlot);
+    void delTimeSlot(TimeSlot* timeSlot);
+    void addClassPeriod(ClassPeriod* classPeriod, Module *mod);
+    void delClassPeriod(ClassPeriod* classPeriod, Module *mod);
     void joinTimeSlotWithClassPeriod(TimeSlot *timeslot, ClassPeriod *classPeriod);
     virtual ~Controller();
 private:
