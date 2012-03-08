@@ -12,15 +12,9 @@ CND_DISTDIR=dist
 CND_BUILDDIR=build
 NBTMPDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-<<<<<<< HEAD
 OUTPUT_PATH=${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/Zebulon
 OUTPUT_BASENAME=Zebulon
 PACKAGE_TOP_DIR=Zebulon/
-=======
-OUTPUT_PATH=${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/zebulon
-OUTPUT_BASENAME=zebulon
-PACKAGE_TOP_DIR=zebulon/
->>>>>>> 147c2b0285400e32547caa52d601089228d27cb9
 
 # Functions
 function checkReturnCode
@@ -65,25 +59,15 @@ mkdir -p ${NBTMPDIR}
 
 # Copy files and create directories and links
 cd "${TOP}"
-<<<<<<< HEAD
 makeDirectory "${NBTMPDIR}/Zebulon/bin"
-=======
-makeDirectory "${NBTMPDIR}/zebulon/bin"
->>>>>>> 147c2b0285400e32547caa52d601089228d27cb9
 copyFileToTmpDir "${OUTPUT_PATH}" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
 
 
 # Generate tar file
 cd "${TOP}"
-<<<<<<< HEAD
 rm -f ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/Zebulon.tar
 cd ${NBTMPDIR}
 tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/Zebulon.tar *
-=======
-rm -f ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/zebulon.tar
-cd ${NBTMPDIR}
-tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/zebulon.tar *
->>>>>>> 147c2b0285400e32547caa52d601089228d27cb9
 checkReturnCode
 
 # Cleanup

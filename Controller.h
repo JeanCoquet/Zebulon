@@ -29,12 +29,6 @@ public:
         return database;
     }
 
-<<<<<<< HEAD
-=======
-    Schedule* getSchedule() const {
-        return schedule;
-    }
->>>>>>> 147c2b0285400e32547caa52d601089228d27cb9
 
     void loadSchedule();
     void commit();
@@ -50,7 +44,6 @@ public:
     void delClassPeriod(ClassPeriod* classPeriod, Module *mod);
     void joinTimeSlotWithClassPeriod(TimeSlot *timeslot, ClassPeriod *classPeriod);
     virtual ~Controller();
-<<<<<<< HEAD
 
 
     Schedule* getSchedule() const {
@@ -61,8 +54,6 @@ public:
         this->schedule = schedule;
     }
 
-=======
->>>>>>> 147c2b0285400e32547caa52d601089228d27cb9
 private:
     int strToInt(string);
     Date* strToDate(string);
