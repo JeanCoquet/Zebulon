@@ -4,7 +4,11 @@
 #include <QtGui>
 #include <QList>
 #include <QString>
+<<<<<<< HEAD
 #include "QTimeSlot.h"
+=======
+#include <QTimeSlot.h>
+>>>>>>> 147c2b0285400e32547caa52d601089228d27cb9
 
 #define LUNDI "Lundi"
 #define MARDI "Mardi"

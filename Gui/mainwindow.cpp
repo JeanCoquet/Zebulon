@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+<<<<<<< HEAD
 #include <iostream>
 
 
@@ -35,12 +36,15 @@ void MainWindow::addClassroomToComboBox(){
     }
 }
 
+=======
+>>>>>>> 147c2b0285400e32547caa52d601089228d27cb9
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+<<<<<<< HEAD
     QDate date = QDate::currentDate();
     ui->edt->setDate(date);
     QObject::connect(ui->calendarWidget, SIGNAL(clicked(QDate)), this, SLOT(changeDate(QDate)));
@@ -52,6 +56,23 @@ MainWindow::MainWindow(QWidget *parent) :
     addClassroomToComboBox();
     
     
+=======
+
+    //edt = new QSchedule();
+
+    /*QScrollArea *scroll = new QScrollArea;
+    scroll->setWidget(edt);
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->addWidget(scroll);
+    ui->centralWidget->setLayout(layout);*/
+
+    QDate date = QDate::currentDate();
+
+    ui->edt->setDate(date);
+    
+    QObject::connect(ui->calendarWidget, SIGNAL(clicked(QDate)), this, SLOT(changeDate(QDate)));
+    QObject::connect(ui->addTimeSlotButton, SIGNAL(clicked()), this, SLOT(openEditTimeSlot())); 
+>>>>>>> 147c2b0285400e32547caa52d601089228d27cb9
 }
 
 void MainWindow::addTimeSlot() {
@@ -69,7 +90,10 @@ void MainWindow::changeDate(QDate date) {
 
 void MainWindow::openEditTimeSlot() {
     
+<<<<<<< HEAD
     windowEditTimeSlot->show();
+=======
+>>>>>>> 147c2b0285400e32547caa52d601089228d27cb9
 }
 
 MainWindow::~MainWindow()

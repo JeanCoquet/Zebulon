@@ -128,11 +128,19 @@
         </attribute>
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
+<<<<<<< HEAD
           <widget class="QComboBox" name="comboBoxClassroom">
            <property name="minimumSize">
             <size>
              <width>125</width>
              <height>30</height>
+=======
+          <widget class="QComboBox" name="comboBox">
+           <property name="minimumSize">
+            <size>
+             <width>125</width>
+             <height>0</height>
+>>>>>>> 147c2b0285400e32547caa52d601089228d27cb9
             </size>
            </property>
           </widget>
@@ -145,11 +153,19 @@
         </attribute>
         <layout class="QVBoxLayout" name="verticalLayout_5">
          <item>
+<<<<<<< HEAD
           <widget class="QComboBox" name="comboBoxModule">
            <property name="minimumSize">
             <size>
              <width>125</width>
              <height>30</height>
+=======
+          <widget class="QComboBox" name="comboBox_2">
+           <property name="minimumSize">
+            <size>
+             <width>125</width>
+             <height>0</height>
+>>>>>>> 147c2b0285400e32547caa52d601089228d27cb9
             </size>
            </property>
           </widget>
@@ -162,11 +178,19 @@
         </attribute>
         <layout class="QVBoxLayout" name="verticalLayout_6">
          <item>
+<<<<<<< HEAD
           <widget class="QComboBox" name="comboBoxGroup">
            <property name="minimumSize">
             <size>
              <width>125</width>
              <height>30</height>
+=======
+          <widget class="QComboBox" name="comboBox_3">
+           <property name="minimumSize">
+            <size>
+             <width>125</width>
+             <height>0</height>
+>>>>>>> 147c2b0285400e32547caa52d601089228d27cb9
             </size>
            </property>
           </widget>

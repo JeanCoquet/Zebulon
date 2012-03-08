@@ -2,7 +2,11 @@
 <configurationDescriptor version="79">
   <projectmakefile>Makefile</projectmakefile>
   <confs>
+<<<<<<< HEAD
     <conf name="Debug" type="4">
+=======
+    <conf name="Debug" type="1">
+>>>>>>> 147c2b0285400e32547caa52d601089228d27cb9
       <toolsSet>
         <developmentServer>localhost</developmentServer>
         <platform>2</platform>
@@ -20,6 +24,10 @@
         <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
       </dbx_gdbdebugger>
       <gizmo_options version="3">
+<<<<<<< HEAD
+=======
+        <configurationname>GizmoSimple</configurationname>
+>>>>>>> 147c2b0285400e32547caa52d601089228d27cb9
       </gizmo_options>
       <nativedebugger version="1">
         <engine>gdb</engine>
@@ -37,7 +45,11 @@
         </environment>
       </runprofile>
     </conf>
+<<<<<<< HEAD
     <conf name="Release" type="4">
+=======
+    <conf name="Release" type="1">
+>>>>>>> 147c2b0285400e32547caa52d601089228d27cb9
       <toolsSet>
         <developmentServer>localhost</developmentServer>
         <platform>2</platform>

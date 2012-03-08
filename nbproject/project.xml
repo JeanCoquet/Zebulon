@@ -10,17 +10,30 @@
             <sourceEncoding>UTF-8</sourceEncoding>
             <make-dep-projects/>
             <sourceRootList>
+<<<<<<< HEAD
                 <sourceRootElem>Gui</sourceRootElem>
                 <sourceRootElem>sqlite</sourceRootElem>
+=======
+                <sourceRootElem>sqlite</sourceRootElem>
+                <sourceRootElem>Gui</sourceRootElem>
+>>>>>>> 147c2b0285400e32547caa52d601089228d27cb9
             </sourceRootList>
             <confList>
                 <confElem>
                     <name>Debug</name>
+<<<<<<< HEAD
                     <type>4</type>
                 </confElem>
                 <confElem>
                     <name>Release</name>
                     <type>4</type>
+=======
+                    <type>1</type>
+                </confElem>
+                <confElem>
+                    <name>Release</name>
+                    <type>1</type>
+>>>>>>> 147c2b0285400e32547caa52d601089228d27cb9
                 </confElem>
             </confList>
         </data>

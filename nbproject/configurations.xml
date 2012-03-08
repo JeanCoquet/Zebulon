@@ -12,17 +12,67 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+<<<<<<< HEAD
       <logicalFolder name="Gui" displayName="Gui" projectFiles="true">
+=======
+      <logicalFolder name="f2" displayName="Class" projectFiles="true">
+        <itemPath>ClassPeriod.cpp</itemPath>
+        <itemPath>ClassPeriod.h</itemPath>
+        <itemPath>MagistralClass.cpp</itemPath>
+        <itemPath>MagistralClass.h</itemPath>
+        <itemPath>Module.cpp</itemPath>
+        <itemPath>Module.h</itemPath>
+        <itemPath>PracticalClass.cpp</itemPath>
+        <itemPath>PracticalClass.h</itemPath>
+        <itemPath>TutorialClass.cpp</itemPath>
+        <itemPath>TutorialClass.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f3" displayName="Classroom" projectFiles="true">
+        <itemPath>Classroom.cpp</itemPath>
+        <itemPath>Classroom.h</itemPath>
+        <itemPath>LectureHall.C</itemPath>
+        <itemPath>LectureHall.h</itemPath>
+        <itemPath>PracticalClassroom.cpp</itemPath>
+        <itemPath>PracticalClassroom.h</itemPath>
+        <itemPath>TutorialClassroom.C</itemPath>
+        <itemPath>TutorialClassroom.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="Gui" displayName="Gui" projectFiles="true">
+        <itemPath>Gui/Gui</itemPath>
+        <itemPath>Gui/Gui.pro</itemPath>
+        <itemPath>Gui/Makefile</itemPath>
+>>>>>>> 147c2b0285400e32547caa52d601089228d27cb9
         <itemPath>Gui/QSchedule.cpp</itemPath>
         <itemPath>Gui/QSchedule.h</itemPath>
         <itemPath>Gui/QTimeSlot.cpp</itemPath>
         <itemPath>Gui/QTimeSlot.h</itemPath>
+<<<<<<< HEAD
         <itemPath>Gui/WindowEditTimeSlot.cpp</itemPath>
         <itemPath>Gui/WindowEditTimeSlot.h</itemPath>
         <itemPath>Gui/WindowEditTimeSlot.ui</itemPath>
         <itemPath>Gui/mainwindow.cpp</itemPath>
         <itemPath>Gui/mainwindow.h</itemPath>
         <itemPath>Gui/mainwindow.ui</itemPath>
+=======
+        <itemPath>Gui/commandesCompilationQt.txt</itemPath>
+        <itemPath>Gui/editTimeSlot.ui</itemPath>
+        <itemPath>Gui/main.cpp</itemPath>
+        <itemPath>Gui/mainwindow.cpp</itemPath>
+        <itemPath>Gui/mainwindow.h</itemPath>
+        <itemPath>Gui/mainwindow.ui</itemPath>
+        <itemPath>Gui/moc_QSchedule.cpp</itemPath>
+        <itemPath>Gui/moc_QTimeSlot.cpp</itemPath>
+        <itemPath>Gui/moc_mainwindow.cpp</itemPath>
+        <itemPath>Gui/ui_mainwindow.h</itemPath>
+        <itemPath>Gui/windowEditTimeSlot.cpp</itemPath>
+        <itemPath>Gui/windowEditTimeSlot.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f1" displayName="People" projectFiles="true">
+        <itemPath>Group.cpp</itemPath>
+        <itemPath>Group.h</itemPath>
+        <itemPath>Student.cpp</itemPath>
+        <itemPath>Student.h</itemPath>
+>>>>>>> 147c2b0285400e32547caa52d601089228d27cb9
       </logicalFolder>
       <logicalFolder name="sqlite" displayName="sqlite" projectFiles="true">
         <logicalFolder name="lib" displayName="lib" projectFiles="true">
@@ -35,14 +85,18 @@
         <itemPath>sqlite/Zebulon_database.sqlite</itemPath>
         <itemPath>sqlite/script.sql</itemPath>
       </logicalFolder>
+<<<<<<< HEAD
       <itemPath>ClassPeriod.cpp</itemPath>
       <itemPath>ClassPeriod.h</itemPath>
       <itemPath>Classroom.cpp</itemPath>
       <itemPath>Classroom.h</itemPath>
+=======
+>>>>>>> 147c2b0285400e32547caa52d601089228d27cb9
       <itemPath>Controller.cpp</itemPath>
       <itemPath>Controller.h</itemPath>
       <itemPath>Date.cpp</itemPath>
       <itemPath>Date.h</itemPath>
+<<<<<<< HEAD
       <itemPath>Group.cpp</itemPath>
       <itemPath>Group.h</itemPath>
       <itemPath>LectureHall.C</itemPath>
@@ -67,6 +121,12 @@
       <itemPath>TutorialClassroom.C</itemPath>
       <itemPath>TutorialClassroom.h</itemPath>
       <itemPath>history.sql</itemPath>
+=======
+      <itemPath>Schedule.cpp</itemPath>
+      <itemPath>Schedule.h</itemPath>
+      <itemPath>TimeSlot.cpp</itemPath>
+      <itemPath>TimeSlot.h</itemPath>
+>>>>>>> 147c2b0285400e32547caa52d601089228d27cb9
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -82,6 +142,7 @@
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
+<<<<<<< HEAD
     <Elem>Gui</Elem>
     <Elem>sqlite</Elem>
   </sourceRootList>
@@ -99,14 +160,39 @@
       </compileType>
     </conf>
     <conf name="Release" type="4">
+=======
+    <Elem>sqlite</Elem>
+    <Elem>Gui</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>GNU|GNU</compilerSet>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <commandLine>-pthread</commandLine>
+        </cTool>
+        <ccTool>
+          <commandLine>-pthread -ldl</commandLine>
+        </ccTool>
+      </compileType>
+    </conf>
+    <conf name="Release" type="1">
+>>>>>>> 147c2b0285400e32547caa52d601089228d27cb9
       <toolsSet>
         <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
         <compilerSet>default</compilerSet>
       </toolsSet>
+<<<<<<< HEAD
       <qt>
         <buildMode>1</buildMode>
         <modules>core gui</modules>
       </qt>
+=======
+>>>>>>> 147c2b0285400e32547caa52d601089228d27cb9
       <compileType>
         <cTool>
           <developmentMode>5</developmentMode>

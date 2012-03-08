@@ -124,8 +124,11 @@ bool Controller::strToBool(string str){
     return (str == "true");
 }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 147c2b0285400e32547caa52d601089228d27cb9
 void Controller::loadSchedule(){
     cout<<"loading schedule..."<<endl;
     /*if(this->schedule != NULL)
