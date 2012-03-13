@@ -7,20 +7,26 @@
 
 #ifndef _WINDOWEDITTIMESLOT_H
 #define	_WINDOWEDITTIMESLOT_H
-
+#include "Controller.h"
 #include "ui_WindowEditTimeSlot.h"
+#include <sstream>
+#include <iostream>
 
 class WindowEditTimeSlot : public QDialog {
     Q_OBJECT
 public:
-    WindowEditTimeSlot();
+    WindowEditTimeSlot(Controller*);
     virtual ~WindowEditTimeSlot();
     Ui::WindowEditTimeSlot getWidget() const {
         return widget;
     }
-
+public slots :
+    void changeModule(int);
+    void timeSlotAccepted();
+        
 private:
     Ui::WindowEditTimeSlot widget;
+    Controller* ctrl;
 };
 
 #endif	/* _WINDOWEDITTIMESLOT_H */

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'WindowEditTimeSlot.h'
 **
-** Created: Wed Mar 7 15:15:23 2012
+** Created: Tue Mar 13 14:43:19 2012
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,18 +23,23 @@ static const uint qt_meta_data_WindowEditTimeSlot[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-       0,    0, // methods
+       2,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
        0,       // signalCount
 
+ // slots: signature, parameters, type, tag, flags
+      20,   19,   19,   19, 0x0a,
+      38,   19,   19,   19, 0x0a,
+
        0        // eod
 };
 
 static const char qt_meta_stringdata_WindowEditTimeSlot[] = {
-    "WindowEditTimeSlot\0"
+    "WindowEditTimeSlot\0\0changeModule(int)\0"
+    "timeSlotAccepted()\0"
 };
 
 const QMetaObject WindowEditTimeSlot::staticMetaObject = {
@@ -64,6 +69,14 @@ int WindowEditTimeSlot::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     _id = QDialog::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: changeModule((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 1: timeSlotAccepted(); break;
+        default: ;
+        }
+        _id -= 2;
+    }
     return _id;
 }
 QT_END_MOC_NAMESPACE

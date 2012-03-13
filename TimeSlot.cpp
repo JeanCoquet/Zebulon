@@ -14,6 +14,8 @@ TimeSlot::TimeSlot(int id, Date *startDate, Classroom* classroom, ClassPeriod* c
     this->classPeriod = classPeriod;
 }
 
+
+
 TimeSlot::TimeSlot(const TimeSlot& orig) {
 }
 
