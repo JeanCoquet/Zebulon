@@ -10,7 +10,7 @@
 WindowEditTimeSlot::WindowEditTimeSlot(Controller* ctrl) {
     cout<<"bleu violace"<<endl;
     this->ctrl = ctrl;
-    
+    this->setModal(true);
     widget.setupUi(this);
     QObject::connect(this->widget.comboBoxModule, SIGNAL(currentIndexChanged(int)), this, SLOT(changeModule(int)));
     QObject::connect(this->widget.buttonBox, SIGNAL(accepted()), this, SLOT(timeSlotAccepted()));
@@ -31,7 +31,7 @@ void WindowEditTimeSlot::changeModule(int){
     this->widget.comboBoxClassPeriod->clear();
     for(;itCp != MaxListCp; itCp++){
         ostringstream oss;
-        oss<<(*itCp)->GetId();
+        oss<<(*itCp)->GetId;
         this->getWidget().comboBoxClassPeriod->addItem(oss.str().c_str());
     }
 }

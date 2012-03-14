@@ -72,7 +72,7 @@ MainWindow::MainWindow(QWidget *parent) :
     addClassroomToComboBox();
     
     QTimeSlot* t = ui->edt->addTimeSlot(ui->calendarWidget->selectedDate(), 8, 0, 80,
-                     "TD", "008", "S32I010 Bases de donnees 2", "MEKAOUCHE, Abdelouahab", "602");
+                     "TD", "008", "S03832B : Informatique et societes", "MEKAOUCHE, Abdelouahab", "602");
     
     QObject::connect(t, SIGNAL(clicked(QTimeSlot*)), this, SLOT(openEditTimeSlot(QTimeSlot*)));
     
@@ -92,7 +92,6 @@ void MainWindow::changeDate(QDate date) {
 }
 
 void MainWindow::openEditTimeSlot() { 
-    windowEditTimeSlot->setModal(true);
     windowEditTimeSlot->show();
 }
 
@@ -105,13 +104,14 @@ void MainWindow::openEditTimeSlot(QTimeSlot* timeSlot) {
     windowEditTimeSlot->getWidget().timeEdit->setTime(time);
     
     QComboBox* combo = windowEditTimeSlot->getWidget().comboBoxClassroom;
-    combo->setCurrentIndex(combo->findText(timeSlot->getClassRoom()));   
+    combo->setCurrentIndex(combo->findText(timeSlot->getClassRoom())); 
     
-    /* A FAIRE : 
-        Remplir les champs de windowEditTimeSlot par les attribit de timeSlot 
-     */
+    combo = windowEditTimeSlot->getWidget().comboBoxClassPeriod;
+    combo->setCurrentIndex(combo->findText(timeSlot->getClassPeriod()));
     
-    windowEditTimeSlot->setModal(true);
+    combo = windowEditTimeSlot->getWidget().comboBoxModule;
+    combo->setCurrentIndex(combo->findText(timeSlot->getModule()));
+    
     windowEditTimeSlot->show();
 }
 

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>408</width>
-    <height>470</height>
+    <width>368</width>
+    <height>360</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,8 +24,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>388</width>
-        <height>204</height>
+        <width>354</width>
+        <height>154</height>
        </rect>
       </property>
       <layout class="QFormLayout" name="formLayout">

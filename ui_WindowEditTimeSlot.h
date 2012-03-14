@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'WindowEditTimeSlot.ui'
 **
-** Created: Tue Mar 13 20:41:11 2012
+** Created: Wed Mar 14 14:47:26 2012
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -53,7 +53,7 @@ public:
     {
         if (WindowEditTimeSlot->objectName().isEmpty())
             WindowEditTimeSlot->setObjectName(QString::fromUtf8("WindowEditTimeSlot"));
-        WindowEditTimeSlot->resize(408, 470);
+        WindowEditTimeSlot->resize(368, 360);
         verticalLayout = new QVBoxLayout(WindowEditTimeSlot);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         scrollArea = new QScrollArea(WindowEditTimeSlot);
@@ -61,7 +61,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 388, 204));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 354, 154));
         formLayout = new QFormLayout(scrollAreaWidgetContents);
         formLayout->setObjectName(QString::fromUtf8("formLayout"));
         label = new QLabel(scrollAreaWidgetContents);
