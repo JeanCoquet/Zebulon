@@ -17,6 +17,7 @@ class WindowEditTimeSlot : public QDialog {
 public:
     WindowEditTimeSlot(Controller*);
     virtual ~WindowEditTimeSlot();
+    void clearWidgetContent();
     Ui::WindowEditTimeSlot getWidget() const {
         return widget;
     }

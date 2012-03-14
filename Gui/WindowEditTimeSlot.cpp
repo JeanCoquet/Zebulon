@@ -30,9 +30,7 @@ void WindowEditTimeSlot::changeModule(int){
     list<ClassPeriod*>::const_iterator MaxListCp = lcp->end();
     this->widget.comboBoxClassPeriod->clear();
     for(;itCp != MaxListCp; itCp++){
-        ostringstream oss;
-        oss<<(*itCp)->GetId;
-        this->getWidget().comboBoxClassPeriod->addItem(oss.str().c_str());
+        this->getWidget().comboBoxClassPeriod->addItem(QString::number((*itCp)->GetId()));
     }
 }
 
@@ -42,6 +40,15 @@ void WindowEditTimeSlot::timeSlotAccepted(){
     int indexClassroom = this->widget.comboBoxClassroom->currentIndex();
     //int duration = atoi(this->widget.durationVal->text().);
     cout<<"time slot cree ou presque"<<endl;
+}
+
+void WindowEditTimeSlot::clearWidgetContent() {
+    this->widget.comboBoxModule->setCurrentIndex(-1);
+    this->widget.comboBoxClassPeriod->setCurrentIndex(-1);
+    this->widget.comboBoxClassroom->setCurrentIndex(-1);
+    this->widget.durationVal->clear();
+    this->widget.timeEdit->setTime(QTime::fromString("00:00", "hh:ss"));
+    this->widget.calendarWidget->setSelectedDate(QDate::currentDate());
 }
 
 WindowEditTimeSlot::~WindowEditTimeSlot() {

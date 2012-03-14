@@ -92,6 +92,7 @@ void MainWindow::changeDate(QDate date) {
 }
 
 void MainWindow::openEditTimeSlot() { 
+    windowEditTimeSlot->clearWidgetContent();
     windowEditTimeSlot->show();
 }
 
