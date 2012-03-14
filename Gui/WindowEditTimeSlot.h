@@ -20,6 +20,7 @@ public:
     Ui::WindowEditTimeSlot getWidget() const {
         return widget;
     }
+    
 public slots :
     void changeModule(int);
     void timeSlotAccepted();

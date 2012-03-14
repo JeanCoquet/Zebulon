@@ -57,3 +57,8 @@ QTimeSlot::~QTimeSlot() {
     delete labelContent;
     delete labelTime;
 }
+
+void QTimeSlot::mousePressEvent(QMouseEvent* e) {
+    QPushButton::mousePressEvent(e);
+    emit clicked(this);
+}

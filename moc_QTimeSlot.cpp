@@ -1,8 +1,8 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'QTimeSlot.h'
 **
-** Created: Wed Mar 7 10:03:00 2012
-**      by: The Qt Meta Object Compiler version 62 (Qt 4.7.2)
+** Created: Tue Mar 13 22:27:39 2012
+**      by: The Qt Meta Object Compiler version 62 (Qt 4.7.4)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -11,7 +11,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'QTimeSlot.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 62
-#error "This file was generated using the moc from 4.7.2. It"
+#error "This file was generated using the moc from 4.7.4. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -23,18 +23,21 @@ static const uint qt_meta_data_QTimeSlot[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-       0,    0, // methods
+       1,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       0,       // signalCount
+       1,       // signalCount
+
+ // signals: signature, parameters, type, tag, flags
+      20,   11,   10,   10, 0x05,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_QTimeSlot[] = {
-    "QTimeSlot\0"
+    "QTimeSlot\0\0timeSlot\0clicked(QTimeSlot*)\0"
 };
 
 const QMetaObject QTimeSlot::staticMetaObject = {
@@ -64,6 +67,20 @@ int QTimeSlot::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     _id = QPushButton::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: clicked((*reinterpret_cast< QTimeSlot*(*)>(_a[1]))); break;
+        default: ;
+        }
+        _id -= 1;
+    }
     return _id;
+}
+
+// SIGNAL 0
+void QTimeSlot::clicked(QTimeSlot * _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_END_MOC_NAMESPACE

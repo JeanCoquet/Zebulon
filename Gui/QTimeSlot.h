@@ -38,6 +38,8 @@ public:
     void setFontFize(int n) { fontFize = n; updateChildren(); }
     void setFontColor(QString s) { fontColor = s; updateChildren(); }
     void setBackgroundColor(QString s) { backgroundColor = s; updateChildren(); }
+    
+    void mousePressEvent(QMouseEvent* e);
 
 private:
     QString classPeriod;
@@ -57,8 +59,8 @@ private:
     QString withZero(QString s);
     void updateChildren();
 
-
 signals:
+        void clicked(QTimeSlot* timeSlot); 
 
 public slots:
 

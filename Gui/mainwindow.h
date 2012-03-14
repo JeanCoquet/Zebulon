@@ -28,6 +28,7 @@ public slots:
     void removeTimeSlot();
     void changeDate(QDate date);
     void openEditTimeSlot();
+    void openEditTimeSlot(QTimeSlot* timeSlot);
 
 private:
     Ui::MainWindow *ui;

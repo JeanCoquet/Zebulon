@@ -1,8 +1,8 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created: Tue Mar 13 14:43:16 2012
-**      by: The Qt Meta Object Compiler version 62 (Qt 4.7.2)
+** Created: Wed Mar 14 13:57:44 2012
+**      by: The Qt Meta Object Compiler version 62 (Qt 4.7.4)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -11,7 +11,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'mainwindow.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 62
-#error "This file was generated using the moc from 4.7.2. It"
+#error "This file was generated using the moc from 4.7.4. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -23,7 +23,7 @@ static const uint qt_meta_data_MainWindow[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -35,6 +35,7 @@ static const uint qt_meta_data_MainWindow[] = {
       26,   11,   11,   11, 0x0a,
       48,   43,   11,   11, 0x0a,
       66,   11,   11,   11, 0x0a,
+      94,   85,   11,   11, 0x0a,
 
        0        // eod
 };
@@ -42,6 +43,7 @@ static const uint qt_meta_data_MainWindow[] = {
 static const char qt_meta_stringdata_MainWindow[] = {
     "MainWindow\0\0addTimeSlot()\0removeTimeSlot()\0"
     "date\0changeDate(QDate)\0openEditTimeSlot()\0"
+    "timeSlot\0openEditTimeSlot(QTimeSlot*)\0"
 };
 
 const QMetaObject MainWindow::staticMetaObject = {
@@ -77,9 +79,10 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 1: removeTimeSlot(); break;
         case 2: changeDate((*reinterpret_cast< QDate(*)>(_a[1]))); break;
         case 3: openEditTimeSlot(); break;
+        case 4: openEditTimeSlot((*reinterpret_cast< QTimeSlot*(*)>(_a[1]))); break;
         default: ;
         }
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }

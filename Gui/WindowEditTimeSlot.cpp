@@ -40,7 +40,7 @@ void WindowEditTimeSlot::timeSlotAccepted(){
     int indexModule = this->widget.comboBoxModule->currentIndex();
     int indexClassPeriod = this->widget.comboBoxClassPeriod->currentIndex();
     int indexClassroom = this->widget.comboBoxClassroom->currentIndex();
-    int duration = atoi(this->widget.durationVal->text().);
+    //int duration = atoi(this->widget.durationVal->text().);
     cout<<"time slot cree ou presque"<<endl;
 }
 

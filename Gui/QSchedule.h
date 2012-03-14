@@ -22,7 +22,7 @@ class QSchedule : public QWidget
 public:
     explicit QSchedule(QWidget *parent = 0);
     ~QSchedule();
-    void addTimeSlot(QDate date, int hour, int minute, int duration, QString classPeriod = "",
+    QTimeSlot* addTimeSlot(QDate date, int hour, int minute, int duration, QString classPeriod = "",
                 QString classRoom = "", QString module = "", QString teacher = "", QString group = "");
 
     void setMarginLeft ( int ml);
