@@ -13,6 +13,7 @@ WindowEditTimeSlot::WindowEditTimeSlot(Controller* ctrl) {
     this->setModal(true);
     widget.setupUi(this);
     QObject::connect(this->widget.comboBoxModule, SIGNAL(currentIndexChanged(int)), this, SLOT(changeModule(int)));
+    QObject::connect(this->widget.comboBoxClassPeriod, SIGNAL(currentIndexChanged(int)), this, SLOT(changeClassPeriod(int)));
     QObject::connect(this->widget.buttonBox, SIGNAL(accepted()), this, SLOT(timeSlotAccepted()));
     cout<<"fin constructeur edit time slot"<<endl;
 }
@@ -29,8 +30,15 @@ void WindowEditTimeSlot::changeModule(int){
     list<ClassPeriod*>::iterator itCp = lcp->begin();
     list<ClassPeriod*>::const_iterator MaxListCp = lcp->end();
     this->widget.comboBoxClassPeriod->clear();
-    for(;itCp != MaxListCp; itCp++){
-        this->getWidget().comboBoxClassPeriod->addItem(QString::number((*itCp)->GetId()));
+    for(;itCp != MaxListCp; itCp++){ 
+        if(dynamic_cast<TutorialClass*>(*itCp) != NULL)
+                this->getWidget().comboBoxClassPeriod->addItem("TD");
+        else if(dynamic_cast<PracticalClass*>(*itCp) != NULL)
+                this->getWidget().comboBoxClassPeriod->addItem("TP");
+        else if(dynamic_cast<MagistralClass*>(*itCp) != NULL)
+                this->getWidget().comboBoxClassPeriod->addItem("CM");
+        else
+                this->getWidget().comboBoxClassPeriod->addItem(QString::number((*itCp)->GetId()));
     }
 }
 

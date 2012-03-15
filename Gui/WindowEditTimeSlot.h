@@ -24,6 +24,7 @@ public:
     
 public slots :
     void changeModule(int);
+    void changeClassPeriod(int);
     void timeSlotAccepted();
         
 private:

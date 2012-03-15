@@ -38,7 +38,7 @@ public:
     void delModule(Module *mod);
     void addGroup(Group *group);
     void delGroup(Group *group);
-    void addTimeSlot(TimeSlot* timeSlot);
+    bool addTimeSlot(TimeSlot* timeSlot);
     void delTimeSlot(TimeSlot* timeSlot);
     void addClassPeriod(ClassPeriod* classPeriod, Module *mod);
     void delClassPeriod(ClassPeriod* classPeriod, Module *mod);

@@ -61,9 +61,10 @@ void Controller::delStudent(Student *stud, Group *group) {
     group->GetStudentList()->remove(stud);
 }
 
-void Controller::addTimeSlot(TimeSlot* timeSlot){
+bool Controller::addTimeSlot(TimeSlot* timeSlot){
     this->history << "insert into TimeSlot values('"<<timeSlot->GetId()<<"','"<<timeSlot->GetClassroom()<<"','"<<timeSlot->GetClassPeriod()<<"','"<<timeSlot->GetStartDate()<<"')";
     this->schedule->GetTimeSlotList()->push_back(timeSlot);
+    return true;
 }
 
 void Controller::delTimeSlot(TimeSlot* timeSlot) {

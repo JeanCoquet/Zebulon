@@ -31,10 +31,16 @@ void MainWindow::addModuleToComboBox(){
                 list<ClassPeriod*>::iterator itCp = lcp->begin();
                 list<ClassPeriod*>::const_iterator MaxListCp = lcp->end();
                 for(;itCp != MaxListCp; itCp++){
-                    ostringstream oss;
-                    oss<<(*itCp)->GetId();
-                    windowEditTimeSlot->getWidget().comboBoxClassPeriod->addItem(oss.str().c_str());
+                    if(dynamic_cast<TutorialClass*>(*itCp) != NULL)
+                            windowEditTimeSlot->getWidget().comboBoxClassPeriod->addItem("TD");
+                    else if(dynamic_cast<PracticalClass*>(*itCp) != NULL)
+                            windowEditTimeSlot->getWidget().comboBoxClassPeriod->addItem("TP");
+                    else if(dynamic_cast<MagistralClass*>(*itCp) != NULL)
+                            windowEditTimeSlot->getWidget().comboBoxClassPeriod->addItem("CM");
+                    else
+                            windowEditTimeSlot->getWidget().comboBoxClassPeriod->addItem(QString::number((*itCp)->GetId()));
                     loaded = false;
+                    
                 }
         }
     }
@@ -61,6 +67,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    
+    this->setWindowIcon(QIcon("./zebulon.png"));
+    
     QDate date = QDate::currentDate();
     ui->edt->setDate(date);
     QObject::connect(ui->calendarWidget, SIGNAL(clicked(QDate)), this, SLOT(changeDate(QDate)));
@@ -107,11 +116,13 @@ void MainWindow::openEditTimeSlot(QTimeSlot* timeSlot) {
     QComboBox* combo = windowEditTimeSlot->getWidget().comboBoxClassroom;
     combo->setCurrentIndex(combo->findText(timeSlot->getClassRoom())); 
     
-    combo = windowEditTimeSlot->getWidget().comboBoxClassPeriod;
-    combo->setCurrentIndex(combo->findText(timeSlot->getClassPeriod()));
-    
     combo = windowEditTimeSlot->getWidget().comboBoxModule;
     combo->setCurrentIndex(combo->findText(timeSlot->getModule()));
+    
+    windowEditTimeSlot->changeModule(windowEditTimeSlot->getWidget().comboBoxModule->currentIndex());
+    
+    combo = windowEditTimeSlot->getWidget().comboBoxClassPeriod;
+    combo->setCurrentIndex(combo->findText(timeSlot->getClassPeriod()));
     
     windowEditTimeSlot->show();
 }
