@@ -36,7 +36,7 @@
         <itemPath>Model/Date.h</itemPath>
         <itemPath>Model/Group.cpp</itemPath>
         <itemPath>Model/Group.h</itemPath>
-        <itemPath>Model/LectureHall.C</itemPath>
+        <itemPath>Model/LectureHall.cpp</itemPath>
         <itemPath>Model/LectureHall.h</itemPath>
         <itemPath>Model/MagistralClass.cpp</itemPath>
         <itemPath>Model/MagistralClass.h</itemPath>
@@ -56,7 +56,7 @@
         <itemPath>Model/TimeSlot.h</itemPath>
         <itemPath>Model/TutorialClass.cpp</itemPath>
         <itemPath>Model/TutorialClass.h</itemPath>
-        <itemPath>Model/TutorialClassroom.C</itemPath>
+        <itemPath>Model/TutorialClassroom.cpp</itemPath>
         <itemPath>Model/TutorialClassroom.h</itemPath>
       </logicalFolder>
       <logicalFolder name="sqlite" displayName="sqlite" projectFiles="true">
