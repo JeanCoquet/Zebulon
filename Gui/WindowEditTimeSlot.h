@@ -7,7 +7,7 @@
 
 #ifndef _WINDOWEDITTIMESLOT_H
 #define	_WINDOWEDITTIMESLOT_H
-#include "Controller.h"
+#include "Model/Controller.h"
 #include "ui_WindowEditTimeSlot.h"
 #include <sstream>
 #include <iostream>

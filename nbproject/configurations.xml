@@ -20,9 +20,44 @@
         <itemPath>Gui/WindowEditTimeSlot.cpp</itemPath>
         <itemPath>Gui/WindowEditTimeSlot.h</itemPath>
         <itemPath>Gui/WindowEditTimeSlot.ui</itemPath>
+        <itemPath>Gui/main.cpp</itemPath>
         <itemPath>Gui/mainwindow.cpp</itemPath>
         <itemPath>Gui/mainwindow.h</itemPath>
         <itemPath>Gui/mainwindow.ui</itemPath>
+      </logicalFolder>
+      <logicalFolder name="Model" displayName="Model" projectFiles="true">
+        <itemPath>Model/ClassPeriod.cpp</itemPath>
+        <itemPath>Model/ClassPeriod.h</itemPath>
+        <itemPath>Model/Classroom.cpp</itemPath>
+        <itemPath>Model/Classroom.h</itemPath>
+        <itemPath>Model/Controller.cpp</itemPath>
+        <itemPath>Model/Controller.h</itemPath>
+        <itemPath>Model/Date.cpp</itemPath>
+        <itemPath>Model/Date.h</itemPath>
+        <itemPath>Model/Group.cpp</itemPath>
+        <itemPath>Model/Group.h</itemPath>
+        <itemPath>Model/LectureHall.C</itemPath>
+        <itemPath>Model/LectureHall.h</itemPath>
+        <itemPath>Model/MagistralClass.cpp</itemPath>
+        <itemPath>Model/MagistralClass.h</itemPath>
+        <itemPath>Model/Module.cpp</itemPath>
+        <itemPath>Model/Module.h</itemPath>
+        <itemPath>Model/PracticalClass.cpp</itemPath>
+        <itemPath>Model/PracticalClass.h</itemPath>
+        <itemPath>Model/PracticalClassroom.cpp</itemPath>
+        <itemPath>Model/PracticalClassroom.h</itemPath>
+        <itemPath>Model/Schedule.cpp</itemPath>
+        <itemPath>Model/Schedule.h</itemPath>
+        <itemPath>Model/Student.cpp</itemPath>
+        <itemPath>Model/Student.h</itemPath>
+        <itemPath>Model/Studient.cpp</itemPath>
+        <itemPath>Model/Studient.h</itemPath>
+        <itemPath>Model/TimeSlot.cpp</itemPath>
+        <itemPath>Model/TimeSlot.h</itemPath>
+        <itemPath>Model/TutorialClass.cpp</itemPath>
+        <itemPath>Model/TutorialClass.h</itemPath>
+        <itemPath>Model/TutorialClassroom.C</itemPath>
+        <itemPath>Model/TutorialClassroom.h</itemPath>
       </logicalFolder>
       <logicalFolder name="sqlite" displayName="sqlite" projectFiles="true">
         <logicalFolder name="lib" displayName="lib" projectFiles="true">
@@ -35,39 +70,7 @@
         <itemPath>sqlite/Zebulon_database.sqlite</itemPath>
         <itemPath>sqlite/script.sql</itemPath>
       </logicalFolder>
-      <itemPath>ClassPeriod.cpp</itemPath>
-      <itemPath>ClassPeriod.h</itemPath>
-      <itemPath>Classroom.cpp</itemPath>
-      <itemPath>Classroom.h</itemPath>
-      <itemPath>Controller.cpp</itemPath>
-      <itemPath>Controller.h</itemPath>
-      <itemPath>Date.cpp</itemPath>
-      <itemPath>Date.h</itemPath>
-      <itemPath>Group.cpp</itemPath>
-      <itemPath>Group.h</itemPath>
-      <itemPath>LectureHall.C</itemPath>
-      <itemPath>LectureHall.h</itemPath>
-      <itemPath>MagistralClass.cpp</itemPath>
-      <itemPath>MagistralClass.h</itemPath>
-      <itemPath>Makefile</itemPath>
-      <itemPath>Module.cpp</itemPath>
-      <itemPath>Module.h</itemPath>
-      <itemPath>PracticalClass.cpp</itemPath>
-      <itemPath>PracticalClass.h</itemPath>
-      <itemPath>PracticalClassroom.cpp</itemPath>
-      <itemPath>PracticalClassroom.h</itemPath>
-      <itemPath>Schedule.cpp</itemPath>
-      <itemPath>Schedule.h</itemPath>
-      <itemPath>Student.cpp</itemPath>
-      <itemPath>Student.h</itemPath>
-      <itemPath>TimeSlot.cpp</itemPath>
-      <itemPath>TimeSlot.h</itemPath>
-      <itemPath>TutorialClass.cpp</itemPath>
-      <itemPath>TutorialClass.h</itemPath>
-      <itemPath>TutorialClassroom.C</itemPath>
-      <itemPath>TutorialClassroom.h</itemPath>
       <itemPath>history.sql</itemPath>
-      <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -84,6 +87,7 @@
   <sourceRootList>
     <Elem>Gui</Elem>
     <Elem>sqlite</Elem>
+    <Elem>Model</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -94,6 +98,8 @@
       </toolsSet>
       <qt>
         <modules>core gui</modules>
+        <mocDir>./Gui/moc/</mocDir>
+        <uiDir>./Gui/</uiDir>
       </qt>
       <compileType>
       </compileType>

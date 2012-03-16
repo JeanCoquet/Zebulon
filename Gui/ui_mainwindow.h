@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Tue Mar 6 16:59:16 2012
-**      by: Qt User Interface Compiler version 4.7.2
+** Created: Fri Mar 16 16:19:53 2012
+**      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -26,7 +26,6 @@
 #include <QtGui/QSpacerItem>
 #include <QtGui/QStatusBar>
 #include <QtGui/QTabWidget>
-#include <QtGui/QToolBar>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
 #include "QSchedule.h"
@@ -46,7 +45,6 @@ public:
     QMenuBar *menuBar;
     QMenu *menuFichier;
     QMenu *menu_dition;
-    QToolBar *mainToolBar;
     QStatusBar *statusBar;
     QDockWidget *dockWidget;
     QWidget *dockWidgetContents;
@@ -54,13 +52,13 @@ public:
     QTabWidget *tabWidget;
     QWidget *tab;
     QVBoxLayout *verticalLayout_4;
-    QComboBox *comboBox;
+    QComboBox *comboBoxClassroom;
     QWidget *tab_2;
     QVBoxLayout *verticalLayout_5;
-    QComboBox *comboBox_2;
+    QComboBox *comboBoxModule;
     QWidget *tab_3;
     QVBoxLayout *verticalLayout_6;
-    QComboBox *comboBox_3;
+    QComboBox *comboBoxGroup;
     QCalendarWidget *calendarWidget;
     QCommandLinkButton *addTimeSlotButton;
     QSpacerItem *verticalSpacer;
@@ -70,6 +68,9 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
         MainWindow->resize(739, 573);
+        QIcon icon;
+        icon.addFile(QString::fromUtf8("../zebulon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        MainWindow->setWindowIcon(icon);
         actionClose = new QAction(MainWindow);
         actionClose->setObjectName(QString::fromUtf8("actionClose"));
         centralWidget = new QWidget(MainWindow);
@@ -83,7 +84,7 @@ public:
         scrollArea_2->setWidgetResizable(true);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 439, 491));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 448, 518));
         verticalLayout_3 = new QVBoxLayout(scrollAreaWidgetContents_2);
         verticalLayout_3->setSpacing(6);
         verticalLayout_3->setContentsMargins(11, 11, 11, 11);
@@ -101,15 +102,12 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 739, 26));
+        menuBar->setGeometry(QRect(0, 0, 739, 21));
         menuFichier = new QMenu(menuBar);
         menuFichier->setObjectName(QString::fromUtf8("menuFichier"));
         menu_dition = new QMenu(menuBar);
         menu_dition->setObjectName(QString::fromUtf8("menu_dition"));
         MainWindow->setMenuBar(menuBar);
-        mainToolBar = new QToolBar(MainWindow);
-        mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
-        MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
         MainWindow->setStatusBar(statusBar);
@@ -136,11 +134,11 @@ public:
         verticalLayout_4->setSpacing(6);
         verticalLayout_4->setContentsMargins(11, 11, 11, 11);
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
-        comboBox = new QComboBox(tab);
-        comboBox->setObjectName(QString::fromUtf8("comboBox"));
-        comboBox->setMinimumSize(QSize(125, 0));
+        comboBoxClassroom = new QComboBox(tab);
+        comboBoxClassroom->setObjectName(QString::fromUtf8("comboBoxClassroom"));
+        comboBoxClassroom->setMinimumSize(QSize(125, 30));
 
-        verticalLayout_4->addWidget(comboBox);
+        verticalLayout_4->addWidget(comboBoxClassroom);
 
         tabWidget->addTab(tab, QString());
         tab_2 = new QWidget();
@@ -149,11 +147,11 @@ public:
         verticalLayout_5->setSpacing(6);
         verticalLayout_5->setContentsMargins(11, 11, 11, 11);
         verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
-        comboBox_2 = new QComboBox(tab_2);
-        comboBox_2->setObjectName(QString::fromUtf8("comboBox_2"));
-        comboBox_2->setMinimumSize(QSize(125, 0));
+        comboBoxModule = new QComboBox(tab_2);
+        comboBoxModule->setObjectName(QString::fromUtf8("comboBoxModule"));
+        comboBoxModule->setMinimumSize(QSize(125, 30));
 
-        verticalLayout_5->addWidget(comboBox_2);
+        verticalLayout_5->addWidget(comboBoxModule);
 
         tabWidget->addTab(tab_2, QString());
         tab_3 = new QWidget();
@@ -162,11 +160,11 @@ public:
         verticalLayout_6->setSpacing(6);
         verticalLayout_6->setContentsMargins(11, 11, 11, 11);
         verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
-        comboBox_3 = new QComboBox(tab_3);
-        comboBox_3->setObjectName(QString::fromUtf8("comboBox_3"));
-        comboBox_3->setMinimumSize(QSize(125, 0));
+        comboBoxGroup = new QComboBox(tab_3);
+        comboBoxGroup->setObjectName(QString::fromUtf8("comboBoxGroup"));
+        comboBoxGroup->setMinimumSize(QSize(125, 30));
 
-        verticalLayout_6->addWidget(comboBox_3);
+        verticalLayout_6->addWidget(comboBoxGroup);
 
         tabWidget->addTab(tab_3, QString());
 
@@ -207,7 +205,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0, QApplication::UnicodeUTF8));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Zebulon", 0, QApplication::UnicodeUTF8));
         actionClose->setText(QApplication::translate("MainWindow", "Close", 0, QApplication::UnicodeUTF8));
         menuFichier->setTitle(QApplication::translate("MainWindow", "Fichier", 0, QApplication::UnicodeUTF8));
         menu_dition->setTitle(QApplication::translate("MainWindow", "\303\211dition", 0, QApplication::UnicodeUTF8));

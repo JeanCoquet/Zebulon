@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include "QSchedule.h"
 #include "WindowEditTimeSlot.h"
-#include "../Controller.h"
+#include "Model/Controller.h"
 #include <list>
 using namespace std;
 

@@ -42,6 +42,10 @@ void WindowEditTimeSlot::changeModule(int){
     }
 }
 
+void WindowEditTimeSlot::changeClassPeriod(int) {
+    
+}
+
 void WindowEditTimeSlot::timeSlotAccepted(){
     int indexModule = this->widget.comboBoxModule->currentIndex();
     int indexClassPeriod = this->widget.comboBoxClassPeriod->currentIndex();
