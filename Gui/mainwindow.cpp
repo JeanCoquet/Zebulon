@@ -85,6 +85,8 @@ MainWindow::MainWindow(QWidget *parent) :
     
     QObject::connect(t, SIGNAL(clicked(QTimeSlot*)), this, SLOT(openEditTimeSlot(QTimeSlot*)));
     
+    this->ctrl->addTimeSlot(*ctrl->getSchedule()->GetTimeSlotList()->begin());
+    
 }
 
 void MainWindow::addTimeSlot() {
