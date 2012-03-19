@@ -29,15 +29,15 @@ void Controller::addStudent(Student *stud, Group *group){
     group->GetStudentList()->push_back(stud);
 }
 
-void Controller::addGroup(Group* group){
-    if(group->GetDaddy() != NULL){
+/*void Controller::addGroup(Group* group)
+  {    if(group->GetDaddy() != NULL){
         this->history << "insert into 'Group' values('"<<group->GetId()<<"', ''"<<group->GetDaddy()->GetId()<<"');"<<endl;
     }
     else {
         this->history << "insert into 'Group' values('"<<group->GetId()<<"', '')"<<endl;
     }
     schedule->GetGroupList()->push_back(group);
-}
+}*/
 
 void Controller::addModule(Module* mod){
     this->history << "insert into Module values('"<<mod->GetId()<<"','"<<mod->GetName()<<"','"<<mod->GetTheHead()<<"')"<<endl;
@@ -149,6 +149,35 @@ bool Controller::strToBool(string str){
     return (str == "true");
 }
 
+struct groupString{
+    Group* group;
+    string str;
+};
+
+void addChildrenToGroup(list<struct groupString*>* lgs, Group* group){
+    list<Group*>* lChildren = new list<Group*>();
+    group->SetGroupList(lChildren);
+    list< struct groupString* >::iterator itLGS = lgs->begin();
+    list< struct groupString* >::const_iterator itMaxLGS = lgs->end();
+    while(itLGS != itMaxLGS){
+        cout<<"boucle chimpanzé"<<endl;
+        cout<<lgs->size()<<endl;
+        if( (*itLGS)->str == group->GetId() ){
+            cout<<"'"<<(*itLGS)->str<<"'"<<" == "<<"'"<<group->GetId()<<"'"<<endl;
+            Group *groupChld = new Group((*itLGS)->group);
+            lChildren->push_back(groupChld);
+            lgs->remove(*itLGS);
+        }
+        cout<<"appel serpent"<<endl;
+        itLGS++;
+    }
+    list<Group*>::iterator it = lChildren->begin();
+    list<Group*>::const_iterator itMax = lChildren->end();
+    for(; it!=itMax; it++) {
+        cout<<"appel serpent"<<endl;
+        addChildrenToGroup(lgs, (*it));
+    }
+}
 
 
 void Controller::loadSchedule(){
@@ -196,7 +225,7 @@ void Controller::loadSchedule(){
          
          result = database->request("select * from 'group'");
          if(result != NULL){
-             list<string> listIdGroup = list<string>();
+             list<struct groupString*>* lgs = new list<struct groupString*>();
              list< list<string> >::iterator it = result->begin();
              list< list<string> >::const_iterator MaxList = result->end();
              for(;it != MaxList; it++){
@@ -204,52 +233,36 @@ void Controller::loadSchedule(){
                 list<string>::iterator itList = it->begin();
                 
                 string id = (*itList);
-                listIdGroup.push_back(id);
-                string idD = *(++itList);
-            
-                list<Group*>::iterator itGroup = schedule->GetGroupList()->begin();
-                list<Group*>::const_iterator MaxListGroup = schedule->GetGroupList()->end();
-                Group* groupExist = NULL;
-                Group* groupDaddyExist = NULL;
-                for(;itGroup != MaxListGroup; itGroup++){
-                   if((*itGroup)->GetId() == id ) {                       
-                       groupExist = (*itGroup);
-                   }
-                   else if((*itGroup)->GetId() == idD ){
-                       groupDaddyExist = (*itGroup);
-                   }
-                } 
-               if(groupExist != NULL) {
-                   groupExist->SetDaddy(groupDaddyExist);
-               }
-               else{
-                   this->schedule->GetGroupList()->push_back(new Group(id,groupDaddyExist));
-               }    
+                string idP = *(++itList);
+                 
+                Group *g = new Group(id, NULL);
+                if(idP == "") {
+                    this->schedule->GetGroupList()->push_back(g);
+                }
+                else {
+                    struct groupString *gs = new struct groupString();
+                    gs->str = idP; 
+                    gs->group = g;
+                    lgs->push_back(gs);
+                }
+                
              } 
-             if(listIdGroup.size() != this->schedule->GetGroupList()->size()) {
-                   list<Group*>::iterator itGroup = schedule->GetGroupList()->begin();
-                   list<Group*>::const_iterator MaxListGroup = schedule->GetGroupList()->end();
-                   list<string>::iterator itString = listIdGroup.begin();
-                   list<string>::const_iterator MaxListString = listIdGroup.end();  
-                   list<Group*> lg = list<Group*>();
-                   bool test = false;
-                   for(;itGroup != MaxListGroup; itGroup++){
-                       itString = listIdGroup.begin();
-                       MaxListString = listIdGroup.end();
-                       for(;itString != MaxListString; itString++){
-                           if((*itString)==(*itGroup)->GetId())
-                               test = true;
-                       }
-                       if(!test){
-                           lg.push_back((*itGroup));
-                       }
-                   }
-                   itGroup = lg.begin();
-                   MaxListGroup = lg.end();
-                   for(;itGroup != MaxListGroup; itGroup++){
-                       schedule->GetGroupList()->remove((*itGroup));
-                   }
-               }
+
+            list<Group*>::iterator itG = this->schedule->GetGroupList()->begin();
+            list<Group*>::const_iterator itMaxG = this->schedule->GetGroupList()->end();
+            for(; itG!=itMaxG; itG++) {
+                addChildrenToGroup(lgs, (*itG));
+            }
+            cout<<"test elephant : "<<lgs->size()<<endl;
+            if(lgs->size() != 0) {
+                list< struct groupString* >::iterator itLGS = lgs->begin();
+                list< struct groupString* >::const_iterator itMaxLGS = lgs->end();
+                for(;itLGS != itMaxLGS ; itLGS++){
+                        Group *groupChld = new Group((*itLGS)->group);
+                        this->schedule->GetGroupList()->push_back(groupChld);
+                }
+            }
+            delete lgs;             
          }
          
          result->clear();      
