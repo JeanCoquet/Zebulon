@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'WindowEditTimeSlot.ui'
 **
-** Created: Mon Mar 19 16:19:50 2012
+** Created: Tue Mar 20 14:16:39 2012
 **      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -22,6 +22,7 @@
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
 #include <QtGui/QLineEdit>
+#include <QtGui/QListWidget>
 #include <QtGui/QScrollArea>
 #include <QtGui/QTimeEdit>
 #include <QtGui/QVBoxLayout>
@@ -47,7 +48,7 @@ public:
     QLabel *label_4;
     QLineEdit *durationVal;
     QLabel *label_6;
-    QComboBox *comboBoxGroup;
+    QListWidget *listGroups;
     QCalendarWidget *calendarWidget;
     QDialogButtonBox *buttonBox;
 
@@ -55,7 +56,7 @@ public:
     {
         if (WindowEditTimeSlot->objectName().isEmpty())
             WindowEditTimeSlot->setObjectName(QString::fromUtf8("WindowEditTimeSlot"));
-        WindowEditTimeSlot->resize(399, 407);
+        WindowEditTimeSlot->resize(431, 601);
         verticalLayout = new QVBoxLayout(WindowEditTimeSlot);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         scrollArea = new QScrollArea(WindowEditTimeSlot);
@@ -63,7 +64,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 385, 177));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 393, 306));
         formLayout = new QFormLayout(scrollAreaWidgetContents);
         formLayout->setObjectName(QString::fromUtf8("formLayout"));
         formLayout->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
@@ -90,44 +91,44 @@ public:
         label_5 = new QLabel(scrollAreaWidgetContents);
         label_5->setObjectName(QString::fromUtf8("label_5"));
 
-        formLayout->setWidget(4, QFormLayout::LabelRole, label_5);
+        formLayout->setWidget(8, QFormLayout::LabelRole, label_5);
 
         comboBoxClassroom = new QComboBox(scrollAreaWidgetContents);
         comboBoxClassroom->setObjectName(QString::fromUtf8("comboBoxClassroom"));
 
-        formLayout->setWidget(4, QFormLayout::FieldRole, comboBoxClassroom);
+        formLayout->setWidget(8, QFormLayout::FieldRole, comboBoxClassroom);
 
         label_3 = new QLabel(scrollAreaWidgetContents);
         label_3->setObjectName(QString::fromUtf8("label_3"));
 
-        formLayout->setWidget(5, QFormLayout::LabelRole, label_3);
+        formLayout->setWidget(9, QFormLayout::LabelRole, label_3);
 
         timeEdit = new QTimeEdit(scrollAreaWidgetContents);
         timeEdit->setObjectName(QString::fromUtf8("timeEdit"));
         timeEdit->setMaximumSize(QSize(100, 16777215));
 
-        formLayout->setWidget(5, QFormLayout::FieldRole, timeEdit);
+        formLayout->setWidget(9, QFormLayout::FieldRole, timeEdit);
 
         label_4 = new QLabel(scrollAreaWidgetContents);
         label_4->setObjectName(QString::fromUtf8("label_4"));
 
-        formLayout->setWidget(6, QFormLayout::LabelRole, label_4);
+        formLayout->setWidget(10, QFormLayout::LabelRole, label_4);
 
         durationVal = new QLineEdit(scrollAreaWidgetContents);
         durationVal->setObjectName(QString::fromUtf8("durationVal"));
         durationVal->setMaximumSize(QSize(100, 16777215));
 
-        formLayout->setWidget(6, QFormLayout::FieldRole, durationVal);
+        formLayout->setWidget(10, QFormLayout::FieldRole, durationVal);
 
         label_6 = new QLabel(scrollAreaWidgetContents);
         label_6->setObjectName(QString::fromUtf8("label_6"));
 
-        formLayout->setWidget(3, QFormLayout::LabelRole, label_6);
+        formLayout->setWidget(4, QFormLayout::LabelRole, label_6);
 
-        comboBoxGroup = new QComboBox(scrollAreaWidgetContents);
-        comboBoxGroup->setObjectName(QString::fromUtf8("comboBoxGroup"));
+        listGroups = new QListWidget(scrollAreaWidgetContents);
+        listGroups->setObjectName(QString::fromUtf8("listGroups"));
 
-        formLayout->setWidget(3, QFormLayout::FieldRole, comboBoxGroup);
+        formLayout->setWidget(4, QFormLayout::FieldRole, listGroups);
 
         scrollArea->setWidget(scrollAreaWidgetContents);
 

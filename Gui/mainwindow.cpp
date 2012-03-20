@@ -107,7 +107,8 @@ void MainWindow::openEditTimeSlot() {
     windowEditTimeSlot->show();
 }
 
-void MainWindow::openEditTimeSlot(QTimeSlot* timeSlot) {    
+void MainWindow::openEditTimeSlot(QTimeSlot* timeSlot) {   
+    windowEditTimeSlot->clearWidgetContent(); 
     windowEditTimeSlot->getWidget().calendarWidget->setSelectedDate(timeSlot->getDate());
     windowEditTimeSlot->getWidget().durationVal->setText(QString::number(timeSlot->getDuration()));
     

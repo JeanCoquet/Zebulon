@@ -78,9 +78,11 @@ bool Controller::addTimeSlot(TimeSlot* timeSlot){
         if((*it)->GetClassroom()->GetId() == timeSlot->GetClassroom()->GetId())
             return false;
         else {
-            /*
-             A faire
-             */
+            list<Group*>::iterator itG = (*it)->GetClassPeriod()->GetGroupList()->begin();
+            list<Group*>::const_iterator itGMax = (*it)->GetClassPeriod()->GetGroupList()->end();
+            for(; itG != itGM; itG++) {
+                if((*itG)->GetId() == 
+            }
         }
     }
     
@@ -154,28 +156,31 @@ struct groupString{
     string str;
 };
 
-void addChildrenToGroup(list<struct groupString*>* lgs, Group* group){
+void addChildrenToGroup(list<Group*> *lgBase, list<struct groupString*>* lgs, Group* group){
     list<Group*>* lChildren = new list<Group*>();
     group->SetGroupList(lChildren);
     list< struct groupString* >::iterator itLGS = lgs->begin();
     list< struct groupString* >::const_iterator itMaxLGS = lgs->end();
+    int count = 0;
     while(itLGS != itMaxLGS){
-        cout<<"boucle chimpanzé"<<endl;
-        cout<<lgs->size()<<endl;
         if( (*itLGS)->str == group->GetId() ){
-            cout<<"'"<<(*itLGS)->str<<"'"<<" == "<<"'"<<group->GetId()<<"'"<<endl;
             Group *groupChld = new Group((*itLGS)->group);
             lChildren->push_back(groupChld);
-            lgs->remove(*itLGS);
+            lgBase->push_back(groupChld);
+            lgs->erase(itLGS);
+            itLGS = lgs->begin();
+            itMaxLGS = lgs->end();
+            count = count - 1;
+            for(int i = 0 ; i < count ; i++){
+                itLGS++;
+            }
         }
-        cout<<"appel serpent"<<endl;
-        itLGS++;
+        itLGS++; count++;
     }
     list<Group*>::iterator it = lChildren->begin();
     list<Group*>::const_iterator itMax = lChildren->end();
     for(; it!=itMax; it++) {
-        cout<<"appel serpent"<<endl;
-        addChildrenToGroup(lgs, (*it));
+        addChildrenToGroup(lgBase, lgs, (*it));
     }
 }
 
@@ -251,9 +256,9 @@ void Controller::loadSchedule(){
             list<Group*>::iterator itG = this->schedule->GetGroupList()->begin();
             list<Group*>::const_iterator itMaxG = this->schedule->GetGroupList()->end();
             for(; itG!=itMaxG; itG++) {
-                addChildrenToGroup(lgs, (*itG));
+                addChildrenToGroup(this->schedule->GetGroupList(), lgs, (*itG));
             }
-            cout<<"test elephant : "<<lgs->size()<<endl;
+            
             if(lgs->size() != 0) {
                 list< struct groupString* >::iterator itLGS = lgs->begin();
                 list< struct groupString* >::const_iterator itMaxLGS = lgs->end();
@@ -293,14 +298,16 @@ void Controller::loadSchedule(){
          
          
          result->clear();
-         result = database->request("select m.id, m.name, m.theHead, c.id, c.teacher, c.duration, c.id_type from Module m left join Classperiod c on m.id = c.id_module order by m.id");
+         result = database->request("select m.id, m.name, m.theHead, c.id, c.teacher, c.duration, c.id_type, a.id_group from Module m left join Classperiod c on m.id = c.id_module left join assign a on c.id = a.id_classPeriod order by m.id, c.id, a.id_group");
          if(result != NULL){
              string idModule = "";
+             string idClassPeriod = "";
              Module *mod;
+             ClassPeriod *classPeriod;
              list< list<string> >::iterator it = result->begin();
              list< list<string> >::const_iterator MaxList = result->end();
              for(;it != MaxList; it++){
-                list<string>::const_iterator MaxListList = it->end();
+                //list<string>::const_iterator MaxListList = it->end();
                 list<string>::iterator itList = it->begin();
                 if(idModule != *itList) {
                     idModule = *itList;
@@ -311,25 +318,43 @@ void Controller::loadSchedule(){
                     ++itList++;
                 }
                 if(*(++itList) != "") { 
-                    int id = strToInt(*(itList));
-                    string teacher = *(++itList);
-                    int duration = strToInt(*(++itList));
-                    int type = strToInt(*(++itList));
-                    ClassPeriod *classPeriod;
-                    switch(type){
-                        case 1 :
-                            classPeriod = new PracticalClass(id, teacher, duration);
-                            break;
-                        case 2 :
-                            classPeriod = new MagistralClass(id, teacher, duration);
-                            break;
-                        case 3 :
-                            classPeriod = new TutorialClass(id, teacher, duration);
-                            break;
+                    if(idClassPeriod != (*itList) ) {
+                        idClassPeriod = (*itList);
+                        int id = strToInt(*(itList));
+                        string teacher = *(++itList);
+                        int duration = strToInt(*(++itList));
+                        int type = strToInt(*(++itList));
+                        switch(type){
+                            case 1 :
+                                classPeriod = new PracticalClass(id, teacher, duration);
+                                break;
+                            case 2 :
+                                classPeriod = new MagistralClass(id, teacher, duration);
+                                break;
+                            case 3 :
+                                classPeriod = new TutorialClass(id, teacher, duration);
+                                break;
+                        }
+
+                        mod->GetClassPeriodList()->push_back(classPeriod);
                     }
-                    
-                    mod->GetClassPeriodList()->push_back(classPeriod); 
+                    else {
+                        ++itList++;
+                        ++itList++; 
+                    }
+                    if(*(++itList) != "") {
+                        string idGroup = (*itList);
+                        list<Group*>::iterator it = this->schedule->GetGroupList()->begin();
+                        list<Group*>::const_iterator itMax = this->schedule->GetGroupList()->end();
+                        for(; it!=itMax; it++) {
+                            if((*it)->GetId() == idGroup) {
+                                classPeriod->GetGroupList()->push_back(*it);
+                                break;
+                            }
+                        }
+                    }
                 }
+                
              } 
          }
          
