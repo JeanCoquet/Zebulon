@@ -80,14 +80,19 @@ bool Controller::addTimeSlot(TimeSlot* timeSlot){
         else {
             list<Group*>::iterator itG = (*it)->GetClassPeriod()->GetGroupList()->begin();
             list<Group*>::const_iterator itGMax = (*it)->GetClassPeriod()->GetGroupList()->end();
-            for(; itG != itGM; itG++) {
-                if((*itG)->GetId() == 
+            for(; itG != itGMax; itG++) {
+                list<Group*>::iterator itGTimeSlot = timeSlot->GetClassPeriod()->GetGroupList()->begin();
+                list<Group*>::const_iterator itGMaxTimeSlot = timeSlot->GetClassPeriod()->GetGroupList()->end();
+                for(; itGTimeSlot != itGMaxTimeSlot; itGTimeSlot++) {
+                    if((*itG)->GetId() == (*itGTimeSlot)->GetId())
+                        return false;
+                }
             }
         }
     }
     
-    //this->history << "insert into TimeSlot values('"<<timeSlot->GetId()<<"','"<<timeSlot->GetClassroom()<<"','"<<timeSlot->GetClassPeriod()<<"','"<<timeSlot->GetStartDate()<<"')";
-    //this->schedule->GetTimeSlotList()->push_back(timeSlot);
+    this->history << "insert into TimeSlot values('"<<timeSlot->GetId()<<"','"<<timeSlot->GetClassroom()<<"','"<<timeSlot->GetClassPeriod()<<"','"<<timeSlot->GetStartDate()<<"')";
+    this->schedule->GetTimeSlotList()->push_back(timeSlot);
     
     delete timeSlotList;
     return true;
