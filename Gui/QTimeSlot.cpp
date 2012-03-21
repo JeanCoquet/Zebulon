@@ -56,6 +56,7 @@ QString QTimeSlot::withZero(QString s) {
 QTimeSlot::~QTimeSlot() {
     delete labelContent;
     delete labelTime;
+//    delete &date;
 }
 
 void QTimeSlot::mousePressEvent(QMouseEvent* e) {

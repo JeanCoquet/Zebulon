@@ -110,8 +110,6 @@ void WindowEditTimeSlot::timeSlotAccepted(){
         this->m->addTimeSlot(time);
     }
     else{
-        delete d;
-        delete t;
     }
 }
 

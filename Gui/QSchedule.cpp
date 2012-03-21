@@ -57,10 +57,13 @@ QSchedule::QSchedule(QWidget *parent) : QWidget (parent) {
 
 }
 
+#include <iostream>
+
 QTimeSlot* QSchedule::addTimeSlot(QTimeSlot *timeSlot) {
+//    std::cout<<timeSlot->getModule().<<std::endl;
     if(startDate<=timeSlot->getDate() && endDate>=timeSlot->getDate() && 
             timeSlot->getHour()>=hourStart && 
-            (timeSlot->getHour()*60+timeSlot->getDuration()+timeSlot->getMinute())<(hourStart*60+numberOfHours*60)) {
+            (timeSlot->getHour()*60+timeSlot->getDuration()+timeSlot->getMinute())<(hourStart*60+numberOfHours*60)) {      
         timeSlotList->push_back(timeSlot);
         timeSlot->setGeometry((timeSlot->getHour()-hourStart)*minMinutesWidth*MIN_TIME_IN_HOUR+dayNameWidth+((int)minMinutesWidth*timeSlot->getMinute()/MIN_TIME+marginLeft),
                                 (timeSlot->getDate().dayOfWeek()-1)*dayHeight+marginTop+hoursHeight+titleHeight,(int)(minMinutesWidth*timeSlot->getDuration()/MIN_TIME), dayHeight);
@@ -69,7 +72,7 @@ QTimeSlot* QSchedule::addTimeSlot(QTimeSlot *timeSlot) {
     }
     else {
         QMessageBox::warning(this, "Erreur add Time Slot", "We can't add this time slot. Sorry!");
-        delete timeSlot;
+//        delete timeSlot;
     }
     return NULL;
 }
