@@ -7,11 +7,15 @@
 
 #include "TimeSlot.h"
 
-TimeSlot::TimeSlot(int id, Date *startDate, Classroom* classroom, ClassPeriod* classPeriod) {
-    this->id = id;
+int TimeSlot::maxId = 0;
+
+TimeSlot::TimeSlot(Date *startDate, Classroom* classroom, ClassPeriod* classPeriod) {
+    
     this->startDate = startDate;
     this->classroom = classroom;
     this->classPeriod = classPeriod;
+    this->maxId++;
+    this->id = this->maxId;
 }
 
 

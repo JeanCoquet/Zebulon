@@ -10,6 +10,8 @@
 #include "PracticalClassroom.h"
 #include "TutorialClassroom.h"
 #include "PracticalClass.h"
+#include <algorithm>
+
 const char* historyFile = "history.sql";
 
 Controller::Controller() throw(int){
@@ -81,12 +83,15 @@ bool Controller::addTimeSlot(TimeSlot* timeSlot){
             list<Group*>::iterator itG = (*it)->GetClassPeriod()->GetGroupList()->begin();
             list<Group*>::const_iterator itGMax = (*it)->GetClassPeriod()->GetGroupList()->end();
             for(; itG != itGMax; itG++) {
-                list<Group*>::iterator itGTimeSlot = timeSlot->GetClassPeriod()->GetGroupList()->begin();
-                list<Group*>::const_iterator itGMaxTimeSlot = timeSlot->GetClassPeriod()->GetGroupList()->end();
-                for(; itGTimeSlot != itGMaxTimeSlot; itGTimeSlot++) {
+                list<Group*>* lg = timeSlot->GetClassPeriod()->GetGroupList();
+                /*list<Group*>::iterator itGTimeSlot = timeSlot->GetClassPeriod()->GetGroupList()->begin();
+                list<Group*>::const_iterator itGMaxTimeSlot = timeSlot->GetClassPeriod()->GetGroupList()->end();*/
+                if( find(lg->begin(), lg->end(), &(*(*itG))) != lg->end() )
+                    return false;
+                /*for(; itGTimeSlot != itGMaxTimeSlot; itGTimeSlot++) {
                     if((*itG)->GetId() == (*itGTimeSlot)->GetId())
                         return false;
-                }
+                }*/
             }
         }
     }
@@ -397,10 +402,10 @@ void Controller::loadSchedule(){
                             classperiod = (*elemClassPeriodList);
                             break;
                         }
+                    }
                 }
-            }
-                
-                TimeSlot *timeslot = new TimeSlot(strToInt(*(++itList)), strToDate(*(++itList)), classroom, classperiod);
+                ++itList;
+                TimeSlot *timeslot = new TimeSlot(strToDate(*(++itList)), classroom, classperiod);
                 schedule->GetTimeSlotList()->push_back(timeslot); 
              } 
          }

@@ -28,6 +28,10 @@ public:
     Database* getDatabase() const {
         return database;
     }
+    
+    int strToInt(string);
+    Date* strToDate(string);
+    bool strToBool(string);
 
 
     void loadSchedule();
@@ -55,9 +59,6 @@ public:
     }
 
 private:
-    int strToInt(string);
-    Date* strToDate(string);
-    bool strToBool(string);
     Schedule *schedule;
     Database *database;
     fstream history;

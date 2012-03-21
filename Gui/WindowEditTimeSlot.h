@@ -8,14 +8,17 @@
 #ifndef _WINDOWEDITTIMESLOT_H
 #define	_WINDOWEDITTIMESLOT_H
 #include "Model/Controller.h"
+#include "mainwindow.h"
 #include "ui_WindowEditTimeSlot.h"
 #include <sstream>
 #include <iostream>
 
+class MainWindow;
+
 class WindowEditTimeSlot : public QDialog {
     Q_OBJECT
 public:
-    WindowEditTimeSlot(Controller*);
+    WindowEditTimeSlot(Controller*, MainWindow*);
     virtual ~WindowEditTimeSlot();
     void clearWidgetContent();
     Ui::WindowEditTimeSlot getWidget() const {
@@ -30,6 +33,7 @@ public slots :
 private:
     Ui::WindowEditTimeSlot widget;
     Controller* ctrl;
+    MainWindow* m;
 };
 
 #endif	/* _WINDOWEDITTIMESLOT_H */

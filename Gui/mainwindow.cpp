@@ -74,28 +74,25 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->edt->setDate(date);
     QObject::connect(ui->calendarWidget, SIGNAL(clicked(QDate)), this, SLOT(changeDate(QDate)));
     QObject::connect(ui->addTimeSlotButton, SIGNAL(clicked()), this, SLOT(openEditTimeSlot())); 
+    
     ctrl = new Controller();
-    windowEditTimeSlot = new WindowEditTimeSlot(this->ctrl);
+    
+    windowEditTimeSlot = new WindowEditTimeSlot(this->ctrl, this);
     addGroupToComboBox();
     addModuleToComboBox();
     addClassroomToComboBox();
     
-    QTimeSlot* t = ui->edt->addTimeSlot(ui->calendarWidget->selectedDate(), 8, 0, 80,
-                     "TD", "008", "S03832B : Informatique et societes", "MEKAOUCHE, Abdelouahab", "602");
-    
-    QObject::connect(t, SIGNAL(clicked(QTimeSlot*)), this, SLOT(openEditTimeSlot(QTimeSlot*)));
-    
-    this->ctrl->addTimeSlot(*ctrl->getSchedule()->GetTimeSlotList()->begin());
-    
 }
 
-void MainWindow::addTimeSlot() {
-    /*ui->edt->addTimeSlot(ui->calendarWidget->selectedDate(), ui->timeEdit->time().hour(), ui->timeEdit->time().minute(), ui->lineEdit_2->text().toInt(),
-                     "TD", "salle 008", "S32I010 Bases de donnees 2", "MEKAOUCHE, Abdelouahab", "602");*/
+void MainWindow::addTimeSlot(QTimeSlot *t) {
+    
+    this->ui->edt->addTimeSlot(t);
+    
+    QObject::connect(t, SIGNAL(clicked(QTimeSlot*)), this, SLOT(openEditTimeSlot(QTimeSlot*)));
 }
 
 void MainWindow::removeTimeSlot() {
-    //ui->edt->removeTimeSlot(ui->lineEdit->text().toInt());
+    cout<<"coucou"<<endl;
 }
 
 void MainWindow::changeDate(QDate date) {

@@ -57,18 +57,20 @@ QSchedule::QSchedule(QWidget *parent) : QWidget (parent) {
 
 }
 
-QTimeSlot* QSchedule::addTimeSlot(QDate date, int hour, int minute, int duration, QString classPeriod,
-                            QString classRoom, QString module, QString teacher, QString group) {
-    if(startDate<=date && endDate>=date && hour>=hourStart && (hour*60+duration+minute)<(hourStart*60+numberOfHours*60)) {
-        QTimeSlot *timeSlot = new QTimeSlot(date, hour, minute, duration, classPeriod, classRoom, module, teacher, group, this);
+QTimeSlot* QSchedule::addTimeSlot(QTimeSlot *timeSlot) {
+    if(startDate<=timeSlot->getDate() && endDate>=timeSlot->getDate() && 
+            timeSlot->getHour()>=hourStart && 
+            (timeSlot->getHour()*60+timeSlot->getDuration()+timeSlot->getMinute())<(hourStart*60+numberOfHours*60)) {
         timeSlotList->push_back(timeSlot);
-        timeSlot->setGeometry((hour-hourStart)*minMinutesWidth*MIN_TIME_IN_HOUR+dayNameWidth+((int)minMinutesWidth*minute/MIN_TIME+marginLeft),
-                                (date.dayOfWeek()-1)*dayHeight+marginTop+hoursHeight+titleHeight,(int)(minMinutesWidth*duration/MIN_TIME), dayHeight);
+        timeSlot->setGeometry((timeSlot->getHour()-hourStart)*minMinutesWidth*MIN_TIME_IN_HOUR+dayNameWidth+((int)minMinutesWidth*timeSlot->getMinute()/MIN_TIME+marginLeft),
+                                (timeSlot->getDate().dayOfWeek()-1)*dayHeight+marginTop+hoursHeight+titleHeight,(int)(minMinutesWidth*timeSlot->getDuration()/MIN_TIME), dayHeight);
         timeSlot->show();
         return timeSlot;
     }
-    else
+    else {
         QMessageBox::warning(this, "Erreur add Time Slot", "We can't add this time slot. Sorry!");
+        delete timeSlot;
+    }
     return NULL;
 }
 void QSchedule::setMarginLeft ( int ml) {

@@ -8,6 +8,8 @@
 #include <list>
 using namespace std;
 
+class WindowEditTimeSlot;
+
 namespace Ui {
     class MainWindow;
 }
@@ -23,8 +25,19 @@ public:
     void addGroupToComboBox();
     void addModuleToComboBox();
     
+    Controller* getCtrl() const {
+        return ctrl;
+    }
+
+    Ui::MainWindow* getUi() const {
+        return ui;
+    }
+    
+    
+    void addTimeSlot(QTimeSlot *t);
+
+    
 public slots:
-    void addTimeSlot();
     void removeTimeSlot();
     void changeDate(QDate date);
     void openEditTimeSlot();
@@ -34,7 +47,6 @@ private:
     Ui::MainWindow *ui;
     WindowEditTimeSlot *windowEditTimeSlot;
     Controller *ctrl;
-    //QSchedule *edt;
 };
 
 #endif // MAINWINDOW_H

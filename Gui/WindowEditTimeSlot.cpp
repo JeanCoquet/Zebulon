@@ -6,9 +6,11 @@
  */
 
 #include "WindowEditTimeSlot.h"
+#include "ui_mainwindow.h"
 
-WindowEditTimeSlot::WindowEditTimeSlot(Controller* ctrl) {
+WindowEditTimeSlot::WindowEditTimeSlot(Controller* ctrl, MainWindow* m) {
     this->ctrl = ctrl;
+    this->m = m;
     this->setModal(true);
     widget.setupUi(this);
     QObject::connect(this->widget.comboBoxModule, SIGNAL(currentIndexChanged(int)), this, SLOT(changeModule(int)));
@@ -65,8 +67,52 @@ void WindowEditTimeSlot::timeSlotAccepted(){
     int indexModule = this->widget.comboBoxModule->currentIndex();
     int indexClassPeriod = this->widget.comboBoxClassPeriod->currentIndex();
     int indexClassroom = this->widget.comboBoxClassroom->currentIndex();
-    //int duration = atoi(this->widget.durationVal->text().);
-    cout<<"time slot cree ou presque"<<endl;
+    int duration = this->widget.durationVal->text().toInt();
+    int h = this->widget.timeEdit->time().hour();
+    int m = this->widget.timeEdit->time().minute();
+    QDate date = this->widget.calendarWidget->selectedDate();
+    
+    list<Module*>* lm = this->ctrl->getSchedule()->GetModuleList();    
+    list<Module*>::iterator itM = lm->begin();
+    for( int i = 0; i < indexModule ; i++){ 
+        itM++;
+    }
+    
+    list<ClassPeriod*>* lcp = (*itM)->GetClassPeriodList();
+    list<ClassPeriod*>::iterator itCP = lcp->begin();
+    for(int i = 0 ; i < indexClassPeriod ; i++){
+        itCP++;
+    }
+    
+    list<Classroom*>* lcr = this->ctrl->getSchedule()->GetClassroomList();
+    list<Classroom*>::iterator itCr = lcr->begin();
+    for(int i = 0 ; i < indexClassroom ; i++){
+        itCr++;
+    }
+    
+    Date *d = new Date(date.day(), date.month(), date.year(), h, m);
+    TimeSlot *t = new TimeSlot(d, (*itCr), (*itCP));
+    
+    if(ctrl->addTimeSlot(t)) {
+        QString nameCP;
+        if(dynamic_cast<TutorialClass*>(*itCP) != NULL)
+                nameCP = "TD "+QString::number((*itCP)->GetId());
+        else if(dynamic_cast<PracticalClass*>(*itCP) != NULL)
+                nameCP = "TP "+QString::number((*itCP)->GetId());
+        else if(dynamic_cast<MagistralClass*>(*itCP) != NULL)
+                nameCP = "CM "+QString::number((*itCP)->GetId());
+        this->m->removeTimeSlot();
+//        QTimeSlot* time = new QTimeSlot(date, h, m, duration,
+//                     nameCP, (*itCr)->GetId(), ((*itM)->GetId()+" : "+(*itM)->GetName()), (*itCP)->GetTeacher(), "602", this->m->getUi()->edt);
+        
+        QTimeSlot* time = new QTimeSlot(date, h, m, duration,
+                     nameCP, "008", "cc", "ee", "602", this->m->getUi()->edt);
+        this->m->addTimeSlot(time);
+    }
+    else{
+        delete d;
+        delete t;
+    }
 }
 
 void WindowEditTimeSlot::clearWidgetContent() {

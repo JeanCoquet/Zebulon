@@ -12,9 +12,11 @@
 #include "ClassPeriod.h"
 class TimeSlot {
 public:
-    TimeSlot(int id, Date *startDate, Classroom *classroom, ClassPeriod* classPeriod);
+    TimeSlot(Date *startDate, Classroom *classroom, ClassPeriod* classPeriod);
     TimeSlot(const TimeSlot& orig);
     virtual ~TimeSlot();
+    
+    static int maxId;
     
     ClassPeriod* GetClassPeriod() const {
         return classPeriod;

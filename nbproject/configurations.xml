@@ -24,6 +24,8 @@
         <itemPath>Gui/mainwindow.cpp</itemPath>
         <itemPath>Gui/mainwindow.h</itemPath>
         <itemPath>Gui/mainwindow.ui</itemPath>
+        <itemPath>Gui/ui_WindowEditTimeSlot.h</itemPath>
+        <itemPath>Gui/ui_mainwindow.h</itemPath>
       </logicalFolder>
       <logicalFolder name="Model" displayName="Model" projectFiles="true">
         <itemPath>Model/ClassPeriod.cpp</itemPath>
