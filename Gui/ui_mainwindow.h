@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Wed Mar 21 15:29:58 2012
-**      by: Qt User Interface Compiler version 4.7.2
+** Created: Thu Mar 22 20:59:12 2012
+**      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -22,6 +22,7 @@
 #include <QtGui/QMainWindow>
 #include <QtGui/QMenu>
 #include <QtGui/QMenuBar>
+#include <QtGui/QPushButton>
 #include <QtGui/QScrollArea>
 #include <QtGui/QSpacerItem>
 #include <QtGui/QStatusBar>
@@ -62,6 +63,7 @@ public:
     QCalendarWidget *calendarWidget;
     QCommandLinkButton *addTimeSlotButton;
     QSpacerItem *verticalSpacer;
+    QPushButton *commitButton;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -84,7 +86,7 @@ public:
         scrollArea_2->setWidgetResizable(true);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 448, 518));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 439, 498));
         verticalLayout_3 = new QVBoxLayout(scrollAreaWidgetContents_2);
         verticalLayout_3->setSpacing(6);
         verticalLayout_3->setContentsMargins(11, 11, 11, 11);
@@ -102,7 +104,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 739, 21));
+        menuBar->setGeometry(QRect(0, 0, 739, 29));
         menuFichier = new QMenu(menuBar);
         menuFichier->setObjectName(QString::fromUtf8("menuFichier"));
         menu_dition = new QMenu(menuBar);
@@ -188,6 +190,14 @@ public:
 
         verticalLayout->addItem(verticalSpacer);
 
+        commitButton = new QPushButton(dockWidgetContents);
+        commitButton->setObjectName(QString::fromUtf8("commitButton"));
+        QIcon icon1;
+        icon1.addFile(QString::fromUtf8("../Check-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        commitButton->setIcon(icon1);
+
+        verticalLayout->addWidget(commitButton);
+
         dockWidget->setWidget(dockWidgetContents);
         MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(1), dockWidget);
 
@@ -214,6 +224,7 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Module", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Group", 0, QApplication::UnicodeUTF8));
         addTimeSlotButton->setText(QApplication::translate("MainWindow", "Add Time Slot", 0, QApplication::UnicodeUTF8));
+        commitButton->setText(QApplication::translate("MainWindow", "Commit changes", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

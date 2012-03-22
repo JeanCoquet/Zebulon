@@ -74,7 +74,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->edt->setDate(date);
     QObject::connect(ui->calendarWidget, SIGNAL(clicked(QDate)), this, SLOT(changeDate(QDate)));
     QObject::connect(ui->addTimeSlotButton, SIGNAL(clicked()), this, SLOT(openEditTimeSlot())); 
-    
+    QObject::connect(ui->commitButton, SIGNAL(clicked()), this, SLOT(commit()));
     ctrl = new Controller();
     
     windowEditTimeSlot = new WindowEditTimeSlot(this->ctrl, this);
@@ -84,15 +84,28 @@ MainWindow::MainWindow(QWidget *parent) :
     
 }
 
+void MainWindow::commit(){
+    cout<<"COMMIT DES DONNEES SI T AS MERDE T AS DETRUIT NOTRE BASE, :p"<<endl;
+    this->ctrl->commit();
+}
+
 void MainWindow::addTimeSlot(QTimeSlot *t) {
-    
+    //ajout du nouveau time slot
     this->ui->edt->addTimeSlot(t);
-    
     QObject::connect(t, SIGNAL(clicked(QTimeSlot*)), this, SLOT(openEditTimeSlot(QTimeSlot*)));
 }
 
-void MainWindow::removeTimeSlot() {
-    cout<<"coucou"<<endl;
+void MainWindow::removeTimeSlot(QTimeSlot *t) {
+    list<TimeSlot*> *lts = this->ctrl->getSchedule()->GetTimeSlotList();
+    list<TimeSlot*>::iterator it = lts->begin();
+    list<TimeSlot*>::const_iterator itMax = lts->begin();
+    for(;it!=itMax;it++){
+        if( (*it)->GetId() == t->getId() ){
+            this->ctrl->delTimeSlot((*it));
+            break;
+        }
+    }
+    this->ui->edt->removeTimeSlot(t);
 }
 
 void MainWindow::changeDate(QDate date) {
@@ -109,7 +122,7 @@ void MainWindow::changeDate(QDate date) {
         list<TimeSlot*> ::const_iterator itMax = ctrl->getSchedule()->GetTimeSlotList()->end();
         for(; it!=itMax; it++) {
             Date *dit = (*it)->GetStartDate();
-            cout<<dit<<" "<<d<<" "<<de<<endl;
+            //cout<<dit<<" "<<d<<" "<<de<<endl;
             if(*dit >= d && *dit <= de ) {
                 QDate qdts = QDate(dit->GetYear(), dit->GetMonth(), dit->GetDay());
                 
@@ -122,11 +135,12 @@ void MainWindow::changeDate(QDate date) {
                 else if(dynamic_cast<MagistralClass*>(cp) != NULL)
                         nameCP = "CM "+QString::number(cp->GetId());
                 
-                QTimeSlot* time = new QTimeSlot(qdts, dit->GetHour(), dit->GetMin(), cp->GetDuration(),
+                QTimeSlot* time = new QTimeSlot((*it)->GetId(), qdts, dit->GetHour(), dit->GetMin(), cp->GetDuration(),
                      nameCP, QString::fromStdString((*it)->GetClassroom()->GetId()), QString::fromStdString((cp->GetMomo()->GetId()+" : "+cp->GetMomo()->GetName())), QString::fromStdString(cp->GetTeacher()), "602", ui->edt);
-
-                this->ui->edt->addTimeSlot(time);
-                QApplication::connect(time, SIGNAL(clicked(QTimeSlot*)), this, SLOT(openEditTimeSlot(QTimeSlot*)));
+                
+                this->addTimeSlot(time);
+                //QApplication::connect(time, SIGNAL(clicked(QTimeSlot*)), this, SLOT(openEditTimeSlot(QTimeSlot*)));
+                
             }
         }
     }
@@ -161,6 +175,7 @@ void MainWindow::openEditTimeSlot(QTimeSlot* timeSlot) {
     combo = windowEditTimeSlot->getWidget().comboBoxClassPeriod;
     combo->setCurrentIndex(combo->findText(timeSlot->getClassPeriod()));
     
+    windowEditTimeSlot->setCurrentTimeSlot(timeSlot);
     windowEditTimeSlot->show();
 }
 

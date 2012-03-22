@@ -15,7 +15,7 @@ public:
     TimeSlot(Date *startDate, Classroom *classroom, ClassPeriod* classPeriod);
     TimeSlot(const TimeSlot& orig);
     virtual ~TimeSlot();
-    
+    void updateEndDate();
     static int maxId;
     
     ClassPeriod* GetClassPeriod() const {
@@ -34,12 +34,16 @@ public:
         return startDate;
     }
     
-    Date GetEndDate() const;
+    Date* GetEndDate() const {
+        return endDate;
+    }
+
 
 
 private:
     int id;
     Date *startDate;
+    Date *endDate;
     Classroom *classroom;
     ClassPeriod *classPeriod;
 };

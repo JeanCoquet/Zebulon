@@ -63,6 +63,7 @@ public:
     QList<QTimeSlot*>* getTimeSlotList() const { return timeSlotList;}
     QTimeSlot* getTimeSlot(int i);
     void removeTimeSlot(int i);
+    void removeTimeSlot(QTimeSlot* qts);
     void removeAllTimeSlots();
 
 protected:

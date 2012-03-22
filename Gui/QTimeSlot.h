@@ -8,11 +8,10 @@ class QTimeSlot : public QPushButton
 {
     Q_OBJECT
 public:
-    explicit QTimeSlot(QDate date, int hour, int minute, int duration, QString classPeriod = "",
+    explicit QTimeSlot(int id, QDate date, int hour, int minute, int duration, QString classPeriod = "",
             QString classRoom = "", QString module = "", QString teacher = "", QString group = "", QWidget *parent = 0);
 
     ~QTimeSlot();
-
     QString getClassPeriod() const { return classPeriod; }
     QString getClassRoom() const { return classRoom; }
     QString getModule() const { return module; }
@@ -38,10 +37,14 @@ public:
     void setFontFize(int n) { fontFize = n; updateChildren(); }
     void setFontColor(QString s) { fontColor = s; updateChildren(); }
     void setBackgroundColor(QString s) { backgroundColor = s; updateChildren(); }
-    
+    int getId() const {
+        return id;
+    }
+
     void mousePressEvent(QMouseEvent* e);
 
 private:
+    int id;
     QString classPeriod;
     QString classRoom;
     QString module;

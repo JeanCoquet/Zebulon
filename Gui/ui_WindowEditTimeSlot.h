@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'WindowEditTimeSlot.ui'
 **
-** Created: Wed Mar 21 15:29:58 2012
-**      by: Qt User Interface Compiler version 4.7.2
+** Created: Thu Mar 22 20:36:42 2012
+**      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -23,6 +23,7 @@
 #include <QtGui/QLabel>
 #include <QtGui/QLineEdit>
 #include <QtGui/QListWidget>
+#include <QtGui/QPushButton>
 #include <QtGui/QScrollArea>
 #include <QtGui/QTimeEdit>
 #include <QtGui/QVBoxLayout>
@@ -34,6 +35,7 @@ class Ui_WindowEditTimeSlot
 {
 public:
     QVBoxLayout *verticalLayout;
+    QPushButton *deleteTimeSlotButton;
     QScrollArea *scrollArea;
     QWidget *scrollAreaWidgetContents;
     QFormLayout *formLayout;
@@ -56,15 +58,20 @@ public:
     {
         if (WindowEditTimeSlot->objectName().isEmpty())
             WindowEditTimeSlot->setObjectName(QString::fromUtf8("WindowEditTimeSlot"));
-        WindowEditTimeSlot->resize(431, 601);
+        WindowEditTimeSlot->resize(431, 623);
         verticalLayout = new QVBoxLayout(WindowEditTimeSlot);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        deleteTimeSlotButton = new QPushButton(WindowEditTimeSlot);
+        deleteTimeSlotButton->setObjectName(QString::fromUtf8("deleteTimeSlotButton"));
+
+        verticalLayout->addWidget(deleteTimeSlotButton);
+
         scrollArea = new QScrollArea(WindowEditTimeSlot);
         scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 393, 306));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 393, 317));
         formLayout = new QFormLayout(scrollAreaWidgetContents);
         formLayout->setObjectName(QString::fromUtf8("formLayout"));
         formLayout->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
@@ -157,6 +164,7 @@ public:
     void retranslateUi(QDialog *WindowEditTimeSlot)
     {
         WindowEditTimeSlot->setWindowTitle(QApplication::translate("WindowEditTimeSlot", "WindowEditTimeSlot", 0, QApplication::UnicodeUTF8));
+        deleteTimeSlotButton->setText(QApplication::translate("WindowEditTimeSlot", "Delete", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("WindowEditTimeSlot", "Module", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("WindowEditTimeSlot", "ClassPeriod", 0, QApplication::UnicodeUTF8));
         label_5->setText(QApplication::translate("WindowEditTimeSlot", "Classroom", 0, QApplication::UnicodeUTF8));

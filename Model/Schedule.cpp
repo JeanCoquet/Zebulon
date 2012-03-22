@@ -14,9 +14,6 @@ Schedule::Schedule() {
     timeSlotList = new list<TimeSlot*>;
 }
 
-Schedule::Schedule(const Schedule& orig) {
-}
-
 Schedule::~Schedule() {
     delete[] classroomList;
     delete[] groupList;

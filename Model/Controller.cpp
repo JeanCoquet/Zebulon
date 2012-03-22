@@ -68,17 +68,19 @@ bool Controller::addTimeSlot(TimeSlot* timeSlot){
     list<TimeSlot*>::iterator it = this->schedule->GetTimeSlotList()->begin();
     list<TimeSlot*> ::const_iterator itMax = this->schedule->GetTimeSlotList()->end();
     for(; it!=itMax; it++) {
-        cout<< "l'autre : "<<(*it)->GetEndDate()<<endl
-            <<" le times ajout : "<<timeSlot->GetEndDate()<<endl;
+        cout<<"getendate du time slot recherche"<<endl;
+        cout<< "l'autre : "<<*((*it)->GetEndDate())<<endl;
+        cout<<"getenddate du time slot ajout"<<endl;
+        cout<<" le times ajout : "<<*(timeSlot->GetEndDate())<<endl;
         if( 
                     (
                     timeSlot->GetStartDate() >= (*it)->GetStartDate() 
-                    && timeSlot->GetStartDate() <= (&((*it)->GetEndDate()))
+                    && timeSlot->GetStartDate() <= (*it)->GetEndDate()
                     ) 
                 || 
                     ( 
                     timeSlot->GetStartDate() < (*it)->GetStartDate() 
-                    && (&(timeSlot->GetEndDate())) > (*it)->GetStartDate()
+                    && timeSlot->GetEndDate() > (*it)->GetStartDate()
                     ) 
                 ){
             timeSlotList->push_back(*it);
@@ -87,6 +89,7 @@ bool Controller::addTimeSlot(TimeSlot* timeSlot){
     cout<<"nb timeslot retenus : "<<timeSlotList->size()<<endl;
     it = timeSlotList->begin();
     itMax = timeSlotList->end();
+    cout<<"avant le parcours des timeslots"<<endl;
     for(; it!=itMax; it++) {
         if((*it)->GetClassroom()->GetId() == timeSlot->GetClassroom()->GetId())
             return false;
@@ -143,7 +146,8 @@ void Controller::commit(){
 }
 int Controller::strToInt(string str){
     int val = 0;
-    for(int i= 0 ; i < str.length() ; i++){
+    
+    for(unsigned int i= 0 ; i < str.length() ; i++){
         val *= 10;
         val += str[i] - '0';
     }
@@ -212,7 +216,7 @@ void Controller::loadSchedule(){
              list< list<string> >::iterator it = result->begin();
              list< list<string> >::const_iterator MaxList = result->end();
              for(;it != MaxList; it++){
-                list<string>::const_iterator MaxListList = it->end();
+                //list<string>::const_iterator MaxListList = it->end();
                 list<string>::iterator itList = it->begin();
                 this->schedule->GetClassroomList()->push_back(new LectureHall(*itList, strToInt(*(++itList)), strToBool(*(++itList)) ));
              } 
@@ -224,7 +228,7 @@ void Controller::loadSchedule(){
              list< list<string> >::iterator it = result->begin();
              list< list<string> >::const_iterator MaxList = result->end();
              for(;it != MaxList; it++){
-                list<string>::const_iterator MaxListList = it->end();
+//                list<string>::const_iterator MaxListList = it->end();
                 list<string>::iterator itList = it->begin();
                 this->schedule->GetClassroomList()->push_back(new PracticalClassroom(*itList, strToInt(*(++itList)), strToInt(*(++itList)) ));
              } 
@@ -236,7 +240,7 @@ void Controller::loadSchedule(){
              list< list<string> >::iterator it = result->begin();
              list< list<string> >::const_iterator MaxList = result->end();
              for(;it != MaxList; it++){
-                list<string>::const_iterator MaxListList = it->end();
+//                list<string>::const_iterator MaxListList = it->end();
                 list<string>::iterator itList = it->begin();
                 this->schedule->GetClassroomList()->push_back(new TutorialClassroom(*itList, strToInt(*(++itList)), strToBool(*(++itList)) ));
              } 
@@ -249,7 +253,7 @@ void Controller::loadSchedule(){
              list< list<string> >::iterator it = result->begin();
              list< list<string> >::const_iterator MaxList = result->end();
              for(;it != MaxList; it++){
-                list<string>::const_iterator MaxListList = it->end();
+//                list<string>::const_iterator MaxListList = it->end();
                 list<string>::iterator itList = it->begin();
                 
                 string id = (*itList);
@@ -292,7 +296,7 @@ void Controller::loadSchedule(){
              list< list<string> >::iterator it = result->begin();
              list< list<string> >::const_iterator MaxList = result->end();
              for(;it != MaxList; it++){
-                list<string>::const_iterator MaxListList = it->end();
+//                list<string>::const_iterator MaxListList = it->end();
                 list<string>::iterator itList = it->begin();
                 string stuId = *itList;
                 string groupId = *(++itList);
@@ -377,11 +381,11 @@ void Controller::loadSchedule(){
          result = database->request("select id_classroom, id_classperiod, id, date from timeslot");
          if(result != NULL){
              string idModule = "";
-             Module *mod;
+//             Module *mod;
              list< list<string> >::iterator it = result->begin();
              list< list<string> >::const_iterator MaxList = result->end();
              for(;it != MaxList; it++){
-                list<string>::const_iterator MaxListList = it->end();
+//                list<string>::const_iterator MaxListList = it->end();
                 list<string>::iterator itList = it->begin();
                 Classroom *classroom;
                 ClassPeriod *classperiod;
@@ -418,9 +422,6 @@ void Controller::loadSchedule(){
     }catch(int){
         cout<<"Error while loading classrooms."<<endl;
     }
-}
-
-Controller::Controller(const Controller& orig) {
 }
 
 Controller::~Controller() {

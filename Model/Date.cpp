@@ -59,21 +59,21 @@ ostream& operator <<(ostream& os, const Date &d) {
 
 
 /*Limité à min < 4h*/
-Date& operator+(const Date& date, int min) {
-    cout<<"yo ici on additionne la date wai"<<endl;
-    Date date2 = Date(date);
-    int nbMin = date2.GetMin() + min;
-    if(nbMin >= 60) {
-        date2.SetMin(nbMin%60);
-        date2.SetHour(date2.GetHour()+(nbMin/60));
-        cout<<"heure : "<<date2.GetHour()<<endl;;
-        if(date2.GetHour() > 20)
-            date2.SetHour(20);
-    }
-    else
-        date2.SetMin(nbMin);
-    return date2;
-}
+//Date& operator+(const Date& date, int min) {
+//    cout<<"yo ici on additionne la date wai"<<endl;
+//    Date date2 = Date(date);
+//    int nbMin = date2.GetMin() + min;
+//    if(nbMin >= 60) {
+//        date2.SetMin(nbMin%60);
+//        date2.SetHour(date2.GetHour()+(nbMin/60));
+//        cout<<"heure : "<<date2.GetHour()<<endl;;
+//        if(date2.GetHour() > 20)
+//            date2.SetHour(20);
+//    }
+//    else
+//        date2.SetMin(nbMin);
+//    return date2;
+//}
 
 bool operator==(Date const& d1, Date const& d2) {
     return  d1.GetMin() == d2.GetMin() &&

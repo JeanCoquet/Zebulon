@@ -7,13 +7,20 @@
     <x>0</x>
     <y>0</y>
     <width>431</width>
-    <height>601</height>
+    <height>623</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>WindowEditTimeSlot</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QPushButton" name="deleteTimeSlotButton">
+     <property name="text">
+      <string>Delete</string>
+     </property>
+    </widget>
+   </item>
    <item>
     <widget class="QScrollArea" name="scrollArea">
      <property name="widgetResizable">
@@ -25,7 +32,7 @@
         <x>0</x>
         <y>0</y>
         <width>393</width>
-        <height>306</height>
+        <height>317</height>
        </rect>
       </property>
       <layout class="QFormLayout" name="formLayout">

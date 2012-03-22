@@ -1,8 +1,9 @@
 #include "QTimeSlot.h"
 
-QTimeSlot::QTimeSlot(QDate date, int hour, int minute, int duration, QString classPeriod,
+QTimeSlot::QTimeSlot(int id, QDate date, int hour, int minute, int duration, QString classPeriod,
     QString classRoom, QString module, QString teacher, QString group, QWidget *parent) : QPushButton(parent)
 {
+    this->id = id;
     this->date = date;
     this->hour = hour;
     this->minute = minute;

@@ -25,15 +25,21 @@ public:
         return widget;
     }
     
+    void setCurrentTimeSlot(QTimeSlot* currentTimeSlot) {
+        this->currentTimeSlot = currentTimeSlot;
+    }
+
 public slots :
     void changeModule(int);
     void changeClassPeriod(int);
     void timeSlotAccepted();
+    void deleteTimeSlotButtonAction();
         
 private:
     Ui::WindowEditTimeSlot widget;
     Controller* ctrl;
     MainWindow* m;
+    QTimeSlot *currentTimeSlot;
 };
 
 #endif	/* _WINDOWEDITTIMESLOT_H */

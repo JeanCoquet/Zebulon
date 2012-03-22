@@ -16,7 +16,17 @@ WindowEditTimeSlot::WindowEditTimeSlot(Controller* ctrl, MainWindow* m) {
     QObject::connect(this->widget.comboBoxModule, SIGNAL(currentIndexChanged(int)), this, SLOT(changeModule(int)));
     QObject::connect(this->widget.comboBoxClassPeriod, SIGNAL(currentIndexChanged(int)), this, SLOT(changeClassPeriod(int)));
     QObject::connect(this->widget.buttonBox, SIGNAL(accepted()), this, SLOT(timeSlotAccepted()));
+    QObject::connect(this->widget.deleteTimeSlotButton, SIGNAL(clicked()), this, SLOT(deleteTimeSlotButtonAction()));
     this->widget.listGroups->setEnabled(false);
+    this->currentTimeSlot = NULL;
+}
+
+void WindowEditTimeSlot::deleteTimeSlotButtonAction(){
+    if(this->currentTimeSlot != NULL){
+        this->m->removeTimeSlot(currentTimeSlot);
+        this->currentTimeSlot = NULL;
+    }
+    this->setVisible(false);
 }
 
 void WindowEditTimeSlot::changeModule(int){
@@ -101,10 +111,14 @@ void WindowEditTimeSlot::timeSlotAccepted(){
                 nameCP = "TP "+QString::number((*itCP)->GetId());
         else if(dynamic_cast<MagistralClass*>(*itCP) != NULL)
                 nameCP = "CM "+QString::number((*itCP)->GetId());
-        this->m->removeTimeSlot();
-        QTimeSlot* time = new QTimeSlot(date, h, m, duration,
+        QTimeSlot* time = new QTimeSlot(t->GetId(), date, h, m, duration,
                      nameCP, QString::fromStdString((*itCr)->GetId()), QString::fromStdString(((*itM)->GetId()+" : "+(*itM)->GetName())), QString::fromStdString((*itCP)->GetTeacher()), "602", this->m->getUi()->edt);
         
+        if(currentTimeSlot != NULL){
+            this->m->removeTimeSlot(currentTimeSlot);
+            currentTimeSlot = NULL;
+            // A SUPPRIMER DANS LE CONTROLLEUR
+        }
         this->m->addTimeSlot(time);
     }
     else{

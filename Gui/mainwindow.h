@@ -38,10 +38,11 @@ public:
 
     
 public slots:
-    void removeTimeSlot();
+    void removeTimeSlot(QTimeSlot*);
     void changeDate(QDate date);
     void openEditTimeSlot();
     void openEditTimeSlot(QTimeSlot* timeSlot);
+    void commit();
 
 private:
     Ui::MainWindow *ui;

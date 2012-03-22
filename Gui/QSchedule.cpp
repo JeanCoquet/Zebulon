@@ -1,4 +1,6 @@
 #include "QSchedule.h"
+#include <iostream>
+using namespace std;
 
 QSchedule::QSchedule(QWidget *parent) : QWidget (parent) {
 
@@ -77,6 +79,7 @@ QTimeSlot* QSchedule::addTimeSlot(QTimeSlot *timeSlot) {
         timeSlot->setGeometry((timeSlot->getHour()-hourStart)*minMinutesWidth*MIN_TIME_IN_HOUR+dayNameWidth+((int)minMinutesWidth*timeSlot->getMinute()/MIN_TIME+marginLeft),
                                 (timeSlot->getDate().dayOfWeek()-1)*dayHeight+marginTop+hoursHeight+titleHeight,(int)(minMinutesWidth*timeSlot->getDuration()/MIN_TIME), dayHeight);
         timeSlot->show();
+        updateChildren();
         return timeSlot;
     }
     else {
@@ -270,6 +273,13 @@ void QSchedule::removeTimeSlot(int i) {
     QTimeSlot *t = timeSlotList->toVector()[i];
     t->close();
     timeSlotList->removeAt(i);
+    updateChildren();
+}
+
+void QSchedule::removeTimeSlot(QTimeSlot* qts){
+    qts->close();
+    timeSlotList->removeOne(qts);
+    cout<<"APRES SUPPR :"<<timeSlotList->size()<<endl;
     updateChildren();
 }
 
