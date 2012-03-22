@@ -68,8 +68,8 @@ private:
     int min;
 };
 
-ostream& operator <<(ostream& os, const Date *d);
-Date* operator+(Date const& date, int min);
+ostream& operator <<(ostream& os, const Date &d);
+Date& operator+(Date const& date, int min);
 bool operator==(Date const& d1, Date const& d2);
 bool operator<(Date const& d1, Date const& d2);
 bool operator>(Date const& d1, Date const& d2);

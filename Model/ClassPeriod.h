@@ -9,17 +9,18 @@
 #define	CLASSPERIOD_H
 #include <string>
 #include "Group.h"
+#include "Module.h"
 #include <list>
 
 using namespace std;
-
+class Module;
 class ClassPeriod {
 public:
-    ClassPeriod(int id, string teacher, int duration);
+    ClassPeriod(int id, string teacher, int duration, Module* mod);
     ClassPeriod(const ClassPeriod& orig);
     virtual ~ClassPeriod();
 
-        int GetDuration() const {
+    int GetDuration() const {
         return duration;
     }
 
@@ -51,6 +52,14 @@ public:
         this->teacher = teacher;
     }
 
+    Module* GetMomo() const {
+        return momo;
+    }
+
+    void SetMomo(Module* momo) {
+        this->momo = momo;
+    }
+
 
 
 private:
@@ -58,6 +67,7 @@ private:
     string teacher;
     int duration;
     list<Group*> *groupList;
+    Module *momo;
 };
 
 #endif	/* CLASSPERIOD_H */

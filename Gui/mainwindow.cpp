@@ -96,11 +96,48 @@ void MainWindow::removeTimeSlot() {
 }
 
 void MainWindow::changeDate(QDate date) {
-    ui->edt->setDate(date);
+    if(ui->edt->getStartDate() > date || date > ui->edt->getEndDate()){
+        ui->edt->setDate(date);
+        ui->edt->removeAllTimeSlots();
+        QDate qd = this->ui->edt->getStartDate();
+        Date d(qd.day(), qd.month(), qd.year(), 0, 0);
+        
+        QDate qde = this->ui->edt->getEndDate();
+        Date de(qde.day(), qde.month(), qde.year(), 23, 59);
+        
+        list<TimeSlot*>::iterator it = ctrl->getSchedule()->GetTimeSlotList()->begin();
+        list<TimeSlot*> ::const_iterator itMax = ctrl->getSchedule()->GetTimeSlotList()->end();
+        for(; it!=itMax; it++) {
+            Date *dit = (*it)->GetStartDate();
+            cout<<dit<<" "<<d<<" "<<de<<endl;
+            if(*dit >= d && *dit <= de ) {
+                QDate qdts = QDate(dit->GetYear(), dit->GetMonth(), dit->GetDay());
+                
+                QString nameCP;
+                ClassPeriod *cp = (*it)->GetClassPeriod();
+                if(dynamic_cast<TutorialClass*>(cp) != NULL)
+                        nameCP = "TD "+QString::number(cp->GetId());
+                else if(dynamic_cast<PracticalClass*>(cp) != NULL)
+                        nameCP = "TP "+QString::number(cp->GetId());
+                else if(dynamic_cast<MagistralClass*>(cp) != NULL)
+                        nameCP = "CM "+QString::number(cp->GetId());
+                
+                QTimeSlot* time = new QTimeSlot(qdts, dit->GetHour(), dit->GetMin(), cp->GetDuration(),
+                     nameCP, QString::fromStdString((*it)->GetClassroom()->GetId()), QString::fromStdString((cp->GetMomo()->GetId()+" : "+cp->GetMomo()->GetName())), QString::fromStdString(cp->GetTeacher()), "602", ui->edt);
+
+                this->ui->edt->addTimeSlot(time);
+                QApplication::connect(time, SIGNAL(clicked(QTimeSlot*)), this, SLOT(openEditTimeSlot(QTimeSlot*)));
+            }
+        }
+    }
+    else
+            ui->edt->setDate(date);
+
 }
 
 void MainWindow::openEditTimeSlot() { 
     windowEditTimeSlot->clearWidgetContent();
+    windowEditTimeSlot->getWidget().calendarWidget->setSelectedDate(ui->calendarWidget->selectedDate());
     windowEditTimeSlot->show();
 }
 

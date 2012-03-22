@@ -51,25 +51,28 @@ int Date::duration() const {
 Date::~Date() {
 }
 
-ostream& operator <<(ostream& os, const Date *d) {
-    os << d->GetDay() << "/" << d->GetMonth() << "/" << d->GetYear() << " " << d->GetHour() << ":" << d->GetMin();
+ostream& operator <<(ostream& os, const Date &d) {
+    os << d.GetDay() << "/" << d.GetMonth() << "/" << d.GetYear() << " " << d.GetHour() << ":" << d.GetMin();
     return os;
 }
 
+
+
 /*Limité à min < 4h*/
-Date* operator +(const Date& date, int min) {
-    if(min < 4*60) {
-        Date *date2 = new Date(date);
-        int nbMin = date2->GetMin() + min;
-        if(nbMin >= 60) {
-            date2->SetMin(nbMin%60);
-            date2->SetHour(date2->GetHour()+((int) nbMin/60));
-        }
-        else
-            date2->SetMin(nbMin);
-        return date2;
+Date& operator+(const Date& date, int min) {
+    cout<<"yo ici on additionne la date wai"<<endl;
+    Date date2 = Date(date);
+    int nbMin = date2.GetMin() + min;
+    if(nbMin >= 60) {
+        date2.SetMin(nbMin%60);
+        date2.SetHour(date2.GetHour()+(nbMin/60));
+        cout<<"heure : "<<date2.GetHour()<<endl;;
+        if(date2.GetHour() > 20)
+            date2.SetHour(20);
     }
-    else return NULL;
+    else
+        date2.SetMin(nbMin);
+    return date2;
 }
 
 bool operator==(Date const& d1, Date const& d2) {
@@ -81,10 +84,22 @@ bool operator==(Date const& d1, Date const& d2) {
             
 }
 bool operator<(Date const& d1, Date const& d2) {
-    return d1.duration() < d2.duration();    
+    if(d1.GetYear() < d2.GetYear())
+        return true;
+    else
+        if(d1.GetMonth() < d2.GetMonth() )
+            return true;
+        else
+            if(d1.GetDay() < d2.GetDay())
+                return true;
+            else
+                if(d1.GetHour() < d2.GetHour())
+                    return true;
+                else
+                    return (d1.GetMin() < d2.GetMin());
 }
 bool operator>(Date const& d1, Date const& d2) {
-    return d1.duration() < d2.duration();
+    return !( d1 < d2 || d1 == d2);
 }
 bool operator<=(Date const& d1, Date const& d2) {
     return d1<d2 || d1==d2;

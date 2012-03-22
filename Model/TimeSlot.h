@@ -33,6 +33,8 @@ public:
     Date* GetStartDate() const {
         return startDate;
     }
+    
+    Date GetEndDate() const;
 
 
 private:

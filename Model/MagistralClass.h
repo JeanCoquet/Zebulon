@@ -10,7 +10,7 @@
 #include "ClassPeriod.h"
 class MagistralClass  : public ClassPeriod{
 public:
-    MagistralClass(int id, string teacher, int duration);
+    MagistralClass(int id, string teacher, int duration, Module* mod);
     virtual ~MagistralClass();
 private:
 

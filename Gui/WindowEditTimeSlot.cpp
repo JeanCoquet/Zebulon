@@ -102,23 +102,23 @@ void WindowEditTimeSlot::timeSlotAccepted(){
         else if(dynamic_cast<MagistralClass*>(*itCP) != NULL)
                 nameCP = "CM "+QString::number((*itCP)->GetId());
         this->m->removeTimeSlot();
-//        QTimeSlot* time = new QTimeSlot(date, h, m, duration,
-//                     nameCP, (*itCr)->GetId(), ((*itM)->GetId()+" : "+(*itM)->GetName()), (*itCP)->GetTeacher(), "602", this->m->getUi()->edt);
-        
         QTimeSlot* time = new QTimeSlot(date, h, m, duration,
-                     nameCP, "008", "cc", "ee", "602", this->m->getUi()->edt);
+                     nameCP, QString::fromStdString((*itCr)->GetId()), QString::fromStdString(((*itM)->GetId()+" : "+(*itM)->GetName())), QString::fromStdString((*itCP)->GetTeacher()), "602", this->m->getUi()->edt);
+        
         this->m->addTimeSlot(time);
     }
     else{
+        QMessageBox::warning(this, "Oups!", "Le time SLot que vosu avez cherché à ajouter n'est pas correct!");
     }
 }
 
 void WindowEditTimeSlot::clearWidgetContent() {
     this->widget.comboBoxModule->setCurrentIndex(-1);
     this->widget.comboBoxClassPeriod->setCurrentIndex(-1);
+    this->widget.comboBoxClassPeriod->clear();
     this->widget.comboBoxClassroom->setCurrentIndex(-1);
     this->widget.durationVal->clear();
-    this->widget.timeEdit->setTime(QTime::fromString("00:00", "hh:ss"));
+    this->widget.timeEdit->setTime(QTime::fromString("08:00", "hh:ss"));
     this->widget.calendarWidget->setSelectedDate(QDate::currentDate());
     this->widget.listGroups->clear();
 }

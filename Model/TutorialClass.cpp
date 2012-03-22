@@ -7,7 +7,7 @@
 
 #include "TutorialClass.h"
 
-TutorialClass::TutorialClass(int id, string teacher, int duration):ClassPeriod(id, teacher, duration) {
+TutorialClass::TutorialClass(int id, string teacher, int duration, Module* mod):ClassPeriod(id,teacher,duration, mod)  {
 }
 
 TutorialClass::~TutorialClass() {

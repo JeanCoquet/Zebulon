@@ -7,7 +7,7 @@
 
 #include "ClassPeriod.h"
 
-ClassPeriod::ClassPeriod(int id, string teacher, int duration) {
+ClassPeriod::ClassPeriod(int id, string teacher, int duration, Module* mod): momo(mod) {
     this->duration = duration;
     this->id = id;
     this->teacher = teacher;

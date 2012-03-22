@@ -12,6 +12,8 @@
 #include "ClassPeriod.h"
 
 using namespace std;
+
+class ClassPeriod;
         
 class Module {
 public:

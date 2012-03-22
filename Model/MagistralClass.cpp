@@ -7,7 +7,7 @@
 
 #include "MagistralClass.h"
 
-MagistralClass::MagistralClass(int id, string teacher, int duration):ClassPeriod(id,teacher,duration) {
+MagistralClass::MagistralClass(int id, string teacher, int duration, Module* mod):ClassPeriod(id,teacher,duration, mod) {
 }
 
 MagistralClass::~MagistralClass() {

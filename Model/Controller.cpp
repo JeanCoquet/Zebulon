@@ -68,12 +68,23 @@ bool Controller::addTimeSlot(TimeSlot* timeSlot){
     list<TimeSlot*>::iterator it = this->schedule->GetTimeSlotList()->begin();
     list<TimeSlot*> ::const_iterator itMax = this->schedule->GetTimeSlotList()->end();
     for(; it!=itMax; it++) {
-        if((*it)->GetStartDate() >= timeSlot->GetStartDate()
-                && (*it)->GetStartDate() < timeSlot->GetStartDate()+timeSlot->GetClassPeriod()->GetDuration()) {
+        cout<< "l'autre : "<<(*it)->GetEndDate()<<endl
+            <<" le times ajout : "<<timeSlot->GetEndDate()<<endl;
+        if( 
+                    (
+                    timeSlot->GetStartDate() >= (*it)->GetStartDate() 
+                    && timeSlot->GetStartDate() <= (&((*it)->GetEndDate()))
+                    ) 
+                || 
+                    ( 
+                    timeSlot->GetStartDate() < (*it)->GetStartDate() 
+                    && (&(timeSlot->GetEndDate())) > (*it)->GetStartDate()
+                    ) 
+                ){
             timeSlotList->push_back(*it);
         }
     }
-    
+    cout<<"nb timeslot retenus : "<<timeSlotList->size()<<endl;
     it = timeSlotList->begin();
     itMax = timeSlotList->end();
     for(; it!=itMax; it++) {
@@ -84,14 +95,8 @@ bool Controller::addTimeSlot(TimeSlot* timeSlot){
             list<Group*>::const_iterator itGMax = (*it)->GetClassPeriod()->GetGroupList()->end();
             for(; itG != itGMax; itG++) {
                 list<Group*>* lg = timeSlot->GetClassPeriod()->GetGroupList();
-                /*list<Group*>::iterator itGTimeSlot = timeSlot->GetClassPeriod()->GetGroupList()->begin();
-                list<Group*>::const_iterator itGMaxTimeSlot = timeSlot->GetClassPeriod()->GetGroupList()->end();*/
-                if( find(lg->begin(), lg->end(), &(*(*itG))) != lg->end() )
+                 if( find(lg->begin(), lg->end(), &(*(*itG))) != lg->end() )
                     return false;
-                /*for(; itGTimeSlot != itGMaxTimeSlot; itGTimeSlot++) {
-                    if((*itG)->GetId() == (*itGTimeSlot)->GetId())
-                        return false;
-                }*/
             }
         }
     }
@@ -336,13 +341,13 @@ void Controller::loadSchedule(){
                         int type = strToInt(*(++itList));
                         switch(type){
                             case 1 :
-                                classPeriod = new PracticalClass(id, teacher, duration);
+                                classPeriod = new PracticalClass(id, teacher, duration, mod);
                                 break;
                             case 2 :
-                                classPeriod = new MagistralClass(id, teacher, duration);
+                                classPeriod = new MagistralClass(id, teacher, duration, mod);
                                 break;
                             case 3 :
-                                classPeriod = new TutorialClass(id, teacher, duration);
+                                classPeriod = new TutorialClass(id, teacher, duration, mod);
                                 break;
                         }
 

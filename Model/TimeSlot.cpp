@@ -18,6 +18,21 @@ TimeSlot::TimeSlot(Date *startDate, Classroom* classroom, ClassPeriod* classPeri
     this->id = this->maxId;
 }
 
+Date TimeSlot::GetEndDate() const{
+    cout<<"addition date: "<<*(this->GetStartDate())<<" + "<<this->GetClassPeriod()->GetDuration()<<endl;
+    Date date2 = Date(*(this->startDate));
+    int nbMin = date2.GetMin() + this->classPeriod->GetDuration();
+    if(nbMin >= 60) {
+        date2.SetMin(nbMin%60);
+        date2.SetHour(date2.GetHour()+(nbMin/60));
+        if(date2.GetHour() > 20)
+            date2.SetHour(20);
+    }
+    else
+        date2.SetMin(nbMin);
+    cout<<"date end : "<<date2<<endl;
+    return date2;
+}
 
 
 TimeSlot::TimeSlot(const TimeSlot& orig) {
