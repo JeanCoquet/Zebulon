@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created: Thu Mar 22 21:03:22 2012
+** Created: Fri Mar 23 10:21:47 2012
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.4)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_MainWindow[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -36,6 +36,7 @@ static const uint qt_meta_data_MainWindow[] = {
       62,   11,   11,   11, 0x0a,
       90,   81,   11,   11, 0x0a,
      119,   11,   11,   11, 0x0a,
+     137,   11,   11,   11, 0x0a,
 
        0        // eod
 };
@@ -44,7 +45,7 @@ static const char qt_meta_stringdata_MainWindow[] = {
     "MainWindow\0\0removeTimeSlot(QTimeSlot*)\0"
     "date\0changeDate(QDate)\0openEditTimeSlot()\0"
     "timeSlot\0openEditTimeSlot(QTimeSlot*)\0"
-    "commit()\0"
+    "tabIndexChanged()\0commit()\0"
 };
 
 const QMetaObject MainWindow::staticMetaObject = {
@@ -80,10 +81,11 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 1: changeDate((*reinterpret_cast< QDate(*)>(_a[1]))); break;
         case 2: openEditTimeSlot(); break;
         case 3: openEditTimeSlot((*reinterpret_cast< QTimeSlot*(*)>(_a[1]))); break;
-        case 4: commit(); break;
+        case 4: tabIndexChanged(); break;
+        case 5: commit(); break;
         default: ;
         }
-        _id -= 5;
+        _id -= 6;
     }
     return _id;
 }

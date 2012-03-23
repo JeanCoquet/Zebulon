@@ -75,13 +75,16 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->calendarWidget, SIGNAL(clicked(QDate)), this, SLOT(changeDate(QDate)));
     QObject::connect(ui->addTimeSlotButton, SIGNAL(clicked()), this, SLOT(openEditTimeSlot())); 
     QObject::connect(ui->commitButton, SIGNAL(clicked()), this, SLOT(commit()));
+    QObject::connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(tabIndexChanged()));
+    QObject::connect(ui->comboBoxClassroom, SIGNAL(currentIndexChanged(int)), this, SLOT(tabIndexChanged()));
+    QObject::connect(ui->comboBoxGroup, SIGNAL(currentIndexChanged(int)), this, SLOT(tabIndexChanged()));
+    QObject::connect(ui->comboBoxModule, SIGNAL(currentIndexChanged(int)), this, SLOT(tabIndexChanged()));
     ctrl = new Controller();
     
     windowEditTimeSlot = new WindowEditTimeSlot(this->ctrl, this);
     addGroupToComboBox();
     addModuleToComboBox();
     addClassroomToComboBox();
-    
 }
 
 void MainWindow::commit(){
@@ -108,9 +111,24 @@ void MainWindow::removeTimeSlot(QTimeSlot *t) {
     this->ui->edt->removeTimeSlot(t);
 }
 
+
+void MainWindow::tabIndexChanged(){
+    reloadQTimeSlots();
+}
+
 void MainWindow::changeDate(QDate date) {
+    
     if(ui->edt->getStartDate() > date || date > ui->edt->getEndDate()){
         ui->edt->setDate(date);
+        reloadQTimeSlots();
+    }    
+   else
+            ui->edt->setDate(date);
+
+}
+    
+void MainWindow::reloadQTimeSlots(){
+    cout<<"reload"<<endl;
         ui->edt->removeAllTimeSlots();
         QDate qd = this->ui->edt->getStartDate();
         Date d(qd.day(), qd.month(), qd.year(), 0, 0);
@@ -120,32 +138,79 @@ void MainWindow::changeDate(QDate date) {
         
         list<TimeSlot*>::iterator it = ctrl->getSchedule()->GetTimeSlotList()->begin();
         list<TimeSlot*> ::const_iterator itMax = ctrl->getSchedule()->GetTimeSlotList()->end();
+        
         for(; it!=itMax; it++) {
             Date *dit = (*it)->GetStartDate();
             //cout<<dit<<" "<<d<<" "<<de<<endl;
             if(*dit >= d && *dit <= de ) {
-                QDate qdts = QDate(dit->GetYear(), dit->GetMonth(), dit->GetDay());
-                
-                QString nameCP;
-                ClassPeriod *cp = (*it)->GetClassPeriod();
-                if(dynamic_cast<TutorialClass*>(cp) != NULL)
-                        nameCP = "TD "+QString::number(cp->GetId());
-                else if(dynamic_cast<PracticalClass*>(cp) != NULL)
-                        nameCP = "TP "+QString::number(cp->GetId());
-                else if(dynamic_cast<MagistralClass*>(cp) != NULL)
-                        nameCP = "CM "+QString::number(cp->GetId());
-                
-                QTimeSlot* time = new QTimeSlot((*it)->GetId(), qdts, dit->GetHour(), dit->GetMin(), cp->GetDuration(),
-                     nameCP, QString::fromStdString((*it)->GetClassroom()->GetId()), QString::fromStdString((cp->GetMomo()->GetId()+" : "+cp->GetMomo()->GetName())), QString::fromStdString(cp->GetTeacher()), "602", ui->edt);
-                
-                this->addTimeSlot(time);
-                //QApplication::connect(time, SIGNAL(clicked(QTimeSlot*)), this, SLOT(openEditTimeSlot(QTimeSlot*)));
+                int currentIndex = this->ui->tabWidget->currentIndex();
+            
+                if(currentIndex == 0){
+                    cout<<"INDEX 1"<<endl;
+                    int indexCR = this->ui->comboBoxClassroom->currentIndex();
+                    list<Classroom*> *lcr = this->ctrl->getSchedule()->GetClassroomList();
+                    list<Classroom*>::iterator itCR = lcr->begin();
+                    for(int i = 0 ; i < indexCR ; i++){
+                        itCR++;
+                    }
+                    if((*it)->GetClassroom() == (*itCR)){
+                        genererQTimeSlot((*it));
+                    }
+                }
+                else if(currentIndex == 1){
+                    cout<<"INDEX 2"<<endl;
+                    int indexMod = this->ui->comboBoxModule->currentIndex();
+                    list<Module*> *lm = this->ctrl->getSchedule()->GetModuleList();
+                    list<Module*>::iterator itM = lm->begin();
+                    for(int i = 0 ; i < indexMod ; i++){
+                        itM++;
+                    }
+                    if((*it)->GetClassPeriod()->GetMomo() == (*itM)){
+                        genererQTimeSlot((*it));
+                    }
+                }
+                else if(currentIndex == 2){
+                    cout<<"INDEX 3"<<endl;
+                    int indexGroup = this->ui->comboBoxGroup->currentIndex();
+                    list<Group*> *lg = this->ctrl->getSchedule()->GetGroupList();
+                    list<Group*>::iterator itG = lg->begin();
+                    for(int i = 0 ; i < indexGroup ; i++){
+                        itG++;
+                    }
+                    list<Group*> *lgl = (*it)->GetClassPeriod()->GetGroupList();
+                    list<Group*>::iterator itGL = lgl->begin();
+                    list<Group*>::const_iterator itGLMax = lgl->end();
+                    for(;itGL != itGLMax ; itGL++){
+                        if((*itG) == (*itGL)){
+                            genererQTimeSlot((*it));
+                            break;
+                        }
+                    }
+
+                }
+                }                 //QApplication::connect(time, SIGNAL(clicked(QTimeSlot*)), this, SLOT(openEditTimeSlot(QTimeSlot*)));
                 
             }
         }
-    }
-    else
-            ui->edt->setDate(date);
+ 
+
+void MainWindow::genererQTimeSlot(TimeSlot* t){
+    Date *dit = t->GetStartDate();
+    QDate qdts = QDate(dit->GetYear(), dit->GetMonth(), dit->GetDay());
+                
+    QString nameCP;
+    ClassPeriod *cp = t->GetClassPeriod();
+    if(dynamic_cast<TutorialClass*>(cp) != NULL)
+            nameCP = "TD "+QString::number(cp->GetId());
+    else if(dynamic_cast<PracticalClass*>(cp) != NULL)
+            nameCP = "TP "+QString::number(cp->GetId());
+    else if(dynamic_cast<MagistralClass*>(cp) != NULL)
+            nameCP = "CM "+QString::number(cp->GetId());
+
+    QTimeSlot* time = new QTimeSlot(t->GetId(), qdts, dit->GetHour(), dit->GetMin(), cp->GetDuration(),
+            nameCP, QString::fromStdString(t->GetClassroom()->GetId()), QString::fromStdString((cp->GetMomo()->GetId()+" : "+cp->GetMomo()->GetName())), QString::fromStdString(cp->GetTeacher()), "602", ui->edt);
+
+    this->addTimeSlot(time);
 
 }
 

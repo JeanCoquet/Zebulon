@@ -42,9 +42,12 @@ public slots:
     void changeDate(QDate date);
     void openEditTimeSlot();
     void openEditTimeSlot(QTimeSlot* timeSlot);
+    void tabIndexChanged();
     void commit();
 
 private:
+    void reloadQTimeSlots();
+    void genererQTimeSlot(TimeSlot* t);
     Ui::MainWindow *ui;
     WindowEditTimeSlot *windowEditTimeSlot;
     Controller *ctrl;
