@@ -111,15 +111,15 @@ void WindowEditTimeSlot::timeSlotAccepted(){
                 nameCP = "TP "+QString::number((*itCP)->GetId());
         else if(dynamic_cast<MagistralClass*>(*itCP) != NULL)
                 nameCP = "CM "+QString::number((*itCP)->GetId());
-        QTimeSlot* time = new QTimeSlot(t->GetId(), date, h, m, duration,
-                     nameCP, QString::fromStdString((*itCr)->GetId()), QString::fromStdString(((*itM)->GetId()+" : "+(*itM)->GetName())), QString::fromStdString((*itCP)->GetTeacher()), "602", this->m->getUi()->edt);
+        //QTimeSlot* time = new QTimeSlot(t->GetId(), date, h, m, duration,
+        //             nameCP, QString::fromStdString((*itCr)->GetId()), QString::fromStdString(((*itM)->GetId()+" : "+(*itM)->GetName())), QString::fromStdString((*itCP)->GetTeacher()), "602", this->m->getUi()->edt);
         
         if(currentTimeSlot != NULL){
             this->m->removeTimeSlot(currentTimeSlot);
             currentTimeSlot = NULL;
             // A SUPPRIMER DANS LE CONTROLLEUR
         }
-        this->m->addTimeSlot(time);
+        this->m->reloadQTimeSlots();
     }
     else{
         QMessageBox::warning(this, "Oups!", "Le time SLot que vosu avez cherché à ajouter n'est pas correct!");

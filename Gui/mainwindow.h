@@ -33,7 +33,7 @@ public:
         return ui;
     }
     
-    
+    void reloadQTimeSlots();
     void addTimeSlot(QTimeSlot *t);
 
     
@@ -46,7 +46,7 @@ public slots:
     void commit();
 
 private:
-    void reloadQTimeSlots();
+    
     void genererQTimeSlot(TimeSlot* t);
     Ui::MainWindow *ui;
     WindowEditTimeSlot *windowEditTimeSlot;

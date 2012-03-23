@@ -69,6 +69,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     
     this->setWindowIcon(QIcon("./zebulon.png"));
+    this->ui->commitButton->setIcon(QIcon("./Check-icon.png"));
     
     QDate date = QDate::currentDate();
     ui->edt->setDate(date);
