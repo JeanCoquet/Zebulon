@@ -32,7 +32,7 @@ public:
     int strToInt(string);
     Date* strToDate(string);
     bool strToBool(string);
-
+    string intToStr(int);
 
     void loadSchedule();
     void commit();

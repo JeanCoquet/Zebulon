@@ -26,6 +26,7 @@ void MainWindow::addModuleToComboBox(){
         s.append((*it)->GetName().c_str());
         ui->comboBoxModule->addItem(s.c_str());
         windowEditTimeSlot->getWidget().comboBoxModule->addItem(s.c_str());
+        
         if(!loaded){
                 list<ClassPeriod*>* lcp = (*it)->GetClassPeriodList();
                 list<ClassPeriod*>::iterator itCp = lcp->begin();
@@ -83,6 +84,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ctrl = new Controller();
     
     windowEditTimeSlot = new WindowEditTimeSlot(this->ctrl, this);
+//    ncpw = new newClassPeriodWindow(this->ctrl);
+    
+    
     addGroupToComboBox();
     addModuleToComboBox();
     addClassroomToComboBox();

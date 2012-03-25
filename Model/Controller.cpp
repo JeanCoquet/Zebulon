@@ -11,6 +11,7 @@
 #include "TutorialClassroom.h"
 #include "PracticalClass.h"
 #include <algorithm>
+#include <sstream>
 
 const char* historyFile = "history.sql";
 
@@ -62,8 +63,14 @@ void Controller::delStudent(Student *stud, Group *group) {
     this->history << "delete from Student where id = '"<<stud->GetId()<<"'"<<endl;
     group->GetStudentList()->remove(stud);
 }
+string Controller::intToStr(int i){
+    ostringstream oss;
+    oss << i;
+    return oss.str();
+}
 
 bool Controller::addTimeSlot(TimeSlot* timeSlot){
+    cout<<"Controller : "<<endl<<"   "<<"ajout du timeslot de duree : "<<timeSlot->GetClassPeriod()->GetDuration()<<endl;
     list<TimeSlot*> *timeSlotList = new list<TimeSlot*>();
     list<TimeSlot*>::iterator it = this->schedule->GetTimeSlotList()->begin();
     list<TimeSlot*> ::const_iterator itMax = this->schedule->GetTimeSlotList()->end();

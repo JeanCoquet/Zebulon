@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "QSchedule.h"
 #include "WindowEditTimeSlot.h"
+
 #include "Model/Controller.h"
 #include <list>
 using namespace std;
@@ -51,6 +52,7 @@ private:
     Ui::MainWindow *ui;
     WindowEditTimeSlot *windowEditTimeSlot;
     Controller *ctrl;
+
 };
 
 #endif // MAINWINDOW_H

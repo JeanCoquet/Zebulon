@@ -6,7 +6,8 @@
  */
 
 #include "WindowEditTimeSlot.h"
-#include "ui_mainwindow.h"
+//#include "ui_mainwindow.h"
+#include <sstream>
 
 WindowEditTimeSlot::WindowEditTimeSlot(Controller* ctrl, MainWindow* m) {
     this->ctrl = ctrl;
@@ -71,6 +72,9 @@ void WindowEditTimeSlot::changeClassPeriod(int index) {
     for(;itG != itGMax ; itG++){
         this->widget.listGroups->addItem((*itG)->GetId().c_str());
     }
+    cout<<"duree de la classperiod : "<<(*itCP)->GetDuration()<<endl;
+    
+    this->widget.durationVal->setText(QString::fromStdString(ctrl->intToStr((*itCP)->GetDuration())));
 }
 
 void WindowEditTimeSlot::timeSlotAccepted(){
@@ -93,7 +97,6 @@ void WindowEditTimeSlot::timeSlotAccepted(){
     for(int i = 0 ; i < indexClassPeriod ; i++){
         itCP++;
     }
-    
     list<Classroom*>* lcr = this->ctrl->getSchedule()->GetClassroomList();
     list<Classroom*>::iterator itCr = lcr->begin();
     for(int i = 0 ; i < indexClassroom ; i++){
@@ -101,6 +104,10 @@ void WindowEditTimeSlot::timeSlotAccepted(){
     }
     
     Date *d = new Date(date.day(), date.month(), date.year(), h, m);
+    
+    if(duration != (*itCP)->GetDuration())
+        (*itCP)->SetDuration(duration);
+    
     TimeSlot *t = new TimeSlot(d, (*itCr), (*itCP));
     
     if(ctrl->addTimeSlot(t)) {

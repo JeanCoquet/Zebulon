@@ -11,6 +11,7 @@
 #include "Group.h"
 #include "Module.h"
 #include <list>
+#include <iostream>
 
 using namespace std;
 class Module;
@@ -25,6 +26,7 @@ public:
     }
 
     void SetDuration(int duration) {
+        cout<< "Utilisation de set duration il faut faire la requete associe dans la base"<<endl;
         this->duration = duration;
     }
 
