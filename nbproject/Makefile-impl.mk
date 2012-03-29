@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=Zebulon
+PROJECTNAME=Zebulon4
 
 # Active Configuration
 DEFAULTCONF=Debug

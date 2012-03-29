@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="80">
+<configurationDescriptor version="79">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
@@ -17,6 +17,9 @@
         <itemPath>Gui/QSchedule.h</itemPath>
         <itemPath>Gui/QTimeSlot.cpp</itemPath>
         <itemPath>Gui/QTimeSlot.h</itemPath>
+        <itemPath>Gui/WindowAdministrator.cpp</itemPath>
+        <itemPath>Gui/WindowAdministrator.h</itemPath>
+        <itemPath>Gui/WindowAdministrator.ui</itemPath>
         <itemPath>Gui/WindowEditTimeSlot.cpp</itemPath>
         <itemPath>Gui/WindowEditTimeSlot.h</itemPath>
         <itemPath>Gui/WindowEditTimeSlot.ui</itemPath>

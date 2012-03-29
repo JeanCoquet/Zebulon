@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Sat Mar 24 00:45:13 2012
-**      by: Qt User Interface Compiler version 4.7.4
+** Created: Thu Mar 29 13:01:50 2012
+**      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -37,6 +37,7 @@ class Ui_MainWindow
 {
 public:
     QAction *actionClose;
+    QAction *actionAdministrator;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout_2;
     QScrollArea *scrollArea_2;
@@ -75,6 +76,8 @@ public:
         MainWindow->setWindowIcon(icon);
         actionClose = new QAction(MainWindow);
         actionClose->setObjectName(QString::fromUtf8("actionClose"));
+        actionAdministrator = new QAction(MainWindow);
+        actionAdministrator->setObjectName(QString::fromUtf8("actionAdministrator"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         verticalLayout_2 = new QVBoxLayout(centralWidget);
@@ -86,7 +89,7 @@ public:
         scrollArea_2->setWidgetResizable(true);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 439, 498));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 439, 506));
         verticalLayout_3 = new QVBoxLayout(scrollAreaWidgetContents_2);
         verticalLayout_3->setSpacing(6);
         verticalLayout_3->setContentsMargins(11, 11, 11, 11);
@@ -104,7 +107,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 739, 29));
+        menuBar->setGeometry(QRect(0, 0, 739, 25));
         menuFichier = new QMenu(menuBar);
         menuFichier->setObjectName(QString::fromUtf8("menuFichier"));
         menu_dition = new QMenu(menuBar);
@@ -203,6 +206,7 @@ public:
 
         menuBar->addAction(menuFichier->menuAction());
         menuBar->addAction(menu_dition->menuAction());
+        menuFichier->addAction(actionAdministrator);
         menuFichier->addAction(actionClose);
 
         retranslateUi(MainWindow);
@@ -217,8 +221,9 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Zebulon", 0, QApplication::UnicodeUTF8));
         actionClose->setText(QApplication::translate("MainWindow", "Close", 0, QApplication::UnicodeUTF8));
-        menuFichier->setTitle(QApplication::translate("MainWindow", "Fichier", 0, QApplication::UnicodeUTF8));
-        menu_dition->setTitle(QApplication::translate("MainWindow", "\303\211dition", 0, QApplication::UnicodeUTF8));
+        actionAdministrator->setText(QApplication::translate("MainWindow", "Administrator", 0, QApplication::UnicodeUTF8));
+        menuFichier->setTitle(QApplication::translate("MainWindow", "File", 0, QApplication::UnicodeUTF8));
+        menu_dition->setTitle(QApplication::translate("MainWindow", "Edit", 0, QApplication::UnicodeUTF8));
         dockWidget->setWindowTitle(QString());
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Classroom", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Module", 0, QApplication::UnicodeUTF8));

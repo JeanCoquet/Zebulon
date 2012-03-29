@@ -30,7 +30,7 @@
          <x>0</x>
          <y>0</y>
          <width>439</width>
-         <height>498</height>
+         <height>506</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -53,18 +53,19 @@
      <x>0</x>
      <y>0</y>
      <width>739</width>
-     <height>29</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFichier">
     <property name="title">
-     <string>Fichier</string>
+     <string>File</string>
     </property>
+    <addaction name="actionAdministrator"/>
     <addaction name="actionClose"/>
    </widget>
    <widget class="QMenu" name="menu_dition">
     <property name="title">
-     <string>Édition</string>
+     <string>Edit</string>
     </property>
    </widget>
    <addaction name="menuFichier"/>
@@ -230,6 +231,11 @@
   <action name="actionClose">
    <property name="text">
     <string>Close</string>
+   </property>
+  </action>
+  <action name="actionAdministrator">
+   <property name="text">
+    <string>Administrator</string>
    </property>
   </action>
  </widget>
