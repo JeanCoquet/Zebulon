@@ -18,6 +18,12 @@ class WindowAdministrator : public QDialog {
 public:
     WindowAdministrator(Controller*, MainWindow*);
     virtual ~WindowAdministrator();
+    
+    Ui::WindowAdministrator getWidget() const {
+        return widget;
+    }
+
+    
 private:
     Ui::WindowAdministrator widget;
     Controller* ctrl;

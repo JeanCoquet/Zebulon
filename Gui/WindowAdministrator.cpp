@@ -11,7 +11,9 @@ WindowAdministrator::WindowAdministrator(Controller* ctrl, MainWindow* mainwindo
     widget.setupUi(this);
     this->ctrl = ctrl;
     this->m = mainwindow;
+    this->setModal(true);
 }
+
 
 WindowAdministrator::~WindowAdministrator() {
 }

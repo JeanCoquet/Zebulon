@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>WindowEditTimeSlot</class>
  <widget class="QDialog" name="WindowEditTimeSlot">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -31,8 +34,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>393</width>
-        <height>354</height>
+        <width>411</width>
+        <height>352</height>
        </rect>
       </property>
       <layout class="QFormLayout" name="formLayout">

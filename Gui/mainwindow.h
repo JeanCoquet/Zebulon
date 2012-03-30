@@ -45,6 +45,7 @@ public slots:
     void changeDate(QDate date);
     void openEditTimeSlot();
     void openEditTimeSlot(QTimeSlot* timeSlot);
+    void openAdministrator();
     void tabIndexChanged();
     void commit();
 

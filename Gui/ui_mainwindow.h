@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Thu Mar 29 13:01:50 2012
+** Created: Fri Mar 30 10:43:13 2012
 **      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -45,8 +45,8 @@ public:
     QVBoxLayout *verticalLayout_3;
     QSchedule *edt;
     QMenuBar *menuBar;
-    QMenu *menuFichier;
-    QMenu *menu_dition;
+    QMenu *menuFile;
+    QMenu *menuEdit;
     QStatusBar *statusBar;
     QDockWidget *dockWidget;
     QWidget *dockWidgetContents;
@@ -108,10 +108,10 @@ public:
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 739, 25));
-        menuFichier = new QMenu(menuBar);
-        menuFichier->setObjectName(QString::fromUtf8("menuFichier"));
-        menu_dition = new QMenu(menuBar);
-        menu_dition->setObjectName(QString::fromUtf8("menu_dition"));
+        menuFile = new QMenu(menuBar);
+        menuFile->setObjectName(QString::fromUtf8("menuFile"));
+        menuEdit = new QMenu(menuBar);
+        menuEdit->setObjectName(QString::fromUtf8("menuEdit"));
         MainWindow->setMenuBar(menuBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
@@ -204,10 +204,10 @@ public:
         dockWidget->setWidget(dockWidgetContents);
         MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(1), dockWidget);
 
-        menuBar->addAction(menuFichier->menuAction());
-        menuBar->addAction(menu_dition->menuAction());
-        menuFichier->addAction(actionAdministrator);
-        menuFichier->addAction(actionClose);
+        menuBar->addAction(menuFile->menuAction());
+        menuBar->addAction(menuEdit->menuAction());
+        menuFile->addAction(actionAdministrator);
+        menuFile->addAction(actionClose);
 
         retranslateUi(MainWindow);
 
@@ -222,8 +222,8 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Zebulon", 0, QApplication::UnicodeUTF8));
         actionClose->setText(QApplication::translate("MainWindow", "Close", 0, QApplication::UnicodeUTF8));
         actionAdministrator->setText(QApplication::translate("MainWindow", "Administrator", 0, QApplication::UnicodeUTF8));
-        menuFichier->setTitle(QApplication::translate("MainWindow", "File", 0, QApplication::UnicodeUTF8));
-        menu_dition->setTitle(QApplication::translate("MainWindow", "Edit", 0, QApplication::UnicodeUTF8));
+        menuFile->setTitle(QApplication::translate("MainWindow", "File", 0, QApplication::UnicodeUTF8));
+        menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", 0, QApplication::UnicodeUTF8));
         dockWidget->setWindowTitle(QString());
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Classroom", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Module", 0, QApplication::UnicodeUTF8));

@@ -56,20 +56,20 @@
      <height>25</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuFichier">
+   <widget class="QMenu" name="menuFile">
     <property name="title">
      <string>File</string>
     </property>
     <addaction name="actionAdministrator"/>
     <addaction name="actionClose"/>
    </widget>
-   <widget class="QMenu" name="menu_dition">
+   <widget class="QMenu" name="menuEdit">
     <property name="title">
      <string>Edit</string>
     </property>
    </widget>
-   <addaction name="menuFichier"/>
-   <addaction name="menu_dition"/>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QDockWidget" name="dockWidget">

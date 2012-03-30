@@ -10,6 +10,7 @@ void MainWindow::addGroupToComboBox(){
     list<Group*>::const_iterator MaxList = l->end();
     for(;it != MaxList; it++){
         ui->comboBoxGroup->addItem((*it)->GetId().c_str());
+        windowAdministrator->getWidget().listWidgetGroups->addItem((*it)->GetId().c_str());
     }
 }
 
@@ -27,6 +28,16 @@ void MainWindow::addModuleToComboBox(){
         ui->comboBoxModule->addItem(s.c_str());
         windowEditTimeSlot->getWidget().comboBoxModule->addItem(s.c_str());
         
+        /*
+         A FAIRE!!!!!!!!!!
+         
+         
+         */
+        
+        
+        
+        //windowAdministrator->getWidget().tabModules->addAction(new QAction())
+   /*     
         if(!loaded){
                 list<ClassPeriod*>* lcp = (*it)->GetClassPeriodList();
                 list<ClassPeriod*>::iterator itCp = lcp->begin();
@@ -43,7 +54,7 @@ void MainWindow::addModuleToComboBox(){
                     loaded = false;
                     
                 }
-        }
+        } */
     }
     list<Classroom*>* lcr = this->ctrl->getSchedule()->GetClassroomList();
     list<Classroom*>::iterator itcr = lcr->begin();
@@ -81,12 +92,12 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->comboBoxClassroom, SIGNAL(currentIndexChanged(int)), this, SLOT(tabIndexChanged()));
     QObject::connect(ui->comboBoxGroup, SIGNAL(currentIndexChanged(int)), this, SLOT(tabIndexChanged()));
     QObject::connect(ui->comboBoxModule, SIGNAL(currentIndexChanged(int)), this, SLOT(tabIndexChanged()));
+    QObject::connect(ui->actionAdministrator, SIGNAL(triggered()), this, SLOT(openAdministrator()));
+    
     ctrl = new Controller();
-    
     windowEditTimeSlot = new WindowEditTimeSlot(this->ctrl, this);
-//    ncpw = new newClassPeriodWindow(this->ctrl);
-    
-    
+    windowAdministrator = new WindowAdministrator(this->ctrl, this);
+   
     addGroupToComboBox();
     addModuleToComboBox();
     addClassroomToComboBox();
@@ -247,6 +258,10 @@ void MainWindow::openEditTimeSlot(QTimeSlot* timeSlot) {
     
     windowEditTimeSlot->setCurrentTimeSlot(timeSlot);
     windowEditTimeSlot->show();
+}
+
+void MainWindow::openAdministrator() {
+    windowAdministrator->show();
 }
 
 MainWindow::~MainWindow()
