@@ -15,6 +15,7 @@
 #include <iostream>
 
 class MainWindow;
+class WindowAddClassPeriod;
 
 class WindowEditTimeSlot : public QDialog {
     Q_OBJECT

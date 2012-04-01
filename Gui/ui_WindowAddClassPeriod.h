@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'WindowAddClassPeriod.ui'
 **
-** Created: Sun Apr 1 04:10:32 2012
+** Created: Sun Apr 1 14:14:07 2012
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -170,7 +170,7 @@ public:
         QObject::connect(buttonBox, SIGNAL(accepted()), WindowAddClassPeriod, SLOT(accept()));
         QObject::connect(buttonBox, SIGNAL(rejected()), WindowAddClassPeriod, SLOT(reject()));
 
-        comboBoxType->setCurrentIndex(-1);
+        comboBoxType->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(WindowAddClassPeriod);
@@ -189,9 +189,9 @@ public:
         label_5->setText(QApplication::translate("WindowAddClassPeriod", "Type", 0, QApplication::UnicodeUTF8));
         comboBoxType->clear();
         comboBoxType->insertItems(0, QStringList()
-         << QApplication::translate("WindowAddClassPeriod", "Magistral Class", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("WindowAddClassPeriod", "Tutorial Class", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("WindowAddClassPeriod", "Practical Class", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("WindowAddClassPeriod", "Magistral", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("WindowAddClassPeriod", "Tutorial", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("WindowAddClassPeriod", "Practical", 0, QApplication::UnicodeUTF8)
         );
     } // retranslateUi
 

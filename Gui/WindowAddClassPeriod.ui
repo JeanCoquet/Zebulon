@@ -152,21 +152,21 @@
      <item row="1" column="1">
       <widget class="QComboBox" name="comboBoxType">
        <property name="currentIndex">
-        <number>-1</number>
+        <number>0</number>
        </property>
        <item>
         <property name="text">
-         <string>Magistral Class</string>
+         <string>Magistral</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Tutorial Class</string>
+         <string>Tutorial</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Practical Class</string>
+         <string>Practical</string>
         </property>
        </item>
       </widget>

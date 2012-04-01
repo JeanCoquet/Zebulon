@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'WindowEditTimeSlot.ui'
 **
-** Created: Sun Apr 1 02:46:11 2012
+** Created: Sun Apr 1 14:17:50 2012
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -73,7 +73,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 411, 352));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 417, 354));
         formLayout = new QFormLayout(scrollAreaWidgetContents);
         formLayout->setObjectName(QString::fromUtf8("formLayout"));
         formLayout->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
@@ -94,6 +94,12 @@ public:
 
         comboBoxClassPeriod = new QComboBox(scrollAreaWidgetContents);
         comboBoxClassPeriod->setObjectName(QString::fromUtf8("comboBoxClassPeriod"));
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(comboBoxClassPeriod->sizePolicy().hasHeightForWidth());
+        comboBoxClassPeriod->setSizePolicy(sizePolicy);
+        comboBoxClassPeriod->setMinimumSize(QSize(150, 0));
 
         formLayout->setWidget(3, QFormLayout::FieldRole, comboBoxClassPeriod);
 
@@ -141,6 +147,7 @@ public:
 
         addClassPeriod = new QPushButton(scrollAreaWidgetContents);
         addClassPeriod->setObjectName(QString::fromUtf8("addClassPeriod"));
+        addClassPeriod->setEnabled(false);
 
         formLayout->setWidget(2, QFormLayout::FieldRole, addClassPeriod);
 

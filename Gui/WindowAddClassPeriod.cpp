@@ -10,10 +10,11 @@
 
 #include "WindowAddClassPeriod.h"
 
-WindowAddClassPeriod::WindowAddClassPeriod(Controller* c) {
+WindowAddClassPeriod::WindowAddClassPeriod(Controller* c, WindowEditTimeSlot* w) {
     widget.setupUi(this);
     this->setModal(true); 
     this->ctrl = c;
+    this->windowE = w;
     module = NULL; 
     listIndexGroup = new QList<int>;
     
@@ -23,15 +24,17 @@ WindowAddClassPeriod::WindowAddClassPeriod(Controller* c) {
 }
 
 void WindowAddClassPeriod::addClassPeriod() {
-    /*
-     
-     Ne marche pas encore
-     
-     */
-    
-    if(widget.lineEditDuration->text().toInt() > 15 && widget.lineEditTeacher->text() != "") {
-        ClassPeriod *classPeriod = new ClassPeriod(widget.lineEditTeacher->text().toStdString(), 
-                widget.lineEditDuration->text().toInt(), module);
+    int indexType = widget.comboBoxType->currentIndex();
+    if(widget.lineEditDuration->text().toInt() > 15 && widget.lineEditTeacher->text() != "" && indexType != -1) {
+        ClassPeriod *classPeriod;
+        if(indexType == 0)
+            classPeriod = new MagistralClass(widget.lineEditTeacher->text().toStdString(), widget.lineEditDuration->text().toInt(), module);
+        else if(indexType == 1)
+            classPeriod = new TutorialClass(widget.lineEditTeacher->text().toStdString(), widget.lineEditDuration->text().toInt(), module);
+        else if(indexType == 2)
+            classPeriod = new PracticalClass(widget.lineEditTeacher->text().toStdString(), widget.lineEditDuration->text().toInt(), module);
+        else
+            classPeriod = new ClassPeriod(widget.lineEditTeacher->text().toStdString(), widget.lineEditDuration->text().toInt(), module);
         
         QList<int>::iterator it = listIndexGroup->begin();
         QList<int>::const_iterator itMax = listIndexGroup->end();
@@ -43,6 +46,11 @@ void WindowAddClassPeriod::addClassPeriod() {
             }
             classPeriod->GetGroupList()->push_back((*itG));
         }
+        ctrl->addClassPeriod(classPeriod, module);
+        
+        windowE->changeModule(windowE->getWidget().comboBoxModule->currentIndex());
+        int indexT = windowE->getWidget().comboBoxClassPeriod->findText(widget.comboBoxType->currentText()+" "+QString::number(classPeriod->GetId()));
+        windowE->getWidget().comboBoxClassPeriod->setCurrentIndex(indexT);
     }
     clearChildrenContent();
 }

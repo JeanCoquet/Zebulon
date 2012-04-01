@@ -10,11 +10,14 @@
 
 #include "ui_WindowAddClassPeriod.h"
 #include "Model/Controller.h"
+#include "WindowEditTimeSlot.h"
+
+class WindowEditTimeSlot;
 
 class WindowAddClassPeriod : public QDialog {
     Q_OBJECT
 public:
-    WindowAddClassPeriod(Controller*);
+    WindowAddClassPeriod(Controller*, WindowEditTimeSlot*);
     virtual ~WindowAddClassPeriod();
     
     Ui::WindowAddClassPeriod getWidget() const {
@@ -32,6 +35,7 @@ public slots :
 private:
     Ui::WindowAddClassPeriod widget;
     Controller* ctrl;
+    WindowEditTimeSlot* windowE;
     Module *module;
     QList<int>* listIndexGroup;
 };

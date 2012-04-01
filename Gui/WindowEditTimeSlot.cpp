@@ -6,6 +6,7 @@
  */
 
 #include "WindowEditTimeSlot.h"
+#include "ui_mainwindow.h"
 //#include "ui_mainwindow.h"
 #include <sstream>
 
@@ -14,7 +15,7 @@ WindowEditTimeSlot::WindowEditTimeSlot(Controller* ctrl, MainWindow* m) {
     this->m = m;
     this->setModal(true);
     widget.setupUi(this);
-    windowAddClassPeriod = new WindowAddClassPeriod(ctrl);
+    windowAddClassPeriod = new WindowAddClassPeriod(ctrl, this);
     QObject::connect(this->widget.comboBoxModule, SIGNAL(currentIndexChanged(int)), this, SLOT(changeModule(int)));
     QObject::connect(this->widget.comboBoxClassPeriod, SIGNAL(currentIndexChanged(int)), this, SLOT(changeClassPeriod(int)));
     QObject::connect(this->widget.buttonBox, SIGNAL(accepted()), this, SLOT(timeSlotAccepted()));
@@ -34,6 +35,12 @@ void WindowEditTimeSlot::deleteTimeSlotButtonAction(){
 
 void WindowEditTimeSlot::changeModule(int){
     int index = this->widget.comboBoxModule->currentIndex();
+    
+    if(index != -1)
+        widget.addClassPeriod->setEnabled(true);
+    else
+        widget.addClassPeriod->setEnabled(false);
+    
     list<Module*>* l = this->ctrl->getSchedule()->GetModuleList();
     list<Module*>::iterator it = l->begin();
     for(int i = 0 ; i < index ; i++){
@@ -45,11 +52,11 @@ void WindowEditTimeSlot::changeModule(int){
     this->widget.comboBoxClassPeriod->clear();
     for(;itCp != MaxListCp; itCp++){ 
         if(dynamic_cast<TutorialClass*>(*itCp) != NULL)
-                this->getWidget().comboBoxClassPeriod->addItem("TD "+QString::number((*itCp)->GetId()));
+                this->getWidget().comboBoxClassPeriod->addItem("Tutorial "+QString::number((*itCp)->GetId()));
         else if(dynamic_cast<PracticalClass*>(*itCp) != NULL)
-                this->getWidget().comboBoxClassPeriod->addItem("TP "+QString::number((*itCp)->GetId()));
+                this->getWidget().comboBoxClassPeriod->addItem("Practical "+QString::number((*itCp)->GetId()));
         else if(dynamic_cast<MagistralClass*>(*itCp) != NULL)
-                this->getWidget().comboBoxClassPeriod->addItem("CM "+QString::number((*itCp)->GetId()));
+                this->getWidget().comboBoxClassPeriod->addItem("Magistral "+QString::number((*itCp)->GetId()));
         else
                 this->getWidget().comboBoxClassPeriod->addItem(QString::number((*itCp)->GetId()));
     }
@@ -126,6 +133,7 @@ void WindowEditTimeSlot::timeSlotAccepted(){
             currentTimeSlot = NULL;
             // A SUPPRIMER DANS LE CONTROLLEUR
         }
+        this->m->getUi()->calendarWidget->setSelectedDate(date);
         this->m->reloadQTimeSlots();
     }
     else{
@@ -148,7 +156,6 @@ void WindowEditTimeSlot::openWindowAddClassPeriod() {
     windowAddClassPeriod->clearChildrenContent();
     windowAddClassPeriod->setIndexModule(widget.comboBoxModule->currentIndex());
     windowAddClassPeriod->open();
-    this->widget.comboBoxModule->setCurrentIndex(this->widget.comboBoxModule->currentIndex());
     
 }
 
