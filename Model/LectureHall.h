@@ -13,6 +13,10 @@ public:
     LectureHall(string id, int capacity, bool videoconferencing);
     LectureHall(const LectureHall& orig, string id, int capacity);
     virtual ~LectureHall();
+    bool IsVideoconferencing() const {
+        return videoconferencing;
+    }
+
 private:
     bool videoconferencing;
 };

@@ -13,6 +13,10 @@ public:
     TutorialClassroom(string id, int capacity, bool videoprojector);
     TutorialClassroom(const TutorialClassroom& orig, string id, int capacity);
     virtual ~TutorialClassroom();
+    bool IsVideoprojector() const {
+        return videoprojector;
+    }
+
 private:
     bool videoprojector;
 };

@@ -10,6 +10,9 @@
 #include "Model/Controller.h"
 #include "mainwindow.h"
 #include "ui_WindowAdministrator.h"
+#include "Model/TutorialClassroom.h"
+#include "Model/PracticalClassroom.h"
+#include "Model/LectureHall.h"
 
 class MainWindow;
 
@@ -35,6 +38,8 @@ public slots :
     void deleteClassPeriod();
     void addGroupClassPeriod();
     void deleteGroupClassPeriod();
+    void displayStudents();
+    
     
 private:
     Ui::WindowAdministrator widget;
@@ -42,6 +47,7 @@ private:
     MainWindow* m;
     Module* currentModule;
     ClassPeriod* currentClassPeriod;
+    void displayClassroom();
 };
 
 #endif	/* _WINDOWADMINISTRATOR_H */

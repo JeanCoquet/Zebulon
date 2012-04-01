@@ -66,6 +66,9 @@
         <itemPath>Model/TutorialClass.h</itemPath>
         <itemPath>Model/TutorialClassroom.cpp</itemPath>
         <itemPath>Model/TutorialClassroom.h</itemPath>
+        <itemPath>Gui/WindowAddClassroom.cpp</itemPath>
+        <itemPath>Gui/WindowAddClassroom.h</itemPath>
+        <itemPath>Gui/WindowAddClassroom.ui</itemPath>
       </logicalFolder>
       <logicalFolder name="sqlite" displayName="sqlite" projectFiles="true">
         <logicalFolder name="lib" displayName="lib" projectFiles="true">

@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'WindowAddClassPeriod.ui'
 **
-** Created: Sun Apr 1 14:14:07 2012
-**      by: Qt User Interface Compiler version 4.7.4
+** Created: Sun Apr 1 23:13:11 2012
+**      by: Qt User Interface Compiler version 4.6.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/

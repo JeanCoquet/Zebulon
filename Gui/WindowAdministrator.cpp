@@ -39,7 +39,39 @@ WindowAdministrator::WindowAdministrator(Controller* ctrl, MainWindow* mainwindo
     QObject::connect(widget.buttonDeleteClassPeriod, SIGNAL(clicked()), this, SLOT(deleteClassPeriod()));
     QObject::connect(widget.buttonAddGroupClassPeriod, SIGNAL(clicked()), this, SLOT(addGroupClassPeriod()));
     QObject::connect(widget.buttonDeleteGroupClassPeriod, SIGNAL(clicked()), this, SLOT(deleteGroupClassPeriod()));
+    QObject::connect(widget.listWidgetGroups, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(displayStudents()));
+    displayClassroom();    
     
+}
+
+void WindowAdministrator::displayClassroom(){
+    list<Classroom*> *lc = this->ctrl->getSchedule()->GetClassroomList();
+    list<Classroom*>::iterator itC = lc->begin();
+    list<Classroom*>::const_iterator itCMax = lc->end();
+    QTableWidget *twc = this->widget.tableWidgetClassrooms;
+    for(;itC != itCMax ; itC++){
+        int nbrow = twc->rowCount();
+        twc->insertRow(nbrow);
+        twc->setItem(nbrow, 0, new QTableWidgetItem((*itC)->GetId().c_str()));
+        twc->setItem(nbrow, 1, new QTableWidgetItem(QString::number((*itC)->GetCapacity())));
+        string specificity = "";
+        if(dynamic_cast<TutorialClassroom*>(*itC) != NULL) {
+            if(((TutorialClassroom*)(*itC))->IsVideoprojector())
+                specificity = "projector available";
+            else specificity = "no projector";
+        }
+        else if(dynamic_cast<PracticalClassroom*>(*itC) != NULL){
+            
+        }
+        else if(dynamic_cast<LectureHall*>(*itC) != NULL){
+            if(((LectureHall*)(*itC))->IsVideoconferencing()){
+                specificity = "video conferencing is possible";
+            } else{
+                specificity = "";
+            }
+        }
+        twc->setItem(nbrow, 2, new QTableWidgetItem(specificity.c_str()));
+    }
 }
 
 void WindowAdministrator::addModule() {
@@ -101,6 +133,36 @@ void WindowAdministrator::deleteModule() {
     }
     ctrl->delModule(*itM);
     m->addModuleToComboBox();
+}
+
+void WindowAdministrator::displayStudents(){
+    cout<<"groupe clique"<<endl;
+//    QList<QListWidgetItem*>::iterator  itGroup = lwibegin();
+    QList<QListWidgetItem*>::iterator itGroup = this->widget.listWidgetGroups->selectedItems().begin();
+    list<Group*> *lg = this->ctrl->getSchedule()->GetGroupList();
+    list<Group*>::iterator itG = lg->begin();
+    list<Group*>::const_iterator itGMax = lg->end();
+    for(; itG != itGMax ; itG++ ){
+        if((*itG)->GetId() == (*itGroup)->text().toStdString()){
+            break;
+        }
+    }
+    list<Student*> *ls = (*itG)->GetStudentList();
+    list<Student*>::iterator itS = ls->begin();
+    list<Student*>::const_iterator itSMax = ls->end();
+    QTableWidget* tw = this->widget.tableWidgetStudents;
+    while(tw->rowCount() != 0) {
+        tw->removeRow(tw->rowCount()-1);
+    }
+    for(; itS != itSMax ; itS++){
+        int nbRow = tw->rowCount();
+        tw->insertRow(nbRow);
+        tw->setItem(nbRow, 0, new QTableWidgetItem((*itS)->GetId().c_str()));
+        tw->setItem(nbRow, 1, new QTableWidgetItem((*itS)->GetLastname().c_str()));
+        tw->setItem(nbRow, 2, new QTableWidgetItem((*itS)->GetFirstname().c_str()));
+        tw->setItem(nbRow, 3, new QTableWidgetItem((*itS)->GetAddr().c_str()));
+        tw->setItem(nbRow, 4, new QTableWidgetItem((*itS)->GetEmail().c_str()));
+    }
 }
 
 void WindowAdministrator::displayClassPeriod() {
