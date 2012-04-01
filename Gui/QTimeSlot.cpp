@@ -35,16 +35,20 @@ void QTimeSlot::updateChildren() {
     int endHour = (hour+((int) duration/60))%24;
     int endMinute = minute+duration%60;
 
-    labelTime->setText(withZero(QString::number(hour))+":"+withZero(QString::number(minute))+"-"
-                                      +withZero(QString::number(endHour))+":"+withZero(QString::number(endMinute)));
+    QString time = withZero(QString::number(hour))+":"+withZero(QString::number(minute))+"-"
+                                      +withZero(QString::number(endHour))+":"+withZero(QString::number(endMinute));
+    
+    labelTime->setText(time);
     labelTime->setMinimumHeight(15);
     labelTime->setMaximumHeight(15);
     labelTime->setStyleSheet("background-color : "+backgroundColor+"; color: "+fontColor+"; font-weight: bold; font-size: "+
                              QString::number(fontFize)+"px;");
 
-    labelContent->setText(classPeriod+" "+classRoom+"\n"+module+"\n"+teacher+"\n"+group);
+    labelContent->setText(classPeriod+" - "+classRoom+"\n"+module+"\n"+teacher+"\n"+group);
     labelContent->setStyleSheet("font-size: "+QString::number(fontFize)+"px;");
     labelContent->setWordWrap(true);
+    
+    this->setToolTip(time+"\n\n"+classPeriod+" - "+classRoom+"\n"+module+"\n"+teacher+"\n"+group);
 }
 
 QString QTimeSlot::withZero(QString s) {

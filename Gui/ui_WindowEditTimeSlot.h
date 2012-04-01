@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'WindowEditTimeSlot.ui'
 **
-** Created: Sun Apr 1 14:17:50 2012
+** Created: Sun Apr 1 14:34:40 2012
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -157,6 +157,8 @@ public:
 
         calendarWidget = new QCalendarWidget(WindowEditTimeSlot);
         calendarWidget->setObjectName(QString::fromUtf8("calendarWidget"));
+        calendarWidget->setFirstDayOfWeek(Qt::Monday);
+        calendarWidget->setGridVisible(false);
 
         verticalLayout->addWidget(calendarWidget);
 
