@@ -14,6 +14,7 @@ WindowEditTimeSlot::WindowEditTimeSlot(Controller* ctrl, MainWindow* m) {
     this->ctrl = ctrl;
     this->m = m;
     this->setModal(true);
+    this->setWindowIcon(QIcon("./zebulon.png"));
     widget.setupUi(this);
     windowAddClassPeriod = new WindowAddClassPeriod(ctrl, this);
     QObject::connect(this->widget.comboBoxModule, SIGNAL(currentIndexChanged(int)), this, SLOT(changeModule(int)));
@@ -134,6 +135,7 @@ void WindowEditTimeSlot::timeSlotAccepted(){
             // A SUPPRIMER DANS LE CONTROLLEUR
         }
         this->m->getUi()->calendarWidget->setSelectedDate(date);
+        this->m->reloadQTimeSlots();
         this->m->reloadQTimeSlots();
     }
     else{

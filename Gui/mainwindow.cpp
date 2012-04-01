@@ -5,6 +5,11 @@
 
 
 void MainWindow::addGroupToComboBox(){
+    
+    ui->comboBoxGroup->clear();
+    windowAdministrator->getWidget().listWidgetGroups->clear();
+    windowEditTimeSlot->getWindowAddClassPeriod()->getWidget().comboBoxGroup->clear();
+    
     list<Group*>* l = this->ctrl->getSchedule()->GetGroupList();
     list<Group*>::iterator it = l->begin();
     list<Group*>::const_iterator MaxList = l->end();
@@ -16,11 +21,24 @@ void MainWindow::addGroupToComboBox(){
 }
 
 void MainWindow::addModuleToComboBox(){
+    
+    ui->comboBoxModule->clear();
+    windowEditTimeSlot->getWidget().comboBoxModule->clear();
+    windowEditTimeSlot->getWidget().comboBoxClassroom->clear();
+    
     list<Module*>* l = this->ctrl->getSchedule()->GetModuleList();
     list<Module*>::iterator it = l->begin();
     list<Module*>::const_iterator MaxList = l->end();
     bool loaded = false;
     string s;
+    
+    QTableWidget *tableModule = windowAdministrator->getWidget().tableWidgetModules;
+    while(tableModule->rowCount() != 0) {
+        tableModule->removeRow(tableModule->rowCount()-1);
+    }
+    
+    QTableWidgetItem *item;
+    
     for(;it != MaxList; it++){
         s = "";
         s.append((*it)->GetId().c_str());
@@ -28,16 +46,19 @@ void MainWindow::addModuleToComboBox(){
         s.append((*it)->GetName().c_str());
         ui->comboBoxModule->addItem(s.c_str());
         windowEditTimeSlot->getWidget().comboBoxModule->addItem(s.c_str());
+
+        item = new QTableWidgetItem((*it)->GetId().c_str());
+        int nbRow = tableModule->rowCount();
+        tableModule->insertRow(nbRow);
+        tableModule->setItem(nbRow, 0, item);
         
-        /*
-         A FAIRE!!!!!!!!!!
-         
-         
-         */
+        item = new QTableWidgetItem((*it)->GetName().c_str());
+        tableModule->setItem(nbRow, 1, item);
+        
+        item = new QTableWidgetItem((*it)->GetTheHead().c_str());
+        tableModule->setItem(nbRow, 2, item);
         
         
-        
-        //windowAdministrator->getWidget().tabModules->addAction(new QAction())
    /*     
         if(!loaded){
                 list<ClassPeriod*>* lcp = (*it)->GetClassPeriodList();
@@ -66,6 +87,7 @@ void MainWindow::addModuleToComboBox(){
 }
 
 void MainWindow::addClassroomToComboBox(){
+    ui->comboBoxClassroom->clear();
     list<Classroom*>* l = this->ctrl->getSchedule()->GetClassroomList();
     list<Classroom*>::iterator it = l->begin();
     list<Classroom*>::const_iterator MaxList = l->end();
@@ -76,6 +98,7 @@ void MainWindow::addClassroomToComboBox(){
 
 
 void MainWindow::addStudentToComboBox(){
+    ui->comboBoxStudent->clear();
     list<Group*>* lg = this->ctrl->getSchedule()->GetGroupList();
     list<Group*>::iterator it = lg->begin();
     list<Group*>::const_iterator MaxList = lg->end();
@@ -98,12 +121,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    
     this->setWindowIcon(QIcon("./zebulon.png"));
     this->ui->commitButton->setIcon(QIcon("./Check-icon.png"));
     this->ui->dockWidget->setTitleBarWidget(new QWidget(0));
-    
-    
     
     QDate date = QDate::currentDate();
     ui->edt->setDate(date);

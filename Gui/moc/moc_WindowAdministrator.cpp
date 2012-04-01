@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'WindowAdministrator.h'
 **
-** Created: Sun Apr 1 14:35:10 2012
+** Created: Sun Apr 1 18:50:48 2012
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.4)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,18 +23,36 @@ static const uint qt_meta_data_WindowAdministrator[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-       0,    0, // methods
+      11,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
        0,       // signalCount
 
+ // slots: signature, parameters, type, tag, flags
+      21,   20,   20,   20, 0x0a,
+      33,   20,   20,   20, 0x0a,
+      46,   20,   20,   20, 0x0a,
+      61,   20,   20,   20, 0x0a,
+      76,   20,   20,   20, 0x0a,
+      95,   20,   20,   20, 0x0a,
+     116,   20,   20,   20, 0x0a,
+     133,   20,   20,   20, 0x0a,
+     151,   20,   20,   20, 0x0a,
+     171,   20,   20,   20, 0x0a,
+     193,   20,   20,   20, 0x0a,
+
        0        // eod
 };
 
 static const char qt_meta_stringdata_WindowAdministrator[] = {
-    "WindowAdministrator\0"
+    "WindowAdministrator\0\0addModule()\0"
+    "editModule()\0deleteModule()\0okEditModule()\0"
+    "cancelEditModule()\0displayClassPeriod()\0"
+    "addClassPeriod()\0editClassPeriod()\0"
+    "deleteClassPeriod()\0addGroupClassPeriod()\0"
+    "deleteGroupClassPeriod()\0"
 };
 
 const QMetaObject WindowAdministrator::staticMetaObject = {
@@ -64,6 +82,23 @@ int WindowAdministrator::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     _id = QDialog::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: addModule(); break;
+        case 1: editModule(); break;
+        case 2: deleteModule(); break;
+        case 3: okEditModule(); break;
+        case 4: cancelEditModule(); break;
+        case 5: displayClassPeriod(); break;
+        case 6: addClassPeriod(); break;
+        case 7: editClassPeriod(); break;
+        case 8: deleteClassPeriod(); break;
+        case 9: addGroupClassPeriod(); break;
+        case 10: deleteGroupClassPeriod(); break;
+        default: ;
+        }
+        _id -= 11;
+    }
     return _id;
 }
 QT_END_MOC_NAMESPACE

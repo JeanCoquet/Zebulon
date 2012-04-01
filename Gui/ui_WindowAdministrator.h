@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'WindowAdministrator.ui'
 **
-** Created: Sun Apr 1 02:46:11 2012
+** Created: Sun Apr 1 18:45:46 2012
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -14,11 +14,15 @@
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
+#include <QtGui/QComboBox>
 #include <QtGui/QDialog>
 #include <QtGui/QDialogButtonBox>
+#include <QtGui/QFrame>
+#include <QtGui/QGridLayout>
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
+#include <QtGui/QLineEdit>
 #include <QtGui/QListWidget>
 #include <QtGui/QPushButton>
 #include <QtGui/QSpacerItem>
@@ -67,6 +71,19 @@ public:
     QVBoxLayout *verticalLayout_5;
     QLabel *label_2;
     QTableWidget *tableWidgetModules;
+    QFrame *frameEditModule;
+    QHBoxLayout *horizontalLayout_10;
+    QGridLayout *gridLayout;
+    QLabel *label_5;
+    QLineEdit *lineEditIdModule;
+    QLabel *label_6;
+    QLineEdit *lineEditNameModule;
+    QLabel *label_7;
+    QLineEdit *lineEditTheHeadModule;
+    QVBoxLayout *verticalLayout_6;
+    QPushButton *buttonOkEditModule;
+    QPushButton *buttonCancelEditModule;
+    QSpacerItem *verticalSpacer;
     QHBoxLayout *horizontalLayout_7;
     QSpacerItem *horizontalSpacer_4;
     QPushButton *buttonAddModule;
@@ -74,7 +91,30 @@ public:
     QPushButton *buttonDeleteModule;
     QVBoxLayout *verticalLayout_7;
     QLabel *label_4;
-    QTableWidget *tableWidget_2;
+    QTableWidget *tableWidgetClassPeriod;
+    QFrame *frameEditClassPeriod;
+    QHBoxLayout *horizontalLayout_9;
+    QGridLayout *gridLayout_2;
+    QLabel *label_8;
+    QLabel *label_9;
+    QLabel *label_10;
+    QLabel *label_11;
+    QLabel *label_12;
+    QLineEdit *lineEditModule;
+    QComboBox *comboBoxTypeClassPeriod;
+    QLineEdit *lineEditTeacherClassPeriod;
+    QLineEdit *lineEditDurationClassPeriod;
+    QVBoxLayout *verticalLayout_9;
+    QHBoxLayout *horizontalLayout_13;
+    QSpacerItem *horizontalSpacer_6;
+    QComboBox *comboBoxGroupClassPeriod;
+    QPushButton *buttonAddGroupClassPeriod;
+    QPushButton *buttonDeleteGroupClassPeriod;
+    QListWidget *listWidgetGroupClassPeriod;
+    QVBoxLayout *verticalLayout_8;
+    QPushButton *buttonOkEditClassPeriod;
+    QPushButton *buttonCancelEditClassPeriod;
+    QSpacerItem *verticalSpacer_2;
     QHBoxLayout *horizontalLayout_8;
     QSpacerItem *horizontalSpacer_5;
     QPushButton *buttonAddClassPeriod;
@@ -161,6 +201,13 @@ public:
         QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
         tableWidgetStudents->setHorizontalHeaderItem(4, __qtablewidgetitem4);
         tableWidgetStudents->setObjectName(QString::fromUtf8("tableWidgetStudents"));
+        tableWidgetStudents->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        tableWidgetStudents->setAlternatingRowColors(true);
+        tableWidgetStudents->setSelectionMode(QAbstractItemView::SingleSelection);
+        tableWidgetStudents->setSelectionBehavior(QAbstractItemView::SelectRows);
+        tableWidgetStudents->setShowGrid(false);
+        tableWidgetStudents->verticalHeader()->setVisible(false);
+        tableWidgetStudents->verticalHeader()->setDefaultSectionSize(18);
 
         verticalLayout_3->addWidget(tableWidgetStudents);
 
@@ -214,6 +261,13 @@ public:
         QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
         tableWidgetClassrooms->setHorizontalHeaderItem(2, __qtablewidgetitem7);
         tableWidgetClassrooms->setObjectName(QString::fromUtf8("tableWidgetClassrooms"));
+        tableWidgetClassrooms->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        tableWidgetClassrooms->setAlternatingRowColors(true);
+        tableWidgetClassrooms->setSelectionMode(QAbstractItemView::SingleSelection);
+        tableWidgetClassrooms->setSelectionBehavior(QAbstractItemView::SelectRows);
+        tableWidgetClassrooms->setShowGrid(false);
+        tableWidgetClassrooms->verticalHeader()->setVisible(false);
+        tableWidgetClassrooms->verticalHeader()->setDefaultSectionSize(18);
 
         verticalLayout_4->addWidget(tableWidgetClassrooms);
 
@@ -267,8 +321,83 @@ public:
         QTableWidgetItem *__qtablewidgetitem10 = new QTableWidgetItem();
         tableWidgetModules->setHorizontalHeaderItem(2, __qtablewidgetitem10);
         tableWidgetModules->setObjectName(QString::fromUtf8("tableWidgetModules"));
+        tableWidgetModules->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        tableWidgetModules->setAlternatingRowColors(true);
+        tableWidgetModules->setSelectionMode(QAbstractItemView::SingleSelection);
+        tableWidgetModules->setSelectionBehavior(QAbstractItemView::SelectRows);
+        tableWidgetModules->setShowGrid(false);
+        tableWidgetModules->horizontalHeader()->setVisible(false);
+        tableWidgetModules->horizontalHeader()->setCascadingSectionResizes(false);
+        tableWidgetModules->horizontalHeader()->setProperty("showSortIndicator", QVariant(false));
+        tableWidgetModules->verticalHeader()->setVisible(false);
+        tableWidgetModules->verticalHeader()->setDefaultSectionSize(18);
 
         verticalLayout_5->addWidget(tableWidgetModules);
+
+        frameEditModule = new QFrame(tabModules);
+        frameEditModule->setObjectName(QString::fromUtf8("frameEditModule"));
+        frameEditModule->setMinimumSize(QSize(371, 100));
+        frameEditModule->setMaximumSize(QSize(371, 100));
+        frameEditModule->setFrameShape(QFrame::StyledPanel);
+        frameEditModule->setFrameShadow(QFrame::Raised);
+        horizontalLayout_10 = new QHBoxLayout(frameEditModule);
+        horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
+        gridLayout = new QGridLayout();
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        label_5 = new QLabel(frameEditModule);
+        label_5->setObjectName(QString::fromUtf8("label_5"));
+
+        gridLayout->addWidget(label_5, 0, 1, 1, 1);
+
+        lineEditIdModule = new QLineEdit(frameEditModule);
+        lineEditIdModule->setObjectName(QString::fromUtf8("lineEditIdModule"));
+
+        gridLayout->addWidget(lineEditIdModule, 0, 2, 1, 1);
+
+        label_6 = new QLabel(frameEditModule);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
+
+        gridLayout->addWidget(label_6, 1, 1, 1, 1);
+
+        lineEditNameModule = new QLineEdit(frameEditModule);
+        lineEditNameModule->setObjectName(QString::fromUtf8("lineEditNameModule"));
+
+        gridLayout->addWidget(lineEditNameModule, 1, 2, 1, 1);
+
+        label_7 = new QLabel(frameEditModule);
+        label_7->setObjectName(QString::fromUtf8("label_7"));
+
+        gridLayout->addWidget(label_7, 2, 1, 1, 1);
+
+        lineEditTheHeadModule = new QLineEdit(frameEditModule);
+        lineEditTheHeadModule->setObjectName(QString::fromUtf8("lineEditTheHeadModule"));
+
+        gridLayout->addWidget(lineEditTheHeadModule, 2, 2, 1, 1);
+
+
+        horizontalLayout_10->addLayout(gridLayout);
+
+        verticalLayout_6 = new QVBoxLayout();
+        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
+        buttonOkEditModule = new QPushButton(frameEditModule);
+        buttonOkEditModule->setObjectName(QString::fromUtf8("buttonOkEditModule"));
+
+        verticalLayout_6->addWidget(buttonOkEditModule);
+
+        buttonCancelEditModule = new QPushButton(frameEditModule);
+        buttonCancelEditModule->setObjectName(QString::fromUtf8("buttonCancelEditModule"));
+
+        verticalLayout_6->addWidget(buttonCancelEditModule);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_6->addItem(verticalSpacer);
+
+
+        horizontalLayout_10->addLayout(verticalLayout_6);
+
+
+        verticalLayout_5->addWidget(frameEditModule);
 
         horizontalLayout_7 = new QHBoxLayout();
         horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
@@ -305,18 +434,147 @@ public:
 
         verticalLayout_7->addWidget(label_4);
 
-        tableWidget_2 = new QTableWidget(tabModules);
-        if (tableWidget_2->columnCount() < 3)
-            tableWidget_2->setColumnCount(3);
+        tableWidgetClassPeriod = new QTableWidget(tabModules);
+        if (tableWidgetClassPeriod->columnCount() < 5)
+            tableWidgetClassPeriod->setColumnCount(5);
         QTableWidgetItem *__qtablewidgetitem11 = new QTableWidgetItem();
-        tableWidget_2->setHorizontalHeaderItem(0, __qtablewidgetitem11);
+        tableWidgetClassPeriod->setHorizontalHeaderItem(0, __qtablewidgetitem11);
         QTableWidgetItem *__qtablewidgetitem12 = new QTableWidgetItem();
-        tableWidget_2->setHorizontalHeaderItem(1, __qtablewidgetitem12);
+        tableWidgetClassPeriod->setHorizontalHeaderItem(1, __qtablewidgetitem12);
         QTableWidgetItem *__qtablewidgetitem13 = new QTableWidgetItem();
-        tableWidget_2->setHorizontalHeaderItem(2, __qtablewidgetitem13);
-        tableWidget_2->setObjectName(QString::fromUtf8("tableWidget_2"));
+        tableWidgetClassPeriod->setHorizontalHeaderItem(2, __qtablewidgetitem13);
+        QTableWidgetItem *__qtablewidgetitem14 = new QTableWidgetItem();
+        tableWidgetClassPeriod->setHorizontalHeaderItem(3, __qtablewidgetitem14);
+        QTableWidgetItem *__qtablewidgetitem15 = new QTableWidgetItem();
+        tableWidgetClassPeriod->setHorizontalHeaderItem(4, __qtablewidgetitem15);
+        tableWidgetClassPeriod->setObjectName(QString::fromUtf8("tableWidgetClassPeriod"));
+        tableWidgetClassPeriod->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        tableWidgetClassPeriod->setAlternatingRowColors(true);
+        tableWidgetClassPeriod->setSelectionMode(QAbstractItemView::SingleSelection);
+        tableWidgetClassPeriod->setSelectionBehavior(QAbstractItemView::SelectRows);
+        tableWidgetClassPeriod->setShowGrid(false);
+        tableWidgetClassPeriod->verticalHeader()->setVisible(false);
+        tableWidgetClassPeriod->verticalHeader()->setDefaultSectionSize(18);
 
-        verticalLayout_7->addWidget(tableWidget_2);
+        verticalLayout_7->addWidget(tableWidgetClassPeriod);
+
+        frameEditClassPeriod = new QFrame(tabModules);
+        frameEditClassPeriod->setObjectName(QString::fromUtf8("frameEditClassPeriod"));
+        frameEditClassPeriod->setMinimumSize(QSize(421, 230));
+        frameEditClassPeriod->setMaximumSize(QSize(421, 230));
+        frameEditClassPeriod->setFrameShape(QFrame::StyledPanel);
+        frameEditClassPeriod->setFrameShadow(QFrame::Raised);
+        horizontalLayout_9 = new QHBoxLayout(frameEditClassPeriod);
+        horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
+        gridLayout_2 = new QGridLayout();
+        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        label_8 = new QLabel(frameEditClassPeriod);
+        label_8->setObjectName(QString::fromUtf8("label_8"));
+
+        gridLayout_2->addWidget(label_8, 0, 1, 1, 1);
+
+        label_9 = new QLabel(frameEditClassPeriod);
+        label_9->setObjectName(QString::fromUtf8("label_9"));
+
+        gridLayout_2->addWidget(label_9, 1, 1, 1, 1);
+
+        label_10 = new QLabel(frameEditClassPeriod);
+        label_10->setObjectName(QString::fromUtf8("label_10"));
+
+        gridLayout_2->addWidget(label_10, 2, 1, 1, 1);
+
+        label_11 = new QLabel(frameEditClassPeriod);
+        label_11->setObjectName(QString::fromUtf8("label_11"));
+
+        gridLayout_2->addWidget(label_11, 3, 1, 1, 1);
+
+        label_12 = new QLabel(frameEditClassPeriod);
+        label_12->setObjectName(QString::fromUtf8("label_12"));
+
+        gridLayout_2->addWidget(label_12, 4, 1, 1, 1);
+
+        lineEditModule = new QLineEdit(frameEditClassPeriod);
+        lineEditModule->setObjectName(QString::fromUtf8("lineEditModule"));
+        lineEditModule->setReadOnly(true);
+
+        gridLayout_2->addWidget(lineEditModule, 0, 2, 1, 1);
+
+        comboBoxTypeClassPeriod = new QComboBox(frameEditClassPeriod);
+        comboBoxTypeClassPeriod->setObjectName(QString::fromUtf8("comboBoxTypeClassPeriod"));
+        comboBoxTypeClassPeriod->setMaximumSize(QSize(80, 16777215));
+
+        gridLayout_2->addWidget(comboBoxTypeClassPeriod, 1, 2, 1, 1);
+
+        lineEditTeacherClassPeriod = new QLineEdit(frameEditClassPeriod);
+        lineEditTeacherClassPeriod->setObjectName(QString::fromUtf8("lineEditTeacherClassPeriod"));
+
+        gridLayout_2->addWidget(lineEditTeacherClassPeriod, 2, 2, 1, 1);
+
+        lineEditDurationClassPeriod = new QLineEdit(frameEditClassPeriod);
+        lineEditDurationClassPeriod->setObjectName(QString::fromUtf8("lineEditDurationClassPeriod"));
+        lineEditDurationClassPeriod->setMaximumSize(QSize(100, 16777215));
+
+        gridLayout_2->addWidget(lineEditDurationClassPeriod, 3, 2, 1, 1);
+
+        verticalLayout_9 = new QVBoxLayout();
+        verticalLayout_9->setObjectName(QString::fromUtf8("verticalLayout_9"));
+        horizontalLayout_13 = new QHBoxLayout();
+        horizontalLayout_13->setObjectName(QString::fromUtf8("horizontalLayout_13"));
+        horizontalSpacer_6 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_13->addItem(horizontalSpacer_6);
+
+        comboBoxGroupClassPeriod = new QComboBox(frameEditClassPeriod);
+        comboBoxGroupClassPeriod->setObjectName(QString::fromUtf8("comboBoxGroupClassPeriod"));
+
+        horizontalLayout_13->addWidget(comboBoxGroupClassPeriod);
+
+        buttonAddGroupClassPeriod = new QPushButton(frameEditClassPeriod);
+        buttonAddGroupClassPeriod->setObjectName(QString::fromUtf8("buttonAddGroupClassPeriod"));
+
+        horizontalLayout_13->addWidget(buttonAddGroupClassPeriod);
+
+        buttonDeleteGroupClassPeriod = new QPushButton(frameEditClassPeriod);
+        buttonDeleteGroupClassPeriod->setObjectName(QString::fromUtf8("buttonDeleteGroupClassPeriod"));
+
+        horizontalLayout_13->addWidget(buttonDeleteGroupClassPeriod);
+
+
+        verticalLayout_9->addLayout(horizontalLayout_13);
+
+        listWidgetGroupClassPeriod = new QListWidget(frameEditClassPeriod);
+        listWidgetGroupClassPeriod->setObjectName(QString::fromUtf8("listWidgetGroupClassPeriod"));
+        listWidgetGroupClassPeriod->setMaximumSize(QSize(16777215, 100));
+
+        verticalLayout_9->addWidget(listWidgetGroupClassPeriod);
+
+
+        gridLayout_2->addLayout(verticalLayout_9, 4, 2, 1, 1);
+
+
+        horizontalLayout_9->addLayout(gridLayout_2);
+
+        verticalLayout_8 = new QVBoxLayout();
+        verticalLayout_8->setObjectName(QString::fromUtf8("verticalLayout_8"));
+        buttonOkEditClassPeriod = new QPushButton(frameEditClassPeriod);
+        buttonOkEditClassPeriod->setObjectName(QString::fromUtf8("buttonOkEditClassPeriod"));
+
+        verticalLayout_8->addWidget(buttonOkEditClassPeriod);
+
+        buttonCancelEditClassPeriod = new QPushButton(frameEditClassPeriod);
+        buttonCancelEditClassPeriod->setObjectName(QString::fromUtf8("buttonCancelEditClassPeriod"));
+
+        verticalLayout_8->addWidget(buttonCancelEditClassPeriod);
+
+        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_8->addItem(verticalSpacer_2);
+
+
+        horizontalLayout_9->addLayout(verticalLayout_8);
+
+
+        verticalLayout_7->addWidget(frameEditClassPeriod);
 
         horizontalLayout_8 = new QHBoxLayout();
         horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
@@ -361,7 +619,8 @@ public:
         QObject::connect(buttonBox, SIGNAL(accepted()), WindowAdministrator, SLOT(accept()));
         QObject::connect(buttonBox, SIGNAL(rejected()), WindowAdministrator, SLOT(reject()));
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(2);
+        comboBoxTypeClassPeriod->setCurrentIndex(-1);
 
 
         QMetaObject::connectSlotsByName(WindowAdministrator);
@@ -407,16 +666,40 @@ public:
         ___qtablewidgetitem9->setText(QApplication::translate("WindowAdministrator", "Name", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem10 = tableWidgetModules->horizontalHeaderItem(2);
         ___qtablewidgetitem10->setText(QApplication::translate("WindowAdministrator", "The Head", 0, QApplication::UnicodeUTF8));
+        label_5->setText(QApplication::translate("WindowAdministrator", "Id", 0, QApplication::UnicodeUTF8));
+        label_6->setText(QApplication::translate("WindowAdministrator", "Name", 0, QApplication::UnicodeUTF8));
+        label_7->setText(QApplication::translate("WindowAdministrator", "The Head", 0, QApplication::UnicodeUTF8));
+        buttonOkEditModule->setText(QApplication::translate("WindowAdministrator", "Ok", 0, QApplication::UnicodeUTF8));
+        buttonCancelEditModule->setText(QApplication::translate("WindowAdministrator", "Cancel", 0, QApplication::UnicodeUTF8));
         buttonAddModule->setText(QApplication::translate("WindowAdministrator", "Add Module", 0, QApplication::UnicodeUTF8));
         buttonEditModule->setText(QApplication::translate("WindowAdministrator", "Edit Module", 0, QApplication::UnicodeUTF8));
         buttonDeleteModule->setText(QApplication::translate("WindowAdministrator", "Delete Module", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("WindowAdministrator", "Class Period", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem11 = tableWidget_2->horizontalHeaderItem(0);
+        QTableWidgetItem *___qtablewidgetitem11 = tableWidgetClassPeriod->horizontalHeaderItem(0);
         ___qtablewidgetitem11->setText(QApplication::translate("WindowAdministrator", "Id", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem12 = tableWidget_2->horizontalHeaderItem(1);
-        ___qtablewidgetitem12->setText(QApplication::translate("WindowAdministrator", "Teacher", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem13 = tableWidget_2->horizontalHeaderItem(2);
-        ___qtablewidgetitem13->setText(QApplication::translate("WindowAdministrator", "Duration", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem12 = tableWidgetClassPeriod->horizontalHeaderItem(1);
+        ___qtablewidgetitem12->setText(QApplication::translate("WindowAdministrator", "Type", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem13 = tableWidgetClassPeriod->horizontalHeaderItem(2);
+        ___qtablewidgetitem13->setText(QApplication::translate("WindowAdministrator", "Teacher", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem14 = tableWidgetClassPeriod->horizontalHeaderItem(3);
+        ___qtablewidgetitem14->setText(QApplication::translate("WindowAdministrator", "Duration", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem15 = tableWidgetClassPeriod->horizontalHeaderItem(4);
+        ___qtablewidgetitem15->setText(QApplication::translate("WindowAdministrator", "Groups", 0, QApplication::UnicodeUTF8));
+        label_8->setText(QApplication::translate("WindowAdministrator", "Module", 0, QApplication::UnicodeUTF8));
+        label_9->setText(QApplication::translate("WindowAdministrator", "Type", 0, QApplication::UnicodeUTF8));
+        label_10->setText(QApplication::translate("WindowAdministrator", "Teacher", 0, QApplication::UnicodeUTF8));
+        label_11->setText(QApplication::translate("WindowAdministrator", "Duration", 0, QApplication::UnicodeUTF8));
+        label_12->setText(QApplication::translate("WindowAdministrator", "Group", 0, QApplication::UnicodeUTF8));
+        comboBoxTypeClassPeriod->clear();
+        comboBoxTypeClassPeriod->insertItems(0, QStringList()
+         << QApplication::translate("WindowAdministrator", "Magistral", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("WindowAdministrator", "Tutorial", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("WindowAdministrator", "Practical", 0, QApplication::UnicodeUTF8)
+        );
+        buttonAddGroupClassPeriod->setText(QApplication::translate("WindowAdministrator", "Add Group", 0, QApplication::UnicodeUTF8));
+        buttonDeleteGroupClassPeriod->setText(QApplication::translate("WindowAdministrator", "Delete Group", 0, QApplication::UnicodeUTF8));
+        buttonOkEditClassPeriod->setText(QApplication::translate("WindowAdministrator", "Ok", 0, QApplication::UnicodeUTF8));
+        buttonCancelEditClassPeriod->setText(QApplication::translate("WindowAdministrator", "Cancel", 0, QApplication::UnicodeUTF8));
         buttonAddClassPeriod->setText(QApplication::translate("WindowAdministrator", "Add Class Period", 0, QApplication::UnicodeUTF8));
         buttonEditClassPeriod->setText(QApplication::translate("WindowAdministrator", "Edit Class Period", 0, QApplication::UnicodeUTF8));
         buttonDeleteClassPeriod->setText(QApplication::translate("WindowAdministrator", "Delete Class Period", 0, QApplication::UnicodeUTF8));

@@ -13,6 +13,7 @@
 WindowAddClassPeriod::WindowAddClassPeriod(Controller* c, WindowEditTimeSlot* w) {
     widget.setupUi(this);
     this->setModal(true); 
+    this->setWindowIcon(QIcon("./zebulon.png"));
     this->ctrl = c;
     this->windowE = w;
     module = NULL; 

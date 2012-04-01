@@ -23,11 +23,25 @@ public:
         return widget;
     }
 
+public slots :
+    void addModule();
+    void editModule();
+    void deleteModule();
+    void okEditModule();
+    void cancelEditModule();
+    void displayClassPeriod();
+    void addClassPeriod();
+    void editClassPeriod();
+    void deleteClassPeriod();
+    void addGroupClassPeriod();
+    void deleteGroupClassPeriod();
     
 private:
     Ui::WindowAdministrator widget;
     Controller* ctrl;
     MainWindow* m;
+    Module* currentModule;
+    ClassPeriod* currentClassPeriod;
 };
 
 #endif	/* _WINDOWADMINISTRATOR_H */
