@@ -260,7 +260,7 @@ void Controller::loadSchedule(){
              list< list<string> >::iterator it = result->begin();
              list< list<string> >::const_iterator MaxList = result->end();
              for(;it != MaxList; it++){
-//                list<string>::const_iterator MaxListList = it->end();
+//              list<string>::const_iterator MaxListList = it->end();
                 list<string>::iterator itList = it->begin();
                 
                 string id = (*itList);
@@ -352,13 +352,13 @@ void Controller::loadSchedule(){
                         int type = strToInt(*(++itList));
                         switch(type){
                             case 1 :
-                                classPeriod = new PracticalClass(id, teacher, duration, mod);
+                                classPeriod = new PracticalClass(teacher, duration, mod);
                                 break;
                             case 2 :
-                                classPeriod = new MagistralClass(id, teacher, duration, mod);
+                                classPeriod = new MagistralClass(teacher, duration, mod);
                                 break;
                             case 3 :
-                                classPeriod = new TutorialClass(id, teacher, duration, mod);
+                                classPeriod = new TutorialClass(teacher, duration, mod);
                                 break;
                         }
 

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'QSchedule.h'
 **
-** Created: Sun Apr 1 00:14:55 2012
+** Created: Sun Apr 1 02:46:38 2012
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.4)
 **
 ** WARNING! All changes made in this file will be lost!

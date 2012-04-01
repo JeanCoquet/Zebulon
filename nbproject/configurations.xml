@@ -17,6 +17,9 @@
         <itemPath>Gui/QSchedule.h</itemPath>
         <itemPath>Gui/QTimeSlot.cpp</itemPath>
         <itemPath>Gui/QTimeSlot.h</itemPath>
+        <itemPath>Gui/WindowAddClassPeriod.cpp</itemPath>
+        <itemPath>Gui/WindowAddClassPeriod.h</itemPath>
+        <itemPath>Gui/WindowAddClassPeriod.ui</itemPath>
         <itemPath>Gui/WindowAdministrator.cpp</itemPath>
         <itemPath>Gui/WindowAdministrator.h</itemPath>
         <itemPath>Gui/WindowAdministrator.ui</itemPath>

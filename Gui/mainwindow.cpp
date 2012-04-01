@@ -11,6 +11,7 @@ void MainWindow::addGroupToComboBox(){
     for(;it != MaxList; it++){
         ui->comboBoxGroup->addItem((*it)->GetId().c_str());
         windowAdministrator->getWidget().listWidgetGroups->addItem((*it)->GetId().c_str());
+        windowEditTimeSlot->getWindowAddClassPeriod()->getWidget().comboBoxGroup->addItem((*it)->GetId().c_str());
     }
 }
 
@@ -74,6 +75,24 @@ void MainWindow::addClassroomToComboBox(){
 }
 
 
+void MainWindow::addStudentToComboBox(){
+    list<Group*>* lg = this->ctrl->getSchedule()->GetGroupList();
+    list<Group*>::iterator it = lg->begin();
+    list<Group*>::const_iterator MaxList = lg->end();
+    string s;
+    for(;it != MaxList; it++){
+        list<Student*>::iterator itS = (*it)->GetStudentList()->begin();
+        list<Student*>::const_iterator MaxListS = (*it)->GetStudentList()->end();
+        for(;itS != MaxListS; itS++){
+            s = "";
+            s.append((*itS)->GetFirstname().c_str());
+            s.append(" ");
+            s.append((*itS)->GetLastname().c_str());
+            ui->comboBoxStudent->addItem(s.c_str());
+        }
+    }
+}
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -84,6 +103,8 @@ MainWindow::MainWindow(QWidget *parent) :
     this->ui->commitButton->setIcon(QIcon("./Check-icon.png"));
     this->ui->dockWidget->setTitleBarWidget(new QWidget(0));
     
+    
+    
     QDate date = QDate::currentDate();
     ui->edt->setDate(date);
     QObject::connect(ui->calendarWidget, SIGNAL(clicked(QDate)), this, SLOT(changeDate(QDate)));
@@ -93,7 +114,11 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->comboBoxClassroom, SIGNAL(currentIndexChanged(int)), this, SLOT(tabIndexChanged()));
     QObject::connect(ui->comboBoxGroup, SIGNAL(currentIndexChanged(int)), this, SLOT(tabIndexChanged()));
     QObject::connect(ui->comboBoxModule, SIGNAL(currentIndexChanged(int)), this, SLOT(tabIndexChanged()));
+    QObject::connect(ui->comboBoxStudent, SIGNAL(currentIndexChanged(int)), this, SLOT(tabIndexChanged()));
     QObject::connect(ui->actionAdministrator, SIGNAL(triggered()), this, SLOT(openAdministrator()));
+    QObject::connect(ui->checkBoxMagistral, SIGNAL(stateChanged(int)), this, SLOT(tabIndexChanged()));
+    QObject::connect(ui->checkBoxTutorial, SIGNAL(stateChanged(int)), this, SLOT(tabIndexChanged()));
+    QObject::connect(ui->checkBoxPractical, SIGNAL(stateChanged(int)), this, SLOT(tabIndexChanged()));
     
     ctrl = new Controller();
     windowEditTimeSlot = new WindowEditTimeSlot(this->ctrl, this);
@@ -102,6 +127,7 @@ MainWindow::MainWindow(QWidget *parent) :
     addGroupToComboBox();
     addModuleToComboBox();
     addClassroomToComboBox();
+    addStudentToComboBox();
 }
 
 void MainWindow::commit(){
@@ -118,14 +144,14 @@ void MainWindow::addTimeSlot(QTimeSlot *t) {
 void MainWindow::removeTimeSlot(QTimeSlot *t) {
     list<TimeSlot*> *lts = this->ctrl->getSchedule()->GetTimeSlotList();
     list<TimeSlot*>::iterator it = lts->begin();
-    list<TimeSlot*>::const_iterator itMax = lts->begin();
+    list<TimeSlot*>::const_iterator itMax = lts->end();
     for(;it!=itMax;it++){
         if( (*it)->GetId() == t->getId() ){
             this->ctrl->delTimeSlot((*it));
+            this->ui->edt->removeTimeSlot(t);
             break;
         }
     }
-    this->ui->edt->removeTimeSlot(t);
 }
 
 
@@ -158,20 +184,25 @@ void MainWindow::reloadQTimeSlots(){
         
         for(; it!=itMax; it++) {
             Date *dit = (*it)->GetStartDate();
-            //cout<<dit<<" "<<d<<" "<<de<<endl;
             if(*dit >= d && *dit <= de ) {
                 int currentIndex = this->ui->tabWidget->currentIndex();
-            
+
                 if(currentIndex == 0){
                     cout<<"INDEX 1"<<endl;
-                    int indexCR = this->ui->comboBoxClassroom->currentIndex();
-                    list<Classroom*> *lcr = this->ctrl->getSchedule()->GetClassroomList();
-                    list<Classroom*>::iterator itCR = lcr->begin();
-                    for(int i = 0 ; i < indexCR ; i++){
-                        itCR++;
+                    int indexGroup = this->ui->comboBoxGroup->currentIndex();
+                    list<Group*> *lg = this->ctrl->getSchedule()->GetGroupList();
+                    list<Group*>::iterator itG = lg->begin();
+                    for(int i = 0 ; i < indexGroup ; i++){
+                        itG++;
                     }
-                    if((*it)->GetClassroom() == (*itCR)){
-                        genererQTimeSlot((*it));
+                    list<Group*> *lgl = (*it)->GetClassPeriod()->GetGroupList();
+                    list<Group*>::iterator itGL = lgl->begin();
+                    list<Group*>::const_iterator itGLMax = lgl->end();
+                    for(;itGL != itGLMax ; itGL++){
+                        if((*itG) == (*itGL)){
+                            genererQTimeSlot((*it));
+                            break;
+                        }
                     }
                 }
                 else if(currentIndex == 1){
@@ -188,45 +219,92 @@ void MainWindow::reloadQTimeSlots(){
                 }
                 else if(currentIndex == 2){
                     cout<<"INDEX 3"<<endl;
-                    int indexGroup = this->ui->comboBoxGroup->currentIndex();
-                    list<Group*> *lg = this->ctrl->getSchedule()->GetGroupList();
-                    list<Group*>::iterator itG = lg->begin();
-                    for(int i = 0 ; i < indexGroup ; i++){
-                        itG++;
+                    int indexCR = this->ui->comboBoxClassroom->currentIndex();
+                    list<Classroom*> *lcr = this->ctrl->getSchedule()->GetClassroomList();
+                    list<Classroom*>::iterator itCR = lcr->begin();
+                    for(int i = 0 ; i < indexCR ; i++){
+                        itCR++;
                     }
-                    list<Group*> *lgl = (*it)->GetClassPeriod()->GetGroupList();
-                    list<Group*>::iterator itGL = lgl->begin();
-                    list<Group*>::const_iterator itGLMax = lgl->end();
-                    for(;itGL != itGLMax ; itGL++){
-                        if((*itG) == (*itGL)){
+                    if((*it)->GetClassroom() == (*itCR)){
+                        genererQTimeSlot((*it));
+                    }
+                }
+                else if(currentIndex == 3){
+                    cout<<"INDEX 4"<<endl;
+                    QString stringNameStudent = this->ui->comboBoxStudent->currentText();
+                    list<Group*>* lg = (*it)->GetClassPeriod()->GetGroupList();
+                    list<Group*>::iterator itg = lg->begin();
+                    list<Group*>::const_iterator itgMax = lg->end();
+                    for(; itg!=itgMax; itg++) {
+                        if(findStudentInGroup((*itg), stringNameStudent.toStdString())) {
                             genererQTimeSlot((*it));
                             break;
                         }
                     }
-
                 }
-                }                 //QApplication::connect(time, SIGNAL(clicked(QTimeSlot*)), this, SLOT(openEditTimeSlot(QTimeSlot*)));
+            }                 //QApplication::connect(time, SIGNAL(clicked(QTimeSlot*)), this, SLOT(openEditTimeSlot(QTimeSlot*)));
                 
-            }
         }
+}
+
+bool MainWindow::findStudentInGroup(Group* g, string name) {
+    string s;
+    list<Student*>::iterator itS = g->GetStudentList()->begin();
+    list<Student*>::const_iterator MaxListS = g->GetStudentList()->end();
+    for(;itS != MaxListS; itS++){
+        s = "";
+        s.append((*itS)->GetFirstname().c_str());
+        s.append(" ");
+        s.append((*itS)->GetLastname().c_str());
+        if(s == name) {
+            return true;
+        }
+    }
+    list<Group*>* lg = g->GetGroupList();
+    list<Group*>::iterator itg = lg->begin();
+    list<Group*>::const_iterator itgMax = lg->end();
+    for(; itg!=itgMax; itg++) {
+        return findStudentInGroup((*itg), name);
+    }
+    return false;
+}
  
 
 void MainWindow::genererQTimeSlot(TimeSlot* t){
+    QString nameCP, color;
+    ClassPeriod *cp = t->GetClassPeriod();
+    if(dynamic_cast<TutorialClass*>(cp) != NULL) {
+            nameCP = "Tutorial "+QString::number(cp->GetId());
+            color = "navy";
+            if(!ui->checkBoxTutorial->isChecked()) return;
+    }
+    else if(dynamic_cast<PracticalClass*>(cp) != NULL) {
+            nameCP = "Practical "+QString::number(cp->GetId());
+            color = "green";
+            if(!ui->checkBoxPractical->isChecked()) return;
+    }
+    else if(dynamic_cast<MagistralClass*>(cp) != NULL) {
+            nameCP = "Magistal "+QString::number(cp->GetId());
+            color = "maroon";
+            if(!ui->checkBoxMagistral->isChecked()) return;
+    }
+    
     Date *dit = t->GetStartDate();
     QDate qdts = QDate(dit->GetYear(), dit->GetMonth(), dit->GetDay());
-                
-    QString nameCP;
-    ClassPeriod *cp = t->GetClassPeriod();
-    if(dynamic_cast<TutorialClass*>(cp) != NULL)
-            nameCP = "TD "+QString::number(cp->GetId());
-    else if(dynamic_cast<PracticalClass*>(cp) != NULL)
-            nameCP = "TP "+QString::number(cp->GetId());
-    else if(dynamic_cast<MagistralClass*>(cp) != NULL)
-            nameCP = "CM "+QString::number(cp->GetId());
 
+    QString stringGroups = "";
+    list<Group*>* l = t->GetClassPeriod()->GetGroupList();
+    list<Group*>::iterator it = l->begin();
+    list<Group*>::const_iterator MaxList = l->end();
+    for(;it != MaxList; it++){
+        stringGroups.append(QString::fromStdString((*it)->GetId()));
+        stringGroups.append(";");
+    }
+    
+    
     QTimeSlot* time = new QTimeSlot(t->GetId(), qdts, dit->GetHour(), dit->GetMin(), cp->GetDuration(),
-            nameCP, QString::fromStdString(t->GetClassroom()->GetId()), QString::fromStdString((cp->GetMomo()->GetId()+" : "+cp->GetMomo()->GetName())), QString::fromStdString(cp->GetTeacher()), "602", ui->edt);
-
+            nameCP, QString::fromStdString(t->GetClassroom()->GetId()), QString::fromStdString((cp->GetMomo()->GetId()+" : "+cp->GetMomo()->GetName())), QString::fromStdString(cp->GetTeacher()), stringGroups, ui->edt);
+    time->setBackgroundColor(color);
     this->addTimeSlot(time);
 
 }

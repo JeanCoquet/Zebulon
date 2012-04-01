@@ -7,9 +7,12 @@
 
 #include "ClassPeriod.h"
 
-ClassPeriod::ClassPeriod(int id, string teacher, int duration, Module* mod): momo(mod) {
+int ClassPeriod::maxId = 0;
+
+ClassPeriod::ClassPeriod(string teacher, int duration, Module* mod): momo(mod) {
     this->duration = duration;
-    this->id = id;
+    this->maxId++;
+    this->id = this->maxId;
     this->teacher = teacher;
     this->groupList = new list<Group*>();
 }

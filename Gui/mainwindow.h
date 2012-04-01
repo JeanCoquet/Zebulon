@@ -5,7 +5,6 @@
 #include "QSchedule.h"
 #include "WindowEditTimeSlot.h"
 #include "WindowAdministrator.h"
-
 #include "Model/Controller.h"
 #include <list>
 using namespace std;
@@ -27,6 +26,7 @@ public:
     void addClassroomToComboBox();
     void addGroupToComboBox();
     void addModuleToComboBox();
+    void addStudentToComboBox();
     
     Controller* getCtrl() const {
         return ctrl;
@@ -52,6 +52,8 @@ public slots:
 private:
     
     void genererQTimeSlot(TimeSlot* t);
+    bool findStudentInGroup(Group* g, string name);
+    
     Ui::MainWindow *ui;
     WindowEditTimeSlot *windowEditTimeSlot;
     WindowAdministrator *windowAdministrator;

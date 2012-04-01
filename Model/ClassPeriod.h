@@ -17,9 +17,10 @@ using namespace std;
 class Module;
 class ClassPeriod {
 public:
-    ClassPeriod(int id, string teacher, int duration, Module* mod);
+    ClassPeriod(string teacher, int duration, Module* mod);
     ClassPeriod(const ClassPeriod& orig);
     virtual ~ClassPeriod();
+    static int maxId;
 
     int GetDuration() const {
         return duration;

@@ -11,7 +11,7 @@
 
 class PracticalClass : public ClassPeriod {
 public:
-    PracticalClass(int id, string teacher, int duration, Module* mod);
+    PracticalClass(string teacher, int duration, Module* mod);
     virtual ~PracticalClass();
 private:
 };

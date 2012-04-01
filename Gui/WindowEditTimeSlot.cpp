@@ -14,10 +14,12 @@ WindowEditTimeSlot::WindowEditTimeSlot(Controller* ctrl, MainWindow* m) {
     this->m = m;
     this->setModal(true);
     widget.setupUi(this);
+    windowAddClassPeriod = new WindowAddClassPeriod(ctrl);
     QObject::connect(this->widget.comboBoxModule, SIGNAL(currentIndexChanged(int)), this, SLOT(changeModule(int)));
     QObject::connect(this->widget.comboBoxClassPeriod, SIGNAL(currentIndexChanged(int)), this, SLOT(changeClassPeriod(int)));
     QObject::connect(this->widget.buttonBox, SIGNAL(accepted()), this, SLOT(timeSlotAccepted()));
     QObject::connect(this->widget.deleteTimeSlotButton, SIGNAL(clicked()), this, SLOT(deleteTimeSlotButtonAction()));
+    QObject::connect(widget.addClassPeriod, SIGNAL(clicked()), this, SLOT(openWindowAddClassPeriod()));
     this->widget.listGroups->setEnabled(false);
     this->currentTimeSlot = NULL;
 }
@@ -118,8 +120,6 @@ void WindowEditTimeSlot::timeSlotAccepted(){
                 nameCP = "TP "+QString::number((*itCP)->GetId());
         else if(dynamic_cast<MagistralClass*>(*itCP) != NULL)
                 nameCP = "CM "+QString::number((*itCP)->GetId());
-        //QTimeSlot* time = new QTimeSlot(t->GetId(), date, h, m, duration,
-        //             nameCP, QString::fromStdString((*itCr)->GetId()), QString::fromStdString(((*itM)->GetId()+" : "+(*itM)->GetName())), QString::fromStdString((*itCP)->GetTeacher()), "602", this->m->getUi()->edt);
         
         if(currentTimeSlot != NULL){
             this->m->removeTimeSlot(currentTimeSlot);
@@ -142,6 +142,14 @@ void WindowEditTimeSlot::clearWidgetContent() {
     this->widget.timeEdit->setTime(QTime::fromString("08:00", "hh:ss"));
     this->widget.calendarWidget->setSelectedDate(QDate::currentDate());
     this->widget.listGroups->clear();
+}
+
+void WindowEditTimeSlot::openWindowAddClassPeriod() {
+    windowAddClassPeriod->clearChildrenContent();
+    windowAddClassPeriod->setIndexModule(widget.comboBoxModule->currentIndex());
+    windowAddClassPeriod->open();
+    this->widget.comboBoxModule->setCurrentIndex(this->widget.comboBoxModule->currentIndex());
+    
 }
 
 WindowEditTimeSlot::~WindowEditTimeSlot() {

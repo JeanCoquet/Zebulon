@@ -279,7 +279,6 @@ void QSchedule::removeTimeSlot(int i) {
 void QSchedule::removeTimeSlot(QTimeSlot* qts){
     qts->close();
     timeSlotList->removeOne(qts);
-    cout<<"APRES SUPPR :"<<timeSlotList->size()<<endl;
     updateChildren();
 }
 
