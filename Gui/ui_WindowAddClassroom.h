@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'WindowAddClassroom.ui'
 **
-** Created: Sun Apr 1 23:13:11 2012
+** Created: Mon Apr 2 18:36:33 2012
 **      by: Qt User Interface Compiler version 4.6.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -104,7 +104,7 @@ public:
 
     void retranslateUi(QDialog *WindowAddClassroom)
     {
-        WindowAddClassroom->setWindowTitle(QApplication::translate("WindowAddClassroom", "Add a classroom", 0, QApplication::UnicodeUTF8));
+        WindowAddClassroom->setWindowTitle(QApplication::translate("WindowAddClassroom", "Classroom", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("WindowAddClassroom", "Name (Id)", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("WindowAddClassroom", "Capacity", 0, QApplication::UnicodeUTF8));
         radioButton_2->setText(QApplication::translate("WindowAddClassroom", "Tutorial classroom", 0, QApplication::UnicodeUTF8));

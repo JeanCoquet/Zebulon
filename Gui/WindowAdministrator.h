@@ -36,12 +36,20 @@ public slots :
     void addClassPeriod();
     void editClassPeriod();
     void deleteClassPeriod();
+    void okEditClassPeriod();
+    void cancelEditClassPeriod();
     void addGroupClassPeriod();
     void deleteGroupClassPeriod();
     void displayStudents();
+    void moduleClicked();
+    void classperiodClicked();
+    void displayModule();
     
     
 private:
+    int moduleState; /* voir doc */
+    void refreshModule(int newState);
+    string oldIdSelectedModule; 
     Ui::WindowAdministrator widget;
     Controller* ctrl;
     MainWindow* m;

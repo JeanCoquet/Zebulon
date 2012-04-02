@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'WindowAddClassPeriod.h'
 **
-** Created: Sun Apr 1 23:14:01 2012
+** Created: Mon Apr 2 20:24:16 2012
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.3)
 **
 ** WARNING! All changes made in this file will be lost!

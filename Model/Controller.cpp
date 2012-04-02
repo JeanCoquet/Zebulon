@@ -26,6 +26,29 @@ Controller::Controller() throw(int){
              throw 1;
 }
 
+void Controller::setClassPeriod(ClassPeriod* cp, string type, string teacher, int duration, list<Group*>* lg){
+    int id_type = 2;
+    if(type == "Tutorial") {
+        cp = dynamic_cast<TutorialClass*>(cp);
+        id_type = 3;
+    }
+    else if(type == "Practical") {
+        cp = dynamic_cast<PracticalClass*>(cp);   
+        id_type = 1;
+    }     
+    else if(type == "Magistral") {
+        cp = dynamic_cast<MagistralClass*>(cp);
+        id_type = 2;
+    }
+    
+    history << "update classperiod set teacher = '"<<teacher<<"', duration = '"<<duration<<"', id_type = '"<<id_type<<"' where id = '"<<cp->GetId()<<"'"<<endl;     
+        
+    cp->SetTeacher(teacher);
+    cp->SetDuration(duration);
+    cp->SetGroupList(lg);
+    
+}
+
 void Controller::addStudent(Student *stud, Group *group){
     this->history << "insert into Student values('" << stud->GetId()<<"','"<< group->GetId()<<"','"<< stud->GetLastname()<<"','"
         << stud->GetFirstname()<<"','"<< stud->GetAddr()<<"','"<< stud->GetEmail()<<"')" << endl;    
@@ -181,6 +204,14 @@ struct groupString{
     Group* group;
     string str;
 };
+
+void Controller::setModule(Module* mod, string id, string name, string theHead){
+    this->history << "update module set id = '"<<id<<"', name = '"<<name<<"', theHead = '"<<theHead<<"' where id = '"<<mod->GetId()<<"';";
+    this->history << "update classPeriod set id_module = '"<<id<<"' where id_module = '"<<mod->GetId()<<"';";
+    mod->SetId(id);
+    mod->SetName(name);
+    mod->SetTheHead(theHead);
+}
 
 void addChildrenToGroup(list<Group*> *lgBase, list<struct groupString*>* lgs, Group* group){
     list<Group*>* lChildren = new list<Group*>();

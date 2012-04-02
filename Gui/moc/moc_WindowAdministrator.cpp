@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'WindowAdministrator.h'
 **
-** Created: Sun Apr 1 23:13:50 2012
+** Created: Mon Apr 2 20:24:08 2012
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.3)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_WindowAdministrator[] = {
        4,       // revision
        0,       // classname
        0,    0, // classinfo
-      12,   14, // methods
+      17,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -41,8 +41,13 @@ static const uint qt_meta_data_WindowAdministrator[] = {
      133,   20,   20,   20, 0x0a,
      151,   20,   20,   20, 0x0a,
      171,   20,   20,   20, 0x0a,
-     193,   20,   20,   20, 0x0a,
-     218,   20,   20,   20, 0x0a,
+     191,   20,   20,   20, 0x0a,
+     215,   20,   20,   20, 0x0a,
+     237,   20,   20,   20, 0x0a,
+     262,   20,   20,   20, 0x0a,
+     280,   20,   20,   20, 0x0a,
+     296,   20,   20,   20, 0x0a,
+     317,   20,   20,   20, 0x0a,
 
        0        // eod
 };
@@ -52,8 +57,11 @@ static const char qt_meta_stringdata_WindowAdministrator[] = {
     "editModule()\0deleteModule()\0okEditModule()\0"
     "cancelEditModule()\0displayClassPeriod()\0"
     "addClassPeriod()\0editClassPeriod()\0"
-    "deleteClassPeriod()\0addGroupClassPeriod()\0"
+    "deleteClassPeriod()\0okEditClassPeriod()\0"
+    "cancelEditClassPeriod()\0addGroupClassPeriod()\0"
     "deleteGroupClassPeriod()\0displayStudents()\0"
+    "moduleClicked()\0classperiodClicked()\0"
+    "displayModule()\0"
 };
 
 const QMetaObject WindowAdministrator::staticMetaObject = {
@@ -94,12 +102,17 @@ int WindowAdministrator::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 6: addClassPeriod(); break;
         case 7: editClassPeriod(); break;
         case 8: deleteClassPeriod(); break;
-        case 9: addGroupClassPeriod(); break;
-        case 10: deleteGroupClassPeriod(); break;
-        case 11: displayStudents(); break;
+        case 9: okEditClassPeriod(); break;
+        case 10: cancelEditClassPeriod(); break;
+        case 11: addGroupClassPeriod(); break;
+        case 12: deleteGroupClassPeriod(); break;
+        case 13: displayStudents(); break;
+        case 14: moduleClicked(); break;
+        case 15: classperiodClicked(); break;
+        case 16: displayModule(); break;
         default: ;
         }
-        _id -= 12;
+        _id -= 17;
     }
     return _id;
 }

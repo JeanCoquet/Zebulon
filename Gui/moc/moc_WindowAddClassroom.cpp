@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'WindowAddClassroom.h'
 **
-** Created: Sun Apr 1 23:13:57 2012
+** Created: Mon Apr 2 18:38:35 2012
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.3)
 **
 ** WARNING! All changes made in this file will be lost!
