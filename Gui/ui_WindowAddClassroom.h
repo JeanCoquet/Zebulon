@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'WindowAddClassroom.ui'
 **
-** Created: Mon Apr 2 18:36:33 2012
-**      by: Qt User Interface Compiler version 4.6.3
+** Created: Tue Apr 3 11:02:24 2012
+**      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/

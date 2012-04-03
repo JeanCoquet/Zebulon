@@ -11,6 +11,7 @@
 class MagistralClass  : public ClassPeriod{
 public:
     MagistralClass(string teacher, int duration, Module* mod);
+    MagistralClass(const ClassPeriod* orig);
     virtual ~MagistralClass();
 private:
 

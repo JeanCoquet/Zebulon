@@ -11,6 +11,7 @@
 class TutorialClass  : public ClassPeriod{
 public:
     TutorialClass(string teacher, int duration, Module* mod);
+    TutorialClass(const ClassPeriod* orig);
     virtual ~TutorialClass();
 private:
 

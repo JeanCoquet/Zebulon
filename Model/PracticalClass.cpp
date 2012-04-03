@@ -10,6 +10,8 @@
 PracticalClass::PracticalClass(string teacher, int duration, Module* mod):ClassPeriod(teacher,duration, mod)  {
 }
 
+PracticalClass::PracticalClass(const ClassPeriod* orig) : ClassPeriod(orig) {}
+
 PracticalClass::~PracticalClass() {
 }
 

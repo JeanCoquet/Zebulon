@@ -44,11 +44,18 @@ public slots :
     void moduleClicked();
     void classperiodClicked();
     void displayModule();
+    void comboBoxGroupsClassPeriodChanged(int index);
+    void listGroupClassPeriodClicked();
     
     
 private:
+    bool load;
+    bool groupClassPeriodModified;
     int moduleState; /* voir doc */
+    int classroomState;
+    Classroom *currentClassroom;
     void refreshModule(int newState);
+    void refreshClassroom(int newState);
     string oldIdSelectedModule; 
     Ui::WindowAdministrator widget;
     Controller* ctrl;
@@ -56,6 +63,12 @@ private:
     Module* currentModule;
     ClassPeriod* currentClassPeriod;
     void displayClassroom();
+    void setCurrentModule();
+    void setCurrentClassroom();
+    void setCurrentClassPeriod();
+    void displaySpecificityClassroom();
+    void loadGroupsClassPeriod();
+    QStringList tempGroupListClassPeriod;
 };
 
 #endif	/* _WINDOWADMINISTRATOR_H */

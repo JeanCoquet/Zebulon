@@ -10,6 +10,8 @@
 TutorialClass::TutorialClass(string teacher, int duration, Module* mod):ClassPeriod(teacher,duration, mod)  {
 }
 
+TutorialClass::TutorialClass(const ClassPeriod* orig) : ClassPeriod(orig) {}
+
 TutorialClass::~TutorialClass() {
 }
 

@@ -48,7 +48,7 @@ public:
     void delClassPeriod(ClassPeriod* classPeriod, Module *mod);
     void joinTimeSlotWithClassPeriod(TimeSlot *timeslot, ClassPeriod *classPeriod);
     void setModule(Module* mod, string id, string name, string theHead);
-    void setClassPeriod(ClassPeriod* cp, string type,  string teacher, int duration, list<Group*> *lg);
+    void setClassPeriod(Module *mod, ClassPeriod* cp, string type,  string teacher, int duration, list<Group*> *lg);
     virtual ~Controller();
 
 

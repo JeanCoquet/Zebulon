@@ -1,8 +1,8 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'WindowAdministrator.h'
 **
-** Created: Mon Apr 2 20:24:08 2012
-**      by: The Qt Meta Object Compiler version 62 (Qt 4.6.3)
+** Created: Tue Apr 3 18:29:27 2012
+**      by: The Qt Meta Object Compiler version 62 (Qt 4.7.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -11,7 +11,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'WindowAdministrator.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 62
-#error "This file was generated using the moc from 4.6.3. It"
+#error "This file was generated using the moc from 4.7.2. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -20,10 +20,10 @@ QT_BEGIN_MOC_NAMESPACE
 static const uint qt_meta_data_WindowAdministrator[] = {
 
  // content:
-       4,       // revision
+       5,       // revision
        0,       // classname
        0,    0, // classinfo
-      17,   14, // methods
+      19,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -48,6 +48,8 @@ static const uint qt_meta_data_WindowAdministrator[] = {
      280,   20,   20,   20, 0x0a,
      296,   20,   20,   20, 0x0a,
      317,   20,   20,   20, 0x0a,
+     339,  333,   20,   20, 0x0a,
+     377,   20,   20,   20, 0x0a,
 
        0        // eod
 };
@@ -61,7 +63,9 @@ static const char qt_meta_stringdata_WindowAdministrator[] = {
     "cancelEditClassPeriod()\0addGroupClassPeriod()\0"
     "deleteGroupClassPeriod()\0displayStudents()\0"
     "moduleClicked()\0classperiodClicked()\0"
-    "displayModule()\0"
+    "displayModule()\0index\0"
+    "comboBoxGroupsClassPeriodChanged(int)\0"
+    "listGroupClassPeriodClicked()\0"
 };
 
 const QMetaObject WindowAdministrator::staticMetaObject = {
@@ -110,9 +114,11 @@ int WindowAdministrator::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 14: moduleClicked(); break;
         case 15: classperiodClicked(); break;
         case 16: displayModule(); break;
+        case 17: comboBoxGroupsClassPeriodChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 18: listGroupClassPeriodClicked(); break;
         default: ;
         }
-        _id -= 17;
+        _id -= 19;
     }
     return _id;
 }

@@ -26,27 +26,28 @@ Controller::Controller() throw(int){
              throw 1;
 }
 
-void Controller::setClassPeriod(ClassPeriod* cp, string type, string teacher, int duration, list<Group*>* lg){
+void Controller::setClassPeriod(Module *mod, ClassPeriod* cp, string type, string teacher, int duration, list<Group*>* lg){
     int id_type = 2;
+    ClassPeriod* cp2;
     if(type == "Tutorial") {
-        cp = dynamic_cast<TutorialClass*>(cp);
+        cp2 = new TutorialClass(cp);
         id_type = 3;
     }
     else if(type == "Practical") {
-        cp = dynamic_cast<PracticalClass*>(cp);   
+        cp2 = new PracticalClass(cp);   
         id_type = 1;
     }     
     else if(type == "Magistral") {
-        cp = dynamic_cast<MagistralClass*>(cp);
+        cp2 = new MagistralClass(cp);
         id_type = 2;
     }
-    
     history << "update classperiod set teacher = '"<<teacher<<"', duration = '"<<duration<<"', id_type = '"<<id_type<<"' where id = '"<<cp->GetId()<<"'"<<endl;     
-        
-    cp->SetTeacher(teacher);
-    cp->SetDuration(duration);
-    cp->SetGroupList(lg);
     
+    mod->GetClassPeriodList()->remove(cp);
+    mod->GetClassPeriodList()->push_back(cp2);
+    cp2->SetTeacher(teacher);
+    cp2->SetDuration(duration);
+    cp2->SetGroupList(lg);
 }
 
 void Controller::addStudent(Student *stud, Group *group){

@@ -10,6 +10,8 @@
 MagistralClass::MagistralClass(string teacher, int duration, Module* mod):ClassPeriod(teacher,duration, mod) {
 }
 
+MagistralClass::MagistralClass(const ClassPeriod* orig) : ClassPeriod(orig) {}
+
 MagistralClass::~MagistralClass() {
 }
 

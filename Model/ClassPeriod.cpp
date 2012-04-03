@@ -17,7 +17,16 @@ ClassPeriod::ClassPeriod(string teacher, int duration, Module* mod): momo(mod) {
     this->groupList = new list<Group*>();
 }
 
-ClassPeriod::ClassPeriod(const ClassPeriod& orig) {
+ClassPeriod::ClassPeriod(const ClassPeriod* orig) {
+    this->duration = orig->duration;
+    this->id = orig->id;
+    this->teacher = orig->teacher;
+    
+    this->groupList = new list<Group*>();
+    list<Group*>::iterator it = orig->groupList->begin();
+    list<Group*>::const_iterator itMax = orig->groupList->end();
+    for(; it!=itMax; it++)
+        this->groupList->push_back((*it));
 }
 
 ClassPeriod::~ClassPeriod() {

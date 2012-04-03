@@ -18,7 +18,7 @@ class Module;
 class ClassPeriod {
 public:
     ClassPeriod(string teacher, int duration, Module* mod);
-    ClassPeriod(const ClassPeriod& orig);
+    ClassPeriod(const ClassPeriod* orig);
     virtual ~ClassPeriod();
     static int maxId;
 
@@ -36,7 +36,7 @@ public:
     }
 
     void SetGroupList(list<Group*>* groupList) {
-        delete[] this->groupList;
+        delete this->groupList;
         this->groupList = groupList;
     }
 
