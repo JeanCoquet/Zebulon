@@ -7,7 +7,6 @@
 void MainWindow::addGroupToComboBox(){
     
     ui->comboBoxGroup->clear();
-    windowAdministrator->getWidget().listWidgetGroups->clear();
     windowEditTimeSlot->getWindowAddClassPeriod()->getWidget().comboBoxGroup->clear();
     
     list<Group*>* l = this->ctrl->getSchedule()->GetGroupList();
@@ -15,7 +14,6 @@ void MainWindow::addGroupToComboBox(){
     list<Group*>::const_iterator MaxList = l->end();
     for(;it != MaxList; it++){
         ui->comboBoxGroup->addItem((*it)->GetId().c_str());
-        windowAdministrator->getWidget().listWidgetGroups->addItem((*it)->GetId().c_str());
         windowEditTimeSlot->getWindowAddClassPeriod()->getWidget().comboBoxGroup->addItem((*it)->GetId().c_str());
     }
 }

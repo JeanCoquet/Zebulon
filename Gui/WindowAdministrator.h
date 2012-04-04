@@ -27,12 +27,27 @@ public:
     }
 
 public slots :
+    
+    // Onglet Group
+    
+    // Onglet Classroom
+    void classroomClicked();
+    void addClassroom();
+    void editClassroom();
+    void deleteClassroom();
+    void okEditClassroom();
+    void cancelEditClassroom();
+    void comboBoxTypeClassroomChanged();
+    
+    // Onglet Module
+    void moduleClicked();
     void addModule();
     void editModule();
     void deleteModule();
     void okEditModule();
     void cancelEditModule();
-    void displayClassPeriod();
+    
+    void classperiodClicked();
     void addClassPeriod();
     void editClassPeriod();
     void deleteClassPeriod();
@@ -40,42 +55,40 @@ public slots :
     void cancelEditClassPeriod();
     void addGroupClassPeriod();
     void deleteGroupClassPeriod();
-    void displayStudents();
-    void moduleClicked();
-    void classperiodClicked();
-    void displayModule();
     void comboBoxGroupsClassPeriodChanged(int index);
     void listGroupClassPeriodClicked();
-    void addClassroom();
-    void editClassroom();
-    void deleteClassroom();
-    void okEditClassroom();
-    void cancelEditClassroom();
-    void classroomClicked();
-    void comboBoxTypeClassroomChanged();
     
     
 private:
-    bool load;
-    bool groupClassPeriodModified;
-    int moduleState; /* voir doc */
-    int classroomState;
-    Classroom *currentClassroom;
-    void refreshModule(int newState);
-    void refreshClassroom(int newState);
-    string oldIdSelectedModule; 
     Ui::WindowAdministrator widget;
     Controller* ctrl;
     MainWindow* m;
+    bool load; 
+    
+    // Onglet Group
+    void displayStudents();
+    
+    // Onglet Classroom
+    Classroom *currentClassroom;
+    int classroomState; /* voir doc */
+    void refreshClassroom(int newState);
+    void displayClassroom();
+    void displaySpecificityClassroom();
+    void setCurrentClassroom();
+    
+    // Onglet Module
     Module* currentModule;
     ClassPeriod* currentClassPeriod;
-    void displayClassroom();
-    void setCurrentModule();
-    void setCurrentClassroom();
-    void setCurrentClassPeriod();
-    void displaySpecificityClassroom();
-    void loadGroupsClassPeriod();
+    int moduleState; /* voir doc */
+    string oldIdSelectedModule;
+    bool groupClassPeriodModified;
     QStringList tempGroupListClassPeriod;
+    void refreshModule(int newState);
+    void displayModule();
+    void displayClassPeriod();
+    void loadGroupsClassPeriod();
+    void setCurrentModule();
+    void setCurrentClassPeriod();
 };
 
 #endif	/* _WINDOWADMINISTRATOR_H */

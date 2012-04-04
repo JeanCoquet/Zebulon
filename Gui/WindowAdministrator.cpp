@@ -23,6 +23,8 @@ WindowAdministrator::WindowAdministrator(Controller* ctrl, MainWindow* mainwindo
     this->widget.tableWidgetClassPeriod->horizontalHeader()->setResizeMode ( QHeaderView::Stretch) ; 
     this->widget.tableWidgetClassrooms->horizontalHeader()->setVisible(true);
     this->widget.tableWidgetClassrooms->horizontalHeader()->setResizeMode ( QHeaderView::Stretch) ; 
+    this->widget.tableWidgetGroups->horizontalHeader()->setVisible(true);
+    this->widget.tableWidgetGroups->horizontalHeader()->setResizeMode ( QHeaderView::Stretch) ;    
     this->widget.tableWidgetStudents->horizontalHeader()->setVisible(true);
     this->widget.tableWidgetStudents->horizontalHeader()->setResizeMode ( QHeaderView::Stretch) ;
     
@@ -45,7 +47,7 @@ WindowAdministrator::WindowAdministrator(Controller* ctrl, MainWindow* mainwindo
     QObject::connect(widget.buttonCancelEditClassPeriod, SIGNAL(clicked()), this, SLOT(cancelEditClassPeriod()));
     QObject::connect(widget.buttonAddGroupClassPeriod, SIGNAL(clicked()), this, SLOT(addGroupClassPeriod()));
     QObject::connect(widget.buttonDeleteGroupClassPeriod, SIGNAL(clicked()), this, SLOT(deleteGroupClassPeriod()));
-    QObject::connect(widget.listWidgetGroups, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(displayStudents()));
+    QObject::connect(widget.tableWidgetGroups, SIGNAL(currentRowChanged (int)), this, SLOT(displayStudents()));
     QObject::connect(widget.comboBoxGroupClassPeriod, SIGNAL(currentIndexChanged (int)), this, SLOT(comboBoxGroupsClassPeriodChanged(int)));
     QObject::connect(widget.listWidgetGroupClassPeriod, SIGNAL(currentRowChanged (int)), this, SLOT(listGroupClassPeriodClicked()));
     QObject::connect(widget.tableWidgetClassrooms, SIGNAL(itemClicked(QTableWidgetItem*)), this, SLOT(classroomClicked()));
@@ -635,7 +637,7 @@ void WindowAdministrator::displayModule() {
 void WindowAdministrator::displayStudents(){
     cout<<"groupe clique"<<endl;
 //    QList<QListWidgetItem*>::iterator  itGroup = lwibegin();
-    QList<QListWidgetItem*>::iterator itGroup = this->widget.listWidgetGroups->selectedItems().begin();
+    QList<QTableWidgetItem*>::iterator itGroup = this->widget.tableWidgetGroups->selectedItems().begin();
     list<Group*> *lg = this->ctrl->getSchedule()->GetGroupList();
     list<Group*>::iterator itG = lg->begin();
     list<Group*>::const_iterator itGMax = lg->end();

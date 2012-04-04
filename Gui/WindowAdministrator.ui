@@ -23,16 +23,16 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>-7</y>
-        <width>975</width>
-        <height>457</height>
+        <y>0</y>
+        <width>961</width>
+        <height>480</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_16">
        <item>
         <widget class="QTabWidget" name="tabWidget">
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="tabGroups">
           <attribute name="title">
@@ -58,7 +58,39 @@
               </widget>
              </item>
              <item>
-              <widget class="QListWidget" name="listWidgetGroups"/>
+              <widget class="QTableWidget" name="tableWidgetGroups">
+               <property name="editTriggers">
+                <set>QAbstractItemView::NoEditTriggers</set>
+               </property>
+               <property name="alternatingRowColors">
+                <bool>true</bool>
+               </property>
+               <property name="selectionMode">
+                <enum>QAbstractItemView::SingleSelection</enum>
+               </property>
+               <property name="selectionBehavior">
+                <enum>QAbstractItemView::SelectRows</enum>
+               </property>
+               <property name="showGrid">
+                <bool>false</bool>
+               </property>
+               <attribute name="verticalHeaderVisible">
+                <bool>false</bool>
+               </attribute>
+               <attribute name="verticalHeaderDefaultSectionSize">
+                <number>18</number>
+               </attribute>
+               <column>
+                <property name="text">
+                 <string>Id</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Children</string>
+                </property>
+               </column>
+              </widget>
              </item>
              <item>
               <widget class="QFrame" name="frameEditGroup">
@@ -1182,8 +1214,6 @@ computers</string>
         </widget>
        </item>
       </layout>
-      <zorder>tabWidget</zorder>
-      <zorder>tabWidget</zorder>
      </widget>
     </widget>
    </item>
