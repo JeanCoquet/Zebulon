@@ -11,7 +11,8 @@ LectureHall::LectureHall(string id, int capacity, bool videoconferencing) : Clas
     this->videoconferencing = videoconferencing;
 }
 
-LectureHall::LectureHall(const LectureHall& orig, string id, int capacity) : Classroom(id, capacity){
+LectureHall::LectureHall(const LectureHall* orig) : Classroom(orig){
+    this->videoconferencing = orig->videoconferencing;
 }
 
 LectureHall::~LectureHall() {

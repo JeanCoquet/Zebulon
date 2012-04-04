@@ -11,7 +11,8 @@ TutorialClassroom::TutorialClassroom(string id, int capacity, bool videoprojecto
     this->videoprojector = videoprojector;
 }
 
-TutorialClassroom::TutorialClassroom(const TutorialClassroom& orig, string id, int capacity) : Classroom(id, capacity) {
+TutorialClassroom::TutorialClassroom(const TutorialClassroom* orig) : Classroom(orig) {
+    this->videoprojector = orig->videoprojector;
 }
 
 TutorialClassroom::~TutorialClassroom() {

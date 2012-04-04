@@ -21,8 +21,6 @@ void MainWindow::addGroupToComboBox(){
 }
 
 void MainWindow::addModuleToComboBox(){
-    
-    ui->comboBoxModule->clear();
     windowEditTimeSlot->getWidget().comboBoxModule->clear();
     windowEditTimeSlot->getWidget().comboBoxClassroom->clear();
     
@@ -44,7 +42,6 @@ void MainWindow::addModuleToComboBox(){
         s.append((*it)->GetId().c_str());
         s.append(" : ");
         s.append((*it)->GetName().c_str());
-        ui->comboBoxModule->addItem(s.c_str());
         windowEditTimeSlot->getWidget().comboBoxModule->addItem(s.c_str());
 
         item = new QTableWidgetItem((*it)->GetId().c_str());
@@ -133,7 +130,6 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(tabIndexChanged()));
     QObject::connect(ui->comboBoxClassroom, SIGNAL(currentIndexChanged(int)), this, SLOT(tabIndexChanged()));
     QObject::connect(ui->comboBoxGroup, SIGNAL(currentIndexChanged(int)), this, SLOT(tabIndexChanged()));
-    QObject::connect(ui->comboBoxModule, SIGNAL(currentIndexChanged(int)), this, SLOT(tabIndexChanged()));
     QObject::connect(ui->comboBoxStudent, SIGNAL(currentIndexChanged(int)), this, SLOT(tabIndexChanged()));
     QObject::connect(ui->actionAdministrator, SIGNAL(triggered()), this, SLOT(openAdministrator()));
     QObject::connect(ui->checkBoxMagistral, SIGNAL(stateChanged(int)), this, SLOT(tabIndexChanged()));
@@ -206,7 +202,7 @@ void MainWindow::reloadQTimeSlots(){
             Date *dit = (*it)->GetStartDate();
             if(*dit >= d && *dit <= de ) {
                 int currentIndex = this->ui->tabWidget->currentIndex();
-
+                cout<<"************ "<<currentIndex<<endl;
                 if(currentIndex == 0){
                     cout<<"INDEX 1"<<endl;
                     int indexGroup = this->ui->comboBoxGroup->currentIndex();
@@ -225,7 +221,7 @@ void MainWindow::reloadQTimeSlots(){
                         }
                     }
                 }
-                else if(currentIndex == 1){
+                /*else if(currentIndex == 1){
                     cout<<"INDEX 2"<<endl;
                     int indexMod = this->ui->comboBoxModule->currentIndex();
                     list<Module*> *lm = this->ctrl->getSchedule()->GetModuleList();
@@ -236,9 +232,9 @@ void MainWindow::reloadQTimeSlots(){
                     if((*it)->GetClassPeriod()->GetMomo() == (*itM)){
                         genererQTimeSlot((*it));
                     }
-                }
-                else if(currentIndex == 2){
-                    cout<<"INDEX 3"<<endl;
+                }*/
+                else if(currentIndex == 1){
+                    cout<<"INDEX 2"<<endl;
                     int indexCR = this->ui->comboBoxClassroom->currentIndex();
                     list<Classroom*> *lcr = this->ctrl->getSchedule()->GetClassroomList();
                     list<Classroom*>::iterator itCR = lcr->begin();
@@ -249,8 +245,8 @@ void MainWindow::reloadQTimeSlots(){
                         genererQTimeSlot((*it));
                     }
                 }
-                else if(currentIndex == 3){
-                    cout<<"INDEX 4"<<endl;
+                else if(currentIndex == 2){
+                    cout<<"INDEX 3"<<endl;
                     QString stringNameStudent = this->ui->comboBoxStudent->currentText();
                     list<Group*>* lg = (*it)->GetClassPeriod()->GetGroupList();
                     list<Group*>::iterator itg = lg->begin();
@@ -323,7 +319,7 @@ void MainWindow::genererQTimeSlot(TimeSlot* t){
     
     
     QTimeSlot* time = new QTimeSlot(t->GetId(), qdts, dit->GetHour(), dit->GetMin(), cp->GetDuration(),
-            nameCP, QString::fromStdString(t->GetClassroom()->GetId()), QString::fromStdString((cp->GetMomo()->GetId()+" : "+cp->GetMomo()->GetName())), QString::fromStdString(cp->GetTeacher()), stringGroups, ui->edt);
+            nameCP, QString::fromStdString(t->GetClassroom()->GetId()), QString::fromStdString((cp->GetMomo()->GetId()+" : "+cp->GetMomo()->GetName())), QString::fromStdString(cp->GetTeacher()), stringGroups, NULL);
     time->setBackgroundColor(color);
     this->addTimeSlot(time);
 

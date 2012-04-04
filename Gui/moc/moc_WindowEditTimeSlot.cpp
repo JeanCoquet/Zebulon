@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'WindowEditTimeSlot.h'
 **
-** Created: Tue Apr 3 18:29:33 2012
+** Created: Wed Apr 4 17:46:43 2012
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.2)
 **
 ** WARNING! All changes made in this file will be lost!

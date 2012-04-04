@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Tue Apr 3 11:02:24 2012
+** Created: Wed Apr 4 17:44:46 2012
 **      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -57,9 +57,6 @@ public:
     QWidget *tab_3;
     QVBoxLayout *verticalLayout_6;
     QComboBox *comboBoxGroup;
-    QWidget *tab_2;
-    QVBoxLayout *verticalLayout_5;
-    QComboBox *comboBoxModule;
     QWidget *tab;
     QVBoxLayout *verticalLayout_4;
     QComboBox *comboBoxClassroom;
@@ -80,7 +77,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(739, 671);
+        MainWindow->resize(739, 679);
         QIcon icon;
         icon.addFile(QString::fromUtf8("../zebulon.png"), QSize(), QIcon::Normal, QIcon::Off);
         MainWindow->setWindowIcon(icon);
@@ -99,7 +96,7 @@ public:
         scrollArea_2->setWidgetResizable(true);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 322, 616));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 443, 610));
         verticalLayout_3 = new QVBoxLayout(scrollAreaWidgetContents_2);
         verticalLayout_3->setSpacing(6);
         verticalLayout_3->setContentsMargins(11, 11, 11, 11);
@@ -117,7 +114,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 739, 21));
+        menuBar->setGeometry(QRect(0, 0, 739, 26));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuEdit = new QMenu(menuBar);
@@ -156,19 +153,6 @@ public:
         verticalLayout_6->addWidget(comboBoxGroup);
 
         tabWidget->addTab(tab_3, QString());
-        tab_2 = new QWidget();
-        tab_2->setObjectName(QString::fromUtf8("tab_2"));
-        verticalLayout_5 = new QVBoxLayout(tab_2);
-        verticalLayout_5->setSpacing(6);
-        verticalLayout_5->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
-        comboBoxModule = new QComboBox(tab_2);
-        comboBoxModule->setObjectName(QString::fromUtf8("comboBoxModule"));
-        comboBoxModule->setMinimumSize(QSize(125, 30));
-
-        verticalLayout_5->addWidget(comboBoxModule);
-
-        tabWidget->addTab(tab_2, QString());
         tab = new QWidget();
         tab->setObjectName(QString::fromUtf8("tab"));
         verticalLayout_4 = new QVBoxLayout(tab);
@@ -265,7 +249,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -280,7 +264,6 @@ public:
         menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", 0, QApplication::UnicodeUTF8));
         dockWidget->setWindowTitle(QString());
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Group", 0, QApplication::UnicodeUTF8));
-        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Module", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Classroom", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("MainWindow", "Student", 0, QApplication::UnicodeUTF8));
         checkBoxMagistral->setText(QApplication::translate("MainWindow", "Magistral Class", 0, QApplication::UnicodeUTF8));

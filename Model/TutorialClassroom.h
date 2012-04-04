@@ -11,10 +11,13 @@
 class TutorialClassroom : public Classroom {
 public:
     TutorialClassroom(string id, int capacity, bool videoprojector);
-    TutorialClassroom(const TutorialClassroom& orig, string id, int capacity);
+    TutorialClassroom(const TutorialClassroom* orig);
     virtual ~TutorialClassroom();
     bool IsVideoprojector() const {
         return videoprojector;
+    }
+    void SetVideoprojector(bool videoprojector) {
+        this->videoprojector = videoprojector;
     }
 
 private:

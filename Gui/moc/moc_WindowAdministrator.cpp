@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'WindowAdministrator.h'
 **
-** Created: Tue Apr 3 18:29:27 2012
+** Created: Wed Apr 4 17:46:38 2012
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_WindowAdministrator[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-      19,   14, // methods
+      26,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -50,6 +50,13 @@ static const uint qt_meta_data_WindowAdministrator[] = {
      317,   20,   20,   20, 0x0a,
      339,  333,   20,   20, 0x0a,
      377,   20,   20,   20, 0x0a,
+     407,   20,   20,   20, 0x0a,
+     422,   20,   20,   20, 0x0a,
+     438,   20,   20,   20, 0x0a,
+     456,   20,   20,   20, 0x0a,
+     474,   20,   20,   20, 0x0a,
+     496,   20,   20,   20, 0x0a,
+     515,   20,   20,   20, 0x0a,
 
        0        // eod
 };
@@ -66,6 +73,10 @@ static const char qt_meta_stringdata_WindowAdministrator[] = {
     "displayModule()\0index\0"
     "comboBoxGroupsClassPeriodChanged(int)\0"
     "listGroupClassPeriodClicked()\0"
+    "addClassroom()\0editClassroom()\0"
+    "deleteClassroom()\0okEditClassroom()\0"
+    "cancelEditClassroom()\0classroomClicked()\0"
+    "comboBoxTypeClassroomChanged()\0"
 };
 
 const QMetaObject WindowAdministrator::staticMetaObject = {
@@ -116,9 +127,16 @@ int WindowAdministrator::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 16: displayModule(); break;
         case 17: comboBoxGroupsClassPeriodChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 18: listGroupClassPeriodClicked(); break;
+        case 19: addClassroom(); break;
+        case 20: editClassroom(); break;
+        case 21: deleteClassroom(); break;
+        case 22: okEditClassroom(); break;
+        case 23: cancelEditClassroom(); break;
+        case 24: classroomClicked(); break;
+        case 25: comboBoxTypeClassroomChanged(); break;
         default: ;
         }
-        _id -= 19;
+        _id -= 26;
     }
     return _id;
 }

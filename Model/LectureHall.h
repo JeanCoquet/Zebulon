@@ -11,11 +11,15 @@
 class LectureHall : public Classroom {
 public:
     LectureHall(string id, int capacity, bool videoconferencing);
-    LectureHall(const LectureHall& orig, string id, int capacity);
+    LectureHall(const LectureHall* orig);
     virtual ~LectureHall();
     bool IsVideoconferencing() const {
         return videoconferencing;
     }
+    void SetVideoconferencing(bool videoconferencing) {
+        this->videoconferencing = videoconferencing;
+    }
+
 
 private:
     bool videoconferencing;

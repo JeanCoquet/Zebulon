@@ -12,7 +12,9 @@ Classroom::Classroom(string id, int capacity) {
     this->capacity = capacity;
 }
 
-Classroom::Classroom(const Classroom& orig) {
+Classroom::Classroom(const Classroom* orig) {
+    this->id = orig->id;
+    this->capacity = orig->capacity;
 }
 
 Classroom::~Classroom() {

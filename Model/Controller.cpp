@@ -26,6 +26,61 @@ Controller::Controller() throw(int){
              throw 1;
 }
 
+void Controller::addClassroom(Classroom* cr) {
+    schedule->GetClassroomList()->push_back(cr);
+    this->history << "insert into Classroom values('" << cr->GetId() <<"','"<< cr->GetCapacity() <<"')" << endl; 
+    if(dynamic_cast<PracticalClassroom*>(cr) != NULL)
+        this->history << "insert into PracticalClassroom values('" << cr->GetId() <<"','"<< ((PracticalClassroom*)cr)->GetElementsNumber() <<"')" << endl; 
+    else if(dynamic_cast<TutorialClassroom*>(cr) != NULL)
+        this->history << "insert into TutorialClassroom values('" << cr->GetId() <<"','"<< ((TutorialClassroom*)cr)->IsVideoprojector() <<"')" << endl; 
+    else
+        this->history << "insert into LectureHall values('" << cr->GetId() <<"','"<< ((LectureHall*)cr)->IsVideoconferencing() <<"')" << endl; 
+}
+
+void Controller::delClassroom(Classroom* cr) {
+    schedule->GetClassroomList()->remove(cr);
+    this->history << "delete from Classroom where id='"<<cr->GetId()<<"'";
+    if(dynamic_cast<PracticalClassroom*>(cr) != NULL)
+        this->history << "delete from PracticalClassroom where id='"<<cr->GetId()<<"'";
+    else if(dynamic_cast<TutorialClassroom*>(cr) != NULL)
+        this->history << "delete from TutorialClassroom where id='"<<cr->GetId()<<"'";
+    else
+        this->history << "delete from LectureHall where id='"<<cr->GetId()<<"'";
+}
+
+string boolToStr(bool b) {
+    if(b) return "true";
+    else return "false";
+}
+bool intToBool(int i) {
+    if(i==0) return false;
+    else return true;
+}
+
+void Controller::setClassroom(Classroom* cr, string id, int capacity, int specificity) {
+    Classroom* cr2;
+    history << "update classroom set id = '"<< id <<"', capacity = '"<<capacity<<"' where id = '"<<cr->GetId()<<"'"<<endl;
+    if(dynamic_cast<PracticalClassroom*>(cr) != NULL) {
+        cr2 = new PracticalClassroom((PracticalClassroom*) cr);
+        history << "update PracticalClassroom set id = '"<< id <<"', elementsnumber = '"<<specificity<<"' where id = '"<<cr->GetId()<<"'"<<endl;
+        ((PracticalClassroom*)cr2)->SetElementsNumber(specificity);
+    }     
+    else if(dynamic_cast<LectureHall*>(cr) != NULL) {
+        cr2 = new LectureHall((LectureHall*) cr);
+        ((LectureHall*)cr2)->SetVideoconferencing(intToBool(specificity));
+        history << "update LectureHall set id = '"<< id <<"', videoconferencing = '"<<boolToStr(intToBool(specificity))<<"' where id = '"<<cr->GetId()<<"'"<<endl;
+    }
+    else {
+        cr2 = new TutorialClassroom((TutorialClassroom*) cr);
+        ((TutorialClassroom*)cr2)->SetVideoprojector(intToBool(specificity));
+        history << "update TutorialClassroom set id = '"<< id <<"', videoprojector = '"<<boolToStr(intToBool(specificity))<<"' where id = '"<<cr->GetId()<<"'"<<endl;
+    }
+    
+    schedule->GetClassroomList()->remove(cr);
+    schedule->GetClassroomList()->push_back(cr2);
+    cr2->SetCapacity(capacity);
+}
+
 void Controller::setClassPeriod(Module *mod, ClassPeriod* cp, string type, string teacher, int duration, list<Group*>* lg){
     int id_type = 2;
     ClassPeriod* cp2;
@@ -72,7 +127,7 @@ void Controller::addModule(Module* mod){
 }
 
 void Controller::delGroup(Group* group) {
-    this->history << "delete from Student where id_group='"<<group->GetId()<<"'";
+    this->history << "delete from Student where id_group='"<<group->GetId()<<"'"<<endl;
     this->history << "delete from 'Group' where id = '"<<group->GetId()<<"'"<<endl;
     this->schedule->GetGroupList()->remove(group);
 }

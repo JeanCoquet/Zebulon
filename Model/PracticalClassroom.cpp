@@ -11,7 +11,8 @@ PracticalClassroom::PracticalClassroom(string id, int capacity, int elementsNumb
     this->elementsNumber = elementsNumber;
 }
 
-PracticalClassroom::PracticalClassroom(const PracticalClassroom& orig, string id, int capacity) : Classroom(id, capacity){
+PracticalClassroom::PracticalClassroom(const PracticalClassroom* orig) : Classroom(orig){
+    this->elementsNumber = orig->elementsNumber;
 }
 
 PracticalClassroom::~PracticalClassroom() {

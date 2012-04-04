@@ -46,6 +46,13 @@ public slots :
     void displayModule();
     void comboBoxGroupsClassPeriodChanged(int index);
     void listGroupClassPeriodClicked();
+    void addClassroom();
+    void editClassroom();
+    void deleteClassroom();
+    void okEditClassroom();
+    void cancelEditClassroom();
+    void classroomClicked();
+    void comboBoxTypeClassroomChanged();
     
     
 private:

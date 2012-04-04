@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'WindowEditTimeSlot.ui'
 **
-** Created: Tue Apr 3 11:02:24 2012
+** Created: Wed Apr 4 17:44:46 2012
 **      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

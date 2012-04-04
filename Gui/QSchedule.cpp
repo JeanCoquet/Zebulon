@@ -75,6 +75,7 @@ QTimeSlot* QSchedule::addTimeSlot(QTimeSlot *timeSlot) {
     if(startDate<=timeSlot->getDate() && endDate>=timeSlot->getDate() && 
             timeSlot->getHour()>=hourStart && 
             (timeSlot->getHour()*60+timeSlot->getDuration()+timeSlot->getMinute())<(hourStart*60+numberOfHours*60)) {      
+        timeSlot->setParent(this);
         timeSlotList->push_back(timeSlot);
         timeSlot->setGeometry((timeSlot->getHour()-hourStart)*minMinutesWidth*MIN_TIME_IN_HOUR+dayNameWidth+((int)minMinutesWidth*timeSlot->getMinute()/MIN_TIME+marginLeft),
                                 (timeSlot->getDate().dayOfWeek()-1)*dayHeight+marginTop+hoursHeight+titleHeight,(int)(minMinutesWidth*timeSlot->getDuration()/MIN_TIME), dayHeight);

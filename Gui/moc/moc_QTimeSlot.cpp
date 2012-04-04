@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'QTimeSlot.h'
 **
-** Created: Tue Apr 3 11:03:06 2012
+** Created: Wed Apr 4 17:46:47 2012
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.2)
 **
 ** WARNING! All changes made in this file will be lost!

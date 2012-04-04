@@ -6,6 +6,7 @@
  */
 
 #include "WindowAdministrator.h"
+#include "WindowAddClassroom.h"
 
 WindowAdministrator::WindowAdministrator(Controller* ctrl, MainWindow* mainwindow) {
     load = false;
@@ -47,7 +48,14 @@ WindowAdministrator::WindowAdministrator(Controller* ctrl, MainWindow* mainwindo
     QObject::connect(widget.listWidgetGroups, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(displayStudents()));
     QObject::connect(widget.comboBoxGroupClassPeriod, SIGNAL(currentIndexChanged (int)), this, SLOT(comboBoxGroupsClassPeriodChanged(int)));
     QObject::connect(widget.listWidgetGroupClassPeriod, SIGNAL(currentRowChanged (int)), this, SLOT(listGroupClassPeriodClicked()));
-    QObject::connect(widget.buttonClose, SIGNAL(clicked()), this, SLOT(close()));  
+    QObject::connect(widget.tableWidgetClassrooms, SIGNAL(itemClicked(QTableWidgetItem*)), this, SLOT(classroomClicked()));
+    QObject::connect(widget.buttonClose, SIGNAL(clicked()), this, SLOT(close())); 
+    QObject::connect(widget.buttonAddClassroom, SIGNAL(clicked()), this, SLOT(addClassroom()));
+    QObject::connect(widget.buttonEditClassroom, SIGNAL(clicked()), this, SLOT(editClassroom()));
+    QObject::connect(widget.buttonDeleteClassroom, SIGNAL(clicked()), this, SLOT(deleteClassroom()));
+    QObject::connect(widget.buttonOkEditClassroom, SIGNAL(clicked()), this, SLOT(okEditClassroom()));
+    QObject::connect(widget.buttonCancelEditClassroom, SIGNAL(clicked()), this, SLOT(cancelEditClassroom()));
+    QObject::connect(widget.comboBoxClassRoom, SIGNAL(currentIndexChanged (int)), this, SLOT(comboBoxTypeClassroomChanged()));
 }
 
 void WindowAdministrator::moduleClicked(){
@@ -75,7 +83,6 @@ void WindowAdministrator::comboBoxGroupsClassPeriodChanged(int index){
 
 void WindowAdministrator::listGroupClassPeriodClicked(){
     if(!load){
-    cout<<"current row avant refresh "<<widget.listWidgetGroupClassPeriod->currentRow()<<endl;
         if(moduleState == 52){
             refreshModule(522);
         }else if(moduleState == 521){
@@ -85,7 +92,6 @@ void WindowAdministrator::listGroupClassPeriodClicked(){
         }else if(moduleState == 511){
             refreshModule(513);
         }
-    cout<<"Fin current row après refresh "<<widget.listWidgetGroupClassPeriod->currentRow()<<endl;
     }
 }
 
@@ -153,37 +159,40 @@ void WindowAdministrator::loadGroupsClassPeriod(){
 }
 
 void WindowAdministrator::setCurrentClassroom(){
-    QList<QTableWidgetItem*>::iterator itClassroom = widget.tableWidgetModules->selectedItems().begin();
-    
-    list<Classroom*> *lc = this->ctrl->getSchedule()->GetClassroomList();
-    list<Classroom*>::iterator itC = lc->begin();
-    list<Classroom*>::const_iterator itCMax = lc->end();
-    for(;itC != itCMax ; itC++){
-        if((*itC)->GetId() == (*itClassroom)->text().toStdString())
-            break;
+    if(widget.tableWidgetClassrooms->currentRow() != -1) {
+        QList<QTableWidgetItem*>::iterator itClassroom = widget.tableWidgetClassrooms->selectedItems().begin();
+
+        list<Classroom*> *lc = this->ctrl->getSchedule()->GetClassroomList();
+        list<Classroom*>::iterator itC = lc->begin();
+        list<Classroom*>::const_iterator itCMax = lc->end();
+        for(;itC != itCMax ; itC++){
+            if((*itC)->GetId() == (*itClassroom)->text().toStdString())
+                break;
+        }
+
+        currentClassroom = (*itC);
     }
-    
-    currentClassroom = (*itC);
 }
 
 void WindowAdministrator::displaySpecificityClassroom() {
     widget.labelNumberComputers->setVisible(false);
     widget.lineEditNumberComputers->setVisible(false);
     widget.checkBoxSpecificity->setVisible(false);
-    if(widget.comboBoxClassRoom->currentText() == "Practical Classroom") {
+    if(widget.comboBoxClassRoom->currentText().toStdString() == "Practical Classroom") {
         widget.labelNumberComputers->setVisible(true);
         widget.lineEditNumberComputers->setVisible(true);
     }
-    else if(widget.comboBoxClassRoom->currentText() == "Tutorial Classroom") {
+    else if(widget.comboBoxClassRoom->currentText().toStdString() == "Tutorial Classroom") {
         widget.checkBoxSpecificity->setVisible(true);
     }
-    else if(widget.comboBoxClassRoom->currentText() == "Lecture Hall") {
+    else if(widget.comboBoxClassRoom->currentText().toStdString() == "Lecture Hall") {
         widget.checkBoxSpecificity->setVisible(true);
     }
 }
 
 void WindowAdministrator::refreshClassroom(int newState){
     this->classroomState = newState;
+    cout<<"Gestion etat classroom : "<<classroomState<<endl;
     switch(newState){
         case 1 :
             currentClassroom = NULL;
@@ -195,20 +204,20 @@ void WindowAdministrator::refreshClassroom(int newState){
             displayClassroom();
             break;
         case 2 :
-            setCurrentClassroom();
             widget.tableWidgetClassrooms->setEnabled(true);
             widget.frameClassroom->setVisible(false);
             widget.buttonAddClassroom->setEnabled(true);
             widget.buttonEditClassroom->setEnabled(true);
             widget.buttonDeleteClassroom->setEnabled(true);
+            setCurrentClassroom();
             displayClassroom();
             break;
         case 31 :
             widget.tableWidgetClassrooms->setEnabled(false);
             widget.frameClassroom->setVisible(true);
-            widget.buttonAddClassroom->setEnabled(true);
-            widget.buttonEditClassroom->setEnabled(true);
-            widget.buttonDeleteClassroom->setEnabled(true);
+            widget.buttonAddClassroom->setEnabled(false);
+            widget.buttonEditClassroom->setEnabled(false);
+            widget.buttonDeleteClassroom->setEnabled(false);
             widget.lineEditIdClassroom->setText("");
             widget.lineEditCapacityClassroom->setText("");
             widget.comboBoxClassRoom->setCurrentIndex(-1); 
@@ -217,22 +226,84 @@ void WindowAdministrator::refreshClassroom(int newState){
         case 32 :
             widget.tableWidgetClassrooms->setEnabled(false);
             widget.frameClassroom->setVisible(true);
-            widget.buttonAddClassroom->setEnabled(true);
-            widget.buttonEditClassroom->setEnabled(true);
-            widget.buttonDeleteClassroom->setEnabled(true);
-            widget.lineEditIdClassroom->setText(currentClassroom->GetId().c_str());
-            widget.lineEditCapacityClassroom->setText(QString::number(currentClassroom->GetCapacity()));
-            if(dynamic_cast<TutorialClassroom*>(currentClassroom) != NULL) 
-                widget.comboBoxClassRoom->setCurrentIndex(widget.comboBoxClassRoom->findText("Tutorial Classroom"));
-            else if(dynamic_cast<PracticalClassroom*>(currentClassroom) != NULL)
-                widget.comboBoxClassRoom->setCurrentIndex(widget.comboBoxClassRoom->findText("Practical Classroom"));
-            else if(dynamic_cast<LectureHall*>(currentClassroom) != NULL)
-                widget.comboBoxClassRoom->setCurrentIndex(widget.comboBoxClassRoom->findText("Lecture Hall"));
-            else
-                widget.comboBoxClassRoom->setCurrentIndex(-1);
+            widget.buttonAddClassroom->setEnabled(false);
+            widget.buttonEditClassroom->setEnabled(false);
+            widget.buttonDeleteClassroom->setEnabled(false);
+            if(currentClassroom != NULL) {
+                widget.lineEditIdClassroom->setText(currentClassroom->GetId().c_str());
+                widget.lineEditCapacityClassroom->setText(QString::number(currentClassroom->GetCapacity()));
+                if(dynamic_cast<TutorialClassroom*>(currentClassroom) != NULL) 
+                    widget.comboBoxClassRoom->setCurrentIndex(widget.comboBoxClassRoom->findText("Tutorial Classroom"));
+                else if(dynamic_cast<PracticalClassroom*>(currentClassroom) != NULL)
+                    widget.comboBoxClassRoom->setCurrentIndex(widget.comboBoxClassRoom->findText("Practical Classroom"));
+                else if(dynamic_cast<LectureHall*>(currentClassroom) != NULL)
+                    widget.comboBoxClassRoom->setCurrentIndex(widget.comboBoxClassRoom->findText("Lecture Hall"));
+                else
+                    widget.comboBoxClassRoom->setCurrentIndex(-1);
+            }
+            else  {
+                widget.lineEditIdClassroom->setText("");
+                widget.lineEditCapacityClassroom->setText("");
+                widget.comboBoxClassRoom->setCurrentIndex(-1); 
+            }
             displaySpecificityClassroom();   
             break;
     }
+    cout<<"Fin gestion etat classroom : "<<classroomState<<endl;
+}
+
+void WindowAdministrator::comboBoxTypeClassroomChanged() {
+    displaySpecificityClassroom();
+}
+
+void WindowAdministrator::classroomClicked() {
+    refreshClassroom(2);
+}
+void WindowAdministrator::addClassroom() {
+    currentClassroom = NULL;
+    if(classroomState == 1)
+        refreshClassroom(31);
+    else
+        refreshClassroom(32);
+}
+void WindowAdministrator::editClassroom() {
+    refreshClassroom(32);
+}
+void WindowAdministrator::deleteClassroom() {
+    ctrl->delClassroom(currentClassroom);
+    refreshClassroom(1);
+}
+
+int boolToInt(bool b) {
+    if(b) return 1;
+    else return 0;
+}
+
+void WindowAdministrator::okEditClassroom() {
+    if(currentClassroom != NULL)
+        if(widget.checkBoxSpecificity->isVisible())
+            ctrl->setClassroom(currentClassroom, widget.lineEditIdClassroom->text().toStdString(), widget.lineEditCapacityClassroom->text().toInt(), boolToInt(widget.checkBoxSpecificity->isChecked()));
+        else
+            ctrl->setClassroom(currentClassroom, widget.lineEditIdClassroom->text().toStdString(), widget.lineEditCapacityClassroom->text().toInt(), widget.lineEditNumberComputers->text().toInt());
+    else {
+        Classroom *cr;
+        if(widget.comboBoxClassRoom->currentText() == "Lecture Hall")
+            cr = new LectureHall(widget.lineEditIdClassroom->text().toStdString(), widget.lineEditCapacityClassroom->text().toInt(), widget.checkBoxSpecificity->isChecked());
+        else if(widget.comboBoxClassRoom->currentText() == "Practical Classroom")
+            cr = new PracticalClassroom(widget.lineEditIdClassroom->text().toStdString(), widget.lineEditCapacityClassroom->text().toInt(), widget.lineEditNumberComputers->text().toInt());
+        else
+            cr = new TutorialClassroom(widget.lineEditIdClassroom->text().toStdString(), widget.lineEditCapacityClassroom->text().toInt(), widget.checkBoxSpecificity->isChecked());
+        ctrl->addClassroom(cr);
+        currentClassroom = cr;
+        widget.tableWidgetClassrooms->setCurrentCell(-1,0);
+    }    
+    refreshClassroom(2);
+}
+void WindowAdministrator::cancelEditClassroom() {
+    if(classroomState == 31)
+        refreshClassroom(1);
+    else
+        refreshClassroom(2);
 }
 
 void WindowAdministrator::refreshModule(int newState) {
@@ -426,7 +497,11 @@ void WindowAdministrator::refreshModule(int newState) {
 }
 
 void WindowAdministrator::displayClassroom(){
-    widget.tableWidgetClassrooms->clear();
+    QTableWidget *table = widget.tableWidgetClassrooms;    
+    while(table->rowCount() != 0) {
+        table->removeRow(table->rowCount()-1);
+    }
+    
     list<Classroom*> *lc = this->ctrl->getSchedule()->GetClassroomList();
     list<Classroom*>::iterator itC = lc->begin();
     list<Classroom*>::const_iterator itCMax = lc->end();
@@ -434,9 +509,10 @@ void WindowAdministrator::displayClassroom(){
     for(;itC != itCMax ; itC++){
         int nbrow = twc->rowCount();
         twc->insertRow(nbrow);
-        twc->setItem(nbrow, 0, new QTableWidgetItem((*itC)->GetId().c_str()));
+        QTableWidgetItem *item = new QTableWidgetItem((*itC)->GetId().c_str());
+        twc->setItem(nbrow, 0, item);
         twc->setItem(nbrow, 1, new QTableWidgetItem(QString::number((*itC)->GetCapacity())));
-        string specificity = "", type = ""; 
+        QString specificity = "", type = ""; 
         if(dynamic_cast<TutorialClassroom*>(*itC) != NULL) {
             type = "Tutorial Classroom";
             if(((TutorialClassroom*)(*itC))->IsVideoprojector())
@@ -445,6 +521,7 @@ void WindowAdministrator::displayClassroom(){
         }
         else if(dynamic_cast<PracticalClassroom*>(*itC) != NULL){
             type = "Practical Classroom";
+            specificity = QString::number(((PracticalClassroom*)(*itC))->GetElementsNumber())+" computers";
         }
         else if(dynamic_cast<LectureHall*>(*itC) != NULL){
             type = "Lecture Hall";
@@ -454,9 +531,8 @@ void WindowAdministrator::displayClassroom(){
                 specificity = "";
             }
         }
-        twc->setItem(nbrow, 2, new QTableWidgetItem(type.c_str()));
-        QTableWidgetItem *item = new QTableWidgetItem(specificity.c_str());
-        twc->setItem(nbrow, 3, item);
+        twc->setItem(nbrow, 2, new QTableWidgetItem(type));
+        twc->setItem(nbrow, 3, new QTableWidgetItem(specificity));
         if(currentClassroom != NULL){
             if((*itC)->GetId() == currentClassroom->GetId()){
                 twc->setCurrentItem(item);

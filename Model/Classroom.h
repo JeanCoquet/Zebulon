@@ -12,7 +12,7 @@ using namespace std;
 class Classroom {
 public:
     Classroom(string id, int capacity);
-    Classroom(const Classroom& orig);
+    Classroom(const Classroom* orig);
     virtual ~Classroom();
     int GetCapacity() const {
         return capacity;

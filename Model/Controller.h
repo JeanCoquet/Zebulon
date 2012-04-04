@@ -46,6 +46,9 @@ public:
     void delTimeSlot(TimeSlot* timeSlot);
     void addClassPeriod(ClassPeriod* classPeriod, Module *mod);
     void delClassPeriod(ClassPeriod* classPeriod, Module *mod);
+    void delClassroom(Classroom* cr);
+    void addClassroom(Classroom* cr);
+    void setClassroom(Classroom* cr, string id, int capacity, int specificity);
     void joinTimeSlotWithClassPeriod(TimeSlot *timeslot, ClassPeriod *classPeriod);
     void setModule(Module* mod, string id, string name, string theHead);
     void setClassPeriod(Module *mod, ClassPeriod* cp, string type,  string teacher, int duration, list<Group*> *lg);

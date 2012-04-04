@@ -11,8 +11,15 @@
 class PracticalClassroom : public Classroom {
 public:
     PracticalClassroom(string id, int capacity, int elementsNumber);
-    PracticalClassroom(const PracticalClassroom& orig, string id, int capacity);
+    PracticalClassroom(const PracticalClassroom* orig);
     virtual ~PracticalClassroom();
+    int GetElementsNumber() const {
+        return elementsNumber;
+    }
+    void SetElementsNumber(int elementsNumber) {
+        this->elementsNumber = elementsNumber;
+    }
+
 private:
     int elementsNumber;
 };
