@@ -4,8 +4,7 @@
 #include <sstream>
 
 
-void MainWindow::addGroupToComboBox(){
-    
+void MainWindow::reloadGroups(){
     ui->comboBoxGroup->clear();
     windowEditTimeSlot->getWindowAddClassPeriod()->getWidget().comboBoxGroup->clear();
     
@@ -18,7 +17,7 @@ void MainWindow::addGroupToComboBox(){
     }
 }
 
-void MainWindow::addModuleToComboBox(){
+void MainWindow::reloadModules(){
     windowEditTimeSlot->getWidget().comboBoxModule->clear();
     windowEditTimeSlot->getWidget().comboBoxClassroom->clear();
     
@@ -81,7 +80,7 @@ void MainWindow::addModuleToComboBox(){
     }
 }
 
-void MainWindow::addClassroomToComboBox(){
+void MainWindow::reloadClassrooms(){
     ui->comboBoxClassroom->clear();
     list<Classroom*>* l = this->ctrl->getSchedule()->GetClassroomList();
     list<Classroom*>::iterator it = l->begin();
@@ -92,7 +91,7 @@ void MainWindow::addClassroomToComboBox(){
 }
 
 
-void MainWindow::addStudentToComboBox(){
+void MainWindow::reloadStudents(){
     ui->comboBoxStudent->clear();
     list<Group*>* lg = this->ctrl->getSchedule()->GetGroupList();
     list<Group*>::iterator it = lg->begin();
@@ -138,14 +137,13 @@ MainWindow::MainWindow(QWidget *parent) :
     windowEditTimeSlot = new WindowEditTimeSlot(this->ctrl, this);
     windowAdministrator = new WindowAdministrator(this->ctrl, this);
    
-    addGroupToComboBox();
-    addModuleToComboBox();
-    addClassroomToComboBox();
-    addStudentToComboBox();
+    reloadGroups();
+    reloadModules();
+    reloadClassrooms();
+    reloadStudents();
 }
 
 void MainWindow::commit(){
-    cout<<"COMMIT DES DONNEES SI T AS MERDE T AS DETRUIT NOTRE BASE, :p"<<endl;
     this->ctrl->commit();
 }
 
@@ -348,6 +346,14 @@ void MainWindow::openEditTimeSlot(QTimeSlot* timeSlot) {
     
     windowEditTimeSlot->setCurrentTimeSlot(timeSlot);
     windowEditTimeSlot->show();
+}
+
+void MainWindow::reloadAll(){
+    reloadClassrooms();
+    reloadGroups();
+    reloadStudents();
+    reloadModules();
+    reloadQTimeSlots();
 }
 
 void MainWindow::openAdministrator() {

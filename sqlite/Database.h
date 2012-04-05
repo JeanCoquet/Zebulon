@@ -43,7 +43,7 @@ public:
     
     void addGroup(Group *group);
     void delGroup(Group *group);
-    void updateGroup(Group *group, string id, list<Student*> studentList, Group *dadyGroup);
+    void updateGroup(Group *group, string id, Group *daddyGroup);
     
     void addTimeSlot(TimeSlot* timeSlot);
     void delTimeSlot(TimeSlot* timeSlot);

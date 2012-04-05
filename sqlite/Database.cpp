@@ -64,8 +64,10 @@ void Database::delStudent(Student *stud, Group *group) {
     cout <<  "delete from Student where id = '"<<stud->GetId()<<"'"<<endl;
     this->history << "delete from Student where id = '"<<stud->GetId()<<"'"<<endl;
 }
-void Database::updateStudent(Student *stud, Group *group, string id, string lastname, string firstname, string addr, string email){
 
+void Database::updateStudent(Student *stud, Group *group, string id, string lastname, string firstname, string addr, string email){
+    cout << "update student set id='"<<id<<"', firstname='"<< firstname <<"' , lastname='"<<lastname<<"', addr='"<<addr<<"', email='"<<email<<"', id_group='"<<group->GetId()<<"' where id = '"<<stud->GetId()<<"'"<<endl;
+    history << "update student set id='"<<id<<"', firstname='"<< firstname <<"' , lastname='"<<lastname<<"', addr='"<<addr<<"', email='"<<email<<"', id_group='"<<group->GetId()<<"' where id = '"<<stud->GetId()<<"'"<<endl;
 }
 
 void Database::addModule(Module *mod) {
@@ -79,23 +81,28 @@ void Database::delModule(Module *mod){
     this->history << "delete from Module where id = '"<<mod->GetId()<<"'"<<endl;
 }
 void Database::updateModule(Module* mod, string id, string name, string theHead) {
-    cout << "update module set id = '"<<id<<"', name = '"<<name<<"', theHead = '"<<theHead<<"' where id = '"<<mod->GetId()<<endl;
-    this->history << "update module set id = '"<<id<<"', name = '"<<name<<"', theHead = '"<<theHead<<"' where id = '"<<mod->GetId()<<endl;
+    cout << "update module set id = '"<<id<<"', name = '"<<name<<"', theHead = '"<<theHead<<"' where id = '"<<mod->GetId()<< "'" <<endl;
+    this->history << "update module set id = '"<<id<<"', name = '"<<name<<"', theHead = '"<<theHead<<"' where id = '"<<mod->GetId()<< "'" <<endl;
     cout << "update classPeriod set id_module = '"<<id<<"' where id_module = '"<<mod->GetId()<<"'"<<endl;
     this->history << "update classPeriod set id_module = '"<<id<<"' where id_module = '"<<mod->GetId()<<"'"<<endl;
 }
 
 void Database::addGroup(Group *group){
-    
+    list<Group*>::iterator it = group->GetGroupList()->begin();
+    list<Group*>::const_iterator itMax = group->GetGroupList()->end();
+    for(;it != itMax ; it++){
+        updateGroup((*it), (*it)->GetId(), group);
+    }
+    cout << "insert into 'group' values('" << group->GetId() << "', '')"<<endl;
+    history << "insert into 'group' values('" << group->GetId() << "', '')"<<endl;
 }
 void Database::delGroup(Group *group) {
-    cout << "delete from Student where id_group='"<<group->GetId()<<"'"<<endl;
-    this->history << "delete from Student where id_group='"<<group->GetId()<<"'"<<endl;
     cout << "delete from 'Group' where id = '"<<group->GetId()<<"'"<<endl;
     this->history << "delete from 'Group' where id = '"<<group->GetId()<<"'"<<endl;
 }
-void Database::updateGroup(Group *group, string id, list<Student*> studentList, Group *dadyGroup){
-    
+void Database::updateGroup(Group *group, string id, Group *daddyGroup){
+    cout << "update 'group' set id = '" << id << "', id_groupParent = '" << daddyGroup->GetId() << "' where id = '" << group->GetId() << "'"<<endl;
+    history << "update 'group' set id = '" << id << "', id_groupParent = '" << daddyGroup->GetId() << "' where id = '" << group->GetId() << "'"<<endl;
 }
 
 void Database::addTimeSlot(TimeSlot* timeSlot){

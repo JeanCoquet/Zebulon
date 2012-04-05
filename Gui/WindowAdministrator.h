@@ -28,6 +28,7 @@ public:
 
 public slots :
     
+    bool close();
     // Onglet Group
     void groupClicked();
     void addGroup();
@@ -81,14 +82,17 @@ private:
     Controller* ctrl;
     MainWindow* m;
     bool load; 
+    bool edited;
     
     // Onglet Group
     Group* currentGroup;
     Student* currentStudent;
     int groupState; /* voir doc */ 
+    bool groupGroupModified;
+    QStringList tempGroupListGroup;    
     void displayGroups();
     void displayStudents();
-    void refreshGroups(int newState);
+    void refreshGroup(int newState);
     void loadGroupsGroup();
     void setCurrentGroup();
     void setCurrentStudent();

@@ -1,6 +1,6 @@
 /*
  * File:   WindowAdministrator.cpp
- * Author: E110091P
+ * Author: moi (et lui)
  *
  * Created on 29 mars 2012, 12:32
  */
@@ -10,7 +10,9 @@
 
 WindowAdministrator::WindowAdministrator(Controller* ctrl, MainWindow* mainwindow) {
     load = false;
+
     groupClassPeriodModified = false;
+    groupGroupModified = false;
     widget.setupUi(this);
     this->ctrl = ctrl;
     this->m = mainwindow;
@@ -31,7 +33,7 @@ WindowAdministrator::WindowAdministrator(Controller* ctrl, MainWindow* mainwindo
     oldIdSelectedModule = "";
     refreshModule(1);
     refreshClassroom(1);
-    refreshGroups(1);
+    refreshGroup(1);
     currentModule = NULL;
     
     QObject::connect(widget.buttonAddModule, SIGNAL(clicked()), this, SLOT(addModule()));
@@ -48,7 +50,6 @@ WindowAdministrator::WindowAdministrator(Controller* ctrl, MainWindow* mainwindo
     QObject::connect(widget.buttonCancelEditClassPeriod, SIGNAL(clicked()), this, SLOT(cancelEditClassPeriod()));
     QObject::connect(widget.buttonAddGroupClassPeriod, SIGNAL(clicked()), this, SLOT(addGroupClassPeriod()));
     QObject::connect(widget.buttonDeleteGroupClassPeriod, SIGNAL(clicked()), this, SLOT(deleteGroupClassPeriod()));
-    QObject::connect(widget.tableWidgetGroups, SIGNAL(currentRowChanged (int)), this, SLOT(displayStudents()));
     QObject::connect(widget.comboBoxGroupClassPeriod, SIGNAL(currentIndexChanged (int)), this, SLOT(comboBoxGroupsClassPeriodChanged(int)));
     QObject::connect(widget.listWidgetGroupClassPeriod, SIGNAL(currentRowChanged (int)), this, SLOT(listGroupClassPeriodClicked()));
     QObject::connect(widget.tableWidgetClassrooms, SIGNAL(itemClicked(QTableWidgetItem*)), this, SLOT(classroomClicked()));
@@ -59,14 +60,32 @@ WindowAdministrator::WindowAdministrator(Controller* ctrl, MainWindow* mainwindo
     QObject::connect(widget.buttonOkEditClassroom, SIGNAL(clicked()), this, SLOT(okEditClassroom()));
     QObject::connect(widget.buttonCancelEditClassroom, SIGNAL(clicked()), this, SLOT(cancelEditClassroom()));
     QObject::connect(widget.comboBoxClassRoom, SIGNAL(currentIndexChanged (int)), this, SLOT(comboBoxTypeClassroomChanged()));
+    QObject::connect(widget.tableWidgetGroups, SIGNAL(itemClicked(QTableWidgetItem*)), this, SLOT(groupClicked()));
+    QObject::connect(widget.tableWidgetStudents, SIGNAL(itemClicked(QTableWidgetItem*)), this, SLOT(studentClicked()));
+    QObject::connect(widget.buttonAddGroup, SIGNAL(clicked()), this, SLOT(addGroup()));
+    QObject::connect(widget.buttonEditGroup, SIGNAL(clicked()), this, SLOT(editGroup()));
+    QObject::connect(widget.buttonDeleteGroup, SIGNAL(clicked()), this, SLOT(deleteGroup()));
+    QObject::connect(widget.comboBoxChildrenGroup, SIGNAL(currentIndexChanged (int)), this, SLOT(comboBoxGroupsGroupChanged(int)));
+    QObject::connect(widget.buttonAddChildrenGroup, SIGNAL(clicked()), this, SLOT(addGroupGroup()));
+    QObject::connect(widget.listWidgetChildrenGroup, SIGNAL(currentRowChanged (int)), this, SLOT(listGroupGroupClicked()));
+    QObject::connect(widget.buttonDeleteChildrenGroup, SIGNAL(clicked()), this, SLOT(deleteGroupGroup()));
+    QObject::connect(widget.buttonOkEditGroup, SIGNAL(clicked()), this, SLOT(okEditGroup()));
+    QObject::connect(widget.buttonCancelEditGroup, SIGNAL(clicked()), this, SLOT(cancelEditGroup()));
+    QObject::connect(widget.buttonAddStudent, SIGNAL(clicked()), this, SLOT(addStudent()));
+    QObject::connect(widget.buttonEditStudent, SIGNAL(clicked()), this, SLOT(editStudent()));
+    QObject::connect(widget.buttonDeleteStudent, SIGNAL(clicked()), this, SLOT(deleteStudent()));
+    QObject::connect(widget.buttonOkEditStudent, SIGNAL(clicked()), this, SLOT(okEditStudent()));
+    QObject::connect(widget.buttonCancelStudent, SIGNAL(clicked()), this, SLOT(cancelEditStudent()));
 }
 
-void WindowAdministrator::refreshGroups(int newState) {
+void WindowAdministrator::refreshGroup(int newState) {
     cout << "Traitement Etat : "<<newState<<endl;
     this->groupState = newState;
+    load = true;
     switch(newState){
         case 1 :
             currentGroup = NULL;
+            currentStudent = NULL;
             widget.tableWidgetStudents->setEnabled(false);
             widget.frameEditGroup->setVisible(false);
             widget.frameEditStudent->setVisible(false);
@@ -76,59 +95,367 @@ void WindowAdministrator::refreshGroups(int newState) {
             widget.buttonAddStudent->setEnabled(false);
             widget.buttonEditStudent->setEnabled(false);
             widget.buttonDeleteStudent->setEnabled(false);
+            widget.lineEditIdGroup->setText("");
+            widget.listWidgetChildrenGroup->clear();
             displayGroups();
+            displayStudents();
             break;
         case 2 :
+            setCurrentGroup();
+            currentStudent = NULL;
+            widget.tableWidgetGroups->setEnabled(true);
+            widget.tableWidgetStudents->setEnabled(true);
+            widget.frameEditGroup->setVisible(false);
+            widget.frameEditStudent->setVisible(false);
+            widget.buttonAddGroup->setEnabled(true);
+            widget.buttonEditGroup->setEnabled(true);
+            widget.buttonDeleteGroup->setEnabled(true);
+            widget.buttonAddStudent->setEnabled(true);
+            widget.buttonEditStudent->setEnabled(false);
+            widget.buttonDeleteStudent->setEnabled(false);
+            widget.lineEditIdGroup->setText("");
+            widget.listWidgetChildrenGroup->clear();
+            widget.lineEditGroupStudent->setText("");
+            widget.lineEditIdStudent->setText("");
+            widget.lineEditFirstNameStudent->setText("");
+            widget.lineEditLastNameStudent->setText("");
+            widget.lineEditAddressStudent->setText("");
+            widget.lineEditEmailStudent->setText("");
+            displayGroups();
+            displayStudents();
             break;
         case 3 :
+            setCurrentStudent();
+            widget.tableWidgetGroups->setEnabled(true);
+            widget.tableWidgetStudents->setEnabled(true);
+            widget.frameEditGroup->setVisible(false);
+            widget.frameEditStudent->setVisible(false);
+            widget.buttonAddGroup->setEnabled(true);
+            widget.buttonEditGroup->setEnabled(true);
+            widget.buttonDeleteGroup->setEnabled(true);
+            widget.buttonAddStudent->setEnabled(true);
+            widget.buttonEditStudent->setEnabled(true);
+            widget.buttonDeleteStudent->setEnabled(true);
+            displayStudents();
+            widget.lineEditIdGroup->setText("");
+            widget.listWidgetChildrenGroup->clear();
+            widget.lineEditGroupStudent->setText("");
+            widget.lineEditIdStudent->setText("");
+            widget.lineEditFirstNameStudent->setText("");
+            widget.lineEditLastNameStudent->setText("");
+            widget.lineEditAddressStudent->setText("");
+            widget.lineEditEmailStudent->setText("");
             break;
         case 41 :
+            widget.frameEditGroup->setVisible(true);
+            widget.tableWidgetGroups->setEnabled(false);
+            widget.tableWidgetStudents->setEnabled(false);
+            widget.buttonAddGroup->setEnabled(false);
+            widget.buttonEditGroup->setEnabled(false);
+            widget.buttonDeleteGroup->setEnabled(false);
+            widget.buttonAddStudent->setEnabled(false);
+            widget.buttonEditStudent->setEnabled(false);
+            widget.buttonDeleteStudent->setEnabled(false);
+            widget.buttonAddChildrenGroup->setEnabled(false);
+            widget.buttonDeleteChildrenGroup->setEnabled(false);
+            widget.listWidgetChildrenGroup->clear();
+            widget.comboBoxChildrenGroup->setCurrentIndex(-1);
+            loadGroupsGroup();
             break;
         case 411 :
+            widget.buttonAddChildrenGroup->setEnabled(true);
+            widget.buttonDeleteChildrenGroup->setEnabled(false);
+            widget.listWidgetChildrenGroup->setCurrentRow(-1);
             break;
         case 412 :
+            widget.buttonAddChildrenGroup->setEnabled(false);
+            widget.buttonDeleteChildrenGroup->setEnabled(true);
+            widget.comboBoxChildrenGroup->setCurrentIndex(-1);
             break;
         case 413 :
+            widget.buttonAddChildrenGroup->setEnabled(true);
+            widget.buttonDeleteChildrenGroup->setEnabled(true);
             break;
         case 42 :
+            widget.frameEditGroup->setVisible(true);
+            widget.tableWidgetGroups->setEnabled(false);
+            widget.tableWidgetStudents->setEnabled(false);
+            widget.buttonAddGroup->setEnabled(false);
+            widget.buttonEditGroup->setEnabled(false);
+            widget.buttonDeleteGroup->setEnabled(false);
+            widget.buttonAddStudent->setEnabled(false);
+            widget.buttonEditStudent->setEnabled(false);
+            widget.buttonDeleteStudent->setEnabled(false);
+            widget.buttonAddChildrenGroup->setEnabled(false);
+            widget.buttonDeleteChildrenGroup->setEnabled(false);
+            if(currentGroup == NULL){
+            }else{
+                widget.lineEditIdGroup->setText(currentGroup->GetId().c_str());
+            }
+            loadGroupsGroup();
+            widget.comboBoxChildrenGroup->setCurrentIndex(-1);
             break;
         case 421 :
+            widget.buttonAddChildrenGroup->setEnabled(true);
+            widget.buttonDeleteChildrenGroup->setEnabled(false);
+            widget.listWidgetChildrenGroup->setCurrentRow(-1);
             break;
         case 422 :
+            widget.buttonAddChildrenGroup->setEnabled(false);
+            widget.buttonDeleteChildrenGroup->setEnabled(true);
+            widget.comboBoxChildrenGroup->setCurrentIndex(-1);
             break;
         case 423 :
+            widget.buttonAddChildrenGroup->setEnabled(true);
+            widget.buttonDeleteChildrenGroup->setEnabled(true);
             break;
         case 43 :
+            widget.frameEditGroup->setVisible(true);
+            widget.tableWidgetGroups->setEnabled(false);
+            widget.tableWidgetStudents->setEnabled(false);
+            widget.buttonAddGroup->setEnabled(false);
+            widget.buttonEditGroup->setEnabled(false);
+            widget.buttonDeleteGroup->setEnabled(false);
+            widget.buttonAddStudent->setEnabled(false);
+            widget.buttonEditStudent->setEnabled(false);
+            widget.buttonDeleteStudent->setEnabled(false);
+            widget.buttonAddChildrenGroup->setEnabled(false);
+            widget.buttonDeleteChildrenGroup->setEnabled(false);
+            if(currentGroup == NULL){
+                
+            }else{
+                widget.lineEditIdGroup->setText(currentGroup->GetId().c_str());
+            }
+            loadGroupsGroup();     
+            widget.comboBoxChildrenGroup->setCurrentIndex(-1);
             break;
         case 431 :
+            widget.buttonAddChildrenGroup->setEnabled(true);
+            widget.buttonDeleteChildrenGroup->setEnabled(false);
+            widget.listWidgetChildrenGroup->setCurrentRow(-1);
             break;
         case 432 :
+            widget.buttonAddChildrenGroup->setEnabled(false);
+            widget.buttonDeleteChildrenGroup->setEnabled(true);
+            widget.comboBoxChildrenGroup->setCurrentIndex(-1);
             break;
         case 433 :
+            widget.buttonAddChildrenGroup->setEnabled(true);
+            widget.buttonDeleteChildrenGroup->setEnabled(true);
             break;
         case 51 :
+            widget.frameEditStudent->setVisible(true);
+            widget.tableWidgetGroups->setEnabled(false);
+            widget.tableWidgetStudents->setEnabled(false);
+            widget.buttonAddGroup->setEnabled(false);
+            widget.buttonEditGroup->setEnabled(false);
+            widget.buttonDeleteGroup->setEnabled(false);
+            widget.buttonAddStudent->setEnabled(false);
+            widget.buttonEditStudent->setEnabled(false);
+            widget.buttonDeleteStudent->setEnabled(false);
+            widget.buttonAddChildrenGroup->setEnabled(false);
+            widget.buttonDeleteChildrenGroup->setEnabled(false);
+            widget.lineEditGroupStudent->setText(currentGroup->GetId().c_str());
             break;
         case 52 :
+            widget.frameEditStudent->setVisible(true);
+            widget.tableWidgetGroups->setEnabled(false);
+            widget.tableWidgetStudents->setEnabled(false);
+            widget.buttonAddGroup->setEnabled(false);
+            widget.buttonEditGroup->setEnabled(false);
+            widget.buttonDeleteGroup->setEnabled(false);
+            widget.buttonAddStudent->setEnabled(false);
+            widget.buttonEditStudent->setEnabled(false);
+            widget.buttonDeleteStudent->setEnabled(false);
+            widget.buttonAddChildrenGroup->setEnabled(false);
+            widget.buttonDeleteChildrenGroup->setEnabled(false);
+            widget.lineEditGroupStudent->setText(currentGroup->GetId().c_str());
+            if(currentStudent != NULL){   
+                widget.lineEditIdStudent->setText(currentStudent->GetId().c_str());
+                widget.lineEditFirstNameStudent->setText(currentStudent->GetFirstname().c_str());
+                widget.lineEditLastNameStudent->setText(currentStudent->GetLastname().c_str());
+                widget.lineEditAddressStudent->setText(currentStudent->GetAddr().c_str());
+                widget.lineEditEmailStudent->setText(currentStudent->GetEmail().c_str());
+            }
             break;
     }
+    load = false;
     cout << "Fin Traitement Etat : "<<newState<<endl;
 }
-void WindowAdministrator::groupClicked() { }
-void WindowAdministrator::addGroup() { }
-void WindowAdministrator::editGroup() { }
-void WindowAdministrator::deleteGroup() { }
-void WindowAdministrator::okEditGroup() { }
-void WindowAdministrator::cancelEditGroup() { }
-void WindowAdministrator::addGroupGroup() { }
-void WindowAdministrator::deleteGroupGroup() { }
-void WindowAdministrator::comboBoxGroupsGroupChanged(int index) { }
-void WindowAdministrator::listGroupGroupClicked() { }
-void WindowAdministrator::studentClicked() { }
-void WindowAdministrator::addStudent() { }
-void WindowAdministrator::editStudent() { }
-void WindowAdministrator::deleteStudent() { }
-void WindowAdministrator::okEditStudent() { }
-void WindowAdministrator::cancelEditStudent() { }
+void WindowAdministrator::groupClicked() {
+    refreshGroup(2);
+}
+void WindowAdministrator::addGroup() {
+    currentGroup = NULL;
+    if(groupState == 1){
+        refreshGroup(41);
+    }else if(groupState == 2){
+        refreshGroup(42);
+    }else{
+        refreshGroup(43);
+    }
+}
+
+void WindowAdministrator::editGroup() {
+    if(groupState == 2){
+        refreshGroup(42);
+    }else{
+        refreshGroup(43);
+    }
+}
+
+void WindowAdministrator::deleteGroup() {
+    ctrl->delGroup(currentGroup);
+    refreshGroup(1);
+}
+void WindowAdministrator::okEditGroup() {
+    groupGroupModified = false;
+    list<Group*>* lGNew = new list<Group*>();
+    list<Group*> *lg = this->ctrl->getSchedule()->GetGroupList();
+    list<Group*>::iterator itG = lg->begin();
+    list<Group*>::const_iterator itGMax = lg->end();
+    cout<<"petite"<<endl;
+    for( ; itG != itGMax ; itG++){
+        if(widget.listWidgetChildrenGroup->findItems(QString::fromStdString((*itG)->GetId()), Qt::MatchCaseSensitive).size() != 0 ){
+            lGNew->push_back((*itG));
+        }
+    }
+    cout<<"fesse"<<endl;
+    tempGroupListGroup.clear();
+    if(currentGroup != NULL){
+        ctrl->setGroup(currentGroup, widget.lineEditIdGroup->text().toStdString(), lGNew);
+    }
+    else{
+        Group* group = new Group(widget.lineEditIdGroup->text().toStdString(), lGNew);
+        ctrl->addGroup(group);
+        currentGroup = group;
+    }
+    cout<<"gauche"<<endl;
+    refreshGroup(2);
+}
+void WindowAdministrator::cancelEditGroup() {
+    if(groupState == 41){
+        refreshGroup(1);
+    }else if(groupState == 42){
+        refreshGroup(2);
+    }else{
+        refreshGroup(3);
+    }
+}
+
+void WindowAdministrator::addGroupGroup() {
+    groupGroupModified = true;
+    tempGroupListGroup.push_back(widget.comboBoxChildrenGroup->currentText());
+    
+    if(groupState == 421){
+        refreshGroup(42);
+    }else if(groupState == 423){
+        refreshGroup(42);
+    }else if(groupState == 411){
+        refreshGroup(41);
+    }else if(groupState == 413){
+        refreshGroup(41);
+    }else if(groupState == 431){
+        refreshGroup(43);
+    }else if(groupState == 433){
+        refreshGroup(43);
+    }
+}
+void WindowAdministrator::deleteGroupGroup() {
+    groupGroupModified = true;
+    tempGroupListGroup.removeOne(widget.listWidgetChildrenGroup->currentItem()->text());
+    if(groupState == 413){
+        refreshGroup(411);
+    }else if(groupState == 412){
+        refreshGroup(41);
+    }else if(groupState == 423){
+        refreshGroup(421);
+    }else if(groupState == 422){
+        refreshGroup(42);
+    }else if(groupState == 433){
+        refreshGroup(431);
+    }else {
+        refreshGroup(43);
+    }
+}
+void WindowAdministrator::comboBoxGroupsGroupChanged(int index) {
+    if(!load){
+        if(groupState == 41){
+            refreshGroup(411);
+        }else if(groupState == 412){
+            refreshGroup(413);
+        }else if(groupState == 42){
+            refreshGroup(421);
+        }else if(groupState == 422){
+            refreshGroup(423);
+        }else if(groupState == 43){
+            refreshGroup(431);
+        }else {
+            refreshGroup(433);
+        }
+    }
+}
+void WindowAdministrator::listGroupGroupClicked() { 
+    if(!load){
+        if(groupState == 41){
+            refreshGroup(412);
+        }else if(groupState == 411){
+            refreshGroup(413);
+        }else if(groupState == 42){
+            refreshGroup(422);
+        }else if(groupState == 421){
+            refreshGroup(423);
+        }else if(groupState == 43){
+            refreshGroup(432);
+        }else {
+            refreshGroup(433);
+        }
+    }
+}
+void WindowAdministrator::studentClicked() { 
+    refreshGroup(3);
+}
+void WindowAdministrator::addStudent() {
+    currentStudent = NULL;
+    if(groupState == 2) {
+        refreshGroup(51);
+    }else
+        refreshGroup(52);
+}
+bool WindowAdministrator::close(){
+    m->reloadAll();
+    QDialog::close();
+}
+
+void WindowAdministrator::editStudent() {
+    refreshGroup(52);
+}
+
+void WindowAdministrator::deleteStudent() {
+    ctrl->delStudent(currentStudent, currentGroup);
+    refreshGroup(2);
+}
+void WindowAdministrator::okEditStudent() {
+    if(currentStudent != NULL) {
+        ctrl->setStudent(currentStudent, currentGroup, widget.lineEditIdStudent->text().toStdString(), widget.lineEditLastNameStudent->text().toStdString(), widget.lineEditFirstNameStudent->text().toStdString(), widget.lineEditAddressStudent->text().toStdString(), widget.lineEditEmailStudent->text().toStdString());
+        widget.tableWidgetStudents->setCurrentCell(-1,0);
+    }
+    else {
+        Student *student = new Student(widget.lineEditIdStudent->text().toStdString(), widget.lineEditLastNameStudent->text().toStdString(), widget.lineEditFirstNameStudent->text().toStdString(), widget.lineEditAddressStudent->text().toStdString(), widget.lineEditEmailStudent->text().toStdString());
+        ctrl->addStudent(student, currentGroup);
+        currentStudent = student;
+        widget.tableWidgetStudents->setCurrentCell(-1,0);
+    }    
+    refreshGroup(3);
+}
+
+void WindowAdministrator::cancelEditStudent() {
+    if(groupState == 51) {
+        refreshGroup(2);
+    }else
+        refreshGroup(3);
+}
+
 void WindowAdministrator::displayGroups() {
     QTableWidget *table = widget.tableWidgetGroups;    
     while(table->rowCount() != 0) {
@@ -145,19 +472,17 @@ void WindowAdministrator::displayGroups() {
         table->insertRow(nbRow);
         item = new QTableWidgetItem((*it)->GetId().c_str());
         table->setItem(nbRow, 0, item);
-        cout <<(*it)->GetId()<<endl;
-        QString s = "";
-        list<Group*>::iterator itG = (*it)->GetGroupList()->begin();
-        list<Group*>::const_iterator GMaxList = (*it)->GetGroupList()->end();
-        for(; itG!=GMaxList; itG++) {
-            s.append((*itG)->GetId().c_str());
-            s.append(";");
-            cout <<s->toStdString()<<endl;
+        string s = "";
+        if((*it)->GetGroupList() != NULL){
+            list<Group*>::iterator itG = (*it)->GetGroupList()->begin();
+            list<Group*>::const_iterator GMaxList = (*it)->GetGroupList()->end();
+            for(; itG!=GMaxList; itG++) {
+                s.append((*itG)->GetId());
+                s.append(";");
+            }
         }
-        
-    cout << "fin 3"<<endl;
-        item = new QTableWidgetItem(s);
-        table->setItem(nbRow, 2, item);
+        item = new QTableWidgetItem(s.c_str());
+        table->setItem(nbRow, 1, item);
         
         if(currentGroup != NULL){
             if((*it)->GetId() == currentGroup->GetId()){
@@ -165,39 +490,99 @@ void WindowAdministrator::displayGroups() {
             }
         }
     }
-    
-    cout << "fin"<<endl;
 }
 void WindowAdministrator::displayStudents(){
-    QList<QTableWidgetItem*>::iterator itGroup = this->widget.tableWidgetGroups->selectedItems().begin();
-    list<Group*> *lg = this->ctrl->getSchedule()->GetGroupList();
-    list<Group*>::iterator itG = lg->begin();
-    list<Group*>::const_iterator itGMax = lg->end();
-    for(; itG != itGMax ; itG++ ){
-        if((*itG)->GetId() == (*itGroup)->text().toStdString()){
-            break;
+    if(currentGroup != NULL){
+        list<Student*> *ls = currentGroup->GetStudentList();
+        list<Student*>::iterator itS = ls->begin();
+        list<Student*>::const_iterator itSMax = ls->end();
+        QTableWidget* tw = this->widget.tableWidgetStudents;
+        while(tw->rowCount() != 0) {
+            tw->removeRow(tw->rowCount()-1);
+        }
+        for(; itS != itSMax ; itS++){
+            int nbRow = tw->rowCount();
+            tw->insertRow(nbRow);
+            tw->setItem(nbRow, 0, new QTableWidgetItem((*itS)->GetId().c_str()));
+            tw->setItem(nbRow, 1, new QTableWidgetItem((*itS)->GetLastname().c_str()));
+            tw->setItem(nbRow, 2, new QTableWidgetItem((*itS)->GetFirstname().c_str()));
+            tw->setItem(nbRow, 3, new QTableWidgetItem((*itS)->GetAddr().c_str()));
+            QTableWidgetItem *item = new QTableWidgetItem((*itS)->GetEmail().c_str());
+            tw->setItem(nbRow, 4, item);
+
+            if(currentStudent != NULL){
+                if((*itS)->GetId() == currentStudent->GetId()){
+                    tw->setCurrentItem(item);
+                }
+            }
         }
     }
-    list<Student*> *ls = (*itG)->GetStudentList();
-    list<Student*>::iterator itS = ls->begin();
-    list<Student*>::const_iterator itSMax = ls->end();
-    QTableWidget* tw = this->widget.tableWidgetStudents;
-    while(tw->rowCount() != 0) {
-        tw->removeRow(tw->rowCount()-1);
+}
+
+void WindowAdministrator::loadGroupsGroup() { 
+    widget.listWidgetChildrenGroup->clear();
+    widget.comboBoxChildrenGroup->clear();
+    list<Group*>* l = this->ctrl->getSchedule()->GetGroupList();
+    list<Group*>::iterator it = l->begin();
+    list<Group*>::const_iterator MaxList = l->end();
+    int count =  tempGroupListGroup.count();
+    for(;it != MaxList; it++){
+        bool test = false;
+        if(currentGroup != NULL && currentGroup->GetGroupList() != NULL){
+            list<Group*>::iterator itG = currentGroup->GetGroupList()->begin();
+            list<Group*>::const_iterator itGMax = currentGroup->GetGroupList()->end();
+            for(; itG!= itGMax; itG++) {
+                if((*itG)->GetId() == (*it)->GetId()){
+                    if(!groupGroupModified && count == 0){
+                        tempGroupListGroup.push_back(QString::fromStdString((*itG)->GetId()));
+                        test = true;
+                    }
+                    break;
+                }
+            }
+        }
+        
+        if(!test && tempGroupListGroup.indexOf(QString::fromStdString((*it)->GetId())) == -1 && currentGroup != (*it)){
+            widget.comboBoxChildrenGroup->addItem((*it)->GetId().c_str());
+        }
+        
     }
-    for(; itS != itSMax ; itS++){
-        int nbRow = tw->rowCount();
-        tw->insertRow(nbRow);
-        tw->setItem(nbRow, 0, new QTableWidgetItem((*itS)->GetId().c_str()));
-        tw->setItem(nbRow, 1, new QTableWidgetItem((*itS)->GetLastname().c_str()));
-        tw->setItem(nbRow, 2, new QTableWidgetItem((*itS)->GetFirstname().c_str()));
-        tw->setItem(nbRow, 3, new QTableWidgetItem((*itS)->GetAddr().c_str()));
-        tw->setItem(nbRow, 4, new QTableWidgetItem((*itS)->GetEmail().c_str()));
+    int indexRowGroupG = widget.listWidgetChildrenGroup->currentRow();
+    widget.listWidgetChildrenGroup->clear();
+    widget.listWidgetChildrenGroup->addItems(tempGroupListGroup);
+    widget.listWidgetChildrenGroup->setCurrentRow(indexRowGroupG);
+    widget.comboBoxChildrenGroup->setCurrentIndex(-1);
+}
+void WindowAdministrator::setCurrentGroup() {
+    if(widget.tableWidgetGroups->currentRow() != -1) {
+        QList<QTableWidgetItem*>::iterator itGroup = this->widget.tableWidgetGroups->selectedItems().begin();
+        list<Group*> *lg = this->ctrl->getSchedule()->GetGroupList();
+        list<Group*>::iterator itG = lg->begin();
+        list<Group*>::const_iterator itGMax = lg->end();
+        for(; itG != itGMax ; itG++ ){
+            if((*itG)->GetId() == (*itGroup)->text().toStdString()){
+                break;
+            }
+        }
+    
+        currentGroup = (*itG);
     }
 }
-void WindowAdministrator::loadGroupsGroup() { }
-void WindowAdministrator::setCurrentGroup() { }
-void WindowAdministrator::setCurrentStudent() { }
+void WindowAdministrator::setCurrentStudent() { 
+    if(widget.tableWidgetStudents->currentRow() != -1) {
+        QList<QTableWidgetItem*>::iterator itStudent = this->widget.tableWidgetStudents->selectedItems().begin();
+        list<Student*> *ls = currentGroup->GetStudentList();
+        list<Student*>::iterator itS = ls->begin();
+        list<Student*>::const_iterator itSMax = ls->end();
+        for(; itS != itSMax ; itS++ ){
+            if((*itS)->GetId() == (*itStudent)->text().toStdString()){
+                break;
+            }
+        }
+    
+        currentStudent = (*itS);
+    }
+}
 
 void WindowAdministrator::moduleClicked(){
     refreshModule(2);

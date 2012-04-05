@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'WindowAdministrator.ui'
 **
-** Created: Thu Apr 5 15:43:20 2012
-**      by: Qt User Interface Compiler version 4.7.2
+** Created: Thu Apr 5 21:47:46 2012
+**      by: Qt User Interface Compiler version 4.6.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -193,7 +193,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 975, 457));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 953, 467));
         horizontalLayout_16 = new QHBoxLayout(scrollAreaWidgetContents);
         horizontalLayout_16->setObjectName(QString::fromUtf8("horizontalLayout_16"));
         tabWidget = new QTabWidget(scrollAreaWidgetContents);
@@ -418,6 +418,7 @@ public:
 
         lineEditGroupStudent = new QLineEdit(frameEditStudent);
         lineEditGroupStudent->setObjectName(QString::fromUtf8("lineEditGroupStudent"));
+        lineEditGroupStudent->setReadOnly(true);
 
         gridLayout_4->addWidget(lineEditGroupStudent, 1, 1, 1, 1);
 

@@ -1,8 +1,8 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'WindowAdministrator.h'
 **
-** Created: Thu Apr 5 15:44:02 2012
-**      by: The Qt Meta Object Compiler version 62 (Qt 4.7.2)
+** Created: Thu Apr 5 23:05:30 2012
+**      by: The Qt Meta Object Compiler version 62 (Qt 4.6.3)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -11,7 +11,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'WindowAdministrator.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 62
-#error "This file was generated using the moc from 4.7.2. It"
+#error "This file was generated using the moc from 4.6.3. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -20,10 +20,10 @@ QT_BEGIN_MOC_NAMESPACE
 static const uint qt_meta_data_WindowAdministrator[] = {
 
  // content:
-       5,       // revision
+       4,       // revision
        0,       // classname
        0,    0, // classinfo
-      39,   14, // methods
+      40,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -31,55 +31,57 @@ static const uint qt_meta_data_WindowAdministrator[] = {
        0,       // signalCount
 
  // slots: signature, parameters, type, tag, flags
-      21,   20,   20,   20, 0x0a,
-      36,   20,   20,   20, 0x0a,
-      47,   20,   20,   20, 0x0a,
-      59,   20,   20,   20, 0x0a,
-      73,   20,   20,   20, 0x0a,
-      87,   20,   20,   20, 0x0a,
-     105,   20,   20,   20, 0x0a,
-     121,   20,   20,   20, 0x0a,
-     146,  140,   20,   20, 0x0a,
-     178,   20,   20,   20, 0x0a,
-     202,   20,   20,   20, 0x0a,
-     219,   20,   20,   20, 0x0a,
+      26,   20,   21,   20, 0x0a,
+      34,   20,   20,   20, 0x0a,
+      49,   20,   20,   20, 0x0a,
+      60,   20,   20,   20, 0x0a,
+      72,   20,   20,   20, 0x0a,
+      86,   20,   20,   20, 0x0a,
+     100,   20,   20,   20, 0x0a,
+     118,   20,   20,   20, 0x0a,
+     134,   20,   20,   20, 0x0a,
+     159,  153,   20,   20, 0x0a,
+     191,   20,   20,   20, 0x0a,
+     215,   20,   20,   20, 0x0a,
      232,   20,   20,   20, 0x0a,
-     246,   20,   20,   20, 0x0a,
-     262,   20,   20,   20, 0x0a,
-     278,   20,   20,   20, 0x0a,
-     298,   20,   20,   20, 0x0a,
-     317,   20,   20,   20, 0x0a,
-     332,   20,   20,   20, 0x0a,
-     348,   20,   20,   20, 0x0a,
-     366,   20,   20,   20, 0x0a,
-     384,   20,   20,   20, 0x0a,
-     406,   20,   20,   20, 0x0a,
-     437,   20,   20,   20, 0x0a,
-     453,   20,   20,   20, 0x0a,
-     465,   20,   20,   20, 0x0a,
+     245,   20,   20,   20, 0x0a,
+     259,   20,   20,   20, 0x0a,
+     275,   20,   20,   20, 0x0a,
+     291,   20,   20,   20, 0x0a,
+     311,   20,   20,   20, 0x0a,
+     330,   20,   20,   20, 0x0a,
+     345,   20,   20,   20, 0x0a,
+     361,   20,   20,   20, 0x0a,
+     379,   20,   20,   20, 0x0a,
+     397,   20,   20,   20, 0x0a,
+     419,   20,   20,   20, 0x0a,
+     450,   20,   20,   20, 0x0a,
+     466,   20,   20,   20, 0x0a,
      478,   20,   20,   20, 0x0a,
-     493,   20,   20,   20, 0x0a,
-     508,   20,   20,   20, 0x0a,
-     527,   20,   20,   20, 0x0a,
-     548,   20,   20,   20, 0x0a,
-     565,   20,   20,   20, 0x0a,
-     583,   20,   20,   20, 0x0a,
-     603,   20,   20,   20, 0x0a,
-     623,   20,   20,   20, 0x0a,
-     647,   20,   20,   20, 0x0a,
-     669,   20,   20,   20, 0x0a,
-     694,  140,   20,   20, 0x0a,
-     732,   20,   20,   20, 0x0a,
+     491,   20,   20,   20, 0x0a,
+     506,   20,   20,   20, 0x0a,
+     521,   20,   20,   20, 0x0a,
+     540,   20,   20,   20, 0x0a,
+     561,   20,   20,   20, 0x0a,
+     578,   20,   20,   20, 0x0a,
+     596,   20,   20,   20, 0x0a,
+     616,   20,   20,   20, 0x0a,
+     636,   20,   20,   20, 0x0a,
+     660,   20,   20,   20, 0x0a,
+     682,   20,   20,   20, 0x0a,
+     707,  153,   20,   20, 0x0a,
+     745,   20,   20,   20, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_WindowAdministrator[] = {
-    "WindowAdministrator\0\0groupClicked()\0"
-    "addGroup()\0editGroup()\0deleteGroup()\0"
-    "okEditGroup()\0cancelEditGroup()\0"
-    "addGroupGroup()\0deleteGroupGroup()\0"
-    "index\0comboBoxGroupsGroupChanged(int)\0"
+    "WindowAdministrator\0\0bool\0close()\0"
+    "groupClicked()\0addGroup()\0editGroup()\0"
+    "deleteGroup()\0okEditGroup()\0"
+    "cancelEditGroup()\0addGroupGroup()\0"
+    "deleteGroupGroup()\0index\0"
+    "comboBoxGroupsGroupChanged(int)\0"
     "listGroupGroupClicked()\0studentClicked()\0"
     "addStudent()\0editStudent()\0deleteStudent()\0"
     "okEditStudent()\0cancelEditStudent()\0"
@@ -127,48 +129,50 @@ int WindowAdministrator::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: groupClicked(); break;
-        case 1: addGroup(); break;
-        case 2: editGroup(); break;
-        case 3: deleteGroup(); break;
-        case 4: okEditGroup(); break;
-        case 5: cancelEditGroup(); break;
-        case 6: addGroupGroup(); break;
-        case 7: deleteGroupGroup(); break;
-        case 8: comboBoxGroupsGroupChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 9: listGroupGroupClicked(); break;
-        case 10: studentClicked(); break;
-        case 11: addStudent(); break;
-        case 12: editStudent(); break;
-        case 13: deleteStudent(); break;
-        case 14: okEditStudent(); break;
-        case 15: cancelEditStudent(); break;
-        case 16: classroomClicked(); break;
-        case 17: addClassroom(); break;
-        case 18: editClassroom(); break;
-        case 19: deleteClassroom(); break;
-        case 20: okEditClassroom(); break;
-        case 21: cancelEditClassroom(); break;
-        case 22: comboBoxTypeClassroomChanged(); break;
-        case 23: moduleClicked(); break;
-        case 24: addModule(); break;
-        case 25: editModule(); break;
-        case 26: deleteModule(); break;
-        case 27: okEditModule(); break;
-        case 28: cancelEditModule(); break;
-        case 29: classperiodClicked(); break;
-        case 30: addClassPeriod(); break;
-        case 31: editClassPeriod(); break;
-        case 32: deleteClassPeriod(); break;
-        case 33: okEditClassPeriod(); break;
-        case 34: cancelEditClassPeriod(); break;
-        case 35: addGroupClassPeriod(); break;
-        case 36: deleteGroupClassPeriod(); break;
-        case 37: comboBoxGroupsClassPeriodChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 38: listGroupClassPeriodClicked(); break;
+        case 0: { bool _r = close();
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 1: groupClicked(); break;
+        case 2: addGroup(); break;
+        case 3: editGroup(); break;
+        case 4: deleteGroup(); break;
+        case 5: okEditGroup(); break;
+        case 6: cancelEditGroup(); break;
+        case 7: addGroupGroup(); break;
+        case 8: deleteGroupGroup(); break;
+        case 9: comboBoxGroupsGroupChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 10: listGroupGroupClicked(); break;
+        case 11: studentClicked(); break;
+        case 12: addStudent(); break;
+        case 13: editStudent(); break;
+        case 14: deleteStudent(); break;
+        case 15: okEditStudent(); break;
+        case 16: cancelEditStudent(); break;
+        case 17: classroomClicked(); break;
+        case 18: addClassroom(); break;
+        case 19: editClassroom(); break;
+        case 20: deleteClassroom(); break;
+        case 21: okEditClassroom(); break;
+        case 22: cancelEditClassroom(); break;
+        case 23: comboBoxTypeClassroomChanged(); break;
+        case 24: moduleClicked(); break;
+        case 25: addModule(); break;
+        case 26: editModule(); break;
+        case 27: deleteModule(); break;
+        case 28: okEditModule(); break;
+        case 29: cancelEditModule(); break;
+        case 30: classperiodClicked(); break;
+        case 31: addClassPeriod(); break;
+        case 32: editClassPeriod(); break;
+        case 33: deleteClassPeriod(); break;
+        case 34: okEditClassPeriod(); break;
+        case 35: cancelEditClassPeriod(); break;
+        case 36: addGroupClassPeriod(); break;
+        case 37: deleteGroupClassPeriod(); break;
+        case 38: comboBoxGroupsClassPeriodChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 39: listGroupClassPeriodClicked(); break;
         default: ;
         }
-        _id -= 39;
+        _id -= 40;
     }
     return _id;
 }

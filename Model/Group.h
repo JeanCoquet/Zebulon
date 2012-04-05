@@ -38,6 +38,7 @@ public:
     }
 
     void SetGroupList(list<Group*>* groupList) {
+        delete this->groupList;
         this->groupList = groupList;
     }
 

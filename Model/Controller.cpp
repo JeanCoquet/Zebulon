@@ -26,6 +26,20 @@ void Controller::addClassroom(Classroom* cr) {
         database->addLectureHall((LectureHall*) cr);
 }
 
+void Controller::addGroup(Group *group) {
+    database->addGroup(group);
+    this->schedule->GetGroupList()->push_back(group);
+}
+
+void Controller::setStudent(Student* s, Group* group, string id, string lastname, string firstname, string addr, string email) {
+    database->updateStudent(s, group, id, lastname, firstname, addr, email);
+    s->SetId(id);
+    s->SetLastname(lastname);
+    s->SetFirstname(firstname);
+    s->SetAddr(addr);
+    s->SetEmail(email);
+}
+
 void Controller::delClassroom(Classroom* cr) {
     list<TimeSlot*>::iterator it = schedule->GetTimeSlotList()->begin(); 
     list<TimeSlot*>::iterator itMax = schedule->GetTimeSlotList()->end();
@@ -118,18 +132,13 @@ void Controller::addModule(Module* mod){
 }
 
 void Controller::delGroup(Group* group) {
-    list<Student*>::iterator it = group->GetStudentList()->begin();
-    list<Student*>::iterator itMax = group->GetStudentList()->end();
-    for(; it!=itMax; it++) {
-        delStudent((*it), group);
+    while(group->GetStudentList() != NULL && group->GetStudentList()->size() != 0){
+        delStudent(*(group->GetStudentList()->begin()), group);
     }
-    
-    list<Group*>::iterator itG = group->GetGroupList()->begin();
-    list<Group*>::iterator itGMax = group->GetGroupList()->end();
-    for(; itG!=itGMax; it++) {
-        delGroup(*itG);
+    while(group->GetGroupList() != NULL && group->GetGroupList()->size() != 0){
+        delGroup(*(group->GetGroupList()->begin()));
+        group->GetGroupList()->remove(*(group->GetGroupList()->begin()));
     }
-    
     database->delGroup(group);
     this->schedule->GetGroupList()->remove(group);
 }
@@ -195,6 +204,27 @@ bool Controller::addTimeSlot(TimeSlot* timeSlot) {
     
     delete timeSlotList;
     return true;
+}
+
+void Controller::setGroup(Group* g, string id, list<Group*> *lg) {
+    list<Group*>::iterator it = this->schedule->GetGroupList()->begin();
+    list<Group*>::const_iterator itMax = this->schedule->GetGroupList()->end();
+    Group* popa = NULL;
+    for(;it != itMax ; it++){
+        if((*it)->GetId() == g->GetId()){
+            popa = (*it);
+        }
+    }
+    
+    list<Group*>::iterator it2 = lg->begin();
+    list<Group*>::const_iterator it2Max = lg->end();
+    for(;it2 != it2Max ; it2++){
+        database->updateGroup((*it2), (*it2)->GetId(), g);
+    }
+    
+    database->updateGroup(g, id, popa);
+    g->SetGroupList(lg);
+    g->SetId(id);
 }
 
 void Controller::delTimeSlot(TimeSlot* timeSlot) {

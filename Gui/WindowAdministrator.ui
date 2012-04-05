@@ -24,8 +24,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>975</width>
-        <height>457</height>
+        <width>953</width>
+        <height>467</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_16">
@@ -74,6 +74,12 @@
                <property name="showGrid">
                 <bool>false</bool>
                </property>
+               <attribute name="verticalHeaderVisible">
+                <bool>false</bool>
+               </attribute>
+               <attribute name="verticalHeaderDefaultSectionSize">
+                <number>18</number>
+               </attribute>
                <attribute name="verticalHeaderVisible">
                 <bool>false</bool>
                </attribute>
@@ -294,6 +300,12 @@
                <attribute name="verticalHeaderDefaultSectionSize">
                 <number>18</number>
                </attribute>
+               <attribute name="verticalHeaderVisible">
+                <bool>false</bool>
+               </attribute>
+               <attribute name="verticalHeaderDefaultSectionSize">
+                <number>18</number>
+               </attribute>
                <column>
                 <property name="text">
                  <string>Id</string>
@@ -387,7 +399,11 @@
                    </widget>
                   </item>
                   <item row="1" column="1">
-                   <widget class="QLineEdit" name="lineEditGroupStudent"/>
+                   <widget class="QLineEdit" name="lineEditGroupStudent">
+                    <property name="readOnly">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
                   </item>
                   <item row="2" column="1">
                    <widget class="QLineEdit" name="lineEditIdStudent"/>
@@ -519,6 +535,12 @@
                <property name="showGrid">
                 <bool>false</bool>
                </property>
+               <attribute name="verticalHeaderVisible">
+                <bool>false</bool>
+               </attribute>
+               <attribute name="verticalHeaderDefaultSectionSize">
+                <number>18</number>
+               </attribute>
                <attribute name="verticalHeaderVisible">
                 <bool>false</bool>
                </attribute>
@@ -768,6 +790,21 @@ computers</string>
                <attribute name="verticalHeaderDefaultSectionSize">
                 <number>18</number>
                </attribute>
+               <attribute name="verticalHeaderVisible">
+                <bool>false</bool>
+               </attribute>
+               <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+                <bool>false</bool>
+               </attribute>
+               <attribute name="verticalHeaderDefaultSectionSize">
+                <number>18</number>
+               </attribute>
+               <attribute name="horizontalHeaderCascadingSectionResizes">
+                <bool>false</bool>
+               </attribute>
+               <attribute name="horizontalHeaderVisible">
+                <bool>false</bool>
+               </attribute>
                <column>
                 <property name="text">
                  <string>Id</string>
@@ -946,6 +983,12 @@ computers</string>
                <property name="showGrid">
                 <bool>false</bool>
                </property>
+               <attribute name="verticalHeaderVisible">
+                <bool>false</bool>
+               </attribute>
+               <attribute name="verticalHeaderDefaultSectionSize">
+                <number>18</number>
+               </attribute>
                <attribute name="verticalHeaderVisible">
                 <bool>false</bool>
                </attribute>

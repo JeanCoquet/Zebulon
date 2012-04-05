@@ -23,11 +23,11 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    void addClassroomToComboBox();
-    void addGroupToComboBox();
-    void addModuleToComboBox();
-    void addStudentToComboBox();
-    
+    void reloadClassrooms();
+    void reloadGroups();
+    void reloadModules();
+    void reloadStudents();
+    void reloadAll();
     Controller* getCtrl() const {
         return ctrl;
     }

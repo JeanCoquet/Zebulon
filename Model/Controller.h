@@ -44,6 +44,8 @@ public:
     void joinTimeSlotWithClassPeriod(TimeSlot *timeslot, ClassPeriod *classPeriod);
     void setModule(Module* mod, string id, string name, string theHead);
     void setClassPeriod(Module *mod, ClassPeriod* cp, string type,  string teacher, int duration, list<Group*> *lg);
+    void setGroup(Group *g, string id,  list<Group*> *lg);
+    void setStudent(Student *s, Group* group, string id, string lastname, string firstname, string addr, string email);
     virtual ~Controller();
 
 
@@ -58,6 +60,7 @@ public:
 private:
     Schedule *schedule;
     Database *database;
+    Main
 };
 
 #endif	/* CONTROLLER_H */
