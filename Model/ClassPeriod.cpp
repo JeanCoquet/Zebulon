@@ -30,6 +30,6 @@ ClassPeriod::ClassPeriod(const ClassPeriod* orig) {
 }
 
 ClassPeriod::~ClassPeriod() {
-    delete[] this->groupList;
+    delete this->groupList;
 }
 

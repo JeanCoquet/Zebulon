@@ -21,6 +21,6 @@ Group::Group(const Group* orig) {
 
 
 Group::~Group() {
-    delete[] this->StudentList;
+    
 }
 

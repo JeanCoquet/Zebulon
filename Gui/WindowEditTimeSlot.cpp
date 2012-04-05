@@ -82,8 +82,6 @@ void WindowEditTimeSlot::changeClassPeriod(int index) {
     for(;itG != itGMax ; itG++){
         this->widget.listGroups->addItem((*itG)->GetId().c_str());
     }
-    cout<<"duree de la classperiod : "<<(*itCP)->GetDuration()<<endl;
-    
     this->widget.durationVal->setText(QString::fromStdString(ctrl->intToStr((*itCP)->GetDuration())));
 }
 

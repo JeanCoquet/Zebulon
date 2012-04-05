@@ -5,6 +5,8 @@
  * Created on February 8, 2012, 6:32 PM
  */
 
+#include <sstream>
+
 #include "Date.h"
 
 Date::Date(int day, int month, int year, int hour, int min) {
@@ -51,8 +53,18 @@ int Date::duration() const {
 Date::~Date() {
 }
 
+string withZero(int s) {
+    stringstream ss;
+    if(s < 10 )
+        ss<<"0"<<s;
+    else
+        ss<<s;
+    return ss.str();
+}
+
 ostream& operator <<(ostream& os, const Date &d) {
-    os << d.GetDay() << "/" << d.GetMonth() << "/" << d.GetYear() << " " << d.GetHour() << ":" << d.GetMin();
+    string day = withZero(d.GetDay());
+    os << day << "/" << withZero(d.GetMonth()) << "/" << d.GetYear() << " " << withZero(d.GetHour()) << ":" << withZero(d.GetMin());
     return os;
 }
 

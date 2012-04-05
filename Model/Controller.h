@@ -9,14 +9,6 @@
 #define	CONTROLLER_H
 #include "Student.h"
 #include <string>
-#include <fstream>
-#include <iostream>
-#include "PracticalClass.h"
-#include "TutorialClass.h"
-#include "MagistralClass.h"
-#include "ClassPeriod.h"
-#include "Schedule.h"
-#include "Group.h"
 #include "sqlite/Database.h"
 
 using namespace std;
@@ -66,7 +58,6 @@ public:
 private:
     Schedule *schedule;
     Database *database;
-    fstream history;
 };
 
 #endif	/* CONTROLLER_H */

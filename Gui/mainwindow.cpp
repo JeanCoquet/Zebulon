@@ -200,9 +200,7 @@ void MainWindow::reloadQTimeSlots(){
             Date *dit = (*it)->GetStartDate();
             if(*dit >= d && *dit <= de ) {
                 int currentIndex = this->ui->tabWidget->currentIndex();
-                cout<<"************ "<<currentIndex<<endl;
                 if(currentIndex == 0){
-                    cout<<"INDEX 1"<<endl;
                     int indexGroup = this->ui->comboBoxGroup->currentIndex();
                     list<Group*> *lg = this->ctrl->getSchedule()->GetGroupList();
                     list<Group*>::iterator itG = lg->begin();
@@ -232,7 +230,6 @@ void MainWindow::reloadQTimeSlots(){
                     }
                 }*/
                 else if(currentIndex == 1){
-                    cout<<"INDEX 2"<<endl;
                     int indexCR = this->ui->comboBoxClassroom->currentIndex();
                     list<Classroom*> *lcr = this->ctrl->getSchedule()->GetClassroomList();
                     list<Classroom*>::iterator itCR = lcr->begin();
@@ -244,7 +241,6 @@ void MainWindow::reloadQTimeSlots(){
                     }
                 }
                 else if(currentIndex == 2){
-                    cout<<"INDEX 3"<<endl;
                     QString stringNameStudent = this->ui->comboBoxStudent->currentText();
                     list<Group*>* lg = (*it)->GetClassPeriod()->GetGroupList();
                     list<Group*>::iterator itg = lg->begin();
@@ -298,7 +294,7 @@ void MainWindow::genererQTimeSlot(TimeSlot* t){
             if(!ui->checkBoxPractical->isChecked()) return;
     }
     else if(dynamic_cast<MagistralClass*>(cp) != NULL) {
-            nameCP = "Magistal "+QString::number(cp->GetId());
+            nameCP = "Magistral "+QString::number(cp->GetId());
             color = "maroon";
             if(!ui->checkBoxMagistral->isChecked()) return;
     }
@@ -347,6 +343,7 @@ void MainWindow::openEditTimeSlot(QTimeSlot* timeSlot) {
     windowEditTimeSlot->changeModule(windowEditTimeSlot->getWidget().comboBoxModule->currentIndex());
     
     combo = windowEditTimeSlot->getWidget().comboBoxClassPeriod;
+    cout << timeSlot->getClassPeriod().toStdString() <<endl;
     combo->setCurrentIndex(combo->findText(timeSlot->getClassPeriod()));
     
     windowEditTimeSlot->setCurrentTimeSlot(timeSlot);

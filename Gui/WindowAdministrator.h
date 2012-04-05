@@ -29,6 +29,23 @@ public:
 public slots :
     
     // Onglet Group
+    void groupClicked();
+    void addGroup();
+    void editGroup();
+    void deleteGroup();
+    void okEditGroup();
+    void cancelEditGroup();
+    void addGroupGroup();
+    void deleteGroupGroup();
+    void comboBoxGroupsGroupChanged(int index);
+    void listGroupGroupClicked();
+    
+    void studentClicked();
+    void addStudent();
+    void editStudent();
+    void deleteStudent();
+    void okEditStudent();
+    void cancelEditStudent();    
     
     // Onglet Classroom
     void classroomClicked();
@@ -66,7 +83,15 @@ private:
     bool load; 
     
     // Onglet Group
+    Group* currentGroup;
+    Student* currentStudent;
+    int groupState; /* voir doc */ 
+    void displayGroups();
     void displayStudents();
+    void refreshGroups(int newState);
+    void loadGroupsGroup();
+    void setCurrentGroup();
+    void setCurrentStudent();
     
     // Onglet Classroom
     Classroom *currentClassroom;

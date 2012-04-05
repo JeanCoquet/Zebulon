@@ -18,6 +18,6 @@ Module::Module(const Module& orig) {
 }
 
 Module::~Module() {
-    delete[] classPeriodList;
+    
 }
 

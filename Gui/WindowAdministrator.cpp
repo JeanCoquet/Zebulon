@@ -31,6 +31,7 @@ WindowAdministrator::WindowAdministrator(Controller* ctrl, MainWindow* mainwindo
     oldIdSelectedModule = "";
     refreshModule(1);
     refreshClassroom(1);
+    refreshGroups(1);
     currentModule = NULL;
     
     QObject::connect(widget.buttonAddModule, SIGNAL(clicked()), this, SLOT(addModule()));
@@ -59,6 +60,144 @@ WindowAdministrator::WindowAdministrator(Controller* ctrl, MainWindow* mainwindo
     QObject::connect(widget.buttonCancelEditClassroom, SIGNAL(clicked()), this, SLOT(cancelEditClassroom()));
     QObject::connect(widget.comboBoxClassRoom, SIGNAL(currentIndexChanged (int)), this, SLOT(comboBoxTypeClassroomChanged()));
 }
+
+void WindowAdministrator::refreshGroups(int newState) {
+    cout << "Traitement Etat : "<<newState<<endl;
+    this->groupState = newState;
+    switch(newState){
+        case 1 :
+            currentGroup = NULL;
+            widget.tableWidgetStudents->setEnabled(false);
+            widget.frameEditGroup->setVisible(false);
+            widget.frameEditStudent->setVisible(false);
+            widget.buttonAddGroup->setEnabled(true);
+            widget.buttonEditGroup->setEnabled(false);
+            widget.buttonDeleteGroup->setEnabled(false);
+            widget.buttonAddStudent->setEnabled(false);
+            widget.buttonEditStudent->setEnabled(false);
+            widget.buttonDeleteStudent->setEnabled(false);
+            displayGroups();
+            break;
+        case 2 :
+            break;
+        case 3 :
+            break;
+        case 41 :
+            break;
+        case 411 :
+            break;
+        case 412 :
+            break;
+        case 413 :
+            break;
+        case 42 :
+            break;
+        case 421 :
+            break;
+        case 422 :
+            break;
+        case 423 :
+            break;
+        case 43 :
+            break;
+        case 431 :
+            break;
+        case 432 :
+            break;
+        case 433 :
+            break;
+        case 51 :
+            break;
+        case 52 :
+            break;
+    }
+    cout << "Fin Traitement Etat : "<<newState<<endl;
+}
+void WindowAdministrator::groupClicked() { }
+void WindowAdministrator::addGroup() { }
+void WindowAdministrator::editGroup() { }
+void WindowAdministrator::deleteGroup() { }
+void WindowAdministrator::okEditGroup() { }
+void WindowAdministrator::cancelEditGroup() { }
+void WindowAdministrator::addGroupGroup() { }
+void WindowAdministrator::deleteGroupGroup() { }
+void WindowAdministrator::comboBoxGroupsGroupChanged(int index) { }
+void WindowAdministrator::listGroupGroupClicked() { }
+void WindowAdministrator::studentClicked() { }
+void WindowAdministrator::addStudent() { }
+void WindowAdministrator::editStudent() { }
+void WindowAdministrator::deleteStudent() { }
+void WindowAdministrator::okEditStudent() { }
+void WindowAdministrator::cancelEditStudent() { }
+void WindowAdministrator::displayGroups() {
+    QTableWidget *table = widget.tableWidgetGroups;    
+    while(table->rowCount() != 0) {
+        table->removeRow(table->rowCount()-1);
+    }
+    
+    QTableWidgetItem *item;
+    
+    list<Group*>* l = this->ctrl->getSchedule()->GetGroupList();
+    list<Group*>::iterator it = l->begin();
+    list<Group*>::const_iterator MaxList = l->end();
+    for(;it != MaxList; it++){
+        int nbRow = table->rowCount();
+        table->insertRow(nbRow);
+        item = new QTableWidgetItem((*it)->GetId().c_str());
+        table->setItem(nbRow, 0, item);
+        cout <<(*it)->GetId()<<endl;
+        QString s = "";
+        list<Group*>::iterator itG = (*it)->GetGroupList()->begin();
+        list<Group*>::const_iterator GMaxList = (*it)->GetGroupList()->end();
+        for(; itG!=GMaxList; itG++) {
+            s.append((*itG)->GetId().c_str());
+            s.append(";");
+            cout <<s->toStdString()<<endl;
+        }
+        
+    cout << "fin 3"<<endl;
+        item = new QTableWidgetItem(s);
+        table->setItem(nbRow, 2, item);
+        
+        if(currentGroup != NULL){
+            if((*it)->GetId() == currentGroup->GetId()){
+                table->setCurrentItem(item);
+            }
+        }
+    }
+    
+    cout << "fin"<<endl;
+}
+void WindowAdministrator::displayStudents(){
+    QList<QTableWidgetItem*>::iterator itGroup = this->widget.tableWidgetGroups->selectedItems().begin();
+    list<Group*> *lg = this->ctrl->getSchedule()->GetGroupList();
+    list<Group*>::iterator itG = lg->begin();
+    list<Group*>::const_iterator itGMax = lg->end();
+    for(; itG != itGMax ; itG++ ){
+        if((*itG)->GetId() == (*itGroup)->text().toStdString()){
+            break;
+        }
+    }
+    list<Student*> *ls = (*itG)->GetStudentList();
+    list<Student*>::iterator itS = ls->begin();
+    list<Student*>::const_iterator itSMax = ls->end();
+    QTableWidget* tw = this->widget.tableWidgetStudents;
+    while(tw->rowCount() != 0) {
+        tw->removeRow(tw->rowCount()-1);
+    }
+    for(; itS != itSMax ; itS++){
+        int nbRow = tw->rowCount();
+        tw->insertRow(nbRow);
+        tw->setItem(nbRow, 0, new QTableWidgetItem((*itS)->GetId().c_str()));
+        tw->setItem(nbRow, 1, new QTableWidgetItem((*itS)->GetLastname().c_str()));
+        tw->setItem(nbRow, 2, new QTableWidgetItem((*itS)->GetFirstname().c_str()));
+        tw->setItem(nbRow, 3, new QTableWidgetItem((*itS)->GetAddr().c_str()));
+        tw->setItem(nbRow, 4, new QTableWidgetItem((*itS)->GetEmail().c_str()));
+    }
+}
+void WindowAdministrator::loadGroupsGroup() { }
+void WindowAdministrator::setCurrentGroup() { }
+void WindowAdministrator::setCurrentStudent() { }
 
 void WindowAdministrator::moduleClicked(){
     refreshModule(2);
@@ -194,7 +333,6 @@ void WindowAdministrator::displaySpecificityClassroom() {
 
 void WindowAdministrator::refreshClassroom(int newState){
     this->classroomState = newState;
-    cout<<"Gestion etat classroom : "<<classroomState<<endl;
     switch(newState){
         case 1 :
             currentClassroom = NULL;
@@ -251,7 +389,6 @@ void WindowAdministrator::refreshClassroom(int newState){
             displaySpecificityClassroom();   
             break;
     }
-    cout<<"Fin gestion etat classroom : "<<classroomState<<endl;
 }
 
 void WindowAdministrator::comboBoxTypeClassroomChanged() {
@@ -310,7 +447,6 @@ void WindowAdministrator::cancelEditClassroom() {
 
 void WindowAdministrator::refreshModule(int newState) {
     this->moduleState = newState;
-    cout<<"Etat "<<moduleState<<endl;
     load = true;
     switch(this->moduleState){
         case 1 :
@@ -495,7 +631,6 @@ void WindowAdministrator::refreshModule(int newState) {
             break;
     }
     load = false;
-    cout<<"Etat Fin "<<moduleState<<endl;
 }
 
 void WindowAdministrator::displayClassroom(){
@@ -634,35 +769,6 @@ void WindowAdministrator::displayModule() {
     }
 }
 
-void WindowAdministrator::displayStudents(){
-    cout<<"groupe clique"<<endl;
-//    QList<QListWidgetItem*>::iterator  itGroup = lwibegin();
-    QList<QTableWidgetItem*>::iterator itGroup = this->widget.tableWidgetGroups->selectedItems().begin();
-    list<Group*> *lg = this->ctrl->getSchedule()->GetGroupList();
-    list<Group*>::iterator itG = lg->begin();
-    list<Group*>::const_iterator itGMax = lg->end();
-    for(; itG != itGMax ; itG++ ){
-        if((*itG)->GetId() == (*itGroup)->text().toStdString()){
-            break;
-        }
-    }
-    list<Student*> *ls = (*itG)->GetStudentList();
-    list<Student*>::iterator itS = ls->begin();
-    list<Student*>::const_iterator itSMax = ls->end();
-    QTableWidget* tw = this->widget.tableWidgetStudents;
-    while(tw->rowCount() != 0) {
-        tw->removeRow(tw->rowCount()-1);
-    }
-    for(; itS != itSMax ; itS++){
-        int nbRow = tw->rowCount();
-        tw->insertRow(nbRow);
-        tw->setItem(nbRow, 0, new QTableWidgetItem((*itS)->GetId().c_str()));
-        tw->setItem(nbRow, 1, new QTableWidgetItem((*itS)->GetLastname().c_str()));
-        tw->setItem(nbRow, 2, new QTableWidgetItem((*itS)->GetFirstname().c_str()));
-        tw->setItem(nbRow, 3, new QTableWidgetItem((*itS)->GetAddr().c_str()));
-        tw->setItem(nbRow, 4, new QTableWidgetItem((*itS)->GetEmail().c_str()));
-    }
-}
 void WindowAdministrator::displayClassPeriod() {
     QTableWidget *table = widget.tableWidgetClassPeriod;
     while(table->rowCount() != 0) {
@@ -670,18 +776,6 @@ void WindowAdministrator::displayClassPeriod() {
     }
     
     if(widget.tableWidgetModules->currentRow() != -1) {
-//        QList<QTableWidgetItem*>::iterator itModule = widget.tableWidgetModules->selectedItems().begin();
-//
-//        list<Module*> *lm = this->ctrl->getSchedule()->GetModuleList();
-//        list<Module*>::iterator itM = lm->begin();
-//        list<Module*>::const_iterator itMMax = lm->end();
-//        for(; itM!=itMMax; itM++){
-//            if((*itM)->GetId() == (*itModule)->text().toStdString()) {
-//                break;
-//            }
-//        }
-//
-//        currentModule = (*itM);
 
         string type, groups = "";
         QTableWidgetItem *item;
@@ -791,7 +885,6 @@ void WindowAdministrator::deleteGroupClassPeriod() {
     }
 }
 void WindowAdministrator::okEditClassPeriod() {
-    cout<<"1"<<endl;
     groupClassPeriodModified = false;
     list<Group*>* lGNew = new list<Group*>();
     list<Group*> *lg = this->ctrl->getSchedule()->GetGroupList();
@@ -802,13 +895,11 @@ void WindowAdministrator::okEditClassPeriod() {
             lGNew->push_back((*itG));
         }
     }
-    cout<<"3"<<endl;
     tempGroupListClassPeriod.clear();
     if(currentClassPeriod != NULL){
         ctrl->setClassPeriod(currentModule, currentClassPeriod, widget.comboBoxTypeClassPeriod->currentText().toStdString(), widget.lineEditTeacherClassPeriod->text().toStdString(), widget.lineEditDurationClassPeriod->text().toInt(), lGNew);
     }
     else{
-        cout<<"5"<<endl;
         ClassPeriod *cp;
         string type = widget.comboBoxTypeClassPeriod->currentText().toStdString();
         if(type == "Magistral")
@@ -817,14 +908,11 @@ void WindowAdministrator::okEditClassPeriod() {
             cp = new PracticalClass(widget.lineEditTeacherClassPeriod->text().toStdString(), widget.lineEditDurationClassPeriod->text().toInt(), currentModule);
         else
             cp = new TutorialClass(widget.lineEditTeacherClassPeriod->text().toStdString(), widget.lineEditDurationClassPeriod->text().toInt(), currentModule);
-        cout<<"6"<<endl;
         cp->SetGroupList(lGNew);
         
         ctrl->addClassPeriod(cp, currentModule);
         currentClassPeriod = cp;
     }
-    cout<<"2"<<endl;
-//    oldIdSelectedModule = widget.lineEditIdModule->text().toStdString();
     refreshModule(3);
 }
 void WindowAdministrator::cancelEditClassPeriod() {
@@ -837,6 +925,6 @@ void WindowAdministrator::cancelEditClassPeriod() {
     }
 }
 WindowAdministrator::~WindowAdministrator() {
-
+    
 }
 

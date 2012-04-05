@@ -6,52 +6,44 @@
  */
 
 #include "Controller.h"
-#include "LectureHall.h"
-#include "PracticalClassroom.h"
-#include "TutorialClassroom.h"
-#include "PracticalClass.h"
 #include <algorithm>
-#include <sstream>
-
-const char* historyFile = "history.sql";
 
 Controller::Controller() throw(int){
         this->database = new Database(); // doit etre avant load
          this->schedule = NULL;
          loadSchedule();  
          cout<<"schedule loaded."<<endl;
-         
-         this->history.open(historyFile, ios::out | ios::trunc);
-         if(this->history.bad())
-             throw 1;
 }
 
 void Controller::addClassroom(Classroom* cr) {
     schedule->GetClassroomList()->push_back(cr);
-    this->history << "insert into Classroom values('" << cr->GetId() <<"','"<< cr->GetCapacity() <<"')" << endl; 
+    database->addClassroom(cr);
     if(dynamic_cast<PracticalClassroom*>(cr) != NULL)
-        this->history << "insert into PracticalClassroom values('" << cr->GetId() <<"','"<< ((PracticalClassroom*)cr)->GetElementsNumber() <<"')" << endl; 
+        database->addPracticalClassroom((PracticalClassroom*) cr);
     else if(dynamic_cast<TutorialClassroom*>(cr) != NULL)
-        this->history << "insert into TutorialClassroom values('" << cr->GetId() <<"','"<< ((TutorialClassroom*)cr)->IsVideoprojector() <<"')" << endl; 
+        database->addTutorialClassroom((TutorialClassroom*) cr);
     else
-        this->history << "insert into LectureHall values('" << cr->GetId() <<"','"<< ((LectureHall*)cr)->IsVideoconferencing() <<"')" << endl; 
+        database->addLectureHall((LectureHall*) cr);
 }
 
 void Controller::delClassroom(Classroom* cr) {
+    list<TimeSlot*>::iterator it = schedule->GetTimeSlotList()->begin(); 
+    list<TimeSlot*>::iterator itMax = schedule->GetTimeSlotList()->end();
+    for(; it!=itMax; it++) {
+        if((*it)->GetClassroom() == cr) {
+            delTimeSlot(*it);
+        }
+    }
+    
     schedule->GetClassroomList()->remove(cr);
-    this->history << "delete from Classroom where id='"<<cr->GetId()<<"'";
     if(dynamic_cast<PracticalClassroom*>(cr) != NULL)
-        this->history << "delete from PracticalClassroom where id='"<<cr->GetId()<<"'";
+        database->delPracticalClassroom((PracticalClassroom*) cr);
     else if(dynamic_cast<TutorialClassroom*>(cr) != NULL)
-        this->history << "delete from TutorialClassroom where id='"<<cr->GetId()<<"'";
+        database->delTutorialClassroom((TutorialClassroom*) cr);
     else
-        this->history << "delete from LectureHall where id='"<<cr->GetId()<<"'";
+        database->delLectureHall((LectureHall*) cr);
 }
 
-string boolToStr(bool b) {
-    if(b) return "true";
-    else return "false";
-}
 bool intToBool(int i) {
     if(i==0) return false;
     else return true;
@@ -59,21 +51,21 @@ bool intToBool(int i) {
 
 void Controller::setClassroom(Classroom* cr, string id, int capacity, int specificity) {
     Classroom* cr2;
-    history << "update classroom set id = '"<< id <<"', capacity = '"<<capacity<<"' where id = '"<<cr->GetId()<<"'"<<endl;
+    database->updateClassroom(cr, id, capacity);
     if(dynamic_cast<PracticalClassroom*>(cr) != NULL) {
         cr2 = new PracticalClassroom((PracticalClassroom*) cr);
-        history << "update PracticalClassroom set id = '"<< id <<"', elementsnumber = '"<<specificity<<"' where id = '"<<cr->GetId()<<"'"<<endl;
+        database->updatePracticalClassroom((PracticalClassroom*) cr, id, specificity);
         ((PracticalClassroom*)cr2)->SetElementsNumber(specificity);
     }     
     else if(dynamic_cast<LectureHall*>(cr) != NULL) {
         cr2 = new LectureHall((LectureHall*) cr);
         ((LectureHall*)cr2)->SetVideoconferencing(intToBool(specificity));
-        history << "update LectureHall set id = '"<< id <<"', videoconferencing = '"<<boolToStr(intToBool(specificity))<<"' where id = '"<<cr->GetId()<<"'"<<endl;
+        database->updateLectureHall((LectureHall*) cr, id, intToBool(specificity));
     }
     else {
         cr2 = new TutorialClassroom((TutorialClassroom*) cr);
         ((TutorialClassroom*)cr2)->SetVideoprojector(intToBool(specificity));
-        history << "update TutorialClassroom set id = '"<< id <<"', videoprojector = '"<<boolToStr(intToBool(specificity))<<"' where id = '"<<cr->GetId()<<"'"<<endl;
+        database->updateTutorialClassroom((TutorialClassroom*) cr, id, intToBool(specificity));
     }
     
     schedule->GetClassroomList()->remove(cr);
@@ -96,7 +88,7 @@ void Controller::setClassPeriod(Module *mod, ClassPeriod* cp, string type, strin
         cp2 = new MagistralClass(cp);
         id_type = 2;
     }
-    history << "update classperiod set teacher = '"<<teacher<<"', duration = '"<<duration<<"', id_type = '"<<id_type<<"' where id = '"<<cp->GetId()<<"'"<<endl;     
+    database->updateClassPeriod(mod, cp, id_type, teacher, duration, lg);
     
     mod->GetClassPeriodList()->remove(cp);
     mod->GetClassPeriodList()->push_back(cp2);
@@ -106,8 +98,7 @@ void Controller::setClassPeriod(Module *mod, ClassPeriod* cp, string type, strin
 }
 
 void Controller::addStudent(Student *stud, Group *group){
-    this->history << "insert into Student values('" << stud->GetId()<<"','"<< group->GetId()<<"','"<< stud->GetLastname()<<"','"
-        << stud->GetFirstname()<<"','"<< stud->GetAddr()<<"','"<< stud->GetEmail()<<"')" << endl;    
+    database->addStudent(stud, group);
     group->GetStudentList()->push_back(stud);
 }
 
@@ -122,24 +113,40 @@ void Controller::addStudent(Student *stud, Group *group){
 }*/
 
 void Controller::addModule(Module* mod){
-    this->history << "insert into Module values('"<<mod->GetId()<<"','"<<mod->GetName()<<"','"<<mod->GetTheHead()<<"')"<<endl;
+    database->addModule(mod);
     schedule->GetModuleList()->push_back(mod);
 }
 
 void Controller::delGroup(Group* group) {
-    this->history << "delete from Student where id_group='"<<group->GetId()<<"'"<<endl;
-    this->history << "delete from 'Group' where id = '"<<group->GetId()<<"'"<<endl;
+    list<Student*>::iterator it = group->GetStudentList()->begin();
+    list<Student*>::iterator itMax = group->GetStudentList()->end();
+    for(; it!=itMax; it++) {
+        delStudent((*it), group);
+    }
+    
+    list<Group*>::iterator itG = group->GetGroupList()->begin();
+    list<Group*>::iterator itGMax = group->GetGroupList()->end();
+    for(; itG!=itGMax; it++) {
+        delGroup(*itG);
+    }
+    
+    database->delGroup(group);
     this->schedule->GetGroupList()->remove(group);
 }
 
 void Controller::delModule(Module* mod) {
-    this->history << "delete from ClassPeriod where id_module = '"<<mod->GetId()<<"'"<<endl;
-    this->history << "delete from Module where id = '"<<mod->GetId()<<"'"<<endl;
+    list<ClassPeriod*>::iterator it = mod->GetClassPeriodList()->begin();
+    list<ClassPeriod*>::iterator itMax = mod->GetClassPeriodList()->end();
+    for(; it!=itMax; it++) {
+        delClassPeriod(*it, mod);
+    }
+    
+    database->delModule(mod);
     this->schedule->GetModuleList()->remove(mod);
 }
 
 void Controller::delStudent(Student *stud, Group *group) {
-    this->history << "delete from Student where id = '"<<stud->GetId()<<"'"<<endl;
+    database->delStudent(stud, group);
     group->GetStudentList()->remove(stud);
 }
 string Controller::intToStr(int i){
@@ -148,16 +155,11 @@ string Controller::intToStr(int i){
     return oss.str();
 }
 
-bool Controller::addTimeSlot(TimeSlot* timeSlot){
-    cout<<"Controller : "<<endl<<"   "<<"ajout du timeslot de duree : "<<timeSlot->GetClassPeriod()->GetDuration()<<endl;
+bool Controller::addTimeSlot(TimeSlot* timeSlot) {
     list<TimeSlot*> *timeSlotList = new list<TimeSlot*>();
     list<TimeSlot*>::iterator it = this->schedule->GetTimeSlotList()->begin();
     list<TimeSlot*> ::const_iterator itMax = this->schedule->GetTimeSlotList()->end();
     for(; it!=itMax; it++) {
-        cout<<"getendate du time slot recherche"<<endl;
-        cout<< "l'autre : "<<*((*it)->GetEndDate())<<endl;
-        cout<<"getenddate du time slot ajout"<<endl;
-        cout<<" le times ajout : "<<*(timeSlot->GetEndDate())<<endl;
         if( 
                     (
                     timeSlot->GetStartDate() >= (*it)->GetStartDate() 
@@ -172,10 +174,8 @@ bool Controller::addTimeSlot(TimeSlot* timeSlot){
             timeSlotList->push_back(*it);
         }
     }
-    cout<<"nb timeslot retenus : "<<timeSlotList->size()<<endl;
     it = timeSlotList->begin();
     itMax = timeSlotList->end();
-    cout<<"avant le parcours des timeslots"<<endl;
     for(; it!=itMax; it++) {
         if((*it)->GetClassroom()->GetId() == timeSlot->GetClassroom()->GetId())
             return false;
@@ -190,7 +190,7 @@ bool Controller::addTimeSlot(TimeSlot* timeSlot){
         }
     }
     
-    this->history << "insert into TimeSlot values('"<<timeSlot->GetId()<<"','"<<timeSlot->GetClassroom()<<"','"<<timeSlot->GetClassPeriod()<<"','"<<timeSlot->GetStartDate()<<"')";
+    database->addTimeSlot(timeSlot);
     this->schedule->GetTimeSlotList()->push_back(timeSlot);
     
     delete timeSlotList;
@@ -198,37 +198,35 @@ bool Controller::addTimeSlot(TimeSlot* timeSlot){
 }
 
 void Controller::delTimeSlot(TimeSlot* timeSlot) {
-    this->history << "delete from TimeSlot where id = '"<<timeSlot->GetId()<<"'"<<endl;
+    database->delTimeSlot(timeSlot);
     this->schedule->GetTimeSlotList()->remove(timeSlot);
 }
     
 void Controller::addClassPeriod(ClassPeriod* classPeriod, Module *mod) {
-    
-    this->history << "insert into ClassPeriod values('"<<"')";
+    if(dynamic_cast<PracticalClass*>(classPeriod) != NULL)
+        database->addClassPeriod(classPeriod, 1, mod);
+    else if(dynamic_cast<MagistralClass*>(classPeriod) != NULL)
+        database->addClassPeriod(classPeriod, 2, mod);
+    else
+        database->addClassPeriod(classPeriod, 3, mod);
     mod->GetClassPeriodList()->push_back(classPeriod);
 }
 
-void Controller::delClassPeriod(ClassPeriod* classPeriod, Module *mod) {
-    this->history << "delete from ClassPeriod where id = '"<<classPeriod->GetId()<<"'"<<endl;
+void Controller::delClassPeriod(ClassPeriod* classPeriod, Module *mod) {    
+    list<TimeSlot*>::iterator it = schedule->GetTimeSlotList()->begin(); 
+    list<TimeSlot*>::iterator itMax = schedule->GetTimeSlotList()->end();
+    for(; it!=itMax; it++) {
+        if((*it)->GetClassPeriod() == classPeriod) {
+            delTimeSlot(*it);
+        }
+    }
+    
+    database->delClassPeriod(classPeriod, mod);
     mod->GetClassPeriodList()->remove(classPeriod);
 }
 
 void Controller::commit(){
-    this->history.close();
-    this->history.open(historyFile, ios::in);
-    string line = "";
-    while(!this->history.eof()){
-        getline(this->history, line);
-        if(line != ""){
-            try{
-                this->database->request(line);
-                cout<<"request : '"<<line<<"'"<<endl;
-            }catch(int){
-                cout<<"ignored request : '"<<line<<"'"<<endl;
-            }
-        }
-    }
-    this->history.open(historyFile, ios::out | ios::trunc);
+    database->commit();
 }
 int Controller::strToInt(string str){
     int val = 0;
@@ -262,8 +260,7 @@ struct groupString{
 };
 
 void Controller::setModule(Module* mod, string id, string name, string theHead){
-    this->history << "update module set id = '"<<id<<"', name = '"<<name<<"', theHead = '"<<theHead<<"' where id = '"<<mod->GetId()<<"';";
-    this->history << "update classPeriod set id_module = '"<<id<<"' where id_module = '"<<mod->GetId()<<"';";
+    database->updateModule(mod, id, name, theHead);
     mod->SetId(id);
     mod->SetName(name);
     mod->SetTheHead(theHead);
@@ -519,7 +516,6 @@ void Controller::loadSchedule(){
 }
 
 Controller::~Controller() {
-    this->history.close();
     delete this->schedule;
     delete this->database;
 }

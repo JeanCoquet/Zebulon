@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'WindowAdministrator.ui'
 **
-** Created: Wed Apr 4 23:10:18 2012
-**      by: Qt User Interface Compiler version 4.7.4
+** Created: Thu Apr 5 15:43:20 2012
+**      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -72,7 +72,7 @@ public:
     QVBoxLayout *verticalLayout_3;
     QLabel *labelStudent;
     QTableWidget *tableWidgetStudents;
-    QFrame *frame;
+    QFrame *frameEditStudent;
     QHBoxLayout *horizontalLayout_15;
     QGridLayout *gridLayout_4;
     QLabel *label_15;
@@ -193,7 +193,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 961, 480));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 975, 457));
         horizontalLayout_16 = new QHBoxLayout(scrollAreaWidgetContents);
         horizontalLayout_16->setObjectName(QString::fromUtf8("horizontalLayout_16"));
         tabWidget = new QTabWidget(scrollAreaWidgetContents);
@@ -376,72 +376,72 @@ public:
 
         verticalLayout_3->addWidget(tableWidgetStudents);
 
-        frame = new QFrame(tabGroups);
-        frame->setObjectName(QString::fromUtf8("frame"));
-        frame->setMinimumSize(QSize(0, 200));
-        frame->setMaximumSize(QSize(16777215, 200));
-        frame->setFrameShape(QFrame::StyledPanel);
-        frame->setFrameShadow(QFrame::Raised);
-        horizontalLayout_15 = new QHBoxLayout(frame);
+        frameEditStudent = new QFrame(tabGroups);
+        frameEditStudent->setObjectName(QString::fromUtf8("frameEditStudent"));
+        frameEditStudent->setMinimumSize(QSize(0, 200));
+        frameEditStudent->setMaximumSize(QSize(16777215, 200));
+        frameEditStudent->setFrameShape(QFrame::StyledPanel);
+        frameEditStudent->setFrameShadow(QFrame::Raised);
+        horizontalLayout_15 = new QHBoxLayout(frameEditStudent);
         horizontalLayout_15->setObjectName(QString::fromUtf8("horizontalLayout_15"));
         gridLayout_4 = new QGridLayout();
         gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
-        label_15 = new QLabel(frame);
+        label_15 = new QLabel(frameEditStudent);
         label_15->setObjectName(QString::fromUtf8("label_15"));
 
         gridLayout_4->addWidget(label_15, 1, 0, 1, 1);
 
-        label_16 = new QLabel(frame);
+        label_16 = new QLabel(frameEditStudent);
         label_16->setObjectName(QString::fromUtf8("label_16"));
 
         gridLayout_4->addWidget(label_16, 2, 0, 1, 1);
 
-        label_17 = new QLabel(frame);
+        label_17 = new QLabel(frameEditStudent);
         label_17->setObjectName(QString::fromUtf8("label_17"));
 
         gridLayout_4->addWidget(label_17, 3, 0, 1, 1);
 
-        label_18 = new QLabel(frame);
+        label_18 = new QLabel(frameEditStudent);
         label_18->setObjectName(QString::fromUtf8("label_18"));
 
         gridLayout_4->addWidget(label_18, 4, 0, 1, 1);
 
-        label_19 = new QLabel(frame);
+        label_19 = new QLabel(frameEditStudent);
         label_19->setObjectName(QString::fromUtf8("label_19"));
 
         gridLayout_4->addWidget(label_19, 5, 0, 1, 1);
 
-        label_20 = new QLabel(frame);
+        label_20 = new QLabel(frameEditStudent);
         label_20->setObjectName(QString::fromUtf8("label_20"));
 
         gridLayout_4->addWidget(label_20, 6, 0, 1, 1);
 
-        lineEditGroupStudent = new QLineEdit(frame);
+        lineEditGroupStudent = new QLineEdit(frameEditStudent);
         lineEditGroupStudent->setObjectName(QString::fromUtf8("lineEditGroupStudent"));
 
         gridLayout_4->addWidget(lineEditGroupStudent, 1, 1, 1, 1);
 
-        lineEditIdStudent = new QLineEdit(frame);
+        lineEditIdStudent = new QLineEdit(frameEditStudent);
         lineEditIdStudent->setObjectName(QString::fromUtf8("lineEditIdStudent"));
 
         gridLayout_4->addWidget(lineEditIdStudent, 2, 1, 1, 1);
 
-        lineEditLastNameStudent = new QLineEdit(frame);
+        lineEditLastNameStudent = new QLineEdit(frameEditStudent);
         lineEditLastNameStudent->setObjectName(QString::fromUtf8("lineEditLastNameStudent"));
 
         gridLayout_4->addWidget(lineEditLastNameStudent, 3, 1, 1, 1);
 
-        lineEditFirstNameStudent = new QLineEdit(frame);
+        lineEditFirstNameStudent = new QLineEdit(frameEditStudent);
         lineEditFirstNameStudent->setObjectName(QString::fromUtf8("lineEditFirstNameStudent"));
 
         gridLayout_4->addWidget(lineEditFirstNameStudent, 4, 1, 1, 1);
 
-        lineEditAddressStudent = new QLineEdit(frame);
+        lineEditAddressStudent = new QLineEdit(frameEditStudent);
         lineEditAddressStudent->setObjectName(QString::fromUtf8("lineEditAddressStudent"));
 
         gridLayout_4->addWidget(lineEditAddressStudent, 5, 1, 1, 1);
 
-        lineEditEmailStudent = new QLineEdit(frame);
+        lineEditEmailStudent = new QLineEdit(frameEditStudent);
         lineEditEmailStudent->setObjectName(QString::fromUtf8("lineEditEmailStudent"));
 
         gridLayout_4->addWidget(lineEditEmailStudent, 6, 1, 1, 1);
@@ -451,12 +451,12 @@ public:
 
         verticalLayout_12 = new QVBoxLayout();
         verticalLayout_12->setObjectName(QString::fromUtf8("verticalLayout_12"));
-        buttonOkEditStudent = new QPushButton(frame);
+        buttonOkEditStudent = new QPushButton(frameEditStudent);
         buttonOkEditStudent->setObjectName(QString::fromUtf8("buttonOkEditStudent"));
 
         verticalLayout_12->addWidget(buttonOkEditStudent);
 
-        buttonCancelStudent = new QPushButton(frame);
+        buttonCancelStudent = new QPushButton(frameEditStudent);
         buttonCancelStudent->setObjectName(QString::fromUtf8("buttonCancelStudent"));
 
         verticalLayout_12->addWidget(buttonCancelStudent);
@@ -469,7 +469,7 @@ public:
         horizontalLayout_15->addLayout(verticalLayout_12);
 
 
-        verticalLayout_3->addWidget(frame);
+        verticalLayout_3->addWidget(frameEditStudent);
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
