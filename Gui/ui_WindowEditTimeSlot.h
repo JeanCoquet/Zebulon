@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'WindowEditTimeSlot.ui'
 **
-** Created: Thu Apr 5 16:38:51 2012
+** Created: Fri Apr 6 09:02:58 2012
 **      by: Qt User Interface Compiler version 4.6.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -43,15 +43,14 @@ public:
     QComboBox *comboBoxModule;
     QLabel *label_2;
     QComboBox *comboBoxClassPeriod;
+    QLabel *label_6;
+    QListWidget *listGroups;
     QLabel *label_5;
     QComboBox *comboBoxClassroom;
     QLabel *label_3;
     QTimeEdit *timeEdit;
     QLabel *label_4;
     QLineEdit *durationVal;
-    QLabel *label_6;
-    QListWidget *listGroups;
-    QPushButton *addClassPeriod;
     QCalendarWidget *calendarWidget;
     QDialogButtonBox *buttonBox;
 
@@ -60,7 +59,7 @@ public:
         if (WindowEditTimeSlot->objectName().isEmpty())
             WindowEditTimeSlot->setObjectName(QString::fromUtf8("WindowEditTimeSlot"));
         WindowEditTimeSlot->setWindowModality(Qt::NonModal);
-        WindowEditTimeSlot->resize(431, 623);
+        WindowEditTimeSlot->resize(431, 590);
         verticalLayout = new QVBoxLayout(WindowEditTimeSlot);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         deleteTimeSlotButton = new QPushButton(WindowEditTimeSlot);
@@ -73,7 +72,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 417, 354));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 409, 319));
         formLayout = new QFormLayout(scrollAreaWidgetContents);
         formLayout->setObjectName(QString::fromUtf8("formLayout"));
         formLayout->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
@@ -90,7 +89,7 @@ public:
         label_2 = new QLabel(scrollAreaWidgetContents);
         label_2->setObjectName(QString::fromUtf8("label_2"));
 
-        formLayout->setWidget(3, QFormLayout::LabelRole, label_2);
+        formLayout->setWidget(2, QFormLayout::LabelRole, label_2);
 
         comboBoxClassPeriod = new QComboBox(scrollAreaWidgetContents);
         comboBoxClassPeriod->setObjectName(QString::fromUtf8("comboBoxClassPeriod"));
@@ -101,55 +100,49 @@ public:
         comboBoxClassPeriod->setSizePolicy(sizePolicy);
         comboBoxClassPeriod->setMinimumSize(QSize(150, 0));
 
-        formLayout->setWidget(3, QFormLayout::FieldRole, comboBoxClassPeriod);
+        formLayout->setWidget(2, QFormLayout::FieldRole, comboBoxClassPeriod);
+
+        label_6 = new QLabel(scrollAreaWidgetContents);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
+
+        formLayout->setWidget(4, QFormLayout::LabelRole, label_6);
+
+        listGroups = new QListWidget(scrollAreaWidgetContents);
+        listGroups->setObjectName(QString::fromUtf8("listGroups"));
+
+        formLayout->setWidget(4, QFormLayout::FieldRole, listGroups);
 
         label_5 = new QLabel(scrollAreaWidgetContents);
         label_5->setObjectName(QString::fromUtf8("label_5"));
 
-        formLayout->setWidget(9, QFormLayout::LabelRole, label_5);
+        formLayout->setWidget(8, QFormLayout::LabelRole, label_5);
 
         comboBoxClassroom = new QComboBox(scrollAreaWidgetContents);
         comboBoxClassroom->setObjectName(QString::fromUtf8("comboBoxClassroom"));
 
-        formLayout->setWidget(9, QFormLayout::FieldRole, comboBoxClassroom);
+        formLayout->setWidget(8, QFormLayout::FieldRole, comboBoxClassroom);
 
         label_3 = new QLabel(scrollAreaWidgetContents);
         label_3->setObjectName(QString::fromUtf8("label_3"));
 
-        formLayout->setWidget(10, QFormLayout::LabelRole, label_3);
+        formLayout->setWidget(9, QFormLayout::LabelRole, label_3);
 
         timeEdit = new QTimeEdit(scrollAreaWidgetContents);
         timeEdit->setObjectName(QString::fromUtf8("timeEdit"));
         timeEdit->setMaximumSize(QSize(100, 16777215));
 
-        formLayout->setWidget(10, QFormLayout::FieldRole, timeEdit);
+        formLayout->setWidget(9, QFormLayout::FieldRole, timeEdit);
 
         label_4 = new QLabel(scrollAreaWidgetContents);
         label_4->setObjectName(QString::fromUtf8("label_4"));
 
-        formLayout->setWidget(11, QFormLayout::LabelRole, label_4);
+        formLayout->setWidget(10, QFormLayout::LabelRole, label_4);
 
         durationVal = new QLineEdit(scrollAreaWidgetContents);
         durationVal->setObjectName(QString::fromUtf8("durationVal"));
         durationVal->setMaximumSize(QSize(100, 16777215));
 
-        formLayout->setWidget(11, QFormLayout::FieldRole, durationVal);
-
-        label_6 = new QLabel(scrollAreaWidgetContents);
-        label_6->setObjectName(QString::fromUtf8("label_6"));
-
-        formLayout->setWidget(5, QFormLayout::LabelRole, label_6);
-
-        listGroups = new QListWidget(scrollAreaWidgetContents);
-        listGroups->setObjectName(QString::fromUtf8("listGroups"));
-
-        formLayout->setWidget(5, QFormLayout::FieldRole, listGroups);
-
-        addClassPeriod = new QPushButton(scrollAreaWidgetContents);
-        addClassPeriod->setObjectName(QString::fromUtf8("addClassPeriod"));
-        addClassPeriod->setEnabled(false);
-
-        formLayout->setWidget(2, QFormLayout::FieldRole, addClassPeriod);
+        formLayout->setWidget(10, QFormLayout::FieldRole, durationVal);
 
         scrollArea->setWidget(scrollAreaWidgetContents);
 
@@ -183,11 +176,10 @@ public:
         deleteTimeSlotButton->setText(QApplication::translate("WindowEditTimeSlot", "Delete", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("WindowEditTimeSlot", "Module", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("WindowEditTimeSlot", "ClassPeriod", 0, QApplication::UnicodeUTF8));
+        label_6->setText(QApplication::translate("WindowEditTimeSlot", "Group", 0, QApplication::UnicodeUTF8));
         label_5->setText(QApplication::translate("WindowEditTimeSlot", "Classroom", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("WindowEditTimeSlot", "Time", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("WindowEditTimeSlot", "Duration (min)", 0, QApplication::UnicodeUTF8));
-        label_6->setText(QApplication::translate("WindowEditTimeSlot", "Group", 0, QApplication::UnicodeUTF8));
-        addClassPeriod->setText(QApplication::translate("WindowEditTimeSlot", "Add a new Class period", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

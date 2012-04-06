@@ -1,14 +1,14 @@
 /********************************************************************************
-** Form generated from reading UI file 'mainwindow.ui'
+** Form generated from reading UI file 'ZebulonWindow.ui'
 **
-** Created: Fri Apr 6 04:28:55 2012
+** Created: Fri Apr 6 09:02:58 2012
 **      by: Qt User Interface Compiler version 4.6.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_MAINWINDOW_H
-#define UI_MAINWINDOW_H
+#ifndef UI_ZEBULONWINDOW_H
+#define UI_ZEBULONWINDOW_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
@@ -35,7 +35,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_MainWindow
+class Ui_ZebulonWindow
 {
 public:
     QAction *actionClose;
@@ -73,19 +73,19 @@ public:
     QSpacerItem *verticalSpacer;
     QPushButton *commitButton;
 
-    void setupUi(QMainWindow *MainWindow)
+    void setupUi(QMainWindow *ZebulonWindow)
     {
-        if (MainWindow->objectName().isEmpty())
-            MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(739, 679);
+        if (ZebulonWindow->objectName().isEmpty())
+            ZebulonWindow->setObjectName(QString::fromUtf8("ZebulonWindow"));
+        ZebulonWindow->resize(739, 679);
         QIcon icon;
         icon.addFile(QString::fromUtf8("../zebulon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        MainWindow->setWindowIcon(icon);
-        actionClose = new QAction(MainWindow);
+        ZebulonWindow->setWindowIcon(icon);
+        actionClose = new QAction(ZebulonWindow);
         actionClose->setObjectName(QString::fromUtf8("actionClose"));
-        actionAdministrator = new QAction(MainWindow);
+        actionAdministrator = new QAction(ZebulonWindow);
         actionAdministrator->setObjectName(QString::fromUtf8("actionAdministrator"));
-        centralWidget = new QWidget(MainWindow);
+        centralWidget = new QWidget(ZebulonWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         verticalLayout_2 = new QVBoxLayout(centralWidget);
         verticalLayout_2->setSpacing(6);
@@ -96,7 +96,7 @@ public:
         scrollArea_2->setWidgetResizable(true);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 443, 610));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 441, 608));
         verticalLayout_3 = new QVBoxLayout(scrollAreaWidgetContents_2);
         verticalLayout_3->setSpacing(6);
         verticalLayout_3->setContentsMargins(11, 11, 11, 11);
@@ -111,19 +111,19 @@ public:
 
         verticalLayout_2->addWidget(scrollArea_2);
 
-        MainWindow->setCentralWidget(centralWidget);
-        menuBar = new QMenuBar(MainWindow);
+        ZebulonWindow->setCentralWidget(centralWidget);
+        menuBar = new QMenuBar(ZebulonWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 739, 26));
+        menuBar->setGeometry(QRect(0, 0, 739, 27));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuEdit = new QMenu(menuBar);
         menuEdit->setObjectName(QString::fromUtf8("menuEdit"));
-        MainWindow->setMenuBar(menuBar);
-        statusBar = new QStatusBar(MainWindow);
+        ZebulonWindow->setMenuBar(menuBar);
+        statusBar = new QStatusBar(ZebulonWindow);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
-        MainWindow->setStatusBar(statusBar);
-        dockWidget = new QDockWidget(MainWindow);
+        ZebulonWindow->setStatusBar(statusBar);
+        dockWidget = new QDockWidget(ZebulonWindow);
         dockWidget->setObjectName(QString::fromUtf8("dockWidget"));
         dockWidget->setMinimumSize(QSize(270, 630));
         dockWidget->setMaximumSize(QSize(524287, 524287));
@@ -240,45 +240,45 @@ public:
         verticalLayout->addWidget(commitButton);
 
         dockWidget->setWidget(dockWidgetContents);
-        MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(1), dockWidget);
+        ZebulonWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(1), dockWidget);
 
         menuBar->addAction(menuFile->menuAction());
         menuBar->addAction(menuEdit->menuAction());
         menuFile->addAction(actionAdministrator);
         menuFile->addAction(actionClose);
 
-        retranslateUi(MainWindow);
+        retranslateUi(ZebulonWindow);
 
         tabWidget->setCurrentIndex(0);
 
 
-        QMetaObject::connectSlotsByName(MainWindow);
+        QMetaObject::connectSlotsByName(ZebulonWindow);
     } // setupUi
 
-    void retranslateUi(QMainWindow *MainWindow)
+    void retranslateUi(QMainWindow *ZebulonWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Zebulon", 0, QApplication::UnicodeUTF8));
-        actionClose->setText(QApplication::translate("MainWindow", "Close", 0, QApplication::UnicodeUTF8));
-        actionAdministrator->setText(QApplication::translate("MainWindow", "Administrator", 0, QApplication::UnicodeUTF8));
-        menuFile->setTitle(QApplication::translate("MainWindow", "File", 0, QApplication::UnicodeUTF8));
-        menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", 0, QApplication::UnicodeUTF8));
+        ZebulonWindow->setWindowTitle(QApplication::translate("ZebulonWindow", "Zebulon", 0, QApplication::UnicodeUTF8));
+        actionClose->setText(QApplication::translate("ZebulonWindow", "Close", 0, QApplication::UnicodeUTF8));
+        actionAdministrator->setText(QApplication::translate("ZebulonWindow", "Administrator", 0, QApplication::UnicodeUTF8));
+        menuFile->setTitle(QApplication::translate("ZebulonWindow", "File", 0, QApplication::UnicodeUTF8));
+        menuEdit->setTitle(QApplication::translate("ZebulonWindow", "Edit", 0, QApplication::UnicodeUTF8));
         dockWidget->setWindowTitle(QString());
-        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Group", 0, QApplication::UnicodeUTF8));
-        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Classroom", 0, QApplication::UnicodeUTF8));
-        tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("MainWindow", "Student", 0, QApplication::UnicodeUTF8));
-        checkBoxMagistral->setText(QApplication::translate("MainWindow", "Magistral Class", 0, QApplication::UnicodeUTF8));
-        checkBoxTutorial->setText(QApplication::translate("MainWindow", "Tutorial Class", 0, QApplication::UnicodeUTF8));
-        checkBoxPractical->setText(QApplication::translate("MainWindow", "Practical Class", 0, QApplication::UnicodeUTF8));
-        addTimeSlotButton->setText(QApplication::translate("MainWindow", "Add Time Slot", 0, QApplication::UnicodeUTF8));
-        commitButton->setText(QApplication::translate("MainWindow", "Commit changes", 0, QApplication::UnicodeUTF8));
+        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("ZebulonWindow", "Group", 0, QApplication::UnicodeUTF8));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("ZebulonWindow", "Classroom", 0, QApplication::UnicodeUTF8));
+        tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("ZebulonWindow", "Student", 0, QApplication::UnicodeUTF8));
+        checkBoxMagistral->setText(QApplication::translate("ZebulonWindow", "Magistral Class", 0, QApplication::UnicodeUTF8));
+        checkBoxTutorial->setText(QApplication::translate("ZebulonWindow", "Tutorial Class", 0, QApplication::UnicodeUTF8));
+        checkBoxPractical->setText(QApplication::translate("ZebulonWindow", "Practical Class", 0, QApplication::UnicodeUTF8));
+        addTimeSlotButton->setText(QApplication::translate("ZebulonWindow", "Add Time Slot", 0, QApplication::UnicodeUTF8));
+        commitButton->setText(QApplication::translate("ZebulonWindow", "Commit changes", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class MainWindow: public Ui_MainWindow {};
+    class ZebulonWindow: public Ui_ZebulonWindow {};
 } // namespace Ui
 
 QT_END_NAMESPACE
 
-#endif // UI_MAINWINDOW_H
+#endif // UI_ZEBULONWINDOW_H

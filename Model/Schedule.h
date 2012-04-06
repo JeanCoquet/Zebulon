@@ -10,7 +10,12 @@
 #include <list>
 #include "TimeSlot.h"
 #include "Module.h"
-
+#include "TutorialClassroom.h"
+#include "PracticalClassroom.h"
+#include "LectureHall.h"
+#include "../Model/TutorialClass.h"
+#include "../Model/PracticalClass.h"
+#include "../Model/MagistralClass.h"
 using namespace std;
 
 class Schedule {

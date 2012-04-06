@@ -7,28 +7,37 @@
 
 #ifndef _WINDOWADMINISTRATOR_H
 #define	_WINDOWADMINISTRATOR_H
-#include "Model/Controller.h"
-#include "mainwindow.h"
 #include "ui_WindowAdministrator.h"
-#include "Model/TutorialClassroom.h"
-#include "Model/PracticalClassroom.h"
-#include "Model/LectureHall.h"
+#include "../Model/Schedule.h"
 
-class MainWindow;
 
 class WindowAdministrator : public QDialog {
     Q_OBJECT
 public:
-    WindowAdministrator(Controller*, MainWindow*);
+    WindowAdministrator(Schedule *schedule);
     virtual ~WindowAdministrator();
-    
-    Ui::WindowAdministrator getWidget() const {
-        return widget;
-    }
+    ClassPeriod* getCurrentClassPeriod() { return currentClassPeriod; }
+    Classroom* getCurrentClassroom() { return currentClassroom; }
+    Group* getCurrentGroup() { return currentGroup; }
+    Module* getCurrentModule() { return currentModule; }
+    Student* getCurrentStudent() { return currentStudent; }    
+    Ui::WindowAdministrator *getWidget() { return &widget; }
+    bool isGroupGroupModified() { return groupGroupModified; }
+    void setGroupGroupModified(bool groupGroupModified) { this->groupGroupModified = groupGroupModified; }
+    QStringList* getTempGroupListClassPeriod() { return &tempGroupListClassPeriod; }
+    QStringList* getTempGroupListGroup() { return &tempGroupListGroup; }
+    void setCurrentClassPeriod(ClassPeriod* currentClassPeriod) { this->currentClassPeriod = currentClassPeriod; }
+    void setCurrentClassroom(Classroom* currentClassroom) { this->currentClassroom = currentClassroom; }
+    void setCurrentGroup(Group* currentGroup) { this->currentGroup = currentGroup; }
+    void setCurrentModule(Module* currentModule) { this->currentModule = currentModule; }
+    void setCurrentStudent(Student* currentStudent) { this->currentStudent = currentStudent; }
+    string getOldIdSelectedModule() { return oldIdSelectedModule; }
+    void setOldIdSelectedModule(string oldIdSelectedModule) { this->oldIdSelectedModule = oldIdSelectedModule; }
+    bool isGroupClassPeriodModified() { return groupClassPeriodModified; }
+    void setGroupClassPeriodModified(bool groupClassPeriodModified) { this->groupClassPeriodModified = groupClassPeriodModified; }
 
-public slots :
+
     
-    bool close();
     // Onglet Group
     void groupClicked();
     void addGroup();
@@ -79,8 +88,7 @@ public slots :
     
 private:
     Ui::WindowAdministrator widget;
-    Controller* ctrl;
-    MainWindow* m;
+    Schedule *schedule;
     bool load; 
     bool edited;
     

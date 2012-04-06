@@ -34,7 +34,6 @@ void TimeSlot::updateEndDate(){
     }
     else
         this->endDate->SetMin(nbMin);
-    cout<<"date end : "<<this->endDate<<endl;
 }
 
 TimeSlot::~TimeSlot() {

@@ -96,24 +96,31 @@ bool operator==(Date const& d1, Date const& d2) {
             
 }
 bool operator<(Date const& d1, Date const& d2) {
-    if(d1.GetYear() < d2.GetYear())
-        return true;
-    else
-        if(d1.GetMonth() < d2.GetMonth() )
-            return true;
-        else
-            if(d1.GetDay() < d2.GetDay())
-                return true;
-            else
-                if(d1.GetHour() < d2.GetHour())
-                    return true;
-                else
+    if(d1.GetYear() == d2.GetYear()){
+        if(d1.GetMonth() == d2.GetMonth() ){
+            if(d1.GetDay() == d2.GetDay()){
+                if(d1.GetHour() == d2.GetHour()){
                     return (d1.GetMin() < d2.GetMin());
+                }else{
+                    return (d1.GetHour() < d2.GetHour());
+                }
+            }else{
+              return (d1.GetDay() < d2.GetDay());  
+            }
+        }
+        else{
+            return (d1.GetMonth() < d2.GetMonth());
+        }
+    }
+    else{
+        return (d1.GetYear() < d2.GetYear());
+    }
 }
 bool operator>(Date const& d1, Date const& d2) {
     return !( d1 < d2 || d1 == d2);
 }
 bool operator<=(Date const& d1, Date const& d2) {
+    cout << "IMFERIERU : " <<(d1<d2)<<endl;
     return d1<d2 || d1==d2;
 }
 bool operator>=(Date const& d1, Date const& d2) {

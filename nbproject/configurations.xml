@@ -12,24 +12,26 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <logicalFolder name="Controller" displayName="Controller" projectFiles="true">
+        <itemPath>Controller/Controller.cpp</itemPath>
+        <itemPath>Controller/Controller.h</itemPath>
+        <itemPath>Controller/Database.cpp</itemPath>
+        <itemPath>Controller/Database.h</itemPath>
+      </logicalFolder>
       <logicalFolder name="Gui" displayName="Gui" projectFiles="true">
         <itemPath>Gui/QSchedule.cpp</itemPath>
         <itemPath>Gui/QSchedule.h</itemPath>
         <itemPath>Gui/QTimeSlot.cpp</itemPath>
         <itemPath>Gui/QTimeSlot.h</itemPath>
-        <itemPath>Gui/WindowAddClassPeriod.cpp</itemPath>
-        <itemPath>Gui/WindowAddClassPeriod.h</itemPath>
-        <itemPath>Gui/WindowAddClassPeriod.ui</itemPath>
         <itemPath>Gui/WindowAdministrator.cpp</itemPath>
         <itemPath>Gui/WindowAdministrator.h</itemPath>
         <itemPath>Gui/WindowAdministrator.ui</itemPath>
         <itemPath>Gui/WindowEditTimeSlot.cpp</itemPath>
         <itemPath>Gui/WindowEditTimeSlot.h</itemPath>
         <itemPath>Gui/WindowEditTimeSlot.ui</itemPath>
-        <itemPath>Gui/main.cpp</itemPath>
-        <itemPath>Gui/mainwindow.cpp</itemPath>
-        <itemPath>Gui/mainwindow.h</itemPath>
-        <itemPath>Gui/mainwindow.ui</itemPath>
+        <itemPath>Gui/ZebulonWindow.cpp</itemPath>
+        <itemPath>Gui/ZebulonWindow.h</itemPath>
+        <itemPath>Gui/ZebulonWindow.ui</itemPath>
         <itemPath>Gui/ui_WindowEditTimeSlot.h</itemPath>
         <itemPath>Gui/ui_mainwindow.h</itemPath>
       </logicalFolder>
@@ -38,8 +40,6 @@
         <itemPath>Model/ClassPeriod.h</itemPath>
         <itemPath>Model/Classroom.cpp</itemPath>
         <itemPath>Model/Classroom.h</itemPath>
-        <itemPath>Model/Controller.cpp</itemPath>
-        <itemPath>Model/Controller.h</itemPath>
         <itemPath>Model/Date.cpp</itemPath>
         <itemPath>Model/Date.h</itemPath>
         <itemPath>Model/Group.cpp</itemPath>
@@ -74,12 +74,11 @@
           <itemPath>sqlite/lib/sqlite3.h</itemPath>
           <itemPath>sqlite/lib/sqlite3ext.h</itemPath>
         </logicalFolder>
-        <itemPath>sqlite/Database.cpp</itemPath>
-        <itemPath>sqlite/Database.h</itemPath>
         <itemPath>sqlite/Zebulon_database.sqlite</itemPath>
         <itemPath>sqlite/script.sql</itemPath>
       </logicalFolder>
       <itemPath>history.sql</itemPath>
+      <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -97,6 +96,7 @@
     <Elem>Gui</Elem>
     <Elem>sqlite</Elem>
     <Elem>Model</Elem>
+    <Elem>Controller</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>

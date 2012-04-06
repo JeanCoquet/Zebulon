@@ -1,9 +1,9 @@
 Tâches à faire :
-	-Update
+X	-Update
 X	- Faire l'administration des groupes et des étudiants
 X	- Commit
 X	- Supprimer les TimeSlots si on supprime la classe ou le cours
 	- Faire les tests de crétaion, d'ajout, et de suppression
 	- Faire les détails
-	- Fusionner Schedule et Controller
+X	- Fusionner Schedule et Controller
 X	- les requetes et la pérénisation des données dans database

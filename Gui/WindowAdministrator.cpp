@@ -6,16 +6,14 @@
  */
 
 #include "WindowAdministrator.h"
-#include "WindowAddClassroom.h"
 
-WindowAdministrator::WindowAdministrator(Controller* ctrl, MainWindow* mainwindow) {
+WindowAdministrator::WindowAdministrator(Schedule *schedule) {
     load = false;
 
     groupClassPeriodModified = false;
     groupGroupModified = false;
     widget.setupUi(this);
-    this->ctrl = ctrl;
-    this->m = mainwindow;
+    this->schedule = schedule;
     this->setModal(true);
     this->setWindowIcon(QIcon("./zebulon.png"));
     
@@ -35,47 +33,6 @@ WindowAdministrator::WindowAdministrator(Controller* ctrl, MainWindow* mainwindo
     refreshClassroom(1);
     refreshGroup(1);
     currentModule = NULL;
-    
-    QObject::connect(widget.buttonAddModule, SIGNAL(clicked()), this, SLOT(addModule()));
-    QObject::connect(widget.buttonEditModule, SIGNAL(clicked()), this, SLOT(editModule()));
-    QObject::connect(widget.buttonDeleteModule, SIGNAL(clicked()), this, SLOT(deleteModule()));
-    QObject::connect(widget.buttonOkEditModule, SIGNAL(clicked()), this, SLOT(okEditModule()));
-    QObject::connect(widget.buttonCancelEditModule, SIGNAL(clicked()), this, SLOT(cancelEditModule()));
-    QObject::connect(widget.tableWidgetModules, SIGNAL(itemClicked(QTableWidgetItem*)), this, SLOT(moduleClicked()));
-    QObject::connect(widget.tableWidgetClassPeriod, SIGNAL(itemClicked(QTableWidgetItem*)), this, SLOT(classperiodClicked()));
-    QObject::connect(widget.buttonAddClassPeriod, SIGNAL(clicked()), this, SLOT(addClassPeriod()));
-    QObject::connect(widget.buttonEditClassPeriod, SIGNAL(clicked()), this, SLOT(editClassPeriod()));
-    QObject::connect(widget.buttonDeleteClassPeriod, SIGNAL(clicked()), this, SLOT(deleteClassPeriod()));
-    QObject::connect(widget.buttonOkEditClassPeriod, SIGNAL(clicked()), this, SLOT(okEditClassPeriod()));
-    QObject::connect(widget.buttonCancelEditClassPeriod, SIGNAL(clicked()), this, SLOT(cancelEditClassPeriod()));
-    QObject::connect(widget.buttonAddGroupClassPeriod, SIGNAL(clicked()), this, SLOT(addGroupClassPeriod()));
-    QObject::connect(widget.buttonDeleteGroupClassPeriod, SIGNAL(clicked()), this, SLOT(deleteGroupClassPeriod()));
-    QObject::connect(widget.comboBoxGroupClassPeriod, SIGNAL(currentIndexChanged (int)), this, SLOT(comboBoxGroupsClassPeriodChanged(int)));
-    QObject::connect(widget.listWidgetGroupClassPeriod, SIGNAL(currentRowChanged (int)), this, SLOT(listGroupClassPeriodClicked()));
-    QObject::connect(widget.tableWidgetClassrooms, SIGNAL(itemClicked(QTableWidgetItem*)), this, SLOT(classroomClicked()));
-    QObject::connect(widget.buttonClose, SIGNAL(clicked()), this, SLOT(close())); 
-    QObject::connect(widget.buttonAddClassroom, SIGNAL(clicked()), this, SLOT(addClassroom()));
-    QObject::connect(widget.buttonEditClassroom, SIGNAL(clicked()), this, SLOT(editClassroom()));
-    QObject::connect(widget.buttonDeleteClassroom, SIGNAL(clicked()), this, SLOT(deleteClassroom()));
-    QObject::connect(widget.buttonOkEditClassroom, SIGNAL(clicked()), this, SLOT(okEditClassroom()));
-    QObject::connect(widget.buttonCancelEditClassroom, SIGNAL(clicked()), this, SLOT(cancelEditClassroom()));
-    QObject::connect(widget.comboBoxClassRoom, SIGNAL(currentIndexChanged (int)), this, SLOT(comboBoxTypeClassroomChanged()));
-    QObject::connect(widget.tableWidgetGroups, SIGNAL(itemClicked(QTableWidgetItem*)), this, SLOT(groupClicked()));
-    QObject::connect(widget.tableWidgetStudents, SIGNAL(itemClicked(QTableWidgetItem*)), this, SLOT(studentClicked()));
-    QObject::connect(widget.buttonAddGroup, SIGNAL(clicked()), this, SLOT(addGroup()));
-    QObject::connect(widget.buttonEditGroup, SIGNAL(clicked()), this, SLOT(editGroup()));
-    QObject::connect(widget.buttonDeleteGroup, SIGNAL(clicked()), this, SLOT(deleteGroup()));
-    QObject::connect(widget.comboBoxChildrenGroup, SIGNAL(currentIndexChanged (int)), this, SLOT(comboBoxGroupsGroupChanged(int)));
-    QObject::connect(widget.buttonAddChildrenGroup, SIGNAL(clicked()), this, SLOT(addGroupGroup()));
-    QObject::connect(widget.listWidgetChildrenGroup, SIGNAL(currentRowChanged (int)), this, SLOT(listGroupGroupClicked()));
-    QObject::connect(widget.buttonDeleteChildrenGroup, SIGNAL(clicked()), this, SLOT(deleteGroupGroup()));
-    QObject::connect(widget.buttonOkEditGroup, SIGNAL(clicked()), this, SLOT(okEditGroup()));
-    QObject::connect(widget.buttonCancelEditGroup, SIGNAL(clicked()), this, SLOT(cancelEditGroup()));
-    QObject::connect(widget.buttonAddStudent, SIGNAL(clicked()), this, SLOT(addStudent()));
-    QObject::connect(widget.buttonEditStudent, SIGNAL(clicked()), this, SLOT(editStudent()));
-    QObject::connect(widget.buttonDeleteStudent, SIGNAL(clicked()), this, SLOT(deleteStudent()));
-    QObject::connect(widget.buttonOkEditStudent, SIGNAL(clicked()), this, SLOT(okEditStudent()));
-    QObject::connect(widget.buttonCancelStudent, SIGNAL(clicked()), this, SLOT(cancelEditStudent()));
 }
 
 void WindowAdministrator::refreshGroup(int newState) {
@@ -286,7 +243,6 @@ void WindowAdministrator::groupClicked() {
     refreshGroup(2);
 }
 void WindowAdministrator::addGroup() {
-    currentGroup = NULL;
     if(groupState == 1){
         refreshGroup(41);
     }else if(groupState == 2){
@@ -305,32 +261,9 @@ void WindowAdministrator::editGroup() {
 }
 
 void WindowAdministrator::deleteGroup() {
-    ctrl->delGroup(currentGroup);
     refreshGroup(1);
 }
 void WindowAdministrator::okEditGroup() {
-    groupGroupModified = false;
-    list<Group*>* lGNew = new list<Group*>();
-    list<Group*> *lg = this->ctrl->getSchedule()->GetGroupList();
-    list<Group*>::iterator itG = lg->begin();
-    list<Group*>::const_iterator itGMax = lg->end();
-    cout<<"petite"<<endl;
-    for( ; itG != itGMax ; itG++){
-        if(widget.listWidgetChildrenGroup->findItems(QString::fromStdString((*itG)->GetId()), Qt::MatchCaseSensitive).size() != 0 ){
-            lGNew->push_back((*itG));
-        }
-    }
-    cout<<"fesse"<<endl;
-    tempGroupListGroup.clear();
-    if(currentGroup != NULL){
-        ctrl->setGroup(currentGroup, widget.lineEditIdGroup->text().toStdString(), lGNew);
-    }
-    else{
-        Group* group = new Group(widget.lineEditIdGroup->text().toStdString(), lGNew);
-        ctrl->addGroup(group);
-        currentGroup = group;
-    }
-    cout<<"gauche"<<endl;
     refreshGroup(2);
 }
 void WindowAdministrator::cancelEditGroup() {
@@ -343,10 +276,7 @@ void WindowAdministrator::cancelEditGroup() {
     }
 }
 
-void WindowAdministrator::addGroupGroup() {
-    groupGroupModified = true;
-    tempGroupListGroup.push_back(widget.comboBoxChildrenGroup->currentText());
-    
+void WindowAdministrator::addGroupGroup() {    
     if(groupState == 421){
         refreshGroup(42);
     }else if(groupState == 423){
@@ -362,8 +292,6 @@ void WindowAdministrator::addGroupGroup() {
     }
 }
 void WindowAdministrator::deleteGroupGroup() {
-    groupGroupModified = true;
-    tempGroupListGroup.removeOne(widget.listWidgetChildrenGroup->currentItem()->text());
     if(groupState == 413){
         refreshGroup(411);
     }else if(groupState == 412){
@@ -416,15 +344,10 @@ void WindowAdministrator::studentClicked() {
     refreshGroup(3);
 }
 void WindowAdministrator::addStudent() {
-    currentStudent = NULL;
     if(groupState == 2) {
         refreshGroup(51);
     }else
         refreshGroup(52);
-}
-bool WindowAdministrator::close(){
-    m->reloadAll();
-    QDialog::close();
 }
 
 void WindowAdministrator::editStudent() {
@@ -432,20 +355,10 @@ void WindowAdministrator::editStudent() {
 }
 
 void WindowAdministrator::deleteStudent() {
-    ctrl->delStudent(currentStudent, currentGroup);
     refreshGroup(2);
 }
-void WindowAdministrator::okEditStudent() {
-    if(currentStudent != NULL) {
-        ctrl->setStudent(currentStudent, currentGroup, widget.lineEditIdStudent->text().toStdString(), widget.lineEditLastNameStudent->text().toStdString(), widget.lineEditFirstNameStudent->text().toStdString(), widget.lineEditAddressStudent->text().toStdString(), widget.lineEditEmailStudent->text().toStdString());
-        widget.tableWidgetStudents->setCurrentCell(-1,0);
-    }
-    else {
-        Student *student = new Student(widget.lineEditIdStudent->text().toStdString(), widget.lineEditLastNameStudent->text().toStdString(), widget.lineEditFirstNameStudent->text().toStdString(), widget.lineEditAddressStudent->text().toStdString(), widget.lineEditEmailStudent->text().toStdString());
-        ctrl->addStudent(student, currentGroup);
-        currentStudent = student;
-        widget.tableWidgetStudents->setCurrentCell(-1,0);
-    }    
+void WindowAdministrator::okEditStudent() { 
+    widget.tableWidgetStudents->setCurrentCell(-1,0);
     refreshGroup(3);
 }
 
@@ -464,7 +377,7 @@ void WindowAdministrator::displayGroups() {
     
     QTableWidgetItem *item;
     
-    list<Group*>* l = this->ctrl->getSchedule()->GetGroupList();
+    list<Group*>* l = schedule->GetGroupList();
     list<Group*>::iterator it = l->begin();
     list<Group*>::const_iterator MaxList = l->end();
     for(;it != MaxList; it++){
@@ -522,7 +435,7 @@ void WindowAdministrator::displayStudents(){
 void WindowAdministrator::loadGroupsGroup() { 
     widget.listWidgetChildrenGroup->clear();
     widget.comboBoxChildrenGroup->clear();
-    list<Group*>* l = this->ctrl->getSchedule()->GetGroupList();
+    list<Group*>* l = schedule->GetGroupList();
     list<Group*>::iterator it = l->begin();
     list<Group*>::const_iterator MaxList = l->end();
     int count =  tempGroupListGroup.count();
@@ -556,7 +469,7 @@ void WindowAdministrator::loadGroupsGroup() {
 void WindowAdministrator::setCurrentGroup() {
     if(widget.tableWidgetGroups->currentRow() != -1) {
         QList<QTableWidgetItem*>::iterator itGroup = this->widget.tableWidgetGroups->selectedItems().begin();
-        list<Group*> *lg = this->ctrl->getSchedule()->GetGroupList();
+        list<Group*> *lg = schedule->GetGroupList();
         list<Group*>::iterator itG = lg->begin();
         list<Group*>::const_iterator itGMax = lg->end();
         for(; itG != itGMax ; itG++ ){
@@ -589,7 +502,6 @@ void WindowAdministrator::moduleClicked(){
 }
 
 void WindowAdministrator::classperiodClicked() {
-    currentClassPeriod = NULL;
     refreshModule(3);
 }
 
@@ -623,7 +535,7 @@ void WindowAdministrator::listGroupClassPeriodClicked(){
 
 void WindowAdministrator::setCurrentModule(){
     QList<QTableWidgetItem*>::iterator itModule = widget.tableWidgetModules->selectedItems().begin();
-    list<Module*> *lm = this->ctrl->getSchedule()->GetModuleList();
+    list<Module*> *lm = schedule->GetModuleList();
     list<Module*>::iterator itM = lm->begin();
     list<Module*>::const_iterator itMMax = lm->end();
     for(; itM!=itMMax; itM++){
@@ -651,7 +563,7 @@ void WindowAdministrator::setCurrentClassPeriod(){
 
 void WindowAdministrator::loadGroupsClassPeriod(){
     widget.comboBoxGroupClassPeriod->clear();
-    list<Group*>* l = this->ctrl->getSchedule()->GetGroupList();
+    list<Group*>* l = schedule->GetGroupList();
     list<Group*>::iterator it = l->begin();
     list<Group*>::const_iterator MaxList = l->end();
     int count =  tempGroupListClassPeriod.count();
@@ -688,7 +600,7 @@ void WindowAdministrator::setCurrentClassroom(){
     if(widget.tableWidgetClassrooms->currentRow() != -1) {
         QList<QTableWidgetItem*>::iterator itClassroom = widget.tableWidgetClassrooms->selectedItems().begin();
 
-        list<Classroom*> *lc = this->ctrl->getSchedule()->GetClassroomList();
+        list<Classroom*> *lc = schedule->GetClassroomList();
         list<Classroom*>::iterator itC = lc->begin();
         list<Classroom*>::const_iterator itCMax = lc->end();
         for(;itC != itCMax ; itC++){
@@ -784,7 +696,6 @@ void WindowAdministrator::classroomClicked() {
     refreshClassroom(2);
 }
 void WindowAdministrator::addClassroom() {
-    currentClassroom = NULL;
     if(classroomState == 1)
         refreshClassroom(31);
     else
@@ -794,33 +705,10 @@ void WindowAdministrator::editClassroom() {
     refreshClassroom(32);
 }
 void WindowAdministrator::deleteClassroom() {
-    ctrl->delClassroom(currentClassroom);
     refreshClassroom(1);
 }
 
-int boolToInt(bool b) {
-    if(b) return 1;
-    else return 0;
-}
-
-void WindowAdministrator::okEditClassroom() {
-    if(currentClassroom != NULL)
-        if(widget.checkBoxSpecificity->isVisible())
-            ctrl->setClassroom(currentClassroom, widget.lineEditIdClassroom->text().toStdString(), widget.lineEditCapacityClassroom->text().toInt(), boolToInt(widget.checkBoxSpecificity->isChecked()));
-        else
-            ctrl->setClassroom(currentClassroom, widget.lineEditIdClassroom->text().toStdString(), widget.lineEditCapacityClassroom->text().toInt(), widget.lineEditNumberComputers->text().toInt());
-    else {
-        Classroom *cr;
-        if(widget.comboBoxClassRoom->currentText() == "Lecture Hall")
-            cr = new LectureHall(widget.lineEditIdClassroom->text().toStdString(), widget.lineEditCapacityClassroom->text().toInt(), widget.checkBoxSpecificity->isChecked());
-        else if(widget.comboBoxClassRoom->currentText() == "Practical Classroom")
-            cr = new PracticalClassroom(widget.lineEditIdClassroom->text().toStdString(), widget.lineEditCapacityClassroom->text().toInt(), widget.lineEditNumberComputers->text().toInt());
-        else
-            cr = new TutorialClassroom(widget.lineEditIdClassroom->text().toStdString(), widget.lineEditCapacityClassroom->text().toInt(), widget.checkBoxSpecificity->isChecked());
-        ctrl->addClassroom(cr);
-        currentClassroom = cr;
-        widget.tableWidgetClassrooms->setCurrentCell(-1,0);
-    }    
+void WindowAdministrator::okEditClassroom() { 
     refreshClassroom(2);
 }
 void WindowAdministrator::cancelEditClassroom() {
@@ -1024,7 +912,7 @@ void WindowAdministrator::displayClassroom(){
         table->removeRow(table->rowCount()-1);
     }
     
-    list<Classroom*> *lc = this->ctrl->getSchedule()->GetClassroomList();
+    list<Classroom*> *lc = schedule->GetClassroomList();
     list<Classroom*>::iterator itC = lc->begin();
     list<Classroom*>::const_iterator itCMax = lc->end();
     QTableWidget *twc = this->widget.tableWidgetClassrooms;
@@ -1064,7 +952,6 @@ void WindowAdministrator::displayClassroom(){
 }
 
 void WindowAdministrator::addModule() {
-    currentModule = NULL;
     if(moduleState == 1) {
         refreshModule(41);
     }else if(moduleState == 2){
@@ -1079,38 +966,18 @@ void WindowAdministrator::editModule() {
         refreshModule(42);
     }else{
         refreshModule(43);
-    }
-    
-
-//    widget.frameEditModule->setVisible(true);
-    
+    }    
 }
 
 void WindowAdministrator::okEditModule() {
-    if(currentModule != NULL){
-        ctrl->setModule(currentModule, widget.lineEditIdModule->text().toStdString(), widget.lineEditNameModule->text().toStdString(), widget.lineEditTheHeadModule->text().toStdString());
-    }
-    else{
-        Module* mod = new Module(widget.lineEditIdModule->text().toStdString(), widget.lineEditNameModule->text().toStdString(), widget.lineEditTheHeadModule->text().toStdString());
-        ctrl->addModule(mod);
-
-    }
-    oldIdSelectedModule = widget.lineEditIdModule->text().toStdString();
-
     if(moduleState == 41 || moduleState == 42){
         refreshModule(2);
     }else{
         refreshModule(3);
     }
-    
-//    m->addModuleToComboBox();
 }
-void WindowAdministrator::cancelEditModule() {
-//    widget.frameEditModule->setVisible(false);
-//    widget.lineEditIdModule->setText("");
-//    widget.lineEditNameModule->setText("");
-//    widget.lineEditTheHeadModule->setText("");
-    
+
+void WindowAdministrator::cancelEditModule() {    
     if(moduleState == 41){
         refreshModule(1);
     } else if (moduleState == 42){
@@ -1120,10 +987,7 @@ void WindowAdministrator::cancelEditModule() {
     }
 }
 void WindowAdministrator::deleteModule() {
-    ctrl->delModule(currentModule);
-//    m->addModuleToComboBox();
     refreshModule(1);
-
 }
 void WindowAdministrator::displayModule() {
     QTableWidget *table = widget.tableWidgetModules;    
@@ -1133,7 +997,7 @@ void WindowAdministrator::displayModule() {
     
     QTableWidgetItem *item;
     
-    list<Module*>* l = this->ctrl->getSchedule()->GetModuleList();
+    list<Module*>* l = schedule->GetModuleList();
     list<Module*>::iterator it = l->begin();
     list<Module*>::const_iterator MaxList = l->end();
     for(;it != MaxList; it++){
@@ -1212,39 +1076,19 @@ void WindowAdministrator::displayClassPeriod() {
     }
 }
 void WindowAdministrator::addClassPeriod() {
-    currentClassPeriod = NULL;
     if(moduleState == 2)
         refreshModule(51);
     else
         refreshModule(52);
 }
 void WindowAdministrator::editClassPeriod() {
-    refreshModule(52);
-    
-    
-    
-    
-   
+    refreshModule(52);   
 }
 void WindowAdministrator::deleteClassPeriod() {
-    QList<QTableWidgetItem*>::iterator itClassPeriod = widget.tableWidgetClassPeriod->selectedItems().begin();
-    list<ClassPeriod*>::iterator itCP = currentModule->GetClassPeriodList()->begin();
-    list<ClassPeriod*>::const_iterator itCPMax = currentModule->GetClassPeriodList()->end();
-    for(; itCP!=itCPMax; itCP++){
-        if((*itCP)->GetId() == (*itClassPeriod)->text().toInt()) {
-            break;
-        }
-    }
-    ctrl->delClassPeriod((*itCP), currentModule);
-    
-    currentClassPeriod = NULL;
     refreshModule(2);
 }
 void WindowAdministrator::addGroupClassPeriod() {
-    groupClassPeriodModified = true;
-    tempGroupListClassPeriod.push_back(widget.comboBoxGroupClassPeriod->currentText());
-    
-    if(moduleState == 521){
+   if(moduleState == 521){
         refreshModule(52);
     }else if(moduleState == 523){
         refreshModule(52);
@@ -1257,8 +1101,6 @@ void WindowAdministrator::addGroupClassPeriod() {
     
 }
 void WindowAdministrator::deleteGroupClassPeriod() {
-    groupClassPeriodModified = true;
-    tempGroupListClassPeriod.removeOne(widget.listWidgetGroupClassPeriod->currentItem()->text());
     if(moduleState == 522){
         refreshModule(52);
     }else if(moduleState == 523){
@@ -1270,39 +1112,9 @@ void WindowAdministrator::deleteGroupClassPeriod() {
     }
 }
 void WindowAdministrator::okEditClassPeriod() {
-    groupClassPeriodModified = false;
-    list<Group*>* lGNew = new list<Group*>();
-    list<Group*> *lg = this->ctrl->getSchedule()->GetGroupList();
-    list<Group*>::iterator itG = lg->begin();
-    list<Group*>::const_iterator itGMax = lg->end();
-    for( ; itG != itGMax ; itG++){
-        if(widget.listWidgetGroupClassPeriod->findItems(QString::fromStdString((*itG)->GetId()), Qt::MatchCaseSensitive).size() != 0 ){
-            lGNew->push_back((*itG));
-        }
-    }
-    tempGroupListClassPeriod.clear();
-    if(currentClassPeriod != NULL){
-        ctrl->setClassPeriod(currentModule, currentClassPeriod, widget.comboBoxTypeClassPeriod->currentText().toStdString(), widget.lineEditTeacherClassPeriod->text().toStdString(), widget.lineEditDurationClassPeriod->text().toInt(), lGNew);
-    }
-    else{
-        ClassPeriod *cp;
-        string type = widget.comboBoxTypeClassPeriod->currentText().toStdString();
-        if(type == "Magistral")
-            cp = new MagistralClass(widget.lineEditTeacherClassPeriod->text().toStdString(), widget.lineEditDurationClassPeriod->text().toInt(), currentModule);
-        else if(type == "Practical")
-            cp = new PracticalClass(widget.lineEditTeacherClassPeriod->text().toStdString(), widget.lineEditDurationClassPeriod->text().toInt(), currentModule);
-        else
-            cp = new TutorialClass(widget.lineEditTeacherClassPeriod->text().toStdString(), widget.lineEditDurationClassPeriod->text().toInt(), currentModule);
-        cp->SetGroupList(lGNew);
-        
-        ctrl->addClassPeriod(cp, currentModule);
-        currentClassPeriod = cp;
-    }
     refreshModule(3);
 }
 void WindowAdministrator::cancelEditClassPeriod() {
-    groupClassPeriodModified = false;
-    tempGroupListClassPeriod.clear();
     if(moduleState == 51){
         refreshModule(2);
     }else{

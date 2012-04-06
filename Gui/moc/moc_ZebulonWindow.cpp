@@ -1,15 +1,15 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'QTimeSlot.h'
+** Meta object code from reading C++ file 'ZebulonWindow.h'
 **
-** Created: Fri Apr 6 09:11:52 2012
+** Created: Fri Apr 6 09:11:47 2012
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.3)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../QTimeSlot.h"
+#include "../ZebulonWindow.h"
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'QTimeSlot.h' doesn't include <QObject>."
+#error "The header file 'ZebulonWindow.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 62
 #error "This file was generated using the moc from 4.6.3. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -17,7 +17,7 @@
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
-static const uint qt_meta_data_QTimeSlot[] = {
+static const uint qt_meta_data_ZebulonWindow[] = {
 
  // content:
        4,       // revision
@@ -31,45 +31,45 @@ static const uint qt_meta_data_QTimeSlot[] = {
        1,       // signalCount
 
  // signals: signature, parameters, type, tag, flags
-      20,   11,   10,   10, 0x05,
+      15,   14,   14,   14, 0x05,
 
        0        // eod
 };
 
-static const char qt_meta_stringdata_QTimeSlot[] = {
-    "QTimeSlot\0\0timeSlot\0clicked(QTimeSlot*)\0"
+static const char qt_meta_stringdata_ZebulonWindow[] = {
+    "ZebulonWindow\0\0signal_addTimeSlot(QTimeSlot*)\0"
 };
 
-const QMetaObject QTimeSlot::staticMetaObject = {
-    { &QPushButton::staticMetaObject, qt_meta_stringdata_QTimeSlot,
-      qt_meta_data_QTimeSlot, 0 }
+const QMetaObject ZebulonWindow::staticMetaObject = {
+    { &QMainWindow::staticMetaObject, qt_meta_stringdata_ZebulonWindow,
+      qt_meta_data_ZebulonWindow, 0 }
 };
 
 #ifdef Q_NO_DATA_RELOCATION
-const QMetaObject &QTimeSlot::getStaticMetaObject() { return staticMetaObject; }
+const QMetaObject &ZebulonWindow::getStaticMetaObject() { return staticMetaObject; }
 #endif //Q_NO_DATA_RELOCATION
 
-const QMetaObject *QTimeSlot::metaObject() const
+const QMetaObject *ZebulonWindow::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
 }
 
-void *QTimeSlot::qt_metacast(const char *_clname)
+void *ZebulonWindow::qt_metacast(const char *_clname)
 {
     if (!_clname) return 0;
-    if (!strcmp(_clname, qt_meta_stringdata_QTimeSlot))
-        return static_cast<void*>(const_cast< QTimeSlot*>(this));
-    return QPushButton::qt_metacast(_clname);
+    if (!strcmp(_clname, qt_meta_stringdata_ZebulonWindow))
+        return static_cast<void*>(const_cast< ZebulonWindow*>(this));
+    return QMainWindow::qt_metacast(_clname);
 }
 
-int QTimeSlot::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int ZebulonWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QPushButton::qt_metacall(_c, _id, _a);
+    _id = QMainWindow::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: clicked((*reinterpret_cast< QTimeSlot*(*)>(_a[1]))); break;
+        case 0: signal_addTimeSlot((*reinterpret_cast< QTimeSlot*(*)>(_a[1]))); break;
         default: ;
         }
         _id -= 1;
@@ -78,7 +78,7 @@ int QTimeSlot::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void QTimeSlot::clicked(QTimeSlot * _t1)
+void ZebulonWindow::signal_addTimeSlot(QTimeSlot * _t1)
 {
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);

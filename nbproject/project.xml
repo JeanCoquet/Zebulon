@@ -13,6 +13,7 @@
                 <sourceRootElem>Gui</sourceRootElem>
                 <sourceRootElem>sqlite</sourceRootElem>
                 <sourceRootElem>Model</sourceRootElem>
+                <sourceRootElem>Controller</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

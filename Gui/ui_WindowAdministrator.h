@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'WindowAdministrator.ui'
 **
-** Created: Thu Apr 5 21:47:46 2012
+** Created: Fri Apr 6 09:02:58 2012
 **      by: Qt User Interface Compiler version 4.6.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

@@ -1,5 +1,1 @@
-delete from Student where id = 'E082474W'
-delete from Student where id = 'E110091P'
-delete from Student where id = 'E084204r'
-delete from 'Group' where id = '602'
-delete from 'Group' where id = 'L3Info'
+delete from TimeSlot where id = '2'
